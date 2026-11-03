@@ -10,12 +10,14 @@ This project was created by AI, if you do not like it then you shouldn't use it.
 
 ## Download and run
 
-1. Download **HexagonVR.exe** from [Releases](https://github.com/mrboyplayz/HexagonVR/releases). Install the regular Hexagon 2015 client first. The chat/history changes on `main` are awaiting a live server check before the next binary release.
+1. Download **HexagonVR.exe** from [Releases](https://github.com/mrboyplayz/HexagonVR/releases/tag/v0.2.1-beta.1). Install the regular Hexagon 2015 client first. This is a beta; live filtering for the new VR chat keyboard and simultaneous physical headsets still need user verification.
 2. Launch SteamVR and connect your headset/controllers.
 3. Open HexagonVR **before joining the game**. The console will tell you `enter a game with support for hexagonVR`.
 4. Use the normal Hexagon website Play button for a game with the support scripts installed. HexagonVR starts the verified 2015 client with the renderer initialized before its shaders. Tracking and headset presentation begin after the game reports that its VR camera is active.
 
 If the game was already open without HexagonVR, keep the helper open and rejoin through Hexagon. The helper does not close your game automatically. It can reconnect to a game whose native renderer is already running.
+
+When upgrading from v0.2.0-beta.1, close the existing Hexagon game and the old helper completely, then open the new helper before joining again. Restarting just the helper leaves the old graphics module loaded in the existing game.
 
 While the helper is running it temporarily routes the Windows `hexagon-player:` launch command through HexagonVR for early initialization. The previous per-user association is backed up and restored when the helper exits. If the helper was interrupted, the next launch restores the previous association and uses the original launcher. Other client versions and launch modes are forwarded to the original launcher. No administrator access is required. Launch tickets pass through an authenticated local pipe and stdin; the helper does not save them or read browser cookies.
 
