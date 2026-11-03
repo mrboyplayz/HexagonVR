@@ -20,3 +20,5 @@ native-report-*.jsonl
 .env.*
 *_cookie*
 *_token*
+
+*.pid

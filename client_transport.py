@@ -24,6 +24,11 @@ SENTINELS={
  'ui':(20001.125,30002.25,40003.5),
  'ui_ack':(20001.125,30002.25,81003.5),
  'ui_out':(21001.125,31002.25,41003.5),
+ 'camera_state':(26002.25,0,82003.5),
+ 'chat_result':(23001.125,33002.25,43003.5),
+ 'chat_result_ack':(23001.125,33002.25,84003.5),
+ 'chat_focus':(26002.25,0,85003.5),
+ 'chat_confirm':(23001.125,33002.25,86003.5),
 }
 
 class MBI(C.Structure):
@@ -88,7 +93,8 @@ class LocalTransport:
         patterns={name:struct.pack('<12f',*IDENTITY,*v) if name in ('head','left','right') else struct.pack('<3f',*v) for name,v in SENTINELS.items()}
         found=self.scan(patterns)
         if not all(found[name] for name in ('head','left','right')):raise RuntimeError('Local pose mailbox is not loaded yet')
-        self.acks=found['ack'];self.viewport_cells=found['viewport'];self.position_cells=found['position'];self.ui_outputs=found['ui_out'];self.ui_token=0
+        self.acks=found['ack'];self.viewport_cells=found['viewport'];self.position_cells=found['position'];self.ui_outputs=found['ui_out'];self.ui_token=0;self.camera_state_cells=found.get('camera_state',[])
+        self.chat_focus_cells=found.get('chat_focus',[]);self.chat_confirm_cells=found.get('chat_confirm',[])
         if not self.acks or not self.viewport_cells:raise RuntimeError('Mailbox acknowledgement/output was not found')
         for address in found['control']:
             if self.read(address,12)!=patterns['control']:continue
@@ -115,6 +121,7 @@ class LocalTransport:
             self.cells[name]=candidates[0]
         channels=[('move',(.125,.25,0),'move_ack'),('settings',(110,.35,3),'settings_ack')]
         if found['ui']:channels.append(('ui',(0,0,0),'ui_ack'))
+        if found['chat_result']:channels.append(('chat_result',(123,0,43003.5),'chat_result_ack'))
         for name,test_values,ack_name in channels:
             for address in found[name]:
                 if self.read(address,12)!=patterns[name]:continue
@@ -137,7 +144,21 @@ class LocalTransport:
             v=self.vec(address)
             if v and 64<=v[0]<=16384 and 64<=v[1]<=16384 and 1<=v[2]<=120 and v[0].is_integer() and v[1].is_integer():return {'width':v[0],'height':v[1],'fov':v[2]}
     def active_ack_address(self):
-        return next((a for a in self.acks if (v:=self.vec(a))and v[0]==self.last_ack_sequence and v[1:]==SENTINELS['ack'][1:]),0)
+        current=[(v[0],a)for a in self.acks if (v:=self.vec(a))and v[1:]==SENTINELS['ack'][1:]and v[0].is_integer()and 0<=v[0]<=self.sequence]
+        return max(current,key=lambda row:row[0])[1]if current else 0
+    def camera_enabled(self):
+        cells=getattr(self,'camera_state_cells',[])
+        if not cells:return None # Older game support has no explicit camera state.
+        values=[v for a in cells if(v:=self.vec(a))and v[2]==SENTINELS['camera_state'][2]and v[0].is_integer()and 0<=v[0]<=self.sequence and v[1]in(0,1)]
+        return bool(max(values,key=lambda row:row[0])[1])if values else False
+    def report_chat(self,token,code):
+        if 'chat_result'in self.cells:self.write(self.cells['chat_result'],struct.pack('<3f',token,code,43003.5))
+    def chat_focused(self):
+        values=[v for a in getattr(self,'chat_focus_cells',[])if(v:=self.vec(a))and v[2]==85003.5 and v[0].is_integer()and 0<=v[0]<=self.sequence and v[1]in(-1,0,1)]
+        value=max(values,key=lambda row:row[0])[1]if values else -1
+        return None if value==-1 else bool(value)
+    def chat_confirmed(self,token):
+        return bool(token)and any((v:=self.vec(a))and v==(float(token),1.,86003.5)for a in getattr(self,'chat_confirm_cells',[]))
     def position(self):
         values=[v for a in self.position_cells if (v:=self.vec(a)) and v[2].is_integer() and 0<=v[2]<=self.sequence]
         return max(values,key=lambda v:v[2]) if values else None
@@ -160,12 +181,20 @@ class LocalTransport:
         self.heartbeat(flags,pose.get('turn',0))
         self.sent_times[self.sequence]=time.monotonic()
     def ui_command(self):
+        candidates=[]
         for address in self.ui_outputs:
             v=self.vec(address)
             if not v or not all(x.is_integer() and 0<=x<16777216 for x in v):continue
             token=int(v[0]);kind=token%16
-            if token>16 and kind in range(1,9) and token!=self.ui_token:
-                self.ui_token=token
-                return kind,int(v[1]),int(v[2])
+            if token<=16 or kind not in range(1,9):continue
+            serial=token//16
+            if not 1<=serial<=999999:continue
+            delta=(serial-self.ui_token//16)%999999 if self.ui_token else serial
+            if self.ui_token and not 0<delta<=499999:continue
+            candidates.append((delta,token,kind,int(v[1]),int(v[2])))
+        if candidates:
+            chosen=min(candidates)if self.ui_token else max(candidates)
+            _,self.ui_token,kind,a,b=chosen
+            return kind,a,b
     def close(self):
         if getattr(self,'handle',None):self.k.CloseHandle(self.handle);self.handle=None

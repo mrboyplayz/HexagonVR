@@ -40,9 +40,9 @@ Players=Instance.new('Players');Players.players={};Players.PlayerAdded=event();P
 function Players:GetPlayers()return self.players end
 RS=Instance.new('ReplicatedStorage');Run={Stepped=event(),IsStudio=function()return true end}
 game={GetService=function(_,name)return({Players=Players,ReplicatedStorage=RS,RunService=Run})[name]end}
-script=Instance.new('Script');script.Parent=Instance.new('ServerScriptService');script.Parent.VRConfig={}
+script=Instance.new('Script');script.Parent=Instance.new('ServerScriptService');script.Parent.VRConfig={};script.Parent.VRChat={}
 config={AllowedUserIds={},AutoEnable=false,TrackingTimeout=2,WalkSpeed=12,MaxReach=12,ArmRotationDegrees=90}
-function require()return config end
+function require(module)if module==script.Parent.VRChat then return chat_module end;return config end
 function character()
  local char=Instance.new('Model');char.Parent=workspace
  for _,name in ipairs({'Torso','Head','Left Arm','Right Arm','HumanoidRootPart'})do local p=Instance.new('Part');p.Name=name;p.Parent=char end
@@ -61,7 +61,7 @@ function pose(seq,x)return{seq=seq,tracked=true,head={x,1.5,0,1,0,0,0,1,0,0,0,1}
 
 class MultiplayerTests(unittest.TestCase):
  def setUp(self):
-  self.lua=LuaRuntime();self.lua.execute(FIXTURE);self.lua.execute((ROOT/'roblox/VRServer.lua').read_text());self.lua.execute("remote=RS:FindFirstChild('HexagonVR');toggle=script:FindFirstChild('HexagonVRTestToggle')")
+  self.lua=LuaRuntime();self.lua.execute(FIXTURE);self.lua.globals().chat_module=self.lua.execute((ROOT/'roblox/VRChat.lua').read_text());self.lua.execute((ROOT/'roblox/VRServer.lua').read_text());self.lua.execute("remote=RS:FindFirstChild('HexagonVR');toggle=script:FindFirstChild('HexagonVRTestToggle')")
  def test_two_players_have_independent_rigs_and_rate_limits(self):
   self.lua.execute('''
   toggle.Event:Fire(A);toggle.Event:Fire(B)
@@ -72,6 +72,8 @@ class MultiplayerTests(unittest.TestCase):
   time=1.02;remote.OnServerEvent:Fire(A,'pose',pose(2,2));assert(vr(A).C0.x==1,'Own rate limit not enforced')
   time=1.05;remote.OnServerEvent:Fire(B,'pose',pose(2,4));assert(vr(B).C0.x==4)
   ''')
+ def test_repeated_enable_requests_do_not_toggle_either_player_off(self):
+  self.lua.execute("remote.OnServerEvent:Fire(A,'enable');remote.OnServerEvent:Fire(A,'enable');remote.OnServerEvent:Fire(B,'enable');time=3;remote.OnServerEvent:Fire(A,'enable');assert(vr(A)and vr(B));remote.OnServerEvent:Fire(A,'toggle');assert(not vr(A)and vr(B))")
  def test_timeout_does_not_stop_other_player(self):
   self.lua.execute('''
   toggle.Event:Fire(A);toggle.Event:Fire(B)

@@ -26,17 +26,19 @@ def install(source, target, url, key, user_id=0, local_fast_poll=False):
     tree=ET.parse(source).getroot()
     if tree.tag!='roblox': raise ValueError('Input must be an XML .rbxlx place.')
     ss=service(tree,'ServerScriptService'); sg=service(tree,'StarterGui')
-    for parent,names in [(ss,('HexagonVRServer','VRConfig')),(sg,('HexagonVRClient',))]:
+    for parent,names in [(ss,('HexagonVRServer','VRConfig','VRChat')),(sg,('HexagonVRClient',))]:
         for child in list(parent.findall('Item')):
             if child.findtext('./Properties/string[@name="Name"]') in names: parent.remove(child)
     cfg=(ROOT/'roblox/VRConfig.lua').read_text()
     cfg=cfg.replace('http://127.0.0.1:18765',url).replace('CHANGE_ME',key)
     if user_id:cfg=cfg.replace('AllowedUserIds = {},','AllowedUserIds = {'+str(int(user_id))+'},')
     if local_fast_poll:cfg=cfg.replace('PollRate = 6,','PollRate = 30,')
-    for parent,kind,name,text in [(ss,'ModuleScript','VRConfig',cfg),(ss,'Script','HexagonVRServer',(ROOT/'roblox/VRServer.lua').read_text()),(sg,'LocalScript','HexagonVRClient',(ROOT/'roblox/VRClient.lua').read_text())]:
+    for parent,kind,name,text in [(ss,'ModuleScript','VRConfig',cfg),(ss,'ModuleScript','VRChat',(ROOT/'roblox/VRChat.lua').read_text()),(ss,'Script','HexagonVRServer',(ROOT/'roblox/VRServer.lua').read_text()),(sg,'LocalScript','HexagonVRClient',(ROOT/'roblox/VRClient.lua').read_text())]:
         node=item(kind,name,parent);prop(node,'ProtectedString','Source',text)
         if kind!='ModuleScript': prop(node,'bool','Disabled','false')
         if kind=='LocalScript':
+            chat_ui=item('ModuleScript','VRChatClient',node)
+            prop(chat_ui,'ProtectedString','Source',(ROOT/'roblox/VRChatClient.lua').read_text())
             module=item('ModuleScript','VRMenu',node)
             prop(module,'ProtectedString','Source',(ROOT/'roblox/VRMenu.lua').read_text())
             texture_module=item('ModuleScript','VRMenuAssets',module)

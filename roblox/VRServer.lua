@@ -62,6 +62,7 @@ local function command(player,text)
     requested[player]=tick()
     if sessions[player]then leave(player,"toggle")elseif text=="/vr"then enter(player)end
 end
+require(script.Parent.VRChat).start(remote,C,function(player)return sessions[player]~=nil end,command)
 local function setup(player)
     player.Chatted:connect(function(text)command(player,text)end)
     local function characterAdded(character)
@@ -119,6 +120,7 @@ for _,player in ipairs(Players:GetPlayers())do setup(player)end
 remote.OnServerEvent:connect(function(player,action,data)
     local state=sessions[player]
     if action=="reset"and state then state.humanoid.Health=0;return end
+    if action=="enable"then enter(player)end
     if action=="toggle"then command(player,"/vr")end
     if action=="ready"and state then remote:FireClient(player,"mode",player,true)end
     if action=="pose"and state and tick()-state.remotePoseAt>=.04 then state.remotePoseAt=tick();apply(player,data)end

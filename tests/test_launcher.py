@@ -7,7 +7,7 @@ class LauncherTests(unittest.TestCase):
     def run_waiting(self,hwnd=None,transport_error=None):
         vr=types.ModuleType('openvr');vr.init=Mock(side_effect=AssertionError('SteamVR started without a supported game'))
         output=io.StringIO()
-        with patch.object(sys,'argv',['HexagonVR.exe','--seconds','.05']),patch.dict(sys.modules,{'openvr':vr}),patch.object(bridge,'find_player_window',return_value=hwnd),patch.object(bridge,'window_pid',return_value=42),patch.object(bridge,'configure_console'),patch('client_transport.LocalTransport',side_effect=transport_error),contextlib.redirect_stdout(output):
+        with patch.object(sys,'argv',['HexagonVR.exe','--no-launch-integration','--seconds','.05']),patch.dict(sys.modules,{'openvr':vr}),patch.object(bridge,'find_player_window',return_value=hwnd),patch.object(bridge,'window_pid',return_value=42),patch.object(bridge,'configure_console'),patch('client_transport.LocalTransport',side_effect=transport_error),contextlib.redirect_stdout(output):
             bridge.main()
         vr.init.assert_not_called()
         self.assertEqual(output.getvalue(),'Launch SteamVR and connect your headset.\nenter a game with support for hexagonVR\n')
@@ -19,7 +19,7 @@ class LauncherTests(unittest.TestCase):
         vr.init=Mock(side_effect=Error('No headset'))
         transport=Mock();transport.push.side_effect=OSError('Client closed')
         output=io.StringIO()
-        with patch.object(sys,'argv',['HexagonVR.exe','--seconds','.4']),patch.dict(sys.modules,{'openvr':vr}),patch.object(bridge,'find_player_window',return_value=123),patch.object(bridge,'window_pid',return_value=42),patch.object(bridge,'configure_console'),patch('client_transport.LocalTransport',return_value=transport),contextlib.redirect_stdout(output):bridge.main()
+        with patch.object(sys,'argv',['HexagonVR.exe','--no-launch-integration','--seconds','.4']),patch.dict(sys.modules,{'openvr':vr}),patch.object(bridge,'find_player_window',return_value=123),patch.object(bridge,'window_pid',return_value=42),patch.object(bridge,'configure_console'),patch('client_transport.LocalTransport',return_value=transport),patch('native_renderer.renderer_active',return_value=True),contextlib.redirect_stdout(output):bridge.main()
         self.assertEqual(vr.init.call_count,1);transport.close.assert_called_once()
         self.assertEqual(output.getvalue().splitlines(),['Launch SteamVR and connect your headset.','enter a game with support for hexagonVR','Launch SteamVR and connect your headset to continue.','enter a game with support for hexagonVR'])
 

@@ -38,7 +38,7 @@ class NativePresenter:
         self.host=C.CDLL(str(Path(directory).resolve()/'HexagonVRTextureHost64.dll'))
         self.host.AcquireNativeEyes.argtypes=[C.c_uint64,C.c_uint64,C.POINTER(C.c_void_p),C.POINTER(C.c_void_p)];self.host.AcquireNativeEyes.restype=C.c_long
         self.host.CloseNativeEyes.argtypes=[];self.host.CloseNativeEyes.restype=None
-        self.last_frame=0;self.textures=None;self.frames=0;self.submitted=0;self.width=0;self.height=0;self.started=time.monotonic();self.pose=None;self.pose_sequence=0
+        self.last_frame=0;self.textures=None;self.frames=0;self.submitted=0;self.width=0;self.height=0;self.started=time.monotonic();self.pose=None;self.pose_sequence=0;self.active=False
     def read(self):
         raw=self.map[:PACKET.size];values=PACKET.unpack(raw)
         if values[0]%2 or values[0]!=struct.unpack('<I',self.map[:4])[0]or values[1]!=0x48565246 or not values[8]:return None
@@ -51,6 +51,7 @@ class NativePresenter:
         self.map[offset:offset+4]=struct.pack('<I',sequence)
         self.map[112:120]=struct.pack('<Q',ack_address or 0)
     def submit(self,vr,compositor):
+        self.active=True
         self.map[48:56]=struct.pack('<II',1,C.windll.kernel32.GetTickCount()&0xffffffff)
         packet=self.read()
         if packet and packet[4]!=self.last_frame:
@@ -69,10 +70,24 @@ class NativePresenter:
                 else:compositor.submit(eye,vr.Texture_t(C.c_void_p(texture),vr.TextureType_DirectX,vr.ColorSpace_Gamma))
             self.submitted+=1
         elif time.monotonic()-self.started>12:raise RuntimeError('The game did not produce native eye frames; desktop capture was not substituted')
+    def suspend(self):
+        self.map[48:52]=struct.pack('<I',0)
+        was_active=self.active;self.active=False
+        return was_active
     def close(self):
         self.map[48:52]=struct.pack('<I',0);self.host.CloseNativeEyes();self.map.close()
 
+def renderer_active(pid):
+    """Reconnect to an existing renderer without starting another injector."""
+    kernel=C.WinDLL('kernel32',use_last_error=True)
+    kernel.OpenFileMappingW.argtypes=[C.c_uint32,C.c_int,C.c_wchar_p]
+    kernel.OpenFileMappingW.restype=C.c_void_p
+    kernel.CloseHandle.argtypes=[C.c_void_p]
+    handle=kernel.OpenFileMappingW(4,False,'Local\\HexagonVR.Native.Frame.'+str(int(pid)))
+    if not handle:return False
+    kernel.CloseHandle(handle)
+    return True
+
 def attach(pid,directory):
-    directory=Path(directory).resolve()
-    result=subprocess.run([str(directory/'HexagonVRStudioLoader.exe'),'--attach',str(int(pid)),str(directory/'HexagonVRNative.dll')],capture_output=True,text=True,timeout=25)
-    if result.returncode:raise RuntimeError(result.stderr.strip()or'Native graphics module did not initialize')
+    if renderer_active(pid):return
+    raise RuntimeError('Native rendering needs early startup. Keep HexagonVR open and launch the game again through Hexagon.')

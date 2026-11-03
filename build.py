@@ -24,8 +24,8 @@ def toolchain(override):
                 if not(cache/name).resolve().is_relative_to(cache.resolve()):raise RuntimeError('Unsafe compiler archive path')
             z.extractall(cache)
     return path
-def native_build(compiler):
-    out=ROOT/'build/native';out.mkdir(parents=True,exist_ok=True)
+def native_build(compiler,out=None):
+    out=Path(out).resolve()if out else ROOT/'build/native';out.mkdir(parents=True,exist_ok=True)
     x86=compiler/'bin/i686-w64-mingw32-clang++.exe';x64=compiler/'bin/x86_64-w64-mingw32-clang++.exe';cc=compiler/'bin/i686-w64-mingw32-clang.exe'
     include='-I'+str(ROOT/'vendor/minhook/include');objects=[]
     for source in ('hook.c','buffer.c','trampoline.c','hde/hde32.c'):
@@ -37,9 +37,9 @@ def native_build(compiler):
     run(out/'test_stereo_math.exe')
     return out
 def main():
-    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--toolchain',type=Path);p.add_argument('--native-only',action='store_true');args=p.parse_args()
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--toolchain',type=Path);p.add_argument('--native-only',action='store_true');p.add_argument('--native-output',type=Path);args=p.parse_args()
     if os.name!='nt':p.error('Windows x64 is required')
-    compiler=toolchain(args.toolchain);native=native_build(compiler)
+    compiler=toolchain(args.toolchain);native=native_build(compiler,args.native_output)
     from game_tools import make_demo,install
     demo=ROOT/'build/VR-Demo.rbxlx';base=ROOT/'build/base.rbxlx';make_demo(base);install(base,demo,'','',0)
     if args.native_only:return

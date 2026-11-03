@@ -1,7 +1,16 @@
--- Private, world-space menu. Only normal engine chat is displayed here.
+-- Private world-space menu with locally received chat history.
 local Menu={}
 function Menu.new(player,box,remote)
     local self={opened=false,page="menu",draft="",shift=false,buttons={},messages={},queue={},serial=math.random(1,500000),pending=nil,lastButtons=0,scroll=0,notice="",hover=nil}
+    local serialValue=box:FindFirstChild("ui_serial")
+    if not serialValue then serialValue=Instance.new("NumberValue");serialValue.Name="ui_serial";serialValue.Value=self.serial;serialValue.Parent=box end
+    local history=box:FindFirstChild("chat_history")
+    if not history then history=Instance.new("Folder");history.Name="chat_history";history.Parent=box end
+    local stored=history:GetChildren();table.sort(stored,function(a,b)return tonumber(a.Name)<tonumber(b.Name)end)
+    self.historySerial=0
+    for _,line in ipairs(stored)do
+        self.messages[#self.messages+1]=line.Value;self.historySerial=math.max(self.historySerial,tonumber(line.Name))
+    end
     local panel=Instance.new("Part");panel.Name="HexagonVRMenu";panel.FormFactor=Enum.FormFactor.Custom
     panel.Size=Vector3.new(4.8,3.8,.05);panel.Anchored=true;panel.CanCollide=false;panel.Transparency=1
     self.panel=panel
@@ -31,8 +40,9 @@ function Menu.new(player,box,remote)
     end
     function self:command(kind,a,b)
         if #self.queue>180 then self.notice="Please wait for the bridge.";return false end
-        self.serial=self.serial%999999+1
-        self.queue[#self.queue+1]={self.serial*16+kind,a or 0,b or 0};return true
+        serialValue.Value=serialValue.Value%999999+1;self.serial=serialValue.Value
+        local token=self.serial*16+kind
+        self.queue[#self.queue+1]={token,a or 0,b or 0};return token
     end
     function self:mailbox()
         local v=box.ui.Value
@@ -40,19 +50,53 @@ function Menu.new(player,box,remote)
         if self.pending and v.y==self.pending[1] then self.pending=nil end
         if not self.pending and #self.queue>0 then self.pending=table.remove(self.queue,1)end
         local p=self.pending or {0,0,0};box.ui_out.Value=Vector3.new(p[1],p[2],p[3])
+        if self.sending and tick()-self.sending.started>30 then
+            self.sending=nil;self.notice="Send was not confirmed. Your text is kept."
+            if self.opened and self.page=="chat"then self:draw()end
+        end
     end
     function self:send()
+        if self.sending then self.notice="A message is still being sent.";self:draw();return end
         local message=self.draft:match("^%s*(.-)%s*$")
         if message=="" then return end
         if #self.queue>140 then self.notice="A message is still being sent.";self:draw();return end
-        self:command(5)
-        for offset=1,#message,6 do
-            local function pack(start)local n=0;for j=0,2 do n=n+(message:byte(start+j)or 0)*256^j end;return n end
-            self:command(6,pack(offset),pack(offset+3))
-        end
-        self:command(7);self.draft="";self.notice="Sending through Roblox chat...";self:draw()
+        serialValue.Value=serialValue.Value%999999+1
+        local id=serialValue.Value
+        self.sending={id=id,text=message,started=tick()};self.notice="Sending...";self:draw()
+        remote:FireServer("chat",{id=id,text=message})
     end
-    function self:draw()
+    function self:chatResult(id,ok,notice)
+        if not self.sending or self.sending.id~=id then return end
+        if ok and self.draft:match("^%s*(.-)%s*$")==self.sending.text then self.draft=""end
+        self.sending=nil;self.notice=notice or(ok and"Sent."or"Message was not sent. Your text is kept.")
+        if self.opened and self.page=="chat"then self:draw()end
+    end
+    function self:addMessage(sender,message)
+        local line=(sender and sender.Name or"Player")..": "..tostring(message)
+        self.messages[#self.messages+1]=line;self.historySerial=self.historySerial+1
+        local value=Instance.new("StringValue");value.Name=tostring(self.historySerial);value.Value=line;value.Parent=history
+        -- Keep the same messages visible while reading older conversation.
+        if self.scroll>0 then self.scroll=self.scroll+1 end
+        if self.opened and self.page=="chat"then self:draw(self.scroll==0 and math.huge or nil)end
+    end
+    function self:scrollChat(direction)
+        local view=self.chatView
+        if view then
+            local y=view.CanvasPosition.y;local maximum=self.chatMaximum or 0
+            if direction>0 and y>0 then view.CanvasPosition=Vector2.new(0,math.max(0,y-60));return end
+            if direction<0 and y<maximum then view.CanvasPosition=Vector2.new(0,math.min(maximum,y+60));return end
+        end
+        local offset=math.max(0,math.min(math.max(0,#self.messages-6),self.scroll+direction))
+        if offset~=self.scroll then self.scroll=offset;self:draw(direction>0 and 0 or math.huge)end
+    end
+    function self:scrollPlayers(direction)
+        self.playerScroll=math.max(0,math.min(math.max(0,#game.Players:GetPlayers()-4),(self.playerScroll or 0)+direction))
+        if self.opened and self.page=="menu"then self:draw()end
+    end
+    function self:draw(chatPosition)
+        if self.chatView then self.chatPosition=self.chatView.CanvasPosition.y end
+        if chatPosition~=nil then self.chatPosition=chatPosition end
+        self.chatView=nil
         for _,child in ipairs(background:GetChildren())do if child~=cursor then child:Destroy()end end
         self.buttons={}
         local confirm=self.page=="confirmLeave"or self.page=="confirmReset"
@@ -77,10 +121,34 @@ function Menu.new(player,box,remote)
                 self:setOpen(false)
             end)
         elseif self.page=="chat" then
-            local rows={};local last=math.max(0,#self.messages-self.scroll)
-            for i=math.max(1,last-5),last do rows[#rows+1]=self.messages[i]end
-            local chat=text(table.concat(rows,"\n"),60,155,980,155,Enum.FontSize.Size28);chat.TextYAlignment=Enum.TextYAlignment.Top;chat.TextXAlignment=Enum.TextXAlignment.Left
-            local draft=text(self.draft==""and"To chat, select the keys below"or self.draft.."|",70,320,960,58,Enum.FontSize.Size32)
+            self.scroll=math.max(0,math.min(math.max(0,#self.messages-6),self.scroll))
+            local rows={};local last=math.max(0,#self.messages-self.scroll);local first=math.max(1,last-5)
+            for i=first,last do rows[#rows+1]=self.messages[i]end
+            text(last==0 and "No messages received yet"or("Messages "..first.."-"..last.." of "..#self.messages),60,132,865,22,Enum.FontSize.Size18)
+            local view=Instance.new("ScrollingFrame");view.Name="ChatHistory";view.Position=UDim2.new(0,60,0,155);view.Size=UDim2.new(0,865,0,155)
+            view.BackgroundTransparency=1;view.BorderSizePixel=0;view.ClipsDescendants=true;view.ScrollBarThickness=6;view.ZIndex=3;view.Parent=background
+            local chat=text(table.concat(rows,"\n"),0,0,850,10000,Enum.FontSize.Size28);chat.Parent=view;chat.TextYAlignment=Enum.TextYAlignment.Top;chat.TextXAlignment=Enum.TextXAlignment.Left
+            self.chatView=view
+            local firstFit,placing,maximum,lastHeight=true,false,0,nil
+            local function fit()
+                if self.chatView~=view or placing then return end
+                placing=true
+                local position=firstFit and(self.chatPosition or math.huge)or view.CanvasPosition.y
+                local follow=not firstFit and self.scroll==0 and position>=maximum and maximum>0
+                -- TextBounds may be zero until this world-space GUI renders.
+                local estimate=8
+                for _,line in ipairs(rows)do estimate=estimate+math.max(1,math.ceil(#line/28))*34 end
+                local height=math.max(155,chat.TextBounds.y>0 and chat.TextBounds.y+8 or estimate)
+                if height~=lastHeight then chat.Size=UDim2.new(0,850,0,height);view.CanvasSize=UDim2.new(0,0,0,height);lastHeight=height end
+                maximum=height-155;self.chatMaximum=maximum
+                view.CanvasPosition=Vector2.new(0,follow and maximum or math.max(0,math.min(maximum,position)))
+                firstFit=false;placing=false
+            end
+            fit();chat.Changed:connect(function(property)if property=="TextBounds"then fit()end end)
+            button("Older",945,155,115,44,function()self:scrollChat(1)end).FontSize=Enum.FontSize.Size24
+            button("Newer",945,207,115,44,function()self:scrollChat(-1)end).FontSize=Enum.FontSize.Size24
+            button("Latest",945,259,115,44,function()self.scroll=0;self:draw(math.huge)end).FontSize=Enum.FontSize.Size24
+            local draft=text(self.draft==""and"Public chat: select the keys below"or self.draft.."|",70,320,960,58,Enum.FontSize.Size32)
             draft.BackgroundTransparency=.6;draft.BackgroundColor3=Color3.new(0,0,0);draft.TextXAlignment=Enum.TextXAlignment.Left
             local lines={"1234567890","qwertyuiop","asdfghjkl","zxcvbnm,./"}
             local symbols={['1']='!',['2']='@',['3']='#',['4']='$',['5']='%',['6']='^',['7']='&',['8']='*',['9']='(',['0']=')',[',']='<',['.']='>',['/']='?'}
@@ -118,7 +186,8 @@ function Menu.new(player,box,remote)
         else
             local title=text("Players",65,160,970,65,Enum.FontSize.Size36);title.Font=Enum.Font.SourceSansBold;title.TextXAlignment=Enum.TextXAlignment.Left
             local members=game.Players:GetPlayers();table.sort(members,function(a,b)return a.Name<b.Name end)
-            local first=math.max(1,math.min(#members-4,self.playerScroll or 0)+1)
+            self.playerScroll=math.max(0,math.min(math.max(0,#members-4),self.playerScroll or 0))
+            local first=self.playerScroll+1
             for index=first,math.min(#members,first+3)do
                 local member=members[index];local y=245+(index-first)*94
                 local row=image("MenuBarAssets/MenuButton.png",55,y,990,80,{8,6,46,44});row.ImageTransparency=.25
@@ -126,6 +195,9 @@ function Menu.new(player,box,remote)
                 local name=text(member.Name,145,y,650,80,Enum.FontSize.Size36);name.Font=Enum.Font.SourceSansBold;name.TextXAlignment=Enum.TextXAlignment.Left
                 if member==player then text("You",850,y,160,80)end
             end
+            button("Previous",60,642,260,54,function()self:scrollPlayers(-4)end)
+            text(#members==0 and "No players"or(first.."-"..math.min(#members,first+3).." of "..#members),345,642,410,54,Enum.FontSize.Size28)
+            button("Next",780,642,260,54,function()self:scrollPlayers(4)end)
         end
         if not confirm then
             button("Reset Character",40,766,325,72,function()self.page="confirmReset";self:draw()end)
@@ -153,10 +225,10 @@ function Menu.new(player,box,remote)
         if pressed(2)then self:setOpen(not self.opened,"menu")end
         if pressed(4)then self:setOpen(not(self.opened and self.page=="chat"),"chat")end
         if self.opened and self.page=="chat"and math.abs(axis)>.65 and tick()-(self.lastScroll or 0)>.25 then
-            self.lastScroll=tick();self.scroll=math.max(0,math.min(math.max(0,#self.messages-6),self.scroll+(axis<0 and 1 or -1)));self:draw()
+            self.lastScroll=tick();self:scrollChat(axis<0 and 1 or -1)
         end
         if self.opened and self.page=="menu"and math.abs(axis)>.65 and tick()-(self.lastScroll or 0)>.25 then
-            self.lastScroll=tick();self.playerScroll=math.max(0,math.min(math.max(0,#game.Players:GetPlayers()-4),(self.playerScroll or 0)+(axis>0 and 1 or -1)));self:draw()
+            self.lastScroll=tick();self:scrollPlayers(axis>0 and 1 or -1)
         end
         cursor.Visible=false;self.hover=nil
         if self.opened and down(1)then self.consumeTrigger=true end
@@ -191,23 +263,30 @@ function Menu.new(player,box,remote)
     local function incoming(kind,sender,message,recipient)
         if kind==Enum.PlayerChatType.Whisper and sender~=player and recipient~=player then return end
         if kind==Enum.PlayerChatType.Team and sender and sender.TeamColor~=player.TeamColor then return end
-        self.messages[#self.messages+1]=(sender and sender.Name or "Player")..": "..tostring(message)
-        if #self.messages>40 then table.remove(self.messages,1)end
-        if self.opened and self.page=="chat"then self:draw()end
+        self:addMessage(sender,message)
     end
-    -- Some 2015 builds reserve PlayerChatted for CoreScripts. Chatted is the
-    -- ordinary game event; no custom server chat or filtering path is added.
+    -- Some 2015 builds reserve PlayerChatted for CoreScripts.
     local connected=pcall(function()game.Players.PlayerChatted:connect(incoming)end)
-    if not connected then
-        local function watch(sender)
-            sender.Chatted:connect(function(message,recipient)
-                if recipient and sender~=player and recipient~=player then return end
-                incoming(recipient and Enum.PlayerChatType.Whisper or Enum.PlayerChatType.All,sender,message,recipient)
-            end)
-        end
-        for _,sender in ipairs(game.Players:GetPlayers())do watch(sender)end
-        game.Players.PlayerAdded:connect(watch)
+    local watchers={}
+    local function watch(sender)
+        if connected or watchers[sender]or not sender:IsA("Player")then return end
+        watchers[sender]=sender.Chatted:connect(function(message,recipient)
+            if recipient and sender~=player and recipient~=player then return end
+            incoming(recipient and Enum.PlayerChatType.Whisper or Enum.PlayerChatType.All,sender,message,recipient)
+        end)
     end
+    if not connected then
+        for _,sender in ipairs(game.Players:GetPlayers())do watch(sender)end
+    end
+    -- PlayerAdded is server-only in this client generation.
+    game.Players.ChildAdded:connect(function(sender)
+        watch(sender)
+        if sender:IsA("Player")and self.opened and self.page=="menu"then self:draw()end
+    end)
+    game.Players.ChildRemoved:connect(function(sender)
+        if watchers[sender]then watchers[sender]:disconnect();watchers[sender]=nil end
+        if sender:IsA("Player")then self:scrollPlayers(0)end
+    end)
     self:draw();return self
 end
 return Menu

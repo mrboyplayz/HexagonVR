@@ -218,7 +218,7 @@ template<class F>static void stereoDraw(ID3D11DeviceContext* ctx,F issue){
     inspectDraw(ctx);
     if(internal||!runtimeReady){issue();return;}
     ID3D11VertexShader* shader=nullptr;ctx->VSGetShader(&shader,nullptr,nullptr);bool global=false;
-    {std::lock_guard<std::mutex> g(dataLock);auto it=shaders.find(shader);global=it==shaders.end()||it->second.globals;}
+    {std::lock_guard<std::mutex> g(dataLock);auto it=shaders.find(shader);global=it!=shaders.end()&&it->second.globals&&it->second.size==384;}
     release(shader);if(!global){issue();return;}
     ID3D11RenderTargetView* targets[8]{};ID3D11DepthStencilView* depth=nullptr;ctx->OMGetRenderTargets(8,targets,&depth);
     ID3D11Resource* resource=nullptr;ID3D11Texture2D* texture=nullptr;D3D11_TEXTURE2D_DESC td{};
@@ -316,15 +316,27 @@ static HRESULT WINAPI createDeviceAndSwap(IDXGIAdapter* adapter,D3D_DRIVER_TYPE 
     HRESULT result=originalCreateAndSwap(adapter,type,software,flags,levels,count,version,desc,chain,device,level,context);
     if(SUCCEEDED(result))deviceReady(device,level);return result;
 }
+static bool loadConfig(){
+    std::ifstream config(std::filesystem::path(outputDirectory+L"\\native-config.bin"),std::ios::binary);
+    UINT header[3]{},flags=0;stereo::Matrix transforms[2]{};float projection[2][4]{};
+    config.read(reinterpret_cast<char*>(header),sizeof(header));config.read(reinterpret_cast<char*>(transforms),sizeof(transforms));config.read(reinterpret_cast<char*>(projection),sizeof(projection));config.read(reinterpret_cast<char*>(&flags),sizeof(flags));
+    if(!config||header[0]!=0x48565232||header[1]<64||header[2]<64||header[1]>8192||header[2]>8192)return false;
+    for(int i=0;i<2;++i){
+        for(const auto& row:transforms[i].m)for(float value:row)if(!std::isfinite(value))return false;
+        for(float value:projection[i])if(!std::isfinite(value))return false;
+        if(!(projection[i][1]>projection[i][0]&&projection[i][3]>projection[i][2]))return false;
+    }
+    eyeWidth=header[1];eyeHeight=header[2];std::memcpy(eyeTransforms,transforms,sizeof(transforms));std::memcpy(frusta,projection,sizeof(projection));
+    diagnosticRender=(flags&1)!=0;diagnosticCapture=(flags&2)!=0;
+    runtimeReady.store(true,std::memory_order_release);
+    log("{\"native_config\":true,\"width\":"+std::to_string(eyeWidth)+",\"height\":"+std::to_string(eyeHeight)+"}");return true;
+}
 static DWORD WINAPI worker(void*){
     wchar_t path[MAX_PATH];GetModuleFileNameW(module,path,MAX_PATH);std::wstring dir(path);dir=dir.substr(0,dir.find_last_of(L"\\/"));
     outputDirectory=dir;std::wstring filename=dir+L"\\native-report-"+std::to_wstring(GetCurrentProcessId())+L".jsonl";
     logfile.open(std::filesystem::path(filename),std::ios::trunc);
     log("{\"stage\":\"starting\",\"pid\":"+std::to_string(GetCurrentProcessId())+"}");
-    std::wstring configPath=dir+L"\\native-config.bin";std::ifstream config(std::filesystem::path(configPath),std::ios::binary);UINT header[3]{};
-    config.read(reinterpret_cast<char*>(header),sizeof(header));config.read(reinterpret_cast<char*>(eyeTransforms),sizeof(eyeTransforms));config.read(reinterpret_cast<char*>(frusta),sizeof(frusta));
-    if(config&&header[0]==0x48565232&&header[1]>=64&&header[2]>=64&&header[1]<=8192&&header[2]<=8192){eyeWidth=header[1];eyeHeight=header[2];runtimeReady=true;log("{\"native_config\":true,\"width\":"+std::to_string(eyeWidth)+",\"height\":"+std::to_string(eyeHeight)+"}");}
-    UINT diagnosticFlags=0;config.read(reinterpret_cast<char*>(&diagnosticFlags),sizeof(diagnosticFlags));diagnosticRender=(diagnosticFlags&1)!=0;diagnosticCapture=(diagnosticFlags&2)!=0;
+    loadConfig();
     std::wstring mapName=L"Local\\HexagonVR.Native.Frame."+std::to_wstring(GetCurrentProcessId());packetMapping=CreateFileMappingW(INVALID_HANDLE_VALUE,nullptr,PAGE_READWRITE,0,sizeof(FramePacket),mapName.c_str());
     if(packetMapping)packet=static_cast<FramePacket*>(MapViewOfFile(packetMapping,FILE_MAP_ALL_ACCESS,0,0,sizeof(FramePacket)));
     HMODULE library=LoadLibraryW(L"d3d11.dll");bool ok=library&&MH_Initialize()==MH_OK;
@@ -339,7 +351,7 @@ static DWORD WINAPI worker(void*){
     ok=ok&&hook(reinterpret_cast<void*>(GetProcAddress(library,"D3D11CreateDevice")),reinterpret_cast<void*>(createDevice),originalCreate)&&hook(reinterpret_cast<void*>(GetProcAddress(library,"D3D11CreateDeviceAndSwapChain")),reinterpret_cast<void*>(createDeviceAndSwap),originalCreateAndSwap);
     log(ok?"{\"stage\":\"hooks_ready\"}":"{\"stage\":\"hook_initialization_failed\"}");
     std::wstring name=L"Local\\HexagonVR.Native.Ready."+std::to_wstring(GetCurrentProcessId());HANDLE event=OpenEventW(EVENT_MODIFY_STATE,FALSE,name.c_str());if(event){SetEvent(event);CloseHandle(event);}
-    for(;;){Sleep(2000);std::ostringstream s;s<<"{\"draws\":"<<draws<<",\"globals_draws\":"<<globalDraws<<",\"native_draws\":"<<nativeDraws<<",\"native_frames\":"<<nativeFrames<<",\"invalid_matrices\":"<<invalidMatrices<<"}";log(s.str());}
+    for(UINT sample=0;;++sample){Sleep(500);if(!runtimeReady.load(std::memory_order_acquire))loadConfig();if(sample%4)continue;std::ostringstream s;s<<"{\"draws\":"<<draws<<",\"globals_draws\":"<<globalDraws<<",\"native_draws\":"<<nativeDraws<<",\"native_frames\":"<<nativeFrames<<",\"invalid_matrices\":"<<invalidMatrices<<"}";log(s.str());}
     return 0;
 }
 BOOL WINAPI DllMain(HMODULE instance,DWORD reason,LPVOID){if(reason==DLL_PROCESS_ATTACH){module=instance;DisableThreadLibraryCalls(instance);HANDLE t=CreateThread(nullptr,0,worker,nullptr,0,nullptr);if(t)CloseHandle(t);}return TRUE;}

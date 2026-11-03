@@ -17,6 +17,7 @@ local privateStorage=player:WaitForChild("PlayerScripts")
 local box=privateStorage:FindFirstChild("HexagonVRLocalMailbox")
 local initial={head={12001.125,23002.25,34003.5},left={13001.125,24002.25,35003.5},right={14001.125,25002.25,36003.5},control={16001.125,26002.25,36003.5},move={15001.125,25002.25,35003.5},settings={17001.125,27002.25,37003.5},ack={26002.25,56002.25,66003.5},move_ack={15001.125,25002.25,77003.5},settings_ack={17001.125,27002.25,78003.5},viewport={18001.125,28002.25,38003.5},position={19001.125,29002.25,39003.5}}
 initial.ui={20001.125,30002.25,40003.5};initial.ui_ack={20001.125,30002.25,81003.5};initial.ui_out={21001.125,31002.25,41003.5}
+initial.camera_state={26002.25,0,82003.5}
 if not box then
     box=Instance.new("Folder");box.Name="HexagonVRLocalMailbox";box.Parent=privateStorage
     for name,values in pairs(initial) do
@@ -25,7 +26,11 @@ if not box then
         value.Name=name;value.Value=isFrame and CFrame.new(unpack(values)) or Vector3.new(unpack(values));value.Parent=box
     end
 end
+if not box:FindFirstChild("camera_state")then
+    local value=Instance.new("Vector3Value");value.Name="camera_state";value.Value=Vector3.new(unpack(initial.camera_state));value.Parent=box
+end
 local menu=require(script:WaitForChild("VRMenu")).new(player,box,remote)
+local chatUI=require(script:WaitForChild("VRChatClient")).new(player,menu)
 local studioMenuShown=false
 local function walk(object,fn)for _,v in ipairs(object:GetChildren())do fn(v);walk(v,fn)end end
 local function restore()
@@ -40,6 +45,8 @@ local function restore()
     if hum then hum:Move(Vector3.new(),false) end
 end
 remote.OnClientEvent:connect(function(action,who,value,reason)
+    if action=="chatDisplay"then chatUI:display(who,value);return end
+    if action=="chatResult"then menu:chatResult(who,value,reason);return end
     if action=="message" then label.Text=who;return end
     if who~=player then return end
     if action=="mode" then
@@ -83,7 +90,8 @@ local function render()
     end
     local flags=control.x
     local tracked=flags>=1 and flags<=7 and flags==math.floor(flags) and tick()-lastInput<.35
-    if tracked and not enabled and wanted and tick()-lastWake>1 then lastWake=tick();remote:FireServer("toggle")end
+    box.camera_state.Value=Vector3.new(control.y,enabled and tracked and 1 or 0,82003.5)
+    if tracked and not enabled and wanted and tick()-lastWake>1 then lastWake=tick();remote:FireServer("enable")end
     if not enabled or not tracked then
         if menu.opened then menu:setOpen(false)end
         if enabled and tick()-lastInput>.35 then

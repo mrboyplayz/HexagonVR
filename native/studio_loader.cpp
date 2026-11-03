@@ -1,4 +1,4 @@
-// Loads a graphics test module into a fresh, hash-verified offline Studio only.
+// Starts an owned, hash-verified 2015 Player or offline Studio with early graphics initialization.
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 #include <tlhelp32.h>
@@ -43,35 +43,22 @@ static void inject(HANDLE process,DWORD pid,const std::wstring& dll){
     DWORD result=0;GetExitCodeThread(thread,&result);CloseHandle(thread);VirtualFreeEx(process,remote,0,MEM_RELEASE);
     if(!result)throw std::runtime_error("The native graphics module did not load");
 }
-static int attachExisting(DWORD pid,const std::wstring& dll){
-    HANDLE process=OpenProcess(SYNCHRONIZE|PROCESS_CREATE_THREAD|PROCESS_QUERY_INFORMATION|PROCESS_VM_OPERATION|PROCESS_VM_WRITE|PROCESS_VM_READ,FALSE,pid);
-    if(!process)throw std::runtime_error("Could not open the supported game process");
-    HANDLE event=nullptr;
-    try{
-        wchar_t path[32768];DWORD size=32768;if(!QueryFullProcessImageNameW(process,0,path,&size))throw std::runtime_error("Could not verify the target game");
-        auto digest=hashFile(path);
-        if(digest!="432aa5e86c66275d1a27c4e5c6833c8a23ccc0d8e9114eef7c134ba2d6953b9d"&&digest!="007a6ab91703730b3f9635b0558ec0e87db92d3c84dbe649d2f42a2f7718271b")throw std::runtime_error("Unsupported executable; no module was loaded");
-        std::wstring mapping=L"Local\\HexagonVR.Native.Frame."+std::to_wstring(pid);HANDLE existing=OpenFileMappingW(FILE_MAP_READ,FALSE,mapping.c_str());
-        if(existing){CloseHandle(existing);CloseHandle(process);std::cout<<"Native renderer already active"<<std::endl;return 0;}
-        std::wstring name=L"Local\\HexagonVR.Native.Ready."+std::to_wstring(pid);event=CreateEventW(nullptr,TRUE,FALSE,name.c_str());
-        inject(process,pid,dll);
-        if(WaitForSingleObject(event,15000)!=WAIT_OBJECT_0)throw std::runtime_error("Native renderer did not initialize");
-        CloseHandle(event);CloseHandle(process);std::cout<<"Native renderer connected"<<std::endl;return 0;
-    }catch(...){if(event)CloseHandle(event);CloseHandle(process);throw;}
-}
 int wmain(int argc,wchar_t** argv){
-    if(argc==4&&std::wstring(argv[1])==L"--attach"){
-        try{return attachExisting(DWORD(std::stoul(argv[2])),absolute(argv[3]));}
-        catch(const std::exception& error){std::cerr<<error.what()<<std::endl;return 1;}
-    }
-    if(argc!=5){std::cerr<<"Usage: studio_loader STUDIO_EXE GRAPHICS_DLL STARTUP_SCRIPT PID_FILE\n";return 2;}
+    bool playerMode=argc==5&&std::wstring(argv[1])==L"--player";
+    if(playerMode){--argc;++argv;}
+    if((playerMode&&argc!=4)||(!playerMode&&argc!=5)){std::cerr<<"Usage: studio_loader STUDIO_EXE GRAPHICS_DLL STARTUP_SCRIPT PID_FILE\n";return 2;}
     PROCESS_INFORMATION pi{};HANDLE job=nullptr,event=nullptr;
     try{
-        std::wstring exe=absolute(argv[1]),dll=absolute(argv[2]),scriptFile=absolute(argv[3]),pidFile=absolute(argv[4]);
-        if(hashFile(exe)!="007a6ab91703730b3f9635b0558ec0e87db92d3c84dbe649d2f42a2f7718271b")throw std::runtime_error("Only the verified 2015 Studio test executable is supported");
-        std::ifstream in{std::filesystem::path(scriptFile)};std::string code((std::istreambuf_iterator<char>(in)),{});
-        if(code.empty()||code.find("game:Load('rbxasset://HexagonVR/")!=0)throw std::runtime_error("A staged offline HexagonVR test is required");
-        std::wstring command=L"\""+exe+L"\" -script \""+std::wstring(code.begin(),code.end())+L"\"";
+        std::wstring exe=absolute(argv[1]),dll=absolute(argv[2]),pidFile=absolute(argv[playerMode?3:4]);
+        if(hashFile(exe)!=(playerMode?"432aa5e86c66275d1a27c4e5c6833c8a23ccc0d8e9114eef7c134ba2d6953b9d":"007a6ab91703730b3f9635b0558ec0e87db92d3c84dbe649d2f42a2f7718271b"))throw std::runtime_error("Only the verified 2015 executable is supported");
+        std::string code;
+        if(playerMode)code=std::string(std::istreambuf_iterator<char>(std::cin),{});
+        else{std::ifstream in{std::filesystem::path(absolute(argv[3]))};code.assign(std::istreambuf_iterator<char>(in),{});}
+        if(code.empty()||(!playerMode&&code.find("game:Load('rbxasset://HexagonVR/")!=0))throw std::runtime_error("Invalid startup arguments");
+        int length=MultiByteToWideChar(CP_UTF8,MB_ERR_INVALID_CHARS,code.data(),int(code.size()),nullptr,0);
+        if(!length)throw std::runtime_error("Invalid startup encoding");
+        std::wstring input(length,0);MultiByteToWideChar(CP_UTF8,MB_ERR_INVALID_CHARS,code.data(),int(code.size()),input.data(),length);
+        std::wstring command=L"\""+exe+L"\" "+(playerMode?input:L"-script \""+input+L"\"");
         STARTUPINFOW si{};si.cb=sizeof(si);si.dwFlags=STARTF_USESHOWWINDOW;si.wShowWindow=SW_SHOWMAXIMIZED;
         if(!CreateProcessW(exe.c_str(),command.data(),nullptr,nullptr,FALSE,CREATE_SUSPENDED,nullptr,nullptr,&si,&pi))throw std::runtime_error("Could not create Studio test");
         job=CreateJobObjectW(nullptr,nullptr);JOBOBJECT_EXTENDED_LIMIT_INFORMATION limit{};limit.BasicLimitInformation.LimitFlags=JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE;
@@ -83,7 +70,7 @@ int wmain(int argc,wchar_t** argv){
         inject(pi.hProcess,pi.dwProcessId,dll);
         if(WaitForSingleObject(event,15000)!=WAIT_OBJECT_0)throw std::runtime_error("Native renderer did not initialize");
         std::ofstream pid{std::filesystem::path(pidFile)};pid<<pi.dwProcessId;pid.close();
-        std::cout<<"Offline native graphics test PID "<<pi.dwProcessId<<std::endl;
+        std::cout<<"Native graphics process PID "<<pi.dwProcessId<<std::endl;
         WaitForSingleObject(pi.hProcess,INFINITE);DWORD exit=0;GetExitCodeProcess(pi.hProcess,&exit);
         CloseHandle(pi.hProcess);CloseHandle(event);CloseHandle(job);return int(exit);
     }catch(const std::exception& error){std::cerr<<error.what()<<std::endl;if(pi.hProcess){TerminateProcess(pi.hProcess,1);CloseHandle(pi.hProcess);}if(pi.hThread)CloseHandle(pi.hThread);if(event)CloseHandle(event);if(job)CloseHandle(job);return 1;}

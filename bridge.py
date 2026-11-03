@@ -392,8 +392,14 @@ def main():
     p.add_argument('--eye-scale',type=float,default=1,help='Scale the SteamVR recommended eye resolution, from 0.5 to 1.5')
     p.add_argument('--native-renderer',action='store_true',help='Direct stereo GPU rendering in the verified 2015 client')
     p.add_argument('--capture-preview',action='store_true',help='Use the previous monoscopic desktop-capture renderer')
+    p.add_argument('--protocol',help=argparse.SUPPRESS)
+    p.add_argument('--no-launch-integration',action='store_true',help='Do not temporarily route Hexagon launches through the early graphics loader')
     p.add_argument('--native-directory',type=Path,help=argparse.SUPPRESS)
     args=p.parse_args()
+    if args.protocol:
+        from launch_integration import handle_protocol
+        handle_protocol(args.protocol)
+        return
     for name in ('arm_forward','arm_outset'):
         if not math.isfinite(getattr(args,name))or not 0<=getattr(args,name)<=1:p.error(name.replace('_','-')+' must be between 0 and 1 studs')
     eye_resolution((64,64),args.eye_scale)
@@ -419,7 +425,7 @@ def main():
         print(install(args.install,dest,args.url,key,args.user_id));return
     configure_console()
     state=State(key);server=serve(state,args.host,args.port) if not args.local_client else None;stop=threading.Event();preview=None;process=None;folder=None;vr=None;system=None;compositor=None;transport=None;last_bind=0;hwnd=None;native=None
-    last_message=None
+    last_message=None;launch_host=None
     def status(message):
         nonlocal last_message
         if message!=last_message:print(message,flush=True);last_message=message
@@ -434,6 +440,10 @@ def main():
                 except Exception as e:debug('Relay unavailable:',type(e).__name__,flush=True);stop.wait(1)
         threading.Thread(target=publisher,daemon=True).start()
     try:
+        if args.attach_player and args.native_renderer and not args.no_launch_integration:
+            from launch_integration import ProtocolHost
+            launch_host=ProtocolHost(native_directory)
+            launch_host.start()
         if args.launch:
             while True:
                 try:
@@ -444,7 +454,7 @@ def main():
                     if not isinstance(error,vr.OpenVRError):raise
                     status('Launch SteamVR and connect your headset to continue.');time.sleep(1)
         from vr_actions import Actions
-        actions=Actions();tracker=Tracker(args.scale);start=time.monotonic();last_status=start;last_window_check=0
+        actions=Actions(legacy_chat=False);tracker=Tracker(args.scale);start=time.monotonic();last_status=start;last_window_check=0
         left_held=0;last_tuning=None;last_vr_settings=None;last_vr_check=0
         def disconnect():
             nonlocal transport,preview,system,compositor,native
@@ -454,6 +464,10 @@ def main():
             if system is not None:vr.shutdown();system=None;compositor=None
             state.viewport=None;tracker.origin=None
         while not args.seconds or time.monotonic()-start<args.seconds:
+            if launch_host:
+                try:launch_host.poll()
+                except (RuntimeError,OSError,ValueError) as error:
+                    status('Unable to start the VR client; check the Hexagon installation and Windows Security ('+type(error).__name__+').')
             if process and process.poll() is not None:break
             if args.relay_only:time.sleep(.05);continue
             if time.monotonic()-last_vr_check>.25:
@@ -481,6 +495,13 @@ def main():
                         except (RuntimeError,OSError) as error:debug('Waiting for local mailbox:',error,flush=True)
                 if transport is None:
                     status('enter a game with support for hexagonVR');time.sleep(.2);continue
+            if args.native_renderer and transport:
+                from native_renderer import renderer_active
+                if not renderer_active(transport.pid):
+                    status('Keep HexagonVR open and launch the game again through Hexagon for native rendering.')
+                    try:transport.push({'tracked':False})
+                    except (RuntimeError,OSError):disconnect()
+                    time.sleep(.2);continue
             if not args.mock and system is None:
                 import openvr as vr
                 try:
@@ -495,11 +516,6 @@ def main():
                         try:transport.push({'tracked':False})
                         except (RuntimeError,OSError):disconnect()
                     time.sleep(.25);continue
-            if args.native_renderer and native is None:
-                from native_renderer import write_config,attach,NativePresenter
-                write_config(system,vr,native_directory,args.scale,args.eye_scale);attach(transport.pid,native_directory)
-                native=NativePresenter(transport.pid,native_directory)
-                status('hexagonVR native stereo | Y: menu | B: chat')
             if args.mock:
                 t=time.monotonic()-start;head=np.eye(4);head[:3,3]=(0,1.6,0)
                 left=head.copy();left[:3,3]=(-.35,1.3+.15*math.sin(t*2),-.35)
@@ -528,11 +544,11 @@ def main():
             pose['cameraForward']=0 if args.view_mode=='native' else args.camera_forward
             offset_hands(pose,args.arm_outset,args.arm_forward)
             state.publish(pose)
+            camera_ready=not args.native_renderer
             if args.local_client:
                 if transport:
                     try:
                         transport.push(pose)
-                        if native:native.set_pose(transport.sequence,head,transport.active_ack_address())
                         command=transport.ui_command()
                         if command:
                             kind,a,b=command
@@ -549,14 +565,30 @@ def main():
                                     current=json.loads(settings_path.read_text())if settings_path.exists()else{}
                                     current['arm_forward']=args.arm_forward;settings_path.write_text(json.dumps(current,indent=2)+'\n')
                                 except (OSError,ValueError):pass
-                            elif actions.receive(kind,a,b,hwnd,transport.pid)=='leave':break
+                            elif actions.receive(kind,a,b,hwnd,transport.pid,token=transport.ui_token)=='leave':break
+                        chat_result=actions.poll_result(transport.pid)
+                        if chat_result:transport.report_chat(*chat_result)
+                        if actions.last_send_token!=actions.last_confirmed_token and transport.chat_confirmed(actions.last_send_token):
+                            actions.last_confirmed_token=actions.last_send_token
+                            debug('VR chat confirmed by the game.',flush=True)
                         measured=transport.viewport()
                         if measured:state.viewport=measured
+                        active=transport.camera_enabled()
+                        camera_ready=bool(active)if active is not None else measured is not None
+                        if args.native_renderer and camera_ready:
+                            if native is None:
+                                from native_renderer import write_config,attach,NativePresenter
+                                write_config(system,vr,native_directory,args.scale,args.eye_scale);attach(transport.pid,native_directory)
+                                native=NativePresenter(transport.pid,native_directory)
+                            native.set_pose(transport.sequence,head,transport.active_ack_address())
+                            status('hexagonVR native stereo | Y: menu | B: chat')
+                        elif args.native_renderer:status('Waiting for the game VR camera; type /vr if VR was turned off.')
                     except (RuntimeError,OSError) as error:
                         debug('Local client disconnected:',error,flush=True);disconnect();continue
             if process and state.viewport is not None and hasattr(process,'_vr_restore_flags'):process._vr_restore_flags()
             if native:
-                native.submit(vr,compositor)
+                if camera_ready:native.submit(vr,compositor)
+                elif native.suspend():compositor.clearLastSubmittedFrame()
                 if time.monotonic()-last_status>5:
                     (USER_ROOT/'native-status.json').write_text(json.dumps({'mode':'native stereo GPU','pid':native.pid,'eye_resolution':[native.width,native.height],'scene_frames_received':native.frames,'submissions':native.submitted,'render_pose_sequence':native.pose_sequence,'desktop_capture':False},indent=2)+'\n')
             if args.preview and not args.mock:
@@ -587,9 +619,10 @@ def main():
                         except (ValueError,KeyError,OSError):pass
                     preview.submit(vr,compositor)
             if time.monotonic()-last_status>5:
-                debug('Tracking:',state.seq,'| local render ack:',transport.last_ack_sequence if transport else None,'| local acknowledgement ms:',round(sum(transport.latencies)/len(transport.latencies),1) if transport and transport.latencies else None,'| capture/submit:',(preview.frames,preview.submitted) if preview else 'no window','viewport:',state.viewport,flush=True);last_status=time.monotonic()
+                debug('Tracking:',state.seq,'| local render ack:',transport.last_ack_sequence if transport else None,'| local acknowledgement ms:',round(sum(transport.latencies)/len(transport.latencies),1) if transport and transport.latencies else None,'| capture/submit:',(preview.frames,preview.submitted) if preview else 'no window','viewport:',state.viewport,'camera enabled:',transport.camera_enabled()if transport else None,flush=True);last_status=time.monotonic()
     except KeyboardInterrupt:pass
     finally:
+        if launch_host:launch_host.close()
         state.publish({'tracked':False});stop.set()
         if transport:transport.close()
         if native:native.close()
