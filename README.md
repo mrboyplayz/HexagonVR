@@ -4,11 +4,15 @@ Native stereo VR for supported games in Hexagon's Windows 2015 client.
 
 **Launch SteamVR and connect your headset before using HexagonVR.** Tested with a Meta Quest 3S connected wirelessly to SteamVR.
 
+# Warning!
+
+This project was created by AI, if you do not like it then you shouldn't use it.
+
 ## Download and run
 
 1. Download **HexagonVR.exe** from [Releases](https://github.com/mrboyplayz/HexagonVR/releases).
 2. Launch SteamVR and connect your headset/controllers.
-3. Open HexagonVR. Its console tells you to launch SteamVR and waits with `enter a game with support for hexagonVR`.
+3. Open HexagonVR. The console will tell you `enter a game with support for hexagonVR`.
 4. Join a game with the HexagonVR scripts installed. The helper detects support and starts VR locally.
 
 Several players can use VR in the same server. **Each VR player runs their own helper and SteamVR on their own PC.** PC players can join normally without a helper. VR rigs, pose limits, tracking timeouts, and cleanup are independent for each player.
@@ -41,7 +45,7 @@ python bridge.py --install MyGame.rbxlx
 
 The installer adds the server/client scripts and menu modules from `roblox/`. `VRConfig.AllowedUserIds = {}` permits all players. Set a list of numeric IDs to restrict access. Keep `AutoEnable = false` so ordinary PC players retain their normal rigs; the local client requests VR after receiving valid headset tracking.
 
-R6 characters are required. The helper supports the exact 2015 Player and Studio executable hashes in the source. It does not add tracked VR avatars to games without the support scripts.
+R6 characters are required. The helper supports the exact Player and Studio executable hashes in the source. It does not add tracked VR avatars to games without the support scripts.
 
 ## Studio test
 
