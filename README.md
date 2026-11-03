@@ -53,7 +53,7 @@ The native module draws scene geometry separately for each eye into Direct3D 11 
 
 **This modifies the running client:** the helper loads a graphics module, hooks Direct3D calls, and reads/writes the game-created local pose mailbox. It checks the executable hash before loading the module. It does not replace the game executable on disk. The hooks stay loaded until the game exits; stereo GPU work stops when the helper's heartbeat expires.
 
-This is a beta. Some screen-space effects and ordinary 2D CoreGui screens are outside the native path. The game-created 3D menu supplies VR controls. Native display has been tested in Studio; the multi-player server logic has automated isolation tests, while a simultaneous two-headset online session still needs validation. Reopen the game after changing headset eye configuration or native resolution.
+This is a beta. Some screen-space effects and ordinary 2D CoreGui screens are outside the native path. The game-created 3D menu supplies VR controls. Native display has been tested in Studio, and the actual online Player produced separate full-resolution GPU eye images in a test using cached Quest calibration and simulated tracking. End-to-end online Player headset delivery is still pending because the wireless headset was disconnected during that check. The multi-player server logic has automated isolation tests; a simultaneous two-headset online session still needs validation. Reopen the game after changing headset eye configuration or native resolution.
 
 The previous monoscopic mode is available with `--capture-preview`; native failures do not silently switch to it.
 
