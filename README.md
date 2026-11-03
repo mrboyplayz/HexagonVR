@@ -2,7 +2,7 @@
 
 Native stereo VR for supported games in Hexagon's Windows 2015 client.
 
-**Launch SteamVR and connect your headset before using HexagonVR.** Tested with a Meta Quest 3S connected wirelessly to SteamVR.
+**Launch SteamVR and connect your headset before using HexagonVR.** Tested with a Meta Quest 3S and a Meta Quest 3 connected wirelessly to SteamVR.
 
 # Warning!
 
