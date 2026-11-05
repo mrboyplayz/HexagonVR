@@ -1,4 +1,4 @@
-# v0.4.0-beta.1 — fixed support grips, M16, and scoped AWP
+# v0.4.0-beta.1 - fixed support grips, M16, and scoped AWP
 
 Close the old helper and game, open this EXE, then join a fresh server of [Hexagon VR Test](https://www.hexagon.pw/games/105279). Both the updated place scripts and native renderer are needed for the scope.
 
