@@ -1,4 +1,4 @@
-HEXAGON VR: PHYSICAL HATS, CROWBAR, PISTOL, AND AK-47
+HEXAGON VR v0.3.1-beta.1: TWO-HAND AIM, TRACKED ARMS, AND HATS
 
 1. Close the old HexagonVR helper and leave any old test server.
    Every VR player must upgrade. v0.2.1-beta.1 and earlier cannot send grips.
@@ -18,6 +18,7 @@ It pivots around the point where you grabbed it. Release near your head or
 another player's head to equip it there. Release elsewhere to drop it on
 the ground; you can pick it up again. Everyone sees the same original hat.
 Hats require a nearby touch, without distance grab.
+Other loose ground hats are deleted unless a VR player handled/dropped them.
 Pistol: pick up with one hand, then use the other hand to pick up a magazine.
 Keep holding grip. Guide the magazine's top into the bottom opening,
 then push it up the well until it clicks. It only locks when fully seated.
@@ -33,6 +34,9 @@ Hold trigger for automatic fire. Grip the fore-end with your other hand
 to stabilize aiming and reduce recoil. The rear grip stays fixed and the
 front grip captures your actual hand placement. The AK bolt does not lock
 when empty. AK magazines follow a guided rock-in path as you push them in.
+The foregrip responds locally on squeeze. Both hand positions drive aim,
+with rear-wrist roll, no old angle limit, and no extra aiming filter.
+Your own arms are 45% transparent and track independently of body physics.
 
 Both guns have immediate firing sound, spring recoil, muzzle flash,
 controller vibration, textured cartridge cases, and confirmed impact effects.
@@ -53,7 +57,7 @@ Removing it does not remove a round already in the chamber.
 Opening a VR menu drops held items and blocks weapon actions.
 
 The support scripts are published to Hexagon VR Test (place 105279),
-version 14, with Filtering Disabled. Join a fresh server for the new scripts.
+version 15, with Filtering Disabled. Join a fresh server for the new scripts.
 The published file's SHA-256 was verified. See PUBLISH-RECEIPT.json.
 The public download includes the separate offline VR-Demo.rbxlx.
 Each VR player needs this EXE.
@@ -64,3 +68,5 @@ The offline demo still uses the bundled files installed by the helper.
 Marketplace asset sources and adaptation details: assets/MARKETPLACE-SOURCES.json
 Verification results: WEAPON-VALIDATION.json
 Physical headset/controller feel has not been verified in this build.
+Active VR use is reported as client input by this helper. Input delivery was
+verified in the legacy engine; the live 20-minute timeout needs user testing.

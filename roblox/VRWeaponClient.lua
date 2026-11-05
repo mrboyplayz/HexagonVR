@@ -148,6 +148,11 @@ function M.new(player,menu,remote)
             self:finishVisuals();return
         end
         hands=self:stableHands(hands,dt)
+        local occupied={}
+        for _,model in ipairs(folder:GetChildren())do
+            local owner=model:FindFirstChild("Owner");local hand=model:FindFirstChild("Hand")
+            if owner and owner.Value==player and hand then occupied[hand.Value]=model end
+        end
         for _,model in ipairs(folder:GetChildren())do
             local owner=model:FindFirstChild("Owner");local hand=model:FindFirstChild("Hand");local root=model:FindFirstChild("Handle")
             local layout=Geometry.forModel(model)
@@ -155,7 +160,7 @@ function M.new(player,menu,remote)
                 local s=self:state(model);local localOwner=owner.Value==player;local heldHand=hand and hand.Value
                 if localOwner and(not s.localHeld or heldHand~=s.lastHeldHand)then
                     if now-s.lastShot>.15 then s.recoil=0;s.velocity=0;s.yaw=0;s.yawVelocity=0 end
-                    s.aimRotation=nil;s.supportBlend=nil;s.supportHand=nil;s.supportAnchor=nil;s.wearGrip=nil
+                    s.aimRotation=nil;s.supportBlend=nil;s.supportHand=nil;s.supportAnchor=nil;s.wearGrip=nil;s.supportState=nil;s.supportPendingAt=nil;s.supportRejected=nil
                 end
                 s.localHeld=localOwner
                 if localOwner then s.lastHeldHand=heldHand end
@@ -173,20 +178,32 @@ function M.new(player,menu,remote)
                     if localOwner and hands[heldHand]and down(buttons,heldHand=="left"and 32 or 64)and not(mount and mount.Value)then
                         if layout.Gun then
                             local supportHand=support and support.Value or""
+                            local other=heldHand=="left"and"right"or"left"
+                            local squeezed=hands[other]and down(buttons,other=="left"and 32 or 64)
+                            local rack=model:FindFirstChild("SlideHand");local removing=model:FindFirstChild("RemovingHand")
+                            if not squeezed then s.supportPendingAt=nil;s.supportRejected=nil
+                            elseif supportHand~=""then s.supportPendingAt=nil
+                            elseif s.supportPendingAt then
+                                if now-s.supportPendingAt<.35 and not occupied[other]then supportHand=other
+                                else s.supportPendingAt=nil;s.supportRejected=true end
+                            elseif not s.supportRejected and not occupied[other]and(not rack or rack.Value=="")and(not removing or removing.Value=="")and Geometry.supportContact(layout,root.CFrame,hands[heldHand],hands[other])then
+                                s.supportPendingAt=now;supportHand=other
+                            end
                             local front=supportHand~=""and supportHand~=heldHand and down(buttons,supportHand=="left"and 32 or 64)and hands[supportHand]or nil
-                            if not front then s.supportHand=nil;s.supportAnchor=nil
+                            if not front then s.supportHand=nil;s.supportAnchor=nil;s.supportState=nil
                             elseif s.supportHand~=supportHand then
                                 s.supportHand=supportHand;s.supportAnchor=hands[heldHand]:pointToObjectSpace(front.p)
+                                s.supportState={}
                             end
-                            local desired=Geometry.heldFrame(layout,hands[heldHand],front,s.supportAnchor or(anchor and anchor.Value or nil))
+                            local desired=Geometry.heldFrame(layout,hands[heldHand],front,s.supportAnchor or(anchor and anchor.Value or nil),s.supportState)
                             -- Smooth the solved aim in the avatar's space. Smoothing a
                             -- correction in rear-wrist space temporarily adds wrist yaw
                             -- back into a two-hand gun, producing a large sideways kick.
                             local aimedGrip=self.handOrigin:toObjectSpace(desired*layout.Grip)
                             local rotation=aimedGrip-aimedGrip.p
-                            if front then s.supportBlend=1
+                            if front then s.supportBlend=1;s.aimRotation=rotation
                             elseif s.supportBlend then s.supportBlend=s.supportBlend*math.exp(-dt*28);if s.supportBlend<.01 then s.supportBlend=nil end end
-                            if s.supportBlend then s.aimRotation=(s.aimRotation or rotation):lerp(rotation,1-math.exp(-dt*24))
+                            if s.supportBlend and not front then s.aimRotation=(s.aimRotation or rotation):lerp(rotation,1-math.exp(-dt*35))
                             else s.aimRotation=rotation end
                             local originRotation=self.handOrigin-self.handOrigin.p
                             s.baseFrame=CFrame.new(hands[heldHand].p)*originRotation*s.aimRotation*layout.Grip:inverse()
@@ -223,7 +240,7 @@ function M.new(player,menu,remote)
                                 if remaining>0 then
                                     s.predicted=s.predicted+1
                                     local cf=root.CFrame;local origin=cf:pointToWorldSpace(layout.Muzzle)
-                                    local _,position=workspace:FindPartOnRayWithIgnoreList(Ray.new(origin,cf.lookVector*300),{folder,self.fx.folder,visuals,player.Character},false,true)
+                                    local _,position=workspace:FindPartOnRayWithIgnoreList(Ray.new(origin,cf.lookVector*300),{folder,workspace.CurrentCamera,player.Character},false,true)
                                     self:feedback(model,layout,cf,position,s.predicted,heldHand)
                                     if s.baseFrame then root.CFrame=Geometry.applyRecoil(layout,s.baseFrame,s.recoil,s.yaw)end
                                 elseif not down(previous,trigger)then self.fx:dry(root)end

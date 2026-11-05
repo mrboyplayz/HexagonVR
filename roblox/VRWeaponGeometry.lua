@@ -40,28 +40,54 @@ function G.forModel(model)
     local kind=model:FindFirstChild("VRKind")
     return G[kind and kind.Value or model.Name]
 end
-function G.supportRotation(reference,current)
-    if reference.magnitude<.001 or current.magnitude<.001 then return CFrame.new()end
-    local a,b=reference.unit,current.unit
-    local dot=math.max(-1,math.min(1,a:Dot(b)))
-    local axis=a:Cross(b);local length=axis.magnitude
-    if length<.00001 then return CFrame.new()end
-    axis=axis/length
-    local function smooth(value)value=math.max(0,math.min(1,value));return value*value*(3-2*value)end
-    -- Fade support as hands meet or cross instead of jumping to an identity
-    -- correction at a distance threshold or flipping at an opposite vector.
-    local confidence=smooth((current.magnitude-.08)/.37)*smooth((dot+1)/.5)
-    local angle=math.min(math.rad(65),math.acos(dot))*confidence
+function G.supportContact(layout,gunFrame,primary,secondary)
+    if not layout.Foregrip or not primary or not secondary or(secondary.p-primary.p).magnitude<.45 then return false end
+    local point=gunFrame:pointToObjectSpace(secondary.p)
+    return(math.abs(point.x)<.65 and point.y>-.65 and point.y<.3 and point.z> -1.5 and point.z<-.2)or(point-layout.Foregrip).magnitude<.8
+end
+local function axisAngle(axis,angle)
     local x,y,z=axis.x,axis.y,axis.z;local c,s=math.cos(angle),math.sin(angle);local t=1-c
     return CFrame.new(0,0,0,t*x*x+c,t*x*y-s*z,t*x*z+s*y,t*x*y+s*z,t*y*y+c,t*y*z-s*x,t*x*z-s*y,t*y*z+s*x,t*z*z+c)
 end
-function G.heldFrame(layout,primary,support,anchor)
-    local rotation=CFrame.new()
-    if support and layout.Foregrip then
-        local reference=anchor or layout.Grip:pointToObjectSpace(layout.Foregrip)
-        rotation=G.supportRotation(reference,primary:vectorToObjectSpace(support.p-primary.p))
+function G.supportRotation(reference,current)
+    if reference.magnitude<.001 or current.magnitude<.001 then return CFrame.new()end
+    local a,b=reference.unit,current.unit;local dot=math.max(-1,math.min(1,a:Dot(b)))
+    local axis=a:Cross(b);local length=axis.magnitude
+    if length<.00001 then
+        if dot>0 then return CFrame.new()end
+        axis=a:Cross(math.abs(a.y)<.9 and Vector3.new(0,1,0)or Vector3.new(1,0,0));length=axis.magnitude
     end
-    return primary*rotation*layout.Grip:inverse()
+    return axisAngle(axis/length,math.acos(dot))
+end
+local function twist(frame,axis)
+    local m={frame:components()};local a,b,c,d,e,f,g,h,i=m[4],m[5],m[6],m[7],m[8],m[9],m[10],m[11],m[12]
+    local w,x,y,z;local trace=a+e+i
+    if trace>0 then local s=math.sqrt(trace+1)*2;w=s/4;x=(h-f)/s;y=(c-g)/s;z=(d-b)/s
+    elseif a>e and a>i then local s=math.sqrt(1+a-e-i)*2;w=(h-f)/s;x=s/4;y=(b+d)/s;z=(c+g)/s
+    elseif e>i then local s=math.sqrt(1+e-a-i)*2;w=(c-g)/s;x=(b+d)/s;y=s/4;z=(f+h)/s
+    else local s=math.sqrt(1+i-a-e)*2;w=(d-b)/s;x=(c+g)/s;y=(f+h)/s;z=s/4 end
+    local along=x*axis.x+y*axis.y+z*axis.z
+    if math.abs(along)+math.abs(w)<.00001 then return CFrame.new()end
+    return axisAngle(axis,2*math.atan2(along,w))
+end
+function G.heldFrame(layout,primary,support,anchor,state)
+    if not support or not layout.Foregrip then
+        if state then state.rotation=nil end
+        return primary*layout.Grip:inverse()
+    end
+    local reference=anchor or layout.Grip:pointToObjectSpace(layout.Foregrip)
+    if reference.magnitude<.001 then return primary*layout.Grip:inverse()end
+    local rotation=state and state.rotation or(primary-primary.p)
+    local line=support.p-primary.p
+    -- Two tracked grip positions determine pitch/yaw. The rear wrist supplies
+    -- twist only; it cannot clamp or steer the barrel away from the front hand.
+    -- At coincident hands keep the last solution until the direction is defined.
+    if line.magnitude>.25 then
+        rotation=G.supportRotation(rotation:vectorToWorldSpace(reference),line)*rotation
+        rotation=rotation*twist(rotation:toObjectSpace(primary-primary.p),reference.unit)
+    end
+    if state then state.rotation=rotation end
+    return CFrame.new(primary.p)*rotation*layout.Grip:inverse()
 end
 function G.recoilFrame(layout,pitch,yaw)
     return CFrame.new(0,0,math.max(0,pitch)*(layout.RecoilBack or .03))*CFrame.Angles(math.rad(pitch),math.rad(yaw or 0),math.rad((yaw or 0)*.2))

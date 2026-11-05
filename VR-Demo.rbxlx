@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<roblox version="4"><External>null</External><External>nil</External><Item class="Workspace" referent="RBX6478d77cacd248db9646b1455b96147d"><Properties><string name="Name">Workspace</string><bool name="FilteringEnabled">false</bool></Properties><Item class="Part" referent="RBXf1a6947a648e4afaaa028f97a7417e19"><Properties><string name="Name">Baseplate</string><bool name="Anchored">true</bool><token name="TopSurface">0</token><token name="BottomSurface">0</token><Vector3 name="size"><X>120</X><Y>1</Y><Z>120</Z></Vector3><CoordinateFrame name="CFrame"><X>0</X><Y>-0.5</Y><Z>0</Z><R00>1</R00><R01>0</R01><R02>0</R02><R10>0</R10><R11>1</R11><R12>0</R12><R20>0</R20><R21>0</R21><R22>1</R22></CoordinateFrame><Color3 name="Color"><r>0.23</r><g>0.26</g><b>0.3</b></Color3></Properties></Item><Item class="Part" referent="RBX5aaf6c486ffb478bb4e4080fd77c6366"><Properties><string name="Name">DepthMarker0</string><bool name="Anchored">true</bool><token name="TopSurface">0</token><token name="BottomSurface">0</token><Vector3 name="size"><X>2</X><Y>4</Y><Z>2</Z></Vector3><CoordinateFrame name="CFrame"><X>-8</X><Y>2</Y><Z>-10</Z><R00>1</R00><R01>0</R01><R02>0</R02><R10>0</R10><R11>1</R11><R12>0</R12><R20>0</R20><R21>0</R21><R22>1</R22></CoordinateFrame><Color3 name="Color"><r>0.2</r><g>0.5</g><b>0.9</b></Color3></Properties></Item><Item class="Part" referent="RBX8d747e6e7e974edab88464d338d0f5af"><Properties><string name="Name">DepthMarker1</string><bool name="Anchored">true</bool><token name="TopSurface">0</token><token name="BottomSurface">0</token><Vector3 name="size"><X>2</X><Y>4</Y><Z>2</Z></Vector3><CoordinateFrame name="CFrame"><X>-4</X><Y>2</Y><Z>-16</Z><R00>1</R00><R01>0</R01><R02>0</R02><R10>0</R10><R11>1</R11><R12>0</R12><R20>0</R20><R21>0</R21><R22>1</R22></CoordinateFrame><Color3 name="Color"><r>0.2</r><g>0.58</g><b>0.9</b></Color3></Properties></Item><Item class="Part" referent="RBX435df5f86dbe4735a32919bfc7e6fd2f"><Properties><string name="Name">DepthMarker2</string><bool name="Anchored">true</bool><token name="TopSurface">0</token><token name="BottomSurface">0</token><Vector3 name="size"><X>2</X><Y>4</Y><Z>2</Z></Vector3><CoordinateFrame name="CFrame"><X>0</X><Y>2</Y><Z>-22</Z><R00>1</R00><R01>0</R01><R02>0</R02><R10>0</R10><R11>1</R11><R12>0</R12><R20>0</R20><R21>0</R21><R22>1</R22></CoordinateFrame><Color3 name="Color"><r>0.2</r><g>0.66</g><b>0.9</b></Color3></Properties></Item><Item class="Part" referent="RBXb837b83e24c44681a02dcb500cf84d1d"><Properties><string name="Name">DepthMarker3</string><bool name="Anchored">true</bool><token name="TopSurface">0</token><token name="BottomSurface">0</token><Vector3 name="size"><X>2</X><Y>4</Y><Z>2</Z></Vector3><CoordinateFrame name="CFrame"><X>4</X><Y>2</Y><Z>-28</Z><R00>1</R00><R01>0</R01><R02>0</R02><R10>0</R10><R11>1</R11><R12>0</R12><R20>0</R20><R21>0</R21><R22>1</R22></CoordinateFrame><Color3 name="Color"><r>0.2</r><g>0.74</g><b>0.9</b></Color3></Properties></Item><Item class="Part" referent="RBXe3562e4fc2e643b49ed0f33da239c7fc"><Properties><string name="Name">DepthMarker4</string><bool name="Anchored">true</bool><token name="TopSurface">0</token><token name="BottomSurface">0</token><Vector3 name="size"><X>2</X><Y>4</Y><Z>2</Z></Vector3><CoordinateFrame name="CFrame"><X>8</X><Y>2</Y><Z>-34</Z><R00>1</R00><R01>0</R01><R02>0</R02><R10>0</R10><R11>1</R11><R12>0</R12><R20>0</R20><R21>0</R21><R22>1</R22></CoordinateFrame><Color3 name="Color"><r>0.2</r><g>0.8200000000000001</g><b>0.9</b></Color3></Properties></Item><Item class="Part" referent="RBX89589ad28717461b963a5e8c77a35d72"><Properties><string name="Name">LeftWall</string><bool name="Anchored">true</bool><token name="TopSurface">0</token><token name="BottomSurface">0</token><Vector3 name="size"><X>1</X><Y>6</Y><Z>28</Z></Vector3><CoordinateFrame name="CFrame"><X>-16</X><Y>3</Y><Z>-10</Z><R00>1</R00><R01>0</R01><R02>0</R02><R10>0</R10><R11>1</R11><R12>0</R12><R20>0</R20><R21>0</R21><R22>1</R22></CoordinateFrame><Color3 name="Color"><r>0.9</r><g>0.35</g><b>0.22</b></Color3></Properties></Item><Item class="Part" referent="RBX9523775a354d432c9d5c8f8b50744589"><Properties><string name="Name">RightWall</string><bool name="Anchored">true</bool><token name="TopSurface">0</token><token name="BottomSurface">0</token><Vector3 name="size"><X>1</X><Y>6</Y><Z>28</Z></Vector3><CoordinateFrame name="CFrame"><X>16</X><Y>3</Y><Z>-10</Z><R00>1</R00><R01>0</R01><R02>0</R02><R10>0</R10><R11>1</R11><R12>0</R12><R20>0</R20><R21>0</R21><R22>1</R22></CoordinateFrame><Color3 name="Color"><r>0.25</r><g>0.8</g><b>0.45</b></Color3></Properties></Item></Item><Item class="Players" referent="RBXf4005fdf997d4d088416445d4eacd2e6"><Properties><string name="Name">Players</string></Properties></Item><Item class="ReplicatedStorage" referent="RBX54d93a9bd2bc4c9985d6517ca8b0e7fa"><Properties><string name="Name">ReplicatedStorage</string></Properties><Item class="BoolValue" referent="RBXcf61ce5deab04b79b6fd3649942e1a8f"><Properties><string name="Name">HexagonVROfflineAssets</string><bool name="Value">true</bool></Properties></Item><Item class="ModuleScript" referent="RBX4059c687f3274e098845c692c046c1d2"><Properties><string name="Name">HexagonVRWeaponGeometry</string><ProtectedString name="Source">-- Shared render and server transforms; forward is -Z, up is +Y.
+<roblox version="4"><External>null</External><External>nil</External><Item class="Workspace" referent="RBX27b91bed51f644dc9789a1e347aad118"><Properties><string name="Name">Workspace</string><bool name="FilteringEnabled">false</bool></Properties><Item class="Part" referent="RBX99c84c9e5d7044dbba52fca0462fb81f"><Properties><string name="Name">Baseplate</string><bool name="Anchored">true</bool><token name="TopSurface">0</token><token name="BottomSurface">0</token><Vector3 name="size"><X>120</X><Y>1</Y><Z>120</Z></Vector3><CoordinateFrame name="CFrame"><X>0</X><Y>-0.5</Y><Z>0</Z><R00>1</R00><R01>0</R01><R02>0</R02><R10>0</R10><R11>1</R11><R12>0</R12><R20>0</R20><R21>0</R21><R22>1</R22></CoordinateFrame><Color3 name="Color"><r>0.23</r><g>0.26</g><b>0.3</b></Color3></Properties></Item><Item class="Part" referent="RBX666d62b0a2d144da8ad899922412faed"><Properties><string name="Name">DepthMarker0</string><bool name="Anchored">true</bool><token name="TopSurface">0</token><token name="BottomSurface">0</token><Vector3 name="size"><X>2</X><Y>4</Y><Z>2</Z></Vector3><CoordinateFrame name="CFrame"><X>-8</X><Y>2</Y><Z>-10</Z><R00>1</R00><R01>0</R01><R02>0</R02><R10>0</R10><R11>1</R11><R12>0</R12><R20>0</R20><R21>0</R21><R22>1</R22></CoordinateFrame><Color3 name="Color"><r>0.2</r><g>0.5</g><b>0.9</b></Color3></Properties></Item><Item class="Part" referent="RBX60cd1b6cfba049529f353b5e5151fd5c"><Properties><string name="Name">DepthMarker1</string><bool name="Anchored">true</bool><token name="TopSurface">0</token><token name="BottomSurface">0</token><Vector3 name="size"><X>2</X><Y>4</Y><Z>2</Z></Vector3><CoordinateFrame name="CFrame"><X>-4</X><Y>2</Y><Z>-16</Z><R00>1</R00><R01>0</R01><R02>0</R02><R10>0</R10><R11>1</R11><R12>0</R12><R20>0</R20><R21>0</R21><R22>1</R22></CoordinateFrame><Color3 name="Color"><r>0.2</r><g>0.58</g><b>0.9</b></Color3></Properties></Item><Item class="Part" referent="RBXb8db48ea506340ba81afdd506295c11d"><Properties><string name="Name">DepthMarker2</string><bool name="Anchored">true</bool><token name="TopSurface">0</token><token name="BottomSurface">0</token><Vector3 name="size"><X>2</X><Y>4</Y><Z>2</Z></Vector3><CoordinateFrame name="CFrame"><X>0</X><Y>2</Y><Z>-22</Z><R00>1</R00><R01>0</R01><R02>0</R02><R10>0</R10><R11>1</R11><R12>0</R12><R20>0</R20><R21>0</R21><R22>1</R22></CoordinateFrame><Color3 name="Color"><r>0.2</r><g>0.66</g><b>0.9</b></Color3></Properties></Item><Item class="Part" referent="RBX4f30092073f84495aebda33979560912"><Properties><string name="Name">DepthMarker3</string><bool name="Anchored">true</bool><token name="TopSurface">0</token><token name="BottomSurface">0</token><Vector3 name="size"><X>2</X><Y>4</Y><Z>2</Z></Vector3><CoordinateFrame name="CFrame"><X>4</X><Y>2</Y><Z>-28</Z><R00>1</R00><R01>0</R01><R02>0</R02><R10>0</R10><R11>1</R11><R12>0</R12><R20>0</R20><R21>0</R21><R22>1</R22></CoordinateFrame><Color3 name="Color"><r>0.2</r><g>0.74</g><b>0.9</b></Color3></Properties></Item><Item class="Part" referent="RBX98b45fbfbab8467fafecb8ad4ba902ed"><Properties><string name="Name">DepthMarker4</string><bool name="Anchored">true</bool><token name="TopSurface">0</token><token name="BottomSurface">0</token><Vector3 name="size"><X>2</X><Y>4</Y><Z>2</Z></Vector3><CoordinateFrame name="CFrame"><X>8</X><Y>2</Y><Z>-34</Z><R00>1</R00><R01>0</R01><R02>0</R02><R10>0</R10><R11>1</R11><R12>0</R12><R20>0</R20><R21>0</R21><R22>1</R22></CoordinateFrame><Color3 name="Color"><r>0.2</r><g>0.8200000000000001</g><b>0.9</b></Color3></Properties></Item><Item class="Part" referent="RBXa47f3c000691455f91db2e9389347a3e"><Properties><string name="Name">LeftWall</string><bool name="Anchored">true</bool><token name="TopSurface">0</token><token name="BottomSurface">0</token><Vector3 name="size"><X>1</X><Y>6</Y><Z>28</Z></Vector3><CoordinateFrame name="CFrame"><X>-16</X><Y>3</Y><Z>-10</Z><R00>1</R00><R01>0</R01><R02>0</R02><R10>0</R10><R11>1</R11><R12>0</R12><R20>0</R20><R21>0</R21><R22>1</R22></CoordinateFrame><Color3 name="Color"><r>0.9</r><g>0.35</g><b>0.22</b></Color3></Properties></Item><Item class="Part" referent="RBXfd89b015b8f04e028876d46a7e45a387"><Properties><string name="Name">RightWall</string><bool name="Anchored">true</bool><token name="TopSurface">0</token><token name="BottomSurface">0</token><Vector3 name="size"><X>1</X><Y>6</Y><Z>28</Z></Vector3><CoordinateFrame name="CFrame"><X>16</X><Y>3</Y><Z>-10</Z><R00>1</R00><R01>0</R01><R02>0</R02><R10>0</R10><R11>1</R11><R12>0</R12><R20>0</R20><R21>0</R21><R22>1</R22></CoordinateFrame><Color3 name="Color"><r>0.25</r><g>0.8</g><b>0.45</b></Color3></Properties></Item></Item><Item class="Players" referent="RBX71d06510665442548af656357a76893d"><Properties><string name="Name">Players</string></Properties></Item><Item class="ReplicatedStorage" referent="RBX305c8917c8cf48e0bb0082c3b4410e31"><Properties><string name="Name">ReplicatedStorage</string></Properties><Item class="BoolValue" referent="RBX9ed2ae4f021447a299c8cab6cb98c2b5"><Properties><string name="Name">HexagonVROfflineAssets</string><bool name="Value">true</bool></Properties></Item><Item class="ModuleScript" referent="RBXa5c1031847f14465a2d2c8619af69d58"><Properties><string name="Name">HexagonVRWeaponGeometry</string><ProtectedString name="Source">-- Shared render and server transforms; forward is -Z, up is +Y.
 local G={
     Hat={Wearable=true,Grip=CFrame.new()},
     Crowbar={
@@ -41,28 +41,54 @@ function G.forModel(model)
     local kind=model:FindFirstChild("VRKind")
     return G[kind and kind.Value or model.Name]
 end
-function G.supportRotation(reference,current)
-    if reference.magnitude&lt;.001 or current.magnitude&lt;.001 then return CFrame.new()end
-    local a,b=reference.unit,current.unit
-    local dot=math.max(-1,math.min(1,a:Dot(b)))
-    local axis=a:Cross(b);local length=axis.magnitude
-    if length&lt;.00001 then return CFrame.new()end
-    axis=axis/length
-    local function smooth(value)value=math.max(0,math.min(1,value));return value*value*(3-2*value)end
-    -- Fade support as hands meet or cross instead of jumping to an identity
-    -- correction at a distance threshold or flipping at an opposite vector.
-    local confidence=smooth((current.magnitude-.08)/.37)*smooth((dot+1)/.5)
-    local angle=math.min(math.rad(65),math.acos(dot))*confidence
+function G.supportContact(layout,gunFrame,primary,secondary)
+    if not layout.Foregrip or not primary or not secondary or(secondary.p-primary.p).magnitude&lt;.45 then return false end
+    local point=gunFrame:pointToObjectSpace(secondary.p)
+    return(math.abs(point.x)&lt;.65 and point.y&gt;-.65 and point.y&lt;.3 and point.z&gt; -1.5 and point.z&lt;-.2)or(point-layout.Foregrip).magnitude&lt;.8
+end
+local function axisAngle(axis,angle)
     local x,y,z=axis.x,axis.y,axis.z;local c,s=math.cos(angle),math.sin(angle);local t=1-c
     return CFrame.new(0,0,0,t*x*x+c,t*x*y-s*z,t*x*z+s*y,t*x*y+s*z,t*y*y+c,t*y*z-s*x,t*x*z-s*y,t*y*z+s*x,t*z*z+c)
 end
-function G.heldFrame(layout,primary,support,anchor)
-    local rotation=CFrame.new()
-    if support and layout.Foregrip then
-        local reference=anchor or layout.Grip:pointToObjectSpace(layout.Foregrip)
-        rotation=G.supportRotation(reference,primary:vectorToObjectSpace(support.p-primary.p))
+function G.supportRotation(reference,current)
+    if reference.magnitude&lt;.001 or current.magnitude&lt;.001 then return CFrame.new()end
+    local a,b=reference.unit,current.unit;local dot=math.max(-1,math.min(1,a:Dot(b)))
+    local axis=a:Cross(b);local length=axis.magnitude
+    if length&lt;.00001 then
+        if dot&gt;0 then return CFrame.new()end
+        axis=a:Cross(math.abs(a.y)&lt;.9 and Vector3.new(0,1,0)or Vector3.new(1,0,0));length=axis.magnitude
     end
-    return primary*rotation*layout.Grip:inverse()
+    return axisAngle(axis/length,math.acos(dot))
+end
+local function twist(frame,axis)
+    local m={frame:components()};local a,b,c,d,e,f,g,h,i=m[4],m[5],m[6],m[7],m[8],m[9],m[10],m[11],m[12]
+    local w,x,y,z;local trace=a+e+i
+    if trace&gt;0 then local s=math.sqrt(trace+1)*2;w=s/4;x=(h-f)/s;y=(c-g)/s;z=(d-b)/s
+    elseif a&gt;e and a&gt;i then local s=math.sqrt(1+a-e-i)*2;w=(h-f)/s;x=s/4;y=(b+d)/s;z=(c+g)/s
+    elseif e&gt;i then local s=math.sqrt(1+e-a-i)*2;w=(c-g)/s;x=(b+d)/s;y=s/4;z=(f+h)/s
+    else local s=math.sqrt(1+i-a-e)*2;w=(d-b)/s;x=(c+g)/s;y=(f+h)/s;z=s/4 end
+    local along=x*axis.x+y*axis.y+z*axis.z
+    if math.abs(along)+math.abs(w)&lt;.00001 then return CFrame.new()end
+    return axisAngle(axis,2*math.atan2(along,w))
+end
+function G.heldFrame(layout,primary,support,anchor,state)
+    if not support or not layout.Foregrip then
+        if state then state.rotation=nil end
+        return primary*layout.Grip:inverse()
+    end
+    local reference=anchor or layout.Grip:pointToObjectSpace(layout.Foregrip)
+    if reference.magnitude&lt;.001 then return primary*layout.Grip:inverse()end
+    local rotation=state and state.rotation or(primary-primary.p)
+    local line=support.p-primary.p
+    -- Two tracked grip positions determine pitch/yaw. The rear wrist supplies
+    -- twist only; it cannot clamp or steer the barrel away from the front hand.
+    -- At coincident hands keep the last solution until the direction is defined.
+    if line.magnitude&gt;.25 then
+        rotation=G.supportRotation(rotation:vectorToWorldSpace(reference),line)*rotation
+        rotation=rotation*twist(rotation:toObjectSpace(primary-primary.p),reference.unit)
+    end
+    if state then state.rotation=rotation end
+    return CFrame.new(primary.p)*rotation*layout.Grip:inverse()
 end
 function G.recoilFrame(layout,pitch,yaw)
     return CFrame.new(0,0,math.max(0,pitch)*(layout.RecoilBack or .03))*CFrame.Angles(math.rad(pitch),math.rad(yaw or 0),math.rad((yaw or 0)*.2))
@@ -87,7 +113,7 @@ function G.guidedMagazineFrame(layout,progress,freeFrame)
     return freeFrame:lerp(G.magazineFrame(layout,t),assist)
 end
 return G
-</ProtectedString></Properties></Item><Item class="ModuleScript" referent="RBX323a5b21d8c94899b3687a7b42a61602"><Properties><string name="Name">HexagonVRBody</string><ProtectedString name="Source">-- Tracking describes the eyes. Avatar head and neck are placed behind them.
+</ProtectedString></Properties></Item><Item class="ModuleScript" referent="RBX6b6c337672c340b8808d7d50d8359f6d"><Properties><string name="Name">HexagonVRBody</string><ProtectedString name="Source">-- Tracking describes the eyes. Avatar head and neck are placed behind them.
 local B={EyeForward=.45,EyeHeight=.12,HeadHalfHeight=.5,NeckHeight=1,TurnSpeed=65}
 local function wrap(angle)return(angle+math.pi)%(2*math.pi)-math.pi end
 function B.sample(eyes,previous,dt,forward)
@@ -97,6 +123,7 @@ function B.sample(eyes,previous,dt,forward)
     if look.x*look.x+look.z*look.z&lt;.01 then
         local right=head:vectorToWorldSpace(Vector3.new(1,0,0));yaw=math.atan2(-right.z,right.x)
     else yaw=math.atan2(-look.x,-look.z)end
+    yaw=previous+wrap(yaw-previous)
     local target=yaw*.6
     local limit=math.rad(55)
     if math.abs(wrap(yaw-target))&gt;limit then target=yaw-(yaw&gt;=0 and limit or-limit)end
@@ -108,7 +135,7 @@ function B.sample(eyes,previous,dt,forward)
 end
 function B.eyes(head,forward)return head*CFrame.new(0,B.EyeHeight,-(forward or B.EyeForward))end
 return B
-</ProtectedString></Properties></Item></Item><Item class="ServerScriptService" referent="RBXb483c10196d541f491cbcc8ab3cc6d09"><Properties><string name="Name">ServerScriptService</string></Properties><Item class="Script" referent="RBXe94e00adc6c54026a249d9d5057e09b5"><Properties><string name="Name">HexagonVRPracticeTargets</string><ProtectedString name="Source">-- Offline demo targets. Not installed into existing maps by the VR installer.
+</ProtectedString></Properties></Item></Item><Item class="ServerScriptService" referent="RBX774d80743e87486e9e69474a551e8772"><Properties><string name="Name">ServerScriptService</string></Properties><Item class="Script" referent="RBX29f714a546da41ad8ae0f42445e86ac2"><Properties><string name="Name">HexagonVRPracticeTargets</string><ProtectedString name="Source">-- Offline demo targets. Not installed into existing maps by the VR installer.
 local parent=Instance.new("Model");parent.Name="VRPracticeTargets";parent.Parent=workspace
 local function create(position,name)
     local target=Instance.new("Model");target.Name=name;target.Parent=parent
@@ -129,7 +156,7 @@ local function create(position,name)
 end
 create(Vector3.new(-4,0,-11),"Crowbar practice")
 create(Vector3.new(4,0,-17),"Shooting practice")
-</ProtectedString><bool name="Disabled">false</bool></Properties></Item><Item class="ModuleScript" referent="RBX74e1ca027fcb487bb7ac3542659350e0"><Properties><string name="Name">VRWeapons</string><ProtectedString name="Source">-- Physical pickups for the Hexagon 2015 engine. No Marketplace scripts execute.
+</ProtectedString><bool name="Disabled">false</bool></Properties></Item><Item class="ModuleScript" referent="RBX21d6da591bf54c7c93eb1bc89c164024"><Properties><string name="Name">VRWeapons</string><ProtectedString name="Source">-- Physical pickups for the Hexagon 2015 engine. No Marketplace scripts execute.
 local M={}
 local State=require(script.Parent.VRWeaponState)
 local Assets=require(script.Parent.VRWeaponAssets)
@@ -273,6 +300,7 @@ function M.new(config)
     function self:take(item,player,hand,cf,grip)
         if item.owner.Value or item.inserted then return false end
         if item.layout.Wearable then
+            self.hats:markVR(item,player)
             grip=item.root.CFrame:toObjectSpace(cf);self.hats:detach(item)
         end
         item.owner.Value=player;item.hand.Value=hand;self:anchor(item,true);item.root.CanCollide=false
@@ -331,6 +359,7 @@ function M.new(config)
                 local primary=worldHands[other]
                 if not primary or(cf.p-primary.p).magnitude&lt;.45 then return false end
                 ps.held[hand]={kind="support",item=gun};gun.supportAnchor.Value=primary:pointToObjectSpace(cf.p)
+                gun.supportState={}
                 gun.supportGrab.Value=hand;return true
             end
             if gun.layout.Foregrip and math.abs(point.x)&lt;.65 and point.y&gt;-.65 and point.y&lt;.3 and point.z&gt; -1.5 and point.z&lt;-.2 then
@@ -510,7 +539,8 @@ function M.new(config)
                 local support=other and other.kind=="support"and worldHands[hand=="left"and"right"or"left"]or nil
                 local target
                 if item.gun then
-                    target=Geometry.heldFrame(item.layout,cf,support,item.supportAnchor.Value)
+                    item.supportState=item.supportState or{}
+                    target=Geometry.heldFrame(item.layout,cf,support,item.supportAnchor.Value,item.supportState)
                     item.baseFrame=target
                     self:setRecoil(item,type(recoil)=="table"and recoil[hand]or nil,true)
                     target=Geometry.applyRecoil(item.layout,target,item.recoilPitch or 0,item.recoilYaw or 0)
@@ -589,7 +619,7 @@ function M.new(config)
     return self
 end
 return M
-</ProtectedString></Properties></Item><Item class="ModuleScript" referent="RBXcb066ceeb75f46f0b58943980c0e14f1"><Properties><string name="Name">VRWeaponState</string><ProtectedString name="Source">-- Engine-independent firearm state. Lua 5.1; all transitions run on the server.
+</ProtectedString></Properties></Item><Item class="ModuleScript" referent="RBX5443ad22459641b083e7b809278f3104"><Properties><string name="Name">VRWeaponState</string><ProtectedString name="Source">-- Engine-independent firearm state. Lua 5.1; all transitions run on the server.
 local M={}
 function M.new(capacity,holdOpen)
     return {capacity=capacity or 12,holdOpen=holdOpen~=false,magazine=nil,chamber=false,slideOpen=false,slideLocked=false,lastShot=-math.huge}
@@ -627,7 +657,7 @@ function M.fire(gun,now,interval)
     return true
 end
 return M
-</ProtectedString></Properties></Item><Item class="ModuleScript" referent="RBX87249f4c4ad1410c9fe01f0c4a2f855a"><Properties><string name="Name">VRWeaponAssets</string><ProtectedString name="Source">-- Public Roblox assets, verified through anonymous Hexagon delivery.
+</ProtectedString></Properties></Item><Item class="ModuleScript" referent="RBX2be64ae0acd945548d96643819246c6c"><Properties><string name="Name">VRWeaponAssets</string><ProtectedString name="Source">-- Public Roblox assets, verified through anonymous Hexagon delivery.
 local assets={
     ak_bolt_mesh="https://www.hexagon.pw/asset/?id=117894152668366",
     ak_fire="https://www.hexagon.pw/asset/?id=3742927611",
@@ -687,7 +717,7 @@ if offline and offline.Value then
     for key,file in pairs(files)do assets[key]="rbxasset://HexagonVRWeapons/"..file end
 end
 return assets
-</ProtectedString></Properties></Item><Item class="ModuleScript" referent="RBX010cd36d9f914613992324510a45e4b7"><Properties><string name="Name">VRHats</string><ProtectedString name="Source">-- Shared wearable instances: detach, hold at the touched point, and re-equip.
+</ProtectedString></Properties></Item><Item class="ModuleScript" referent="RBX40e4751a54f2498880de5acac94df4ff"><Properties><string name="Name">VRHats</string><ProtectedString name="Source">-- Shared wearable instances: detach, hold at the touched point, and re-equip.
 local M={}
 local Players=game:GetService("Players")
 local Geometry=require(game:GetService("ReplicatedStorage"):WaitForChild("HexagonVRWeaponGeometry"))
@@ -715,12 +745,16 @@ local function detachJoints(item)
 end
 function M.new(weapons,config)
     local self={byHat={}}
+    function self:markVR(item,player)
+        item.vrCreator=item.vrCreator or player
+    end
     function self:register(hat,wearer)
         if self.byHat[hat]then return self.byHat[hat]end
         if not isHat(hat)then return end
         local root=hat:FindFirstChild("Handle");if not root or not root:IsA("BasePart")then return end
         local character=wearer and wearer.Character or hat.Parent
         local head=character and character:FindFirstChild("Head")
+        if not head or not wearer then hat:Destroy();return end
         local offset=head and head.CFrame:toObjectSpace(root.CFrame)or CFrame.new(0,.5,0)
         local item={kind="Hat",model=hat,root=root,layout=Geometry.Hat,grip=CFrame.new(),spawn=root.CFrame,lastUse=tick(),hitAt={},hatParts={},hatOffsets={},wearerCharacter=head and character or nil,headOffset=offset}
         item.owner=value("ObjectValue","Owner",nil,hat);item.hand=value("StringValue","Hand","",hat)
@@ -777,6 +811,7 @@ function M.new(weapons,config)
     end
     function self:step(item)
         if item.wearerCharacter and item.model.Parent==item.wearerCharacter then return end
+        if not item.vrCreator then item.model:Destroy();return end
         if item.model.Parent~=weapons.folder then
             -- The 2015 engine also auto-equips loose Hats on body contact.
             -- Only an explicit grip release near a head may equip a VR hat.
@@ -803,7 +838,9 @@ function M.new(weapons,config)
             humanoid.Died:connect(function()
                 for _,item in pairs(self.byHat)do
                     if item.wearerCharacter==char and item.model.Parent==char then
-                        self:detach(item);weapons:anchor(item,false);item.root.CanCollide=true
+                        if weapons.players[player]then self:markVR(item,player)end
+                        if item.vrCreator then self:detach(item);weapons:anchor(item,false);item.root.CanCollide=true
+                        else item.model:Destroy()end
                     end
                 end
             end)
@@ -815,12 +852,23 @@ function M.new(weapons,config)
     end
     Players.PlayerAdded:connect(playerAdded)
     for _,player in ipairs(Players:GetPlayers())do playerAdded(player)end
-    workspace.ChildAdded:connect(function(node)if isHat(node)then self:register(node,nil)end end)
-    for _,node in ipairs(workspace:GetChildren())do if isHat(node)then self:register(node,nil)end end
+    local function groundAdded(node)
+        if not isHat(node)then return end
+        spawn(function()
+            wait(.2);if not node.Parent or self.byHat[node]then return end
+            for _,player in ipairs(Players:GetPlayers())do if player.Character and node:IsDescendantOf(player.Character)then return end end
+            local parent=node.Parent
+            if parent:FindFirstChild('Humanoid')and parent:FindFirstChild('Head')then return end
+            node:Destroy()
+        end)
+    end
+    workspace.DescendantAdded:connect(groundAdded)
+    workspace.ChildAdded:connect(groundAdded)
+    walk(workspace,groundAdded)
     return self
 end
 return M
-</ProtectedString></Properties></Item><Item class="ModuleScript" referent="RBXaef4277affa248d4995255231307312d"><Properties><string name="Name">VRConfig</string><ProtectedString name="Source">return {
+</ProtectedString></Properties></Item><Item class="ModuleScript" referent="RBX49f556186f18413e94adf75e2302d4ce"><Properties><string name="Name">VRConfig</string><ProtectedString name="Source">return {
     AllowedUserIds = {}, -- Empty allows every player with a local VR helper.
     AutoEnable = false,
     TrackingTimeout = 2,
@@ -846,7 +894,7 @@ return M
         RespawnSeconds = 90,
     },
 }
-</ProtectedString></Properties></Item><Item class="ModuleScript" referent="RBXe0257882da114dacbdb72216ebc91858"><Properties><string name="Name">VRChat</string><ProtectedString name="Source">-- Public chat submitted by the game itself. No desktop keyboard input.
+</ProtectedString></Properties></Item><Item class="ModuleScript" referent="RBX2ba028ac26be457d9bbedb19c21e3329"><Properties><string name="Name">VRChat</string><ProtectedString name="Source">-- Public chat submitted by the game itself. No desktop keyboard input.
 local Chat={}
 function Chat.start(remote,config,isActive,command)
     local Players=game:GetService("Players")
@@ -918,7 +966,7 @@ function Chat.start(remote,config,isActive,command)
     Players.PlayerRemoving:connect(function(player)jobs[player]=nil;last[player]=nil;completed[player]=nil end)
 end
 return Chat
-</ProtectedString></Properties></Item><Item class="Script" referent="RBXcee21ef1a3924ae59d36a1f39f2eeaff"><Properties><string name="Name">HexagonVRServer</string><ProtectedString name="Source">-- Lua 5.1 / Hexagon 0.217. Each player owns an independent R6 VR session.
+</ProtectedString></Properties></Item><Item class="Script" referent="RBX7bb9c89fe7874447bb94c73461c7f07d"><Properties><string name="Name">HexagonVRServer</string><ProtectedString name="Source">-- Lua 5.1 / Hexagon 0.217. Each player owns an independent R6 VR session.
 local Players=game:GetService("Players")
 local RS=game:GetService("ReplicatedStorage")
 local Run=game:GetService("RunService")
@@ -1103,7 +1151,7 @@ end)
 local toggle=Instance.new("BindableEvent");toggle.Name="HexagonVRTestToggle";toggle.Parent=script
 toggle.Event:connect(function(player)command(player,"/vr")end)
 print("HEXAGON_VR_SERVER_READY_MULTIPLAYER")
-</ProtectedString><bool name="Disabled">false</bool></Properties></Item></Item><Item class="StarterGui" referent="RBX34844ff6039b43f19e5b73fb08b804a8"><Properties><string name="Name">StarterGui</string></Properties><Item class="LocalScript" referent="RBX762f7ab18dc64d969ddc7513235a8964"><Properties><string name="Name">HexagonVRClient</string><ProtectedString name="Source">-- First-person tracking and locomotion execute locally every frame.
+</ProtectedString><bool name="Disabled">false</bool></Properties></Item></Item><Item class="StarterGui" referent="RBXeffe40effccb4f31b94b50d4649691c6"><Properties><string name="Name">StarterGui</string></Properties><Item class="LocalScript" referent="RBXf8ffd94bc19d440fac2cc9cc971cb356"><Properties><string name="Name">HexagonVRClient</string><ProtectedString name="Source">-- First-person tracking and locomotion execute locally every frame.
 local Players=game:GetService("Players")
 local RS=game:GetService("ReplicatedStorage")
 local Run=game:GetService("RunService")
@@ -1140,11 +1188,13 @@ end
 local menu=require(script:WaitForChild("VRMenu")).new(player,box,remote)
 local chatUI=require(script:WaitForChild("VRChatClient")).new(player,menu)
 local weapons=require(script:WaitForChild("VRWeaponClient")).new(player,menu,remote)
+local arms=require(script:WaitForChild("VRArms")).new()
 local studioMenuShown=false
 local function walk(object,fn)for _,v in ipairs(object:GetChildren())do fn(v);walk(v,fn)end end
 local function restore()
     menu:setOpen(false)
     weapons:update({},0,true)
+    arms:clear()
     for part,value in pairs(hidden)do if part.Parent then part.LocalTransparencyModifier=value end end
     hidden={};baseline={}
     if savedCamera.camera and savedCamera.camera.Parent then
@@ -1215,6 +1265,7 @@ local function render()
     if tracked and not enabled and wanted and tick()-lastWake&gt;1 then lastWake=tick();remote:FireServer("enable")end
     if not enabled or not tracked then
         weapons:update({},0,true)
+        arms:clear()
         if menu.opened then menu:setOpen(false)end
         if enabled and tick()-lastInput&gt;.35 then
             local hum=player.Character and player.Character:FindFirstChild("Humanoid")
@@ -1262,6 +1313,7 @@ local function render()
     local buttons=ui.x&gt;=0 and ui.x&lt;=255 and ui.x==math.floor(ui.x)and ui.x or 0
     local blocked=menu:update(right and root.CFrame*right or nil,buttons,ui.z)
     weapons:update({left=left and root.CFrame*left or nil,right=right and root.CFrame*right or nil},buttons,blocked)
+    arms:update(char,{left=left and root.CFrame*left or nil,right=right and root.CFrame*right or nil},weapons.visualHands)
     for _,row in ipairs({{"head",avatarHead},{"left",left},{"right",right}})do
         local weld=torso:FindFirstChild("HexagonVR_"..row[1])
         if weld then
@@ -1298,7 +1350,60 @@ local function render()
 end
 Run:BindToRenderStep("HexagonVR",Enum.RenderPriority.Last.Value,render)
 print("HEXAGON_VR_LOCAL_MAILBOX_READY")
-</ProtectedString><bool name="Disabled">false</bool></Properties><Item class="ModuleScript" referent="RBX605e04217cff469eb0ec416387e7a711"><Properties><string name="Name">VRWeaponClient</string><ProtectedString name="Source">-- Rear-hand anchored two-hand poses, guided magazines, and visible weapon recoil.
+</ProtectedString><bool name="Disabled">false</bool></Properties><Item class="ModuleScript" referent="RBX2236d773b5a44d51920c7c0198905932"><Properties><string name="Name">VRArms</string><ProtectedString name="Source">-- Private first-person limbs follow tracked grips, independent of body physics.
+local M={}
+local offset=CFrame.Angles(math.rad(90),0,0)*CFrame.new(0,1,0)
+local function strip(node)
+    for _,child in ipairs(node:GetChildren())do
+        if child:IsA('JointInstance')or child:IsA('LuaSourceContainer')or child:IsA('Sound')or child:IsA('TouchTransmitter')then child:Destroy()
+        else strip(child)end
+    end
+end
+function M.new()
+    local self={originals={},copies={},transparency=.45}
+    function self:clear()
+        for part,previous in pairs(self.originals)do if part.Parent then part.LocalTransparencyModifier=previous end end
+        if self.model then self.model:Destroy()end
+        self.originals={};self.copies={};self.model=nil;self.character=nil
+    end
+    function self:prepare(character)
+        if self.character==character and self.model then return end
+        self:clear();self.character=character
+        local model=Instance.new('Model');model.Name='HexagonVRLocalArms';self.model=model
+        for _,original in ipairs(character:GetChildren())do
+            if original.Name=='Left Arm'or original.Name=='Right Arm'or original.Name=='Torso'or original.Name=='Head'then
+                if original:IsA('BasePart')then
+                    local copy=original:Clone();strip(copy);copy.Anchored=true;copy.CanCollide=false;copy.LocalTransparencyModifier=0;copy.Parent=model
+                    if original.Name=='Left Arm'or original.Name=='Right Arm'then
+                        self.copies[original.Name=='Left Arm'and'left'or'right']=copy
+                        self.originals[original]=original.LocalTransparencyModifier
+                    else copy.Transparency=1 end
+                end
+            elseif original:IsA('Shirt')or original:IsA('Pants')or original:IsA('BodyColors')or original:IsA('CharacterMesh')then
+                original:Clone().Parent=model
+            end
+        end
+        local humanoid=Instance.new('Humanoid');humanoid.Name='Humanoid';humanoid.Parent=model
+        pcall(function()humanoid.NameDisplayDistance=0;humanoid.HealthDisplayDistance=0 end)
+    end
+    function self:update(character,hands,grips)
+        if not character then self:clear();return end
+        self:prepare(character);self.model.Parent=workspace.CurrentCamera
+        for original in pairs(self.originals)do if original.Parent then original.LocalTransparencyModifier=1 end end
+        for hand,copy in pairs(self.copies)do
+            local frame=grips[hand]or hands[hand]
+            copy.Transparency=frame and self.transparency or 1
+            if frame then copy.CFrame=frame*offset end
+        end
+        for _,name in ipairs({'Head','Torso'})do
+            local original=character:FindFirstChild(name);local copy=self.model:FindFirstChild(name)
+            if original and copy then copy.CFrame=original.CFrame end
+        end
+    end
+    return self
+end
+return M
+</ProtectedString></Properties></Item><Item class="ModuleScript" referent="RBXcfb3f53e41564617bb9b6754d442f4aa"><Properties><string name="Name">VRWeaponClient</string><ProtectedString name="Source">-- Rear-hand anchored two-hand poses, guided magazines, and visible weapon recoil.
 local M={}
 local Geometry=require(game:GetService("ReplicatedStorage"):WaitForChild("HexagonVRWeaponGeometry"))
 local FX=require(script:WaitForChild("VRWeaponFX"))
@@ -1448,6 +1553,11 @@ function M.new(player,menu,remote)
             self:finishVisuals();return
         end
         hands=self:stableHands(hands,dt)
+        local occupied={}
+        for _,model in ipairs(folder:GetChildren())do
+            local owner=model:FindFirstChild("Owner");local hand=model:FindFirstChild("Hand")
+            if owner and owner.Value==player and hand then occupied[hand.Value]=model end
+        end
         for _,model in ipairs(folder:GetChildren())do
             local owner=model:FindFirstChild("Owner");local hand=model:FindFirstChild("Hand");local root=model:FindFirstChild("Handle")
             local layout=Geometry.forModel(model)
@@ -1455,7 +1565,7 @@ function M.new(player,menu,remote)
                 local s=self:state(model);local localOwner=owner.Value==player;local heldHand=hand and hand.Value
                 if localOwner and(not s.localHeld or heldHand~=s.lastHeldHand)then
                     if now-s.lastShot&gt;.15 then s.recoil=0;s.velocity=0;s.yaw=0;s.yawVelocity=0 end
-                    s.aimRotation=nil;s.supportBlend=nil;s.supportHand=nil;s.supportAnchor=nil;s.wearGrip=nil
+                    s.aimRotation=nil;s.supportBlend=nil;s.supportHand=nil;s.supportAnchor=nil;s.wearGrip=nil;s.supportState=nil;s.supportPendingAt=nil;s.supportRejected=nil
                 end
                 s.localHeld=localOwner
                 if localOwner then s.lastHeldHand=heldHand end
@@ -1473,20 +1583,32 @@ function M.new(player,menu,remote)
                     if localOwner and hands[heldHand]and down(buttons,heldHand=="left"and 32 or 64)and not(mount and mount.Value)then
                         if layout.Gun then
                             local supportHand=support and support.Value or""
+                            local other=heldHand=="left"and"right"or"left"
+                            local squeezed=hands[other]and down(buttons,other=="left"and 32 or 64)
+                            local rack=model:FindFirstChild("SlideHand");local removing=model:FindFirstChild("RemovingHand")
+                            if not squeezed then s.supportPendingAt=nil;s.supportRejected=nil
+                            elseif supportHand~=""then s.supportPendingAt=nil
+                            elseif s.supportPendingAt then
+                                if now-s.supportPendingAt&lt;.35 and not occupied[other]then supportHand=other
+                                else s.supportPendingAt=nil;s.supportRejected=true end
+                            elseif not s.supportRejected and not occupied[other]and(not rack or rack.Value=="")and(not removing or removing.Value=="")and Geometry.supportContact(layout,root.CFrame,hands[heldHand],hands[other])then
+                                s.supportPendingAt=now;supportHand=other
+                            end
                             local front=supportHand~=""and supportHand~=heldHand and down(buttons,supportHand=="left"and 32 or 64)and hands[supportHand]or nil
-                            if not front then s.supportHand=nil;s.supportAnchor=nil
+                            if not front then s.supportHand=nil;s.supportAnchor=nil;s.supportState=nil
                             elseif s.supportHand~=supportHand then
                                 s.supportHand=supportHand;s.supportAnchor=hands[heldHand]:pointToObjectSpace(front.p)
+                                s.supportState={}
                             end
-                            local desired=Geometry.heldFrame(layout,hands[heldHand],front,s.supportAnchor or(anchor and anchor.Value or nil))
+                            local desired=Geometry.heldFrame(layout,hands[heldHand],front,s.supportAnchor or(anchor and anchor.Value or nil),s.supportState)
                             -- Smooth the solved aim in the avatar's space. Smoothing a
                             -- correction in rear-wrist space temporarily adds wrist yaw
                             -- back into a two-hand gun, producing a large sideways kick.
                             local aimedGrip=self.handOrigin:toObjectSpace(desired*layout.Grip)
                             local rotation=aimedGrip-aimedGrip.p
-                            if front then s.supportBlend=1
+                            if front then s.supportBlend=1;s.aimRotation=rotation
                             elseif s.supportBlend then s.supportBlend=s.supportBlend*math.exp(-dt*28);if s.supportBlend&lt;.01 then s.supportBlend=nil end end
-                            if s.supportBlend then s.aimRotation=(s.aimRotation or rotation):lerp(rotation,1-math.exp(-dt*24))
+                            if s.supportBlend and not front then s.aimRotation=(s.aimRotation or rotation):lerp(rotation,1-math.exp(-dt*35))
                             else s.aimRotation=rotation end
                             local originRotation=self.handOrigin-self.handOrigin.p
                             s.baseFrame=CFrame.new(hands[heldHand].p)*originRotation*s.aimRotation*layout.Grip:inverse()
@@ -1523,7 +1645,7 @@ function M.new(player,menu,remote)
                                 if remaining&gt;0 then
                                     s.predicted=s.predicted+1
                                     local cf=root.CFrame;local origin=cf:pointToWorldSpace(layout.Muzzle)
-                                    local _,position=workspace:FindPartOnRayWithIgnoreList(Ray.new(origin,cf.lookVector*300),{folder,self.fx.folder,visuals,player.Character},false,true)
+                                    local _,position=workspace:FindPartOnRayWithIgnoreList(Ray.new(origin,cf.lookVector*300),{folder,workspace.CurrentCamera,player.Character},false,true)
                                     self:feedback(model,layout,cf,position,s.predicted,heldHand)
                                     if s.baseFrame then root.CFrame=Geometry.applyRecoil(layout,s.baseFrame,s.recoil,s.yaw)end
                                 elseif not down(previous,trigger)then self.fx:dry(root)end
@@ -1691,7 +1813,7 @@ function M.new(player,menu,remote)
     return self
 end
 return M
-</ProtectedString></Properties><Item class="ModuleScript" referent="RBX0c3ad4fe0e2f4e9aa464ef9b9890fc95"><Properties><string name="Name">VRWeaponFX</string><ProtectedString name="Source">-- Local, immediate gun feedback. Damage and ammunition remain server controlled.
+</ProtectedString></Properties><Item class="ModuleScript" referent="RBXb70e4dc34808420e947f0e3681e9f4ee"><Properties><string name="Name">VRWeaponFX</string><ProtectedString name="Source">-- Local, immediate gun feedback. Damage and ammunition remain server controlled.
 local M={}
 local Assets=require(script:WaitForChild("VRWeaponAssets"))
 local Debris=game:GetService("Debris")
@@ -1744,7 +1866,7 @@ function M.new()
     return self
 end
 return M
-</ProtectedString></Properties><Item class="ModuleScript" referent="RBXaba9b70384eb4a01b901f5469f957aa6"><Properties><string name="Name">VRWeaponAssets</string><ProtectedString name="Source">-- Public Roblox assets, verified through anonymous Hexagon delivery.
+</ProtectedString></Properties><Item class="ModuleScript" referent="RBX4c5853b670804698badb7f9af0f29838"><Properties><string name="Name">VRWeaponAssets</string><ProtectedString name="Source">-- Public Roblox assets, verified through anonymous Hexagon delivery.
 local assets={
     ak_bolt_mesh="https://www.hexagon.pw/asset/?id=117894152668366",
     ak_fire="https://www.hexagon.pw/asset/?id=3742927611",
@@ -1804,7 +1926,7 @@ if offline and offline.Value then
     for key,file in pairs(files)do assets[key]="rbxasset://HexagonVRWeapons/"..file end
 end
 return assets
-</ProtectedString></Properties></Item></Item></Item><Item class="ModuleScript" referent="RBXe677a1e09912401483617a3f50ed7c2f"><Properties><string name="Name">VRChatClient</string><ProtectedString name="Source">-- Display only the server-filtered text delivered to this player.
+</ProtectedString></Properties></Item></Item></Item><Item class="ModuleScript" referent="RBXf3f136da52e243f4ab39f1db2aca509a"><Properties><string name="Name">VRChatClient</string><ProtectedString name="Source">-- Display only the server-filtered text delivered to this player.
 local ChatUI={}
 function ChatUI.new(player,menu)
     local Starter=game:GetService("StarterGui")
@@ -1835,7 +1957,7 @@ function ChatUI.new(player,menu)
     return self
 end
 return ChatUI
-</ProtectedString></Properties></Item><Item class="ModuleScript" referent="RBXa6b68fed55944db5a07929c6a3565abc"><Properties><string name="Name">VRMenu</string><ProtectedString name="Source">-- Private world-space menu with locally received chat history.
+</ProtectedString></Properties></Item><Item class="ModuleScript" referent="RBXd50bd0bdad094427a82478e19219fc24"><Properties><string name="Name">VRMenu</string><ProtectedString name="Source">-- Private world-space menu with locally received chat history.
 local Menu={}
 function Menu.new(player,box,remote)
     local self={opened=false,page="menu",draft="",shift=false,buttons={},messages={},queue={},serial=math.random(1,500000),pending=nil,lastButtons=0,scroll=0,notice="",hover=nil}
@@ -2138,7 +2260,7 @@ function Menu.new(player,box,remote)
     self:draw();return self
 end
 return Menu
-</ProtectedString></Properties><Item class="ModuleScript" referent="RBX9bc0f16eade04eca881c17011132d081"><Properties><string name="Name">VRMenuAssets</string><ProtectedString name="Source">-- Verified Hexagon image assets. Pending uploads use built-in textures.
+</ProtectedString></Properties><Item class="ModuleScript" referent="RBX45920085f4054f72bed27b1e0f2fb707"><Properties><string name="Name">VRMenuAssets</string><ProtectedString name="Source">-- Verified Hexagon image assets. Pending uploads use built-in textures.
 return {
     ["MenuBarAssets/MenuBackground.png"] = "https://www.hexagon.pw/asset/?id=105304",
     ["MenuBarAssets/MenuButton.png"] = "https://www.hexagon.pw/asset/?id=105306",

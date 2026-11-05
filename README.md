@@ -15,7 +15,9 @@ This build adds physical hats, a crowbar, pistol, and AK-47 to the existing 2015
 - The AK uses its own 30-round magazines and rejects pistol magazines. Its bolt returns forward when empty. Grip the fore-end with your other hand to stabilize aiming and reduce recoil. The rear grip remains anchored; the support grip captures your actual hand placement, preserves wrist roll, and blends in and out without flipping the rifle.
 - Recoil now has visible rise, rearward kick, and a small sideways impulse. Both virtual hands stay on the weapon. Two hands reduce the kick; the server's firing direction follows the recoiling muzzle.
 - Held weapons, slides, and magazines use a private local view so replicated position corrections cannot pull them away from your hands. Small tracking movements are filtered, while deliberate movements and wrist roll remain responsive. The seated magazine follows the same gun pose every frame. Grip changes send immediately; short controller tracking and squeeze-button dropouts no longer repeatedly detach the grip. The second hand captures its current local placement when support ownership arrives.
-- Two-hand aim now filters the solved direction in avatar space. Rotating the rear wrist cannot briefly steer the rifle away from stationary grip positions. Bringing the hands together or crossing them fades support smoothly. The displayed front hand uses the same local anchor as the gun.
+- The foregrip engages locally on squeeze, then the server confirms it without changing the captured contact. Both hand positions determine two-hand pitch/yaw through the full aiming range; the rear wrist contributes roll. The rear grip stays at your hand, with no 65-degree limit or second aiming filter. Coincident hands keep the last defined direction. Releasing the support grip eases back to one-hand aiming.
+- Your first-person arms are private tracked copies with 45% transparency. They follow the controller or held grip directly, independently of torso physics and replicated shoulder joints. Shared arms retain their normal transparency. The default artificial sideways hand offset is now zero.
+- Only worn hats and hats handled or dropped by a VR player are retained. Other loose hats, including nested ground hats and ordinary avatar drops, are cleaned up. VR provenance is recorded by the server when the grip is accepted.
 - Each magazine has one final render pose. Mounted state takes priority during ownership updates; removal captures the local grip, preserves that grip when detached, and ignores delayed server grip changes during the same hold. Loading measures travel in the rendered gun's frame and bridges short guide-to-mount update gaps.
 - Reload alignment starts locally as the magazine enters the well, then the server confirms it. At the mouth it keeps your hand's angle; assistance ramps up as you physically push the magazine in. Seating eases through the last gap. A previous magazine's progress or grip value cannot snap a fresh reload into place.
 - Dropping sends the displayed weapon pose and bounded throw velocity to the server. Shared parts become visible again, and their physics stay server owned. Remote clients do not write another player's weapon transforms. This test place explicitly uses Filtering Disabled.
@@ -39,7 +41,7 @@ This project was created by AI, if you do not like it then you shouldn't use it.
 
 ## Download and run
 
-1. Download **HexagonVR.exe** from [Releases](https://github.com/mrboyplayz/HexagonVR/releases/tag/v0.3.0-beta.1). Install the regular Hexagon 2015 client first. This is a beta; live filtering for the new VR chat keyboard and simultaneous physical headsets still need user verification.
+1. Download **HexagonVR.exe** from [Releases](https://github.com/mrboyplayz/HexagonVR/releases/tag/v0.3.1-beta.1). Install the regular Hexagon 2015 client first. This is a beta; live filtering for the new VR chat keyboard and simultaneous physical headsets still need user verification.
 2. Launch SteamVR and connect your headset/controllers.
 3. Open HexagonVR **before joining the game**. The console will tell you `enter a game with support for hexagonVR`.
 4. Use the normal Hexagon website Play button for a game with the support scripts installed. HexagonVR starts the verified 2015 client with the renderer initialized before its shaders. Tracking and headset presentation begin after the game reports that its VR camera is active.
@@ -53,6 +55,8 @@ While the helper is running it temporarily routes the Windows `hexagon-player:` 
 Launcher recovery rejects backups that point to another HexagonVR executable, which previously could leave VR registered as the normal launcher. A stale redirect forwards to the real Hexagon launcher and repairs itself. The protocol dispatch process stays hidden; explicitly starting HexagonVR still shows its status console. Close old helpers from Downloads before using this build. Physical pickups need both the current helper and an updated place in a fresh server; the helper cannot update an already running game's server scripts.
 
 Several players can use VR in the same server. **Each VR player runs their own helper and SteamVR on their own PC.** PC players can join normally without a helper. VR rigs, pose limits, tracking timeouts, and cleanup are independent for each player.
+
+Active headset/controller use is reported to the connected game's ordinary input system every 30 seconds, so VR play counts as activity. Reports require the VR camera and recent tracked movement, turning, walking, firing, or button changes. Static tracking noise does not keep reporting activity. Input delivery was verified in the 2015 engine, with another client receiving none; the live Player's 20-minute timeout still needs a real-session check.
 
 ## Controls
 
@@ -72,6 +76,8 @@ Several players can use VR in the same server. **Each VR player runs their own h
 Point at the 3D menu with the right controller and pull its trigger. Open **Y → Settings → Turn Speed** and use **− / +** to change smooth turning from 15 to 180 degrees/s (default 65). It takes effect immediately and is saved locally for the next launch. Partial stick tilt turns more slowly. Settings also includes a live **Arm Forward** adjustment. The default moves the arm anchor 10 cm along controller aim.
 
 The torso partially follows head yaw and follows the tracked neck position when leaning. The avatar head sits behind the tracked eyes, with the camera 0.45 studs forward and 0.12 studs above the head center. The headset view retains direct tracking. Smooth turns pivot around the eyes, so room-scale head offsets do not orbit around the character root. The original R6 body joint is restored when VR ends.
+
+Torso follow unwraps head yaw across the rear-facing boundary. Looking around physically cannot move the private arms through the torso; their positions remain tied to tracking while the body twists underneath them.
 
 The keyboard sends public chat through the game's server, without desktop keyboard input or window focus. The server filters a separate copy for each recipient; filtering failures keep your draft and show an error. Enter clears the draft only after the server confirms it. Both PC and VR players with the support scripts receive these messages. Other chat commands, including whispers, use the ordinary game chat box; `/vr` and `/unvr` also work on the VR keyboard.
 
@@ -132,6 +138,8 @@ With the supported Hexagon 2015 Studio installed, run `python tests/run_weapon_m
 `python tests/run_weapon_network.py` starts an isolated local server and two hidden Studio clients. It checks FD, public mesh URLs, remote held-weapon visibility, private visual isolation, and dropped weapon visibility/physics. It closes only its own test processes.
 
 `python tests/run_hat_interactions.py` checks off-center pivots, multipart hats, drops, re-equipping, and legacy touch-pickup suppression. `python tests/run_hat_network.py` checks taking another player's hat, swapping wearers, placing it on somebody else, ground drops, and returning its original fit with two separate clients.
+
+`python tests/run_vr_arms.py` checks private arm transparency, stationary controllers while turning/leaning, torso yaw continuity, and cleanup when leaving VR.
 
 ## Files and licenses
 

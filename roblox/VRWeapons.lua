@@ -142,6 +142,7 @@ function M.new(config)
     function self:take(item,player,hand,cf,grip)
         if item.owner.Value or item.inserted then return false end
         if item.layout.Wearable then
+            self.hats:markVR(item,player)
             grip=item.root.CFrame:toObjectSpace(cf);self.hats:detach(item)
         end
         item.owner.Value=player;item.hand.Value=hand;self:anchor(item,true);item.root.CanCollide=false
@@ -200,6 +201,7 @@ function M.new(config)
                 local primary=worldHands[other]
                 if not primary or(cf.p-primary.p).magnitude<.45 then return false end
                 ps.held[hand]={kind="support",item=gun};gun.supportAnchor.Value=primary:pointToObjectSpace(cf.p)
+                gun.supportState={}
                 gun.supportGrab.Value=hand;return true
             end
             if gun.layout.Foregrip and math.abs(point.x)<.65 and point.y>-.65 and point.y<.3 and point.z> -1.5 and point.z<-.2 then
@@ -379,7 +381,8 @@ function M.new(config)
                 local support=other and other.kind=="support"and worldHands[hand=="left"and"right"or"left"]or nil
                 local target
                 if item.gun then
-                    target=Geometry.heldFrame(item.layout,cf,support,item.supportAnchor.Value)
+                    item.supportState=item.supportState or{}
+                    target=Geometry.heldFrame(item.layout,cf,support,item.supportAnchor.Value,item.supportState)
                     item.baseFrame=target
                     self:setRecoil(item,type(recoil)=="table"and recoil[hand]or nil,true)
                     target=Geometry.applyRecoil(item.layout,target,item.recoilPitch or 0,item.recoilYaw or 0)

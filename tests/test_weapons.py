@@ -134,7 +134,7 @@ class WeaponIntegrationTests(unittest.TestCase):
             a,b,c=[Path(directory)/name for name in ('a.rbxlx','b.rbxlx','c.rbxlx')]
             make_demo(a);install(a,b,'','');install(b,c,'','')
             tree=ET.parse(c)
-            for name in ('VRWeapons','VRHats','VRWeaponAssets','VRWeaponState','VRWeaponClient','VRWeaponFX','HexagonVRWeaponGeometry'):
+            for name in ('VRWeapons','VRHats','VRArms','VRWeaponAssets','VRWeaponState','VRWeaponClient','VRWeaponFX','HexagonVRWeaponGeometry'):
                 self.assertEqual(len(tree.findall('.//Item/Properties/string[@name="Name"][.="'+name+'"]')),2 if name=='VRWeaponAssets'else 1)
 
 if __name__=='__main__':unittest.main()

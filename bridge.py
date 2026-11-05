@@ -438,7 +438,7 @@ def main():
     p.add_argument('--fov',type=float,default=120);p.add_argument('--camera-forward',type=float,default=.45)
     p.add_argument('--turn-speed',type=float,default=None,help='Smooth turn speed, 15 to 180 degrees per second')
     p.add_argument('--view-mode',choices=['native','wide'],default='native',help='Headset angular scale or intentional wider/zoomed-out view')
-    p.add_argument('--arm-outset',type=float,default=.4,help='Extra outward offset per arm in studs')
+    p.add_argument('--arm-outset',type=float,default=0,help='Optional extra outward offset per arm in studs')
     p.add_argument('--arm-forward',type=float,default=.3,help='Forward hand-anchor offset along each controller aim, in studs')
     p.add_argument('--attach-player',action='store_true',help='Wait for the Hexagon Player window instead of starting Studio')
     p.add_argument('--http-compat',action='store_true',help='Legacy diagnostic HTTP service; not used by the current game scripts')
@@ -518,6 +518,8 @@ def main():
                     if not isinstance(error,vr.OpenVRError):raise
                     status('Launch SteamVR and connect your headset to continue.');time.sleep(1)
         from vr_actions import Actions
+        from vr_activity import VRActivity
+        activity=VRActivity()
         actions=Actions(legacy_chat=False);tracker=Tracker(args.scale);start=time.monotonic();last_status=start;last_window_check=0
         left_held=0;last_tuning=None;last_vr_settings=None;last_vr_check=0;haptics={}
         def disconnect():
@@ -647,6 +649,7 @@ def main():
                         if measured:state.viewport=measured
                         active=transport.camera_enabled()
                         camera_ready=bool(active)if active is not None else measured is not None
+                        activity.update(transport.pid,pose,camera_ready and not args.mock)
                         if args.native_renderer and camera_ready:
                             if native is None:
                                 from native_renderer import write_config,attach,NativePresenter

@@ -10,7 +10,7 @@ local ok,err=pcall(function()
     local function expect(value,text)assert(value,text);print('MOTION_CHECK',text)end
     local primary=CFrame.new(0,5,0);local base=primary*gun.grip:inverse()
     local front=CFrame.new(base:pointToWorldSpace(gun.layout.Foregrip))
-    gun.owner.Value=player;gun.hand.Value='right';gun.supportGrab.Value='left'
+    gun.owner.Value=player;gun.hand.Value='right';gun.supportGrab.Value=''
     gun.supportAnchor.Value=primary:pointToObjectSpace(front.p)
     gun.root.CFrame=base
     local function render(left,right,buttons)
@@ -18,6 +18,10 @@ local ok,err=pcall(function()
         return client:visualRoot(gun.model).CFrame
     end
     local steady=render(front,primary)
+    expect(client.visualHands.left~=nil and client:state(gun.model).supportPendingAt~=nil,'The foregrip engages locally on squeeze before a server acknowledgement')
+    gun.supportGrab.Value='left'
+    local acknowledged=render(front,primary)
+    expect(steady.lookVector:Dot(acknowledged.lookVector)>.9999,'Server foregrip confirmation preserves the locally captured contact')
     local after=render(front,primary*CFrame.Angles(0,math.rad(30),0))
     local jerk=math.deg(math.acos(math.max(-1,math.min(1,steady.lookVector:Dot(after.lookVector)))))
     print('MOTION_DIAGNOSTIC rear_wrist_yaw_kick_degrees',jerk)
@@ -29,6 +33,24 @@ local ok,err=pcall(function()
         if cf.lookVector:Dot(steady.lookVector)<.999 then stable=false end
     end
     expect(stable,'Two-hand aim stays steady through repeated rear-wrist yaw')
+    local aimState={};local reference=gun.supportAnchor.Value
+    local aimed=G.heldFrame(gun.layout,primary,front,reference,aimState)
+    local startGrip=aimed*gun.grip
+    local extended=CFrame.new(primary.p+Vector3.new(2,.4,1))
+    aimed=G.heldFrame(gun.layout,primary,extended,reference,aimState)
+    local solved=aimed*gun.grip
+    expect(solved:vectorToWorldSpace(reference).unit:Dot((extended.p-primary.p).unit)>.9999,'Two-hand aim follows the actual hand line beyond the old 65-degree wrist limit')
+    expect((solved.p-primary.p).magnitude<.001,'Wide two-hand aiming keeps the rear grip exactly at the tracked hand')
+    local before=aimed
+    aimed=G.heldFrame(gun.layout,primary,CFrame.new(primary.p),reference,aimState)
+    expect(aimed.lookVector:Dot(before.lookVector)>.9999,'Coincident grip positions keep the last defined aim instead of snapping to the rear wrist')
+    local rolled=G.heldFrame(gun.layout,primary*CFrame.Angles(0,0,.6),front,reference,{})
+    expect((rolled*gun.grip):vectorToWorldSpace(reference).unit:Dot((front.p-primary.p).unit)>.9999,'Rear wrist roll does not pull a two-hand grip off the line between controllers')
+    client.handFilters={};gun.supportGrab.Value='left';client:state(gun.model).supportHand=nil
+    render(front,primary)
+    local quick=CFrame.new(front.p+Vector3.new(.35,.1,0));local quickFrame=render(quick,primary)
+    local filtered=client.handOrigin*client.handFilters.left.filtered
+    expect((quickFrame*gun.grip):vectorToWorldSpace(client:state(gun.model).supportAnchor).unit:Dot((filtered.p-primary.p).unit)>.9999,'The support hand changes aim in the same frame without a second aim-smoothing delay')
     local reference=Vector3.new(0,0,-2)
     local direction=Vector3.new(1,0,-1).unit
     local a,b=G.supportRotation(reference,direction*.449),G.supportRotation(reference,direction*.451)

@@ -53,7 +53,25 @@ local ok,err=pcall(function()
     W:dropPlayer(player)
     expect(not item.owner.Value and hat.Parent==W.folder,'Tracking cleanup drops held hats without silently equipping them')
     local dropped=handle.CFrame;hat.Parent=char;wait(.15)
-    expect(hat.Parent==W.folder and not item.wearer.Value and(handle.Position-dropped.p).magnitude<.3,'Legacy touch pickup cannot silently reattach a dropped VR hat')
+    expect(hat.Parent==W.folder and not item.wearer.Value,'Legacy touch pickup cannot silently reattach a dropped VR hat')
+    local junk=Instance.new('Hat');junk.Name='Non VR Ground Hat'
+    local junkHandle=Instance.new('Part');junkHandle.Name='Handle';junkHandle.Anchored=true;junkHandle.CFrame=CFrame.new(30,5,0);junkHandle.Parent=junk;junk.Parent=workspace
+    local nested=Instance.new('Model');nested.Parent=workspace
+    local nestedHat=junk:Clone();nestedHat.Parent=nested
+    wait(.3)
+    expect(not junk.Parent and not nestedHat.Parent,'Ground hats without server-recorded VR provenance are deleted, including nested hats')
+    local untouched=Instance.new('Hat');untouched.Name='Untouched Avatar Hat'
+    local untouchedHandle=Instance.new('Part');untouchedHandle.Name='Handle';untouchedHandle.Parent=untouched;untouched.Parent=char
+    wait(.25);expect(untouched.Parent==char,'Cleanup preserves hats that are still being worn')
+    untouched.Parent=workspace;wait(.1)
+    expect(not untouched.Parent,'A non-VR avatar drop is removed rather than registered as a VR pickup')
+    expect(hat.Parent==W.folder,'A hat actually handled by VR survives ground cleanup')
+    local npc=Instance.new('Model');npc.Parent=workspace
+    local npcHead=Instance.new('Part');npcHead.Name='Head';npcHead.Anchored=true;npcHead.CFrame=CFrame.new(50,5,0);npcHead.Parent=npc
+    local npcHumanoid=Instance.new('Humanoid');npcHumanoid.Parent=npc
+    local npcHat=Instance.new('Hat');local npcHandle=Instance.new('Part');npcHandle.Name='Handle';npcHandle.Parent=npcHat;npcHat.Parent=npc
+    wait(.25);expect(npcHat.Parent==npc,'A hat worn by an NPC is not mistaken for a ground hat')
+    npcHat.Parent=workspace;wait(.25);expect(not npcHat.Parent,'An unregistered NPC hat is removed after becoming a loose ground hat')
     print('HEXAGON_HATS_ENGINE_PASS')
 end)
 if not ok then print('HEXAGON_HATS_ENGINE_FAIL',err)end

@@ -8,6 +8,7 @@ function B.sample(eyes,previous,dt,forward)
     if look.x*look.x+look.z*look.z<.01 then
         local right=head:vectorToWorldSpace(Vector3.new(1,0,0));yaw=math.atan2(-right.z,right.x)
     else yaw=math.atan2(-look.x,-look.z)end
+    yaw=previous+wrap(yaw-previous)
     local target=yaw*.6
     local limit=math.rad(55)
     if math.abs(wrap(yaw-target))>limit then target=yaw-(yaw>=0 and limit or-limit)end

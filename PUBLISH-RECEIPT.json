@@ -3,8 +3,9 @@
   "place_id": 105279,
   "game_id": 7804,
   "url": "https://www.hexagon.pw/games/105279",
-  "bytes": 142980,
-  "sha256": "8f2bdd9c0c5b38e8d28a5d002a3dcd745cacb82498a440e05e7e220284e541e2",
-  "version": 14,
-  "served_sha256": "8f2bdd9c0c5b38e8d28a5d002a3dcd745cacb82498a440e05e7e220284e541e2"
+  "bytes": 150530,
+  "sha256": "83ecd4f107cef5f97fb79eaf163fadc0dc0ac739dc7e1f6bc7d34f21298d8b98",
+  "version": 15,
+  "served_sha256": "83ecd4f107cef5f97fb79eaf163fadc0dc0ac739dc7e1f6bc7d34f21298d8b98",
+  "verification": "Current default asset downloaded and matched byte-for-byte; revision follows the place history count. Version-query responses can be stale or fall back to current."
 }

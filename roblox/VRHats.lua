@@ -26,12 +26,16 @@ local function detachJoints(item)
 end
 function M.new(weapons,config)
     local self={byHat={}}
+    function self:markVR(item,player)
+        item.vrCreator=item.vrCreator or player
+    end
     function self:register(hat,wearer)
         if self.byHat[hat]then return self.byHat[hat]end
         if not isHat(hat)then return end
         local root=hat:FindFirstChild("Handle");if not root or not root:IsA("BasePart")then return end
         local character=wearer and wearer.Character or hat.Parent
         local head=character and character:FindFirstChild("Head")
+        if not head or not wearer then hat:Destroy();return end
         local offset=head and head.CFrame:toObjectSpace(root.CFrame)or CFrame.new(0,.5,0)
         local item={kind="Hat",model=hat,root=root,layout=Geometry.Hat,grip=CFrame.new(),spawn=root.CFrame,lastUse=tick(),hitAt={},hatParts={},hatOffsets={},wearerCharacter=head and character or nil,headOffset=offset}
         item.owner=value("ObjectValue","Owner",nil,hat);item.hand=value("StringValue","Hand","",hat)
@@ -88,6 +92,7 @@ function M.new(weapons,config)
     end
     function self:step(item)
         if item.wearerCharacter and item.model.Parent==item.wearerCharacter then return end
+        if not item.vrCreator then item.model:Destroy();return end
         if item.model.Parent~=weapons.folder then
             -- The 2015 engine also auto-equips loose Hats on body contact.
             -- Only an explicit grip release near a head may equip a VR hat.
@@ -114,7 +119,9 @@ function M.new(weapons,config)
             humanoid.Died:connect(function()
                 for _,item in pairs(self.byHat)do
                     if item.wearerCharacter==char and item.model.Parent==char then
-                        self:detach(item);weapons:anchor(item,false);item.root.CanCollide=true
+                        if weapons.players[player]then self:markVR(item,player)end
+                        if item.vrCreator then self:detach(item);weapons:anchor(item,false);item.root.CanCollide=true
+                        else item.model:Destroy()end
                     end
                 end
             end)
@@ -126,8 +133,19 @@ function M.new(weapons,config)
     end
     Players.PlayerAdded:connect(playerAdded)
     for _,player in ipairs(Players:GetPlayers())do playerAdded(player)end
-    workspace.ChildAdded:connect(function(node)if isHat(node)then self:register(node,nil)end end)
-    for _,node in ipairs(workspace:GetChildren())do if isHat(node)then self:register(node,nil)end end
+    local function groundAdded(node)
+        if not isHat(node)then return end
+        spawn(function()
+            wait(.2);if not node.Parent or self.byHat[node]then return end
+            for _,player in ipairs(Players:GetPlayers())do if player.Character and node:IsDescendantOf(player.Character)then return end end
+            local parent=node.Parent
+            if parent:FindFirstChild('Humanoid')and parent:FindFirstChild('Head')then return end
+            node:Destroy()
+        end)
+    end
+    workspace.DescendantAdded:connect(groundAdded)
+    workspace.ChildAdded:connect(groundAdded)
+    walk(workspace,groundAdded)
     return self
 end
 return M

@@ -35,11 +35,13 @@ end
 local menu=require(script:WaitForChild("VRMenu")).new(player,box,remote)
 local chatUI=require(script:WaitForChild("VRChatClient")).new(player,menu)
 local weapons=require(script:WaitForChild("VRWeaponClient")).new(player,menu,remote)
+local arms=require(script:WaitForChild("VRArms")).new()
 local studioMenuShown=false
 local function walk(object,fn)for _,v in ipairs(object:GetChildren())do fn(v);walk(v,fn)end end
 local function restore()
     menu:setOpen(false)
     weapons:update({},0,true)
+    arms:clear()
     for part,value in pairs(hidden)do if part.Parent then part.LocalTransparencyModifier=value end end
     hidden={};baseline={}
     if savedCamera.camera and savedCamera.camera.Parent then
@@ -110,6 +112,7 @@ local function render()
     if tracked and not enabled and wanted and tick()-lastWake>1 then lastWake=tick();remote:FireServer("enable")end
     if not enabled or not tracked then
         weapons:update({},0,true)
+        arms:clear()
         if menu.opened then menu:setOpen(false)end
         if enabled and tick()-lastInput>.35 then
             local hum=player.Character and player.Character:FindFirstChild("Humanoid")
@@ -157,6 +160,7 @@ local function render()
     local buttons=ui.x>=0 and ui.x<=255 and ui.x==math.floor(ui.x)and ui.x or 0
     local blocked=menu:update(right and root.CFrame*right or nil,buttons,ui.z)
     weapons:update({left=left and root.CFrame*left or nil,right=right and root.CFrame*right or nil},buttons,blocked)
+    arms:update(char,{left=left and root.CFrame*left or nil,right=right and root.CFrame*right or nil},weapons.visualHands)
     for _,row in ipairs({{"head",avatarHead},{"left",left},{"right",right}})do
         local weld=torso:FindFirstChild("HexagonVR_"..row[1])
         if weld then
