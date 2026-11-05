@@ -55,6 +55,20 @@ class WeaponStateTests(unittest.TestCase):
         assert(m.rounds==0 and not g.chamber and not g.slideLocked)
         assert(not S.fire(g,31));S.open(g);S.close(g);assert(not g.chamber)
         ''')
+    def test_manual_bolt_cannot_auto_feed_or_fire_twice_without_a_cycle(self):
+        self.lua.execute('''
+        g=S.new(10,false,true);m={rounds=10};S.insert(g,m);S.open(g);S.close(g)
+        assert(g.chamber and m.rounds==9);assert(S.fire(g,1));assert(g.spent and not g.chamber and m.rounds==9)
+        assert(not S.fire(g,3));assert(m.rounds==9)
+        assert(S.open(g));assert(not g.spent);assert(not S.fire(g,4));assert(m.rounds==9)
+        S.close(g);assert(g.chamber and m.rounds==8);assert(S.fire(g,5));assert(g.spent)
+        ''')
+    def test_manual_bolt_can_extract_a_live_round_after_removing_the_magazine(self):
+        self.lua.execute('''
+        g=S.new(10,false,true);m={rounds=10};S.insert(g,m);S.open(g);S.close(g);S.remove(g)
+        assert(S.open(g));assert(not g.chamber and not g.spent and m.rounds==9)
+        S.close(g);assert(not g.chamber and not S.fire(g,1))
+        ''')
 
 class WeaponIntegrationTests(unittest.TestCase):
     def test_filtering_is_explicit_for_demo_and_can_be_disabled_for_a_target_place(self):
@@ -134,7 +148,7 @@ class WeaponIntegrationTests(unittest.TestCase):
             a,b,c=[Path(directory)/name for name in ('a.rbxlx','b.rbxlx','c.rbxlx')]
             make_demo(a);install(a,b,'','');install(b,c,'','')
             tree=ET.parse(c)
-            for name in ('VRWeapons','VRHats','VRArms','VRWeaponAssets','VRWeaponState','VRWeaponClient','VRWeaponFX','HexagonVRWeaponGeometry'):
+            for name in ('VRWeapons','VRHats','VRArms','VRScope','VRWeaponAssets','VRWeaponState','VRWeaponClient','VRWeaponFX','HexagonVRWeaponGeometry'):
                 self.assertEqual(len(tree.findall('.//Item/Properties/string[@name="Name"][.="'+name+'"]')),2 if name=='VRWeaponAssets'else 1)
 
 if __name__=='__main__':unittest.main()

@@ -29,14 +29,21 @@ local ok,err=pcall(function()
         assert(pistol.Owner.Value==player,'Second VR player could not pick up the pistol')
         print('NETWORK_PICKUP_CHECK Second VR player independently picks up a weapon')
         print('NETWORK_OBSERVER_READY')
-        local sawHeld=false;local droppedAt;local deadline=tick()+35
+        local sawHeld=false;local droppedAt;local heldAt;local sawSupport=false;local deadline=tick()+35
         while tick()<deadline do
             secondPose(64);observer:update({right=secondHand},64,false)
             if gun.Owner.Value and gun.Owner.Value.userId==123 then
                 sawHeld=true
+                heldAt=heldAt or tick()
                 assert(gun.Handle.LocalTransparencyModifier==0,'Owner visibility suppression leaked to another client')
                 assert(pistol.Owner.Value==player,'First VR player consumed the second player\'s pickup ownership')
                 assert(#observer.visuals:GetChildren()==1,'Remote client received another player\'s private weapon clones')
+                if gun.SupportHand.Value=='left'and tick()-heldAt>.25 then
+                    local arm=gun.Owner.Value.Character:FindFirstChild('Left Arm')
+                    local wrist=arm and arm.CFrame:pointToWorldSpace(Vector3.new(0,-1,0))
+                    assert(wrist and(wrist-(gun.Handle.CFrame*layout.supportGrip(layout.AK47,'left')).p).magnitude<.2,'The remote avatar support hand did not follow the preset grip')
+                    sawSupport=true
+                end
             elseif sawHeld then
                 droppedAt=droppedAt or tick()
                 assert(gun.Parent==folder and gun.Handle.Parent==gun,'Dropped weapon was deleted from the other client')
@@ -45,6 +52,8 @@ local ok,err=pcall(function()
                     assert(gun.Handle.Position.y>-.5,'Dropped weapon fell through the map')
                     print('NETWORK_PICKUP_CHECK Another client sees the shared held gun without local asset files')
                     print('NETWORK_PICKUP_CHECK Dropped gun remains visible and physical on the observer')
+                    assert(sawSupport,'Observer never saw the replicated preset support grip')
+                    print('NETWORK_PICKUP_CHECK Other players see the support hand fixed to the authored foregrip')
                     local releasedBy=tick()+1
                     repeat secondPose(0);observer:update({},0,false);wait(.06)until not pistol.Owner.Value or tick()>releasedBy
                     assert(not pistol.Owner.Value,'Second VR player could not release its weapon')
@@ -80,6 +89,7 @@ local ok,err=pcall(function()
     assert(gun.SupportHand.Value=='left','Server did not grant the support grip')
     client=require(game.StarterGui.HexagonVRClient.VRWeaponClient).new(player)
     client:update({left=left,right=right},96,false)
+    for n=1,7 do send(96,left,right);wait(.02)end
     local visible=client:visualRoot(gun);local steady=visible.CFrame
     for n=1,12 do send(96,left,right);client:update({left=left,right=right},96,false);wait(.02)end
     assert(visible~=gun.Handle and(visible.Position-steady.p).magnitude<.02,'Replicated gun movement disturbed the private render pose')

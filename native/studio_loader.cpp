@@ -60,6 +60,7 @@ int wmain(int argc,wchar_t** argv){
         std::wstring input(length,0);MultiByteToWideChar(CP_UTF8,MB_ERR_INVALID_CHARS,code.data(),int(code.size()),input.data(),length);
         std::wstring command=L"\""+exe+L"\" "+(playerMode?input:L"-script \""+input+L"\"");
         STARTUPINFOW si{};si.cb=sizeof(si);si.dwFlags=STARTF_USESHOWWINDOW;si.wShowWindow=SW_SHOWMAXIMIZED;
+        wchar_t hidden[4]{};if(GetEnvironmentVariableW(L"HEXAGONVR_TEST_HIDDEN",hidden,4)&&hidden[0]=='1')si.wShowWindow=SW_HIDE;
         if(!CreateProcessW(exe.c_str(),command.data(),nullptr,nullptr,FALSE,CREATE_SUSPENDED,nullptr,nullptr,&si,&pi))throw std::runtime_error("Could not create Studio test");
         job=CreateJobObjectW(nullptr,nullptr);JOBOBJECT_EXTENDED_LIMIT_INFORMATION limit{};limit.BasicLimitInformation.LimitFlags=JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE;
         if(!job||!SetInformationJobObject(job,JobObjectExtendedLimitInformation,&limit,sizeof(limit))||!AssignProcessToJobObject(job,pi.hProcess))throw std::runtime_error("Could not isolate the Studio test process");

@@ -22,14 +22,7 @@ function M.new()
         if hit.Anchored then dot.BrickColor=BrickColor.new("Really black");Debris:AddItem(dot,5)
         else dot.BrickColor=BrickColor.new("Institutional white");dot.Material=Enum.Material.Neon;Debris:AddItem(dot,.08)end
     end
-    function self:shot(root,layout,cf,hitPosition,number)
-        local muzzle=cf:pointToWorldSpace(layout.Muzzle)
-        local audio=part("ShotAudio",folder);audio.Anchored=true;audio.Transparency=1;audio.CFrame=cf
-        play(audio,Assets[layout.FireSound],.6,.97+math.random()*.06);Debris:AddItem(audio,4)
-        local flash=part("MuzzleFlash",folder);flash.Anchored=true;flash.BrickColor=BrickColor.new("New Yeller");flash.Material=Enum.Material.Neon
-        flash.CFrame=cf*CFrame.new(layout.Muzzle)*CFrame.new(0,0,-.12)
-        local glow=Instance.new("SpecialMesh");glow.MeshType=Enum.MeshType.Sphere;glow.Scale=Vector3.new(.65,.65,2.2);glow.Parent=flash
-        local light=Instance.new("PointLight");light.Color=Color3.new(1,.72,.3);light.Range=7;light.Brightness=1.6;light.Parent=flash;Debris:AddItem(flash,.035)
+    function self:eject(layout,cf,number)
         local casing=part("Casing",folder);casing.CFrame=cf*layout.Eject*CFrame.Angles(math.random(),math.random(),math.random())
         casing.BrickColor=BrickColor.new("Bright yellow");casing.Material=Enum.Material.Metal;casing.CanCollide=true
         local mesh=Instance.new("SpecialMesh");mesh.MeshType=Enum.MeshType.FileMesh;mesh.MeshId=Assets[layout.Casing];mesh.TextureId=Assets.casing_texture
@@ -39,6 +32,16 @@ function M.new()
         local bounced=false;casing.Touched:connect(function(other)
             if not bounced and other.Parent~=folder and other.CanCollide then bounced=true;play(casing,Assets.casing_bounce,.12,.9+math.random()*.2)end
         end);Debris:AddItem(casing,3)
+    end
+    function self:shot(root,layout,cf,hitPosition,number)
+        local muzzle=cf:pointToWorldSpace(layout.Muzzle)
+        local audio=part("ShotAudio",folder);audio.Anchored=true;audio.Transparency=1;audio.CFrame=cf
+        play(audio,Assets[layout.FireSound],.6,.97+math.random()*.06);Debris:AddItem(audio,4)
+        local flash=part("MuzzleFlash",folder);flash.Anchored=true;flash.BrickColor=BrickColor.new("New Yeller");flash.Material=Enum.Material.Neon
+        flash.CFrame=cf*CFrame.new(layout.Muzzle)*CFrame.new(0,0,-.12)
+        local glow=Instance.new("SpecialMesh");glow.MeshType=Enum.MeshType.Sphere;glow.Scale=Vector3.new(.65,.65,2.2);glow.Parent=flash
+        local light=Instance.new("PointLight");light.Color=Color3.new(1,.72,.3);light.Range=7;light.Brightness=1.6;light.Parent=flash;Debris:AddItem(flash,.035)
+        if not layout.ManualBolt then self:eject(layout,cf,number)end
         if hitPosition and(not layout.Automatic or number%3==0)then
             local delta=hitPosition-muzzle
             if delta.magnitude>.1 then

@@ -656,6 +656,7 @@ def main():
                                 write_config(system,vr,native_directory,args.scale,args.eye_scale);attach(transport.pid,native_directory)
                                 native=NativePresenter(transport.pid,native_directory)
                             native.set_pose(transport.sequence,head,transport.active_ack_address())
+                            native.set_scope(transport.scope())
                             status('hexagonVR native stereo | Y: menu | grip: grab')
                         elif args.native_renderer:status('Waiting for the game VR camera; type /vr if VR was turned off.')
                     except (RuntimeError,OSError) as error:

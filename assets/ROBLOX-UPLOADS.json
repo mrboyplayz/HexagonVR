@@ -19,6 +19,33 @@
       "url": "https://www.hexagon.pw/asset/?id=79624202898032",
       "bytes": 365453
     },
+    "ak_mesh": {
+      "file": "ak_mesh.mesh",
+      "sha256": "1838ad2993a709c02258e5cba88c182950bbeaa65ea809052377078ba8debaf9",
+      "asset_id": "114208852722175",
+      "verified": true,
+      "public_delivery_verified": true,
+      "url": "https://www.hexagon.pw/asset/?id=114208852722175",
+      "bytes": 1159177
+    },
+    "awp_bolt_mesh": {
+      "file": "awp_bolt_mesh.mesh",
+      "sha256": "8d25a391d7f0874c90228b0ea58b24d0243e333e12ba64dc207f4bf63e2fd380",
+      "asset_id": "79073210543170",
+      "verified": true,
+      "public_delivery_verified": true,
+      "url": "https://www.hexagon.pw/asset/?id=79073210543170",
+      "bytes": 102721
+    },
+    "awp_magazine_mesh": {
+      "file": "awp_magazine_mesh.mesh",
+      "sha256": "9cc8c944ff0805cdcb485b659c8c0f45660ad17cdd4a654b014683ba7686c422",
+      "asset_id": "133321700277730",
+      "verified": true,
+      "public_delivery_verified": true,
+      "url": "https://www.hexagon.pw/asset/?id=133321700277730",
+      "bytes": 89785
+    },
     "crowbar_mesh": {
       "file": "crowbar_mesh.mesh",
       "sha256": "c14e5d936091e0a261673036f164a304a698415cb02a614430043274fe72b1e2",
@@ -28,14 +55,32 @@
       "url": "https://www.hexagon.pw/asset/?id=106907737955498",
       "bytes": 35929
     },
-    "ak_mesh": {
-      "file": "ak_mesh.mesh",
-      "sha256": "1838ad2993a709c02258e5cba88c182950bbeaa65ea809052377078ba8debaf9",
-      "asset_id": "114208852722175",
+    "awp_mesh": {
+      "file": "awp_mesh.mesh",
+      "sha256": "1be046a6a3340db896447da862c665564f6b13f6d209d029187ea2a2e9c0424d",
+      "asset_id": "102434746639255",
       "verified": true,
       "public_delivery_verified": true,
-      "url": "https://www.hexagon.pw/asset/?id=114208852722175",
-      "bytes": 1159177
+      "url": "https://www.hexagon.pw/asset/?id=102434746639255",
+      "bytes": 2002069
+    },
+    "m16_magazine_mesh": {
+      "file": "m16_magazine_mesh.mesh",
+      "sha256": "13773711a1841ac52cac281a8d806b742e400d7543747de235109d3a8e397f5c",
+      "asset_id": "86263527127705",
+      "verified": true,
+      "public_delivery_verified": true,
+      "url": "https://www.hexagon.pw/asset/?id=86263527127705",
+      "bytes": 17225
+    },
+    "m16_mesh": {
+      "file": "m16_mesh.mesh",
+      "sha256": "5bd853a63d022baa750f55cfc011014c505f4b08e70e0eab98a3082d19c5c18e",
+      "asset_id": "134127244946453",
+      "verified": true,
+      "public_delivery_verified": true,
+      "url": "https://www.hexagon.pw/asset/?id=134127244946453",
+      "bytes": 818781
     },
     "magazine_mesh": {
       "file": "magazine_mesh.mesh",
@@ -81,6 +126,15 @@
       "public_delivery_verified": true,
       "url": "https://www.hexagon.pw/asset/?id=72960610154574",
       "bytes": 19369
+    },
+    "m16_bolt_mesh": {
+      "file": "m16_bolt_mesh.mesh",
+      "sha256": "c04d129074a1ade9fbc95a52cb51569271065b4f179217fa172236c0bced32d9",
+      "asset_id": "119853348547548",
+      "verified": true,
+      "public_delivery_verified": true,
+      "url": "https://www.hexagon.pw/asset/?id=119853348547548",
+      "bytes": 94801
     }
   }
 }

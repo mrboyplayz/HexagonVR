@@ -122,6 +122,7 @@ local function apply(player,pose)
         state.bodyYaw=yaw;state.bodyAt=tick();torsoFrame=root*localTorso
     end
     local hands={left=frame(pose.left),right=frame(pose.right)}
+    state.handForward=type(pose.handForward)=="number"and pose.handForward==pose.handForward and math.max(0,math.min(1,pose.handForward))or 0
     for _,row in ipairs(state.joints)do
         local target=row.key=="head"and head or hands[row.key]
         if row.key=="body"then row.weld.C0=root:toObjectSpace(torsoFrame)*row.weld.C1
@@ -149,6 +150,13 @@ local function apply(player,pose)
             end
         end
         weapons:update(player,state,{left=hands.left and trackingRoot*hands.left or nil,right=hands.right and trackingRoot*hands.right or nil},mask,pose.blocked==true,pose.weaponRecoil,releases)
+        local attached=weapons:handFrames(player)
+        for _,row in ipairs(state.joints)do
+            if attached[row.key]then
+                local target=attached[row.key]*CFrame.Angles(math.rad(C.ArmRotationDegrees),0,0)*CFrame.new(0,1,0)
+                row.weld.C0=torsoFrame:toObjectSpace(target)*row.weld.C1
+            end
+        end
     end
     return true
 end

@@ -173,5 +173,89 @@
     "url": "https://www.hexagon.pw/asset/?id=79624202898032",
     "public_delivery_verified": true,
     "provider": "Roblox"
+  },
+  "m16_mesh": {
+    "file": "m16_mesh.mesh",
+    "asset_id": "134127244946453",
+    "url": "https://www.hexagon.pw/asset/?id=134127244946453",
+    "public_delivery_verified": true,
+    "provider": "Roblox"
+  },
+  "m16_magazine_mesh": {
+    "file": "m16_magazine_mesh.mesh",
+    "asset_id": "86263527127705",
+    "url": "https://www.hexagon.pw/asset/?id=86263527127705",
+    "public_delivery_verified": true,
+    "provider": "Roblox"
+  },
+  "awp_mesh": {
+    "file": "awp_mesh.mesh",
+    "asset_id": "102434746639255",
+    "url": "https://www.hexagon.pw/asset/?id=102434746639255",
+    "public_delivery_verified": true,
+    "provider": "Roblox"
+  },
+  "awp_magazine_mesh": {
+    "file": "awp_magazine_mesh.mesh",
+    "asset_id": "133321700277730",
+    "url": "https://www.hexagon.pw/asset/?id=133321700277730",
+    "public_delivery_verified": true,
+    "provider": "Roblox"
+  },
+  "awp_bolt_mesh": {
+    "file": "awp_bolt_mesh.mesh",
+    "asset_id": "79073210543170",
+    "url": "https://www.hexagon.pw/asset/?id=79073210543170",
+    "public_delivery_verified": true,
+    "provider": "Roblox"
+  },
+  "awp_texture": {
+    "file": "awp_texture.png",
+    "asset_id": "430548989",
+    "url": "https://www.hexagon.pw/asset/?id=430548989",
+    "public_delivery_verified": true,
+    "provider": "Roblox"
+  },
+  "m16_texture": {
+    "file": "m16_texture.png",
+    "asset_id": "79706369529860",
+    "url": "https://www.hexagon.pw/asset/?id=79706369529860",
+    "public_delivery_verified": true,
+    "provider": "Roblox"
+  },
+  "m16_fire": {
+    "file": "m16_fire.mp3",
+    "asset_id": "151129869",
+    "url": "https://www.hexagon.pw/asset/?id=151129869",
+    "public_delivery_verified": true,
+    "provider": "Roblox"
+  },
+  "awp_fire": {
+    "file": "awp_fire.mp3",
+    "asset_id": "252126882",
+    "url": "https://www.hexagon.pw/asset/?id=252126882",
+    "public_delivery_verified": true,
+    "provider": "Roblox"
+  },
+  "awp_bolt_pull": {
+    "file": "awp_bolt_pull.mp3",
+    "asset_id": "318369098",
+    "url": "https://www.hexagon.pw/asset/?id=318369098",
+    "public_delivery_verified": true,
+    "provider": "Roblox"
+  },
+  "awp_bolt_close": {
+    "file": "awp_bolt_close.mp3",
+    "asset_id": "318369288",
+    "url": "https://www.hexagon.pw/asset/?id=318369288",
+    "public_delivery_verified": true,
+    "provider": "Roblox"
+  },
+  "m16_bolt_mesh": {
+    "file": "m16_bolt_mesh.mesh",
+    "asset_id": "119853348547548",
+    "url": "https://www.hexagon.pw/asset/?id=119853348547548",
+    "public_delivery_verified": true,
+    "provider": "Roblox"
   }
 }

@@ -25,4 +25,15 @@ inline bool eyeGlobals(const float* source,float* output,const Matrix& eyeToHead
     Matrix worldEye=rigidInverse(eyeView);for(int j=0;j<3;++j)output[28+j]=worldEye.m[j][3];
     return true;
 }
+inline bool cameraGlobals(const float*source,float*output,const Matrix&camera,float half){
+    if(!(half>.001f&&half<2))return false;
+    Matrix original;std::memcpy(&original,source,64);Matrix view=identity();
+    for(int i=0;i<3;i++)for(int j=0;j<3;j++){view.m[i][j]=source[16+i*4+j];view.m[i][3]-=view.m[i][j]*source[28+j];}
+    Matrix projection=multiply(original,rigidInverse(view));
+    if(std::fabs(projection.m[3][2]+1)>.02f)return false;
+    auto target=rigidInverse(camera);Matrix lens{};lens.m[0][0]=lens.m[1][1]=1/half;lens.m[2][2]=projection.m[2][2];lens.m[2][3]=projection.m[2][3];lens.m[3][2]=-1;
+    auto vp=multiply(lens,target);std::memcpy(output,&vp,64);
+    for(int i=0;i<3;i++){for(int j=0;j<3;j++)output[16+i*4+j]=target.m[i][j];output[28+i]=camera.m[i][3];}
+    return true;
+}
 }

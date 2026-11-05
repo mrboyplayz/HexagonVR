@@ -19,6 +19,26 @@
       "name": "AK47 sound sources",
       "id": 7953557310,
       "url": "https://create.roblox.com/store/asset/7953557310"
+    },
+    {
+      "name": "M16 by OnlyJay_WasHere",
+      "id": 13380361404,
+      "url": "https://create.roblox.com/store/asset/13380361404"
+    },
+    {
+      "name": "AWP by ZombehTV, MuYhet, and TurboFusion",
+      "id": 1170862415,
+      "url": "https://create.roblox.com/store/asset/1170862415"
+    },
+    {
+      "name": "M16 sound source by edgarevaristo",
+      "id": 5171779709,
+      "url": "https://create.roblox.com/store/asset/5171779709"
+    },
+    {
+      "name": "AWP bolt sound source by bruh_dootr",
+      "id": 9085637274,
+      "url": "https://create.roblox.com/store/asset/9085637274"
     }
   ],
   "assets": {
@@ -192,6 +212,101 @@
       ],
       "file": "ak_magazine_mesh.mesh",
       "sha256": "e0f3ed91a8977e1741ba889102a60bde57798d9bcd90ae18bfffaa1caa90cf35"
+    },
+    "m16_mesh": {
+      "original_ids": [
+        13380291151,
+        13380292707,
+        13380296148,
+        13380299024,
+        13380301166,
+        13380302770,
+        13380287361
+      ],
+      "file": "m16_mesh.mesh",
+      "sha256": "5bd853a63d022baa750f55cfc011014c505f4b08e70e0eab98a3082d19c5c18e"
+    },
+    "m16_magazine_mesh": {
+      "original_ids": [
+        13380297519
+      ],
+      "file": "m16_magazine_mesh.mesh",
+      "sha256": "13773711a1841ac52cac281a8d806b742e400d7543747de235109d3a8e397f5c"
+    },
+    "awp_mesh": {
+      "original_ids": [
+        430546062,
+        430546180,
+        430546128,
+        430548446
+      ],
+      "file": "awp_mesh.mesh",
+      "sha256": "1be046a6a3340db896447da862c665564f6b13f6d209d029187ea2a2e9c0424d"
+    },
+    "awp_magazine_mesh": {
+      "original_ids": [
+        430546202
+      ],
+      "file": "awp_magazine_mesh.mesh",
+      "sha256": "9cc8c944ff0805cdcb485b659c8c0f45660ad17cdd4a654b014683ba7686c422"
+    },
+    "awp_bolt_mesh": {
+      "original_ids": [
+        430546037,
+        430546157
+      ],
+      "file": "awp_bolt_mesh.mesh",
+      "sha256": "8d25a391d7f0874c90228b0ea58b24d0243e333e12ba64dc207f4bf63e2fd380"
+    },
+    "awp_texture": {
+      "original_ids": [
+        430548989
+      ],
+      "file": "awp_texture.png",
+      "sha256": "3ab4ad2b70b09cd4b0cd5efdb916f49fca92178e88a951942e8cb659f4f649d3"
+    },
+    "m16_texture": {
+      "original_ids": [
+        13380361404
+      ],
+      "file": "m16_texture.png",
+      "sha256": "d435d2f07f8a21db15b0a9689a24ea40febe93ce5a631f4a84a847b51ca9305f",
+      "note": "Exact original flat part colors packed as UV swatches."
+    },
+    "m16_fire": {
+      "original_ids": [
+        151129869
+      ],
+      "file": "m16_fire.mp3",
+      "sha256": "07429985c4b8a12212808da281c634ba631a48376e2f7eba7a3776322f94e741"
+    },
+    "awp_fire": {
+      "original_ids": [
+        252126882
+      ],
+      "file": "awp_fire.mp3",
+      "sha256": "436a5a6f4b9d0a1b2857f678d28f588522cbac929c698633a63ea8bc08688a39"
+    },
+    "awp_bolt_pull": {
+      "original_ids": [
+        318369098
+      ],
+      "file": "awp_bolt_pull.mp3",
+      "sha256": "9247c4207aca99c2afa985d824d362570d6997683b9d7337fe4825b4b522ae6b"
+    },
+    "awp_bolt_close": {
+      "original_ids": [
+        318369288
+      ],
+      "file": "awp_bolt_close.mp3",
+      "sha256": "3d7ecbddb44113c4dd65a46b3f2cd68b8ce101c8c67efe485a44b804772010c8"
+    },
+    "m16_bolt_mesh": {
+      "original_ids": [
+        1059755620
+      ],
+      "file": "m16_bolt_mesh.mesh",
+      "sha256": "c04d129074a1ade9fbc95a52cb51569271065b4f179217fa172236c0bced32d9"
     }
   },
   "note": "Geometry, albedo textures and audio only; no Marketplace scripts. Mesh vertices preserve position, normal, all three texture coordinates and color. AK components are normalized to the 2015 engine; sounds peak limited and converted to MP3."

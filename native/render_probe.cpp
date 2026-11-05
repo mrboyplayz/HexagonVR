@@ -1,6 +1,7 @@
 // Experimental direct stereo draws for the verified 32-bit 2015 Studio build.
 // Retains the original game pass; exports separate synchronized GPU eye textures.
 #define WIN32_LEAN_AND_MEAN
+#define NOMINMAX
 #include <windows.h>
 #include <d3d11.h>
 #include <d3dcompiler.h>
@@ -15,7 +16,9 @@
 #include <sstream>
 #include <cmath>
 #include <cstdint>
+#include <algorithm>
 #include "stereo_math.hpp"
+#include "scope_render.hpp"
 #include "MinHook.h"
 
 static HMODULE module;
@@ -42,9 +45,22 @@ static ID3D11DepthStencilView* eyeDepth[2]{};
 struct Slot {ID3D11Texture2D* texture[2]{};ID3D11RenderTargetView* target[2]{};ID3D11DepthStencilView* depth[2]{};IDXGIKeyedMutex* mutex[2]{};HANDLE handle[2]{};};
 static Slot slots[3];static int currentSlot=0;static bool canRender=false;
 struct PoseItem{volatile UINT sequence;float pose[12];};
-struct FramePacket {volatile LONG sequence;UINT magic,width,height;uint64_t frame,texture0,texture1;UINT draws,ready;volatile LONG enabled;DWORD heartbeat;float pose[12];UINT poseSequence,padding;uint64_t ackAddress;PoseItem poses[64];};
-static_assert(sizeof(FramePacket)==3448,"Native frame protocol layout");
+struct ScopePacket{volatile UINT sequence;float pose[12],radius,zoom,length;UINT enabled,padding;};
+struct FramePacket {volatile LONG sequence;UINT magic,width,height;uint64_t frame,texture0,texture1;UINT draws,ready;volatile LONG enabled;DWORD heartbeat;float pose[12];UINT poseSequence,padding;uint64_t ackAddress;PoseItem poses[64];ScopePacket scope;};
+static_assert(sizeof(FramePacket)==3520&&offsetof(FramePacket,scope)==3448,"Native frame protocol layout");
 static FramePacket* packet=nullptr;static HANDLE packetMapping=nullptr;
+static optic::Renderer scopeRenderer;
+static stereo::Matrix sceneEyeVP[2];
+static bool scopeLogged=false;
+static optic::Input lastScopeInput;
+static optic::Input scopeInput(){
+    optic::Input result;if(!packet)return result;auto sequence=packet->scope.sequence;if(sequence&1)return lastScopeInput;
+    ScopePacket copy;std::memcpy(&copy,&packet->scope,sizeof(copy));MemoryBarrier();if(sequence!=packet->scope.sequence)return lastScopeInput;
+    if(!copy.enabled){lastScopeInput=result;return result;}
+    if(!(copy.radius>.02f&&copy.radius<.5f&&copy.zoom>=1&&copy.zoom<=12&&copy.length>.1f&&copy.length<3))return result;
+    for(int r=0;r<3;r++)for(int c=0;c<4;c++){float v=copy.pose[r*4+c];if(!std::isfinite(v)||std::fabs(v)>1000000)return result;result.lens.m[r][c]=v;}
+    result.radius=copy.radius;result.zoom=copy.zoom;result.length=copy.length;result.enabled=true;lastScopeInput=result;return result;
+}
 static bool diagnosticCapture=false,diagnosticRender=false;
 static float renderedPose[12]{};static UINT renderedPoseSequence=0;
 static void snapshotPose(){
@@ -209,6 +225,7 @@ static bool createEyes(ID3D11DeviceContext* ctx,UINT bytes){
     }
     release(device);if(!ok){log("{\"native_eye_allocation\":false}");return false;}
     sceneContext=ctx;constantBytes=bytes;
+    if(!scopeRenderer.initialize(ctx))log("{\"native_scope_allocation\":false}");
     beginSlot(ctx,0);
     log("{\"native_eye_allocation\":true,\"width\":"+std::to_string(eyeWidth)+",\"height\":"+std::to_string(eyeHeight)+"}");return true;
 }
@@ -231,7 +248,7 @@ template<class F>static void stereoDraw(ID3D11DeviceContext* ctx,F issue){
         if(valid){
             internal=true;
             if(createEyes(ctx,UINT(data.size()))&&canRender){
-                if(!frameHasDraws)snapshotPose();
+                if(!frameHasDraws){snapshotPose();scopeRenderer.begin(ctx,scopeInput());if(scopeRenderer.active()&&!scopeLogged){log("{\"native_scope_ready\":true,\"resolution\":512}");scopeLogged=true;}}
                 UINT count=16;D3D11_VIEWPORT views[16]{};ctx->RSGetViewports(&count,views);
                 UINT rectCount=16;D3D11_RECT rects[16]{};ctx->RSGetScissorRects(&rectCount,rects);
                 D3D11_VIEWPORT eyeView{0,0,float(eyeWidth),float(eyeHeight),0,1};D3D11_RECT full{0,0,LONG(eyeWidth),LONG(eyeHeight)};
@@ -242,11 +259,13 @@ template<class F>static void stereoDraw(ID3D11DeviceContext* ctx,F issue){
                 ID3D11PixelShader* pixelShader=nullptr;ctx->PSGetShader(&pixelShader,nullptr,nullptr);
                 if(debugPixel){ctx->OMSetBlendState(nullptr,nullptr,~0u);ctx->OMSetDepthStencilState(nativeDepthState,0);ctx->RSSetState(nativeRasterizer);ctx->SetPredication(nullptr,FALSE);ctx->PSSetShader(debugPixel,nullptr,0);}
                 const void* constants[2]={left.data(),right.data()};
+                std::memcpy(&sceneEyeVP[0],left.data(),64);std::memcpy(&sceneEyeVP[1],right.data(),64);
                 for(int i=0;i<2;++i){
                     ctx->UpdateSubresource(eyeConstants[i],0,nullptr,constants[i],0,0);
                     ctx->VSSetConstantBuffers(0,1,&eyeConstants[i]);if(pixelCB==cb)ctx->PSSetConstantBuffers(0,1,&eyeConstants[i]);
                     ctx->OMSetRenderTargets(1,&eyeTargets[i],eyeDepth[i]);ctx->RSSetViewports(1,&eyeView);ctx->RSSetScissorRects(1,&full);issue();
                 }
+                scopeRenderer.scenePass(ctx,reinterpret_cast<const float*>(data.data()),pixelCB==cb,issue);
                 ctx->VSSetConstantBuffers(0,1,&cb);if(pixelCB==cb)ctx->PSSetConstantBuffers(0,1,&pixelCB);
                 ctx->OMSetRenderTargets(8,targets,depth);ctx->RSSetViewports(count,views);ctx->RSSetScissorRects(rectCount,rects);
                 ctx->OMSetBlendState(blend,blendFactor,sampleMask);ctx->OMSetDepthStencilState(savedDepth,stencilRef);ctx->RSSetState(rasterizer);ctx->SetPredication(predicate,predicateValue);ctx->PSSetShader(pixelShader,nullptr,0);
@@ -274,6 +293,7 @@ static void saveEyes(ID3D11DeviceContext* ctx){
             release(staging);
         }
     }
+    scopeRenderer.capture(ctx,std::filesystem::path(outputDirectory+L"\\native-scope-"+std::to_wstring(GetCurrentProcessId())+L".ppm"));
     release(device);imagesWritten=true;log("{\"native_eye_images_written\":true}");
 }
 static HRESULT STDMETHODCALLTYPE present(IDXGISwapChain* chain,UINT sync,UINT flags){
@@ -282,6 +302,7 @@ static HRESULT STDMETHODCALLTYPE present(IDXGISwapChain* chain,UINT sync,UINT fl
         if(SUCCEEDED(chain->GetBuffer(0,__uuidof(ID3D11Texture2D),reinterpret_cast<void**>(&back)))){back->GetDesc(&desc);release(back);}
         if(desc.Width==sourceWidth&&desc.Height==sourceHeight){
             internal=true;++nativeFrames;
+            scopeRenderer.composite(sceneContext,eyeTargets,eyeDepth,sceneEyeVP,eyeWidth,eyeHeight,[&]{originalDraw(sceneContext,6,0);});
             if(diagnosticCapture&&!imagesWritten&&nativeFrames>120&&cameraY<20)saveEyes(sceneContext);
             sceneContext->Flush();for(int i=0;i<2;++i)slots[currentSlot].mutex[i]->ReleaseSync(1);
             if(packet){InterlockedIncrement(&packet->sequence);MemoryBarrier();packet->magic=0x48565246;packet->width=eyeWidth;packet->height=eyeHeight;packet->frame=nativeFrames;packet->texture0=reinterpret_cast<uintptr_t>(slots[currentSlot].handle[0]);packet->texture1=reinterpret_cast<uintptr_t>(slots[currentSlot].handle[1]);packet->draws=nativeDraws;packet->ready=1;std::memcpy(packet->pose,renderedPose,sizeof(renderedPose));packet->poseSequence=renderedPoseSequence;MemoryBarrier();InterlockedIncrement(&packet->sequence);}

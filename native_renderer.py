@@ -3,7 +3,7 @@ from pathlib import Path
 import ctypes as C,json,mmap,struct,time,subprocess,sys
 
 PACKET=struct.Struct('<IIIIQQQIIII12fIIQ')
-MAP_SIZE=3448
+MAP_SIZE=3520
 def write_config(system,vr,directory,scale=3,eye_scale=1):
     directory=Path(directory);matrices=[];frusta=[]
     width,height=system.getRecommendedRenderTargetSize()
@@ -50,6 +50,13 @@ class NativePresenter:
         self.map[offset+4:offset+52]=struct.pack('<12f',*head[:3,:].reshape(-1))
         self.map[offset:offset+4]=struct.pack('<I',sequence)
         self.map[112:120]=struct.pack('<Q',ack_address or 0)
+    def set_scope(self,scope):
+        sequence=(getattr(self,'scope_sequence',0)+2)&0xfffffffe;self.scope_sequence=sequence
+        frame=scope['frame']if scope else[0,0,0,1,0,0,0,1,0,0,0,1]
+        matrix=[*frame[3:6],frame[0],*frame[6:9],frame[1],*frame[9:12],frame[2]]
+        radius,zoom,length=(scope['radius'],scope['zoom'],scope['length'])if scope else(.105,4,1.32)
+        data=struct.pack('<I12f3fII',sequence+1,*matrix,radius,zoom,length,int(scope is not None),0)
+        self.map[3448:3520]=data;self.map[3448:3452]=struct.pack('<I',sequence)
     def submit(self,vr,compositor):
         self.active=True
         self.map[48:56]=struct.pack('<II',1,C.windll.kernel32.GetTickCount()&0xffffffff)

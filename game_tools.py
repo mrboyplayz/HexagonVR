@@ -51,6 +51,8 @@ def install(source, target, url, key, user_id=0, local_fast_poll=False, filterin
         if kind=='LocalScript':
             arms=item('ModuleScript','VRArms',node)
             prop(arms,'ProtectedString','Source',(ROOT/'roblox/VRArms.lua').read_text())
+            scope=item('ModuleScript','VRScope',node)
+            prop(scope,'ProtectedString','Source',(ROOT/'roblox/VRScope.lua').read_text())
             weapons=item('ModuleScript','VRWeaponClient',node)
             prop(weapons,'ProtectedString','Source',(ROOT/'roblox/VRWeaponClient.lua').read_text())
             fx=item('ModuleScript','VRWeaponFX',weapons)

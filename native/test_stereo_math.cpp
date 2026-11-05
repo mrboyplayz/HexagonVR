@@ -20,6 +20,11 @@ int main(){
     float far=(xndc(l,8,4,-8)+offset)-(xndc(r,8,4,-8)-offset);
     assert(std::fabs(near-2*sx*.09f/2)<.00001f);assert(std::fabs(near/far-10)<.001f);
     assert(std::fabs(l[28]-7.91f)<.00001f&&std::fabs(r[28]-8.09f)<.00001f);
+    Matrix scopeCamera=identity();scopeCamera.m[0][3]=8;scopeCamera.m[1][3]=4;scopeCamera.m[2][3]=12;
+    float scoped[96]{};std::memcpy(scoped,source,sizeof(source));assert(cameraGlobals(source,scoped,scopeCamera,.3125f));
+    assert(std::fabs(xndc(scoped,9,4,2)/xndc(source,9,4,2)-4)<.00001f);
+    assert(std::fabs(xndc(scoped,8,4,2))<.00001f&&scoped[28]==8&&scoped[29]==4&&scoped[30]==12);
+    assert(!cameraGlobals(source,scoped,scopeCamera,0));
     source[16]=4;assert(!eyeGlobals(source,l,el,left,right,top,bottom));
     std::cout<<"Stereo geometry: independent eye positions, asymmetric projection, 10x depth-disparity ratio; invalid camera rejected\n";
 }

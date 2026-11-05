@@ -22,41 +22,38 @@ local ok,err=pcall(function()
     gun.supportGrab.Value='left'
     local acknowledged=render(front,primary)
     expect(steady.lookVector:Dot(acknowledged.lookVector)>.9999,'Server foregrip confirmation preserves the locally captured contact')
-    local after=render(front,primary*CFrame.Angles(0,math.rad(30),0))
-    local jerk=math.deg(math.acos(math.max(-1,math.min(1,steady.lookVector:Dot(after.lookVector)))))
-    print('MOTION_DIAGNOSTIC rear_wrist_yaw_kick_degrees',jerk)
-    expect(jerk<.5,'Turning the rear wrist cannot kick two-hand aim away from fixed grip positions')
-    local stable=true
-    for n=1,90 do
-        local angle=math.rad(30)*math.sin(n*.2)
-        local cf=render(front,primary*CFrame.Angles(0,angle,0))
-        if cf.lookVector:Dot(steady.lookVector)<.999 then stable=false end
+    wait(.1)
+    client.handFilters={}
+    local rotatedFront=front*CFrame.Angles(.8,1.2,.7)
+    local fixed=render(rotatedFront,primary)
+    expect(fixed.lookVector:Dot(steady.lookVector)>.9999,'Support-wrist rotation cannot steer or roll the gun')
+    local grip=client.visualHands.left
+    local expected=fixed*G.supportGrip(gun.layout,'left')
+    expect((grip.p-expected.p).magnitude<.001 and grip.lookVector:Dot(expected.lookVector)>.9999,'The support hand uses the authored position and wrist rotation')
+    local follows=true
+    for n=1,40 do
+        local cf=render(CFrame.new(front.p+Vector3.new(math.sin(n*.2)*.8,.2,0))*CFrame.Angles(0,n*.1,.4),primary)
+        local actual=client.handOrigin*client.handFilters.left.filtered
+        if(cf*gun.grip):vectorToWorldSpace(gun.supportAnchor.Value).unit:Dot((actual.p-primary.p).unit)<.9999 then follows=false end
     end
-    expect(stable,'Two-hand aim stays steady through repeated rear-wrist yaw')
-    local aimState={};local reference=gun.supportAnchor.Value
-    local aimed=G.heldFrame(gun.layout,primary,front,reference,aimState)
-    local startGrip=aimed*gun.grip
-    local extended=CFrame.new(primary.p+Vector3.new(2,.4,1))
-    aimed=G.heldFrame(gun.layout,primary,extended,reference,aimState)
-    local solved=aimed*gun.grip
-    expect(solved:vectorToWorldSpace(reference).unit:Dot((extended.p-primary.p).unit)>.9999,'Two-hand aim follows the actual hand line beyond the old 65-degree wrist limit')
-    expect((solved.p-primary.p).magnitude<.001,'Wide two-hand aiming keeps the rear grip exactly at the tracked hand')
-    local before=aimed
-    aimed=G.heldFrame(gun.layout,primary,CFrame.new(primary.p),reference,aimState)
-    expect(aimed.lookVector:Dot(before.lookVector)>.9999,'Coincident grip positions keep the last defined aim instead of snapping to the rear wrist')
-    local rolled=G.heldFrame(gun.layout,primary*CFrame.Angles(0,0,.6),front,reference,{})
-    expect((rolled*gun.grip):vectorToWorldSpace(reference).unit:Dot((front.p-primary.p).unit)>.9999,'Rear wrist roll does not pull a two-hand grip off the line between controllers')
-    client.handFilters={};gun.supportGrab.Value='left';client:state(gun.model).supportHand=nil
-    render(front,primary)
-    local quick=CFrame.new(front.p+Vector3.new(.35,.1,0));local quickFrame=render(quick,primary)
-    local filtered=client.handOrigin*client.handFilters.left.filtered
-    expect((quickFrame*gun.grip):vectorToWorldSpace(client:state(gun.model).supportAnchor).unit:Dot((filtered.p-primary.p).unit)>.9999,'The support hand changes aim in the same frame without a second aim-smoothing delay')
-    local reference=Vector3.new(0,0,-2)
-    local direction=Vector3.new(1,0,-1).unit
-    local a,b=G.supportRotation(reference,direction*.449),G.supportRotation(reference,direction*.451)
-    expect(a.lookVector:Dot(b.lookVector)>.9999,'Bringing both hands close cannot trigger a sudden support-angle reset')
-    a=G.supportRotation(reference,Vector3.new(.0001,0,2));b=G.supportRotation(reference,Vector3.new(-.0001,0,2))
-    expect(a.lookVector:Dot(b.lookVector)>.9999,'Crossing the hands cannot flip the support correction')
+    expect(follows,'Support-controller position steers the rifle using the preset grip vector')
+    client.handFilters={}
+    local turned=primary*CFrame.Angles(.1,.6,.2)
+    local aimed=render(rotatedFront,turned)
+    expect((aimed*gun.grip):vectorToWorldSpace(gun.supportAnchor.Value).unit:Dot((rotatedFront.p-turned.p).unit)>.9999 and((aimed*gun.grip).p-turned.p).magnitude<.001,'Both controller positions steer aim while the rear grip stays at the trigger hand')
+    local attached=client.visualHands.left
+    expect((attached.p-(aimed*G.supportGrip(gun.layout,'left')).p).magnitude<.001,'The preset front hand stays on the moving gun')
+    client.handFilters={};render(front,primary,64)
+    expect(client.visualHands.left==nil,'Releasing the support grip immediately frees the hand')
+    local calibrated=require(game.StarterGui.HexagonVRClient.VRWeaponClient).new(player,{armForward=.3,command=function()end})
+    local rawPrimary=CFrame.new(0,5,0);local rawFront=CFrame.new(rawPrimary.p+gun.layout.Grip:pointToObjectSpace(gun.layout.Foregrip))
+    local rear=rawPrimary*CFrame.new(0,0,-.3);gun.root.CFrame=rear*gun.grip:inverse()
+    calibrated:update({right=rear,left=rawFront*CFrame.new(0,0,-.3)},96,false);wait(.1)
+    calibrated:update({right=rear,left=rawFront*CFrame.new(0,0,-.3)},96,false)
+    local beforeOffset=calibrated:visualRoot(gun.model).CFrame
+    for n=1,30 do calibrated.lastAt=tick()-1/90;calibrated:update({right=rear,left=rawFront*CFrame.Angles(.5,.8,.4)*CFrame.new(0,0,-.3)},96,false)end
+    expect(calibrated:visualRoot(gun.model).CFrame.lookVector:Dot(beforeOffset.lookVector)>.9999,'Forward hand calibration cannot turn support-wrist rotation into an aiming wobble')
+    calibrated:update({},0,true);gun.root.CFrame=base;client.handFilters={}
     gun.insertedModel.Value=mag.model;mag.mount.Value=gun.model
     mag.owner.Value=player;mag.hand.Value='left';mag.root.CFrame=base*gun.magOffset
     gun.supportGrab.Value='';client.handFilters={}

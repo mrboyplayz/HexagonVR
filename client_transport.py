@@ -4,7 +4,7 @@ Only game-created, marker-identified Value cells are written. A render-thread
 acknowledgement validates every vector input before tracking begins. No Lua VM
 hooks, executable patches, account data, or remote process are used.
 """
-import ctypes as C,struct,time,hashlib,os
+import ctypes as C,struct,time,hashlib,os,math
 from ctypes import wintypes as W
 from pathlib import Path
 
@@ -29,6 +29,9 @@ SENTINELS={
  'chat_result_ack':(23001.125,33002.25,84003.5),
  'chat_focus':(26002.25,0,85003.5),
  'chat_confirm':(23001.125,33002.25,86003.5),
+ 'scope_frame':(22001.125,32002.25,42003.5),
+ 'scope_params':(24001.125,54002.25,64003.5),
+ 'scope_state':(26002.25,0,87003.5),
 }
 
 class MBI(C.Structure):
@@ -90,7 +93,7 @@ class LocalTransport:
         self.sequence=(self.sequence+1)%1000000
         self.write(self.cells['control'],struct.pack('<3f',flags,self.sequence,turn))
     def bind(self):
-        patterns={name:struct.pack('<12f',*IDENTITY,*v) if name in ('head','left','right') else struct.pack('<3f',*v) for name,v in SENTINELS.items()}
+        patterns={name:struct.pack('<12f',*IDENTITY,*v) if name in ('head','left','right','scope_frame') else struct.pack('<3f',*v) for name,v in SENTINELS.items()}
         found=self.scan(patterns)
         if not all(found[name] for name in ('head','left','right')):raise RuntimeError('Local pose mailbox is not loaded yet')
         self.acks=found['ack'];self.viewport_cells=found['viewport'];self.position_cells=found['position'];self.ui_outputs=found['ui_out'];self.ui_token=0;self.camera_state_cells=found.get('camera_state',[])
@@ -119,6 +122,10 @@ class LocalTransport:
                 candidates=[a for a in candidates if any(instance_vtable(a-offset) for offset in offsets)]
             if len(candidates)!=1:raise RuntimeError('Could not identify the actual '+name+' Value object; candidates '+str(len(candidates))+' offsets '+str(offsets))
             self.cells[name]=candidates[0]
+        self.scope_state_cells=found.get('scope_state',[])
+        for name in ('scope_frame','scope_params'):
+            candidates=[a for a in found.get(name,[])if self.read(a,len(patterns[name]))==patterns[name]and any(instance_vtable(a-offset)for offset in offsets)]
+            if len(candidates)==1:self.cells[name]=candidates[0]
         channels=[('move',(.125,.25,0),'move_ack'),('settings',(110,.35,3),'settings_ack')]
         if found['ui']:channels.append(('ui',(0,0,0),'ui_ack'))
         if found['chat_result']:channels.append(('chat_result',(123,0,43003.5),'chat_result_ack'))
@@ -162,6 +169,15 @@ class LocalTransport:
     def position(self):
         values=[v for a in self.position_cells if (v:=self.vec(a)) and v[2].is_integer() and 0<=v[2]<=self.sequence]
         return max(values,key=lambda v:v[2]) if values else None
+    def scope(self):
+        if not all(name in self.cells for name in ('scope_frame','scope_params')):return None
+        states=[v for a in getattr(self,'scope_state_cells',[])if(v:=self.vec(a))and v[2]==87003.5 and max(0,self.last_ack_sequence-4)<=v[0]<=self.sequence and v[0].is_integer()]
+        if not states or max(states,key=lambda v:v[0])[1]!=1:return None
+        raw=self.read(self.cells['scope_frame'],48);params=self.vec(self.cells['scope_params'])
+        if len(raw)!=48 or not params or not(.02<params[0]<.5 and 1<=params[1]<=12 and .1<params[2]<3):return None
+        cf=struct.unpack('<12f',raw)
+        if not all(math.isfinite(v)and abs(v)<1000000 for v in cf):return None
+        return {'frame':[*cf[9:],*cf[:9]],'radius':params[0],'zoom':params[1],'length':params[2]}
     def push(self,pose):
         self.acknowledgement()
         if time.monotonic()-self.last_ack>1:raise RuntimeError('The local render-thread heartbeat stopped')

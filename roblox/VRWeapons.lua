@@ -71,20 +71,26 @@ function M.new(config)
             p.BrickColor=BrickColor.new("Institutional white")
             mesh(p,Assets[layout.Mesh],Assets[layout.Texture],layout.Scale)
             local slide=part("Slide",layout.SlideSize,"Institutional white",model)
-            mesh(slide,Assets[layout.SlideMesh],Assets[layout.SlideTexture],layout.Scale)
+            if layout.SlideMesh then mesh(slide,Assets[layout.SlideMesh],Assets[layout.SlideTexture],layout.Scale)
+            else slide.BrickColor=BrickColor.new("Really black");slide.Material=Enum.Material.Metal end
             item.slideRest=layout.SlideRest
             item.slide=joint(p,slide,item.slideRest)
             item.slidePart=slide
+            if layout.BoltStem then
+                item.boltStem=part("BoltStem",Vector3.new(.07,.07,.25),"Really black",model);joint(slide,item.boltStem,layout.BoltStem)
+            end
             item.slideOffset=value("CFrameValue","SlideOffset",item.slideRest,model)
             item.slideGrab=value("StringValue","SlideHand","",model)
             item.slideGrabZ=value("NumberValue","SlideGrabZ",0,model)
+            item.slideGrabY=value("NumberValue","SlideGrabY",0,model)
+            item.boltLift=value("NumberValue","BoltLift",0,model)
             item.supportGrab=value("StringValue","SupportHand","",model)
             item.supportAnchor=value("Vector3Value","SupportAnchor",Vector3.new(0,0,-1),model)
             item.removingHand=value("StringValue","RemovingHand","",model)
             item.removalStart=value("NumberValue","RemovalStartY",0,model)
             item.shotCount=value("IntValue","ShotCount",0,model)
             item.insertedModel=value("ObjectValue","InsertedMagazine",nil,model)
-            item.gun=State.new(kind=="Pistol"and(C.MagazineCapacity or layout.Capacity)or layout.Capacity,layout.HoldOpen)
+            item.gun=State.new(kind=="Pistol"and(C.MagazineCapacity or layout.Capacity)or layout.Capacity,layout.HoldOpen,layout.ManualBolt)
             item.chamberValue=value("BoolValue","Chambered",false,model)
             item.lockValue=value("BoolValue","SlideLocked",false,model)
             item.magOffset=layout.Magazine
@@ -107,11 +113,16 @@ function M.new(config)
     for n=1,C.SpareMagazines or 4 do create("Magazine",origin+Vector3.new(1.4+n*.65,1.2,0))end
     create("AK47",origin+Vector3.new(-5,1.8,-1.2))
     for n=1,3 do create("AKMagazine",origin+Vector3.new(-8+n*.8,1.2,1.2))end
+    create("M16",origin+Vector3.new(8,1.8,-1.2));for n=1,3 do create("M16Magazine",origin+Vector3.new(7+n*.65,1.2,1.4))end
+    create("AWP",origin+Vector3.new(-11,1.8,-1.5));for n=1,3 do create("AWPMagazine",origin+Vector3.new(-12+n*.65,1.2,1.4))end
 
-    function self:setSlide(item,travel)
-        local offset=item.slideRest*CFrame.new(0,0,travel)
+    function self:setSlide(item,travel,lift)
+        if lift~=nil then item.boltLift.Value=lift end
+        item.boltTravel=travel
+        local offset=item.slideRest*CFrame.new(0,0,travel)*CFrame.Angles(0,0,(item.layout.BoltAngle or 0)*item.boltLift.Value)
         item.slide.C0=offset;item.slideOffset.Value=offset
         item.slidePart.CFrame=item.root.CFrame*offset
+        if item.boltStem then item.boltStem.CFrame=item.slidePart.CFrame*item.layout.BoltStem end
     end
     function self:move(item,cf)
         item.root.CFrame=cf
@@ -121,6 +132,8 @@ function M.new(config)
         end
         if item.gun then
             item.slidePart.CFrame=cf*item.slideOffset.Value
+            if item.boltStem then item.boltStem.CFrame=item.slidePart.CFrame*item.layout.BoltStem end
+            if item.lens then item.lens.CFrame=cf*item.layout.ScopeFrame*CFrame.Angles(0,math.pi/2,0)end
             if item.gun.magazine then item.gun.magazine.root.CFrame=cf*item.magOffset end
         end
     end
@@ -128,6 +141,8 @@ function M.new(config)
         item.root.Anchored=anchored
         if item.layout.Wearable then for _,part in ipairs(item.hatParts)do part.Anchored=anchored end end
         if item.slidePart then item.slidePart.Anchored=anchored end
+        if item.boltStem then item.boltStem.Anchored=anchored end
+        if item.lens then item.lens.Anchored=anchored end
         if item.gun and item.gun.magazine then item.gun.magazine.root.Anchored=anchored end
     end
 
@@ -158,8 +173,9 @@ function M.new(config)
         ps.held[hand]=nil
         if held.kind=="slide"then
             local gun=held.item
-            if held.opened and gun.gun.slideOpen then State.close(gun.gun);sound(gun.root,Assets.slide_release,.35)end
-            gun.slideHand=nil;gun.slideGrab.Value="";self:setSlide(gun,gun.gun.slideLocked and gun.layout.LockedTravel or 0)
+            if not gun.layout.ManualBolt and held.opened and gun.gun.slideOpen then State.close(gun.gun);sound(gun.root,Assets[gun.layout.RackCloseSound or"slide_release"],.35)end
+            gun.slideHand=nil;gun.slideGrab.Value=""
+            self:setSlide(gun,gun.layout.ManualBolt and(gun.boltTravel or 0)or(gun.gun.slideLocked and gun.layout.LockedTravel or 0))
             self:sync(gun);return
         elseif held.kind=="remove"then held.item.removingHand.Value="";return
         elseif held.kind=="support"then held.item.supportGrab.Value="";return end
@@ -187,6 +203,15 @@ function M.new(config)
         for _,hand in ipairs(HANDS)do self:release(player,hand)end
         self.players[player]=nil
     end
+    function self:handFrames(player)
+        local result={};local ps=self.players[player];if not ps then return result end
+        for _,hand in ipairs(HANDS)do
+            local held=ps.held[hand]
+            if held and held.kind=="support"then result[hand]=held.item.root.CFrame*Geometry.supportGrip(held.item.layout,hand)
+            elseif held and held.kind=="item"then result[hand]=held.item.root.CFrame*held.grip end
+        end
+        return result
+    end
     function self:grab(player,hand,cf,worldHands)
         local ps=self.players[player]
         -- Prefer the other hand's slide or magazine over a nearby loose pickup.
@@ -200,19 +225,21 @@ function M.new(config)
             local function support()
                 local primary=worldHands[other]
                 if not primary or(cf.p-primary.p).magnitude<.45 then return false end
-                ps.held[hand]={kind="support",item=gun};gun.supportAnchor.Value=primary:pointToObjectSpace(cf.p)
+                ps.held[hand]={kind="support",item=gun};gun.supportAnchor.Value=gun.layout.Grip:pointToObjectSpace(gun.layout.Foregrip)
                 gun.supportState={}
                 gun.supportGrab.Value=hand;return true
             end
-            if gun.layout.Foregrip and math.abs(point.x)<.65 and point.y>-.65 and point.y<.3 and point.z> -1.5 and point.z<-.2 then
+            if Geometry.supportContact(gun.layout,gun.root.CFrame,worldHands[other],cf)then
                 if support()then return end
-            elseif gap<gun.layout.SlideGrabRadius and point.y>gun.layout.RemovePoint.y+.5 then
-                ps.held[hand]={kind="slide",item=gun,start=point.z,opened=false}
-                gun.slideHand=hand;gun.slideGrab.Value=hand;gun.slideGrabZ.Value=point.z;return
+            elseif gap<gun.layout.SlideGrabRadius and point.y>(gun.layout.ManualBolt and .1 or gun.layout.RemovePoint.y+.5)then
+                local startZ=point.z-(gun.boltTravel or 0)/gun.layout.RackGain
+                local startY=point.y-gun.boltLift.Value*(gun.layout.BoltLift or 0)
+                ps.held[hand]={kind="slide",item=gun,start=startZ,startY=startY,opened=gun.gun.slideOpen,unlocked=gun.boltLift.Value>.75}
+                gun.slideHand=hand;gun.slideGrab.Value=hand;gun.slideGrabZ.Value=startZ;gun.slideGrabY.Value=startY;return
             elseif gun.gun.magazine and(point-gun.layout.RemovePoint).magnitude<.7 then
                 ps.held[hand]={kind="remove",item=gun,start=point.y}
                 gun.removingHand.Value=hand;gun.removalStart.Value=point.y;return
-            elseif gun.layout.Foregrip and(point-gun.layout.Foregrip).magnitude<.8 then
+            elseif gun.layout.Foregrip and(point-gun.layout.Foregrip).magnitude<.65 then
                 if support()then return end
             end
         end
@@ -264,7 +291,7 @@ function M.new(config)
         if held and held.kind=="item"and held.item.gun then self:shot(held.item,player,session.character)end
     end
     function self:shot(item,player,character)
-        if item.slideHand then return end
+        if item.slideHand or(item.layout.ManualBolt and item.boltLift.Value>.05)then return end
         local fired,reason=State.fire(item.gun,tick(),item.kind=="Pistol"and(C.FireInterval or item.layout.Interval)or item.layout.Interval)
         self:sync(item)
         if not fired then return false,reason end
@@ -276,12 +303,14 @@ function M.new(config)
         local origin=head and head.Position or cf:pointToWorldSpace(item.grip.p)
         local obstruction,obstructedAt,obstructedNormal=self:trace(origin,muzzle-origin,character)
         local hit,position,normal=obstruction,obstructedAt,obstructedNormal
-        if not obstruction then hit,position,normal=self:trace(muzzle,cf.lookVector*(C.Range or 300),character)end
-        if hit then local h,target=humanoid(hit);if h and target~=character then h:TakeDamage(C.GunDamage or 25)end end
+        if not obstruction then hit,position,normal=self:trace(muzzle,cf.lookVector*(item.layout.Range or C.Range or 300),character)end
+        if hit then local h,target=humanoid(hit);if h and target~=character then h:TakeDamage(item.layout.Damage or C.GunDamage or 25)end end
         item.shotCount.Value=item.shotCount.Value+1
         if self.remote then self.remote:FireAllClients("weaponShot",item.model,{count=item.shotCount.Value,frame=cf,position=position,normal=normal,hit=hit,ammo=item.roundValue.Value,chamber=item.gun.chamber})end
-        self:setSlide(item,item.layout.SlideTravel)
-        delay(.07,function()if item.model.Parent and not item.slideHand then self:setSlide(item,item.gun.slideLocked and item.layout.LockedTravel or 0)end end)
+        if not item.layout.ManualBolt then
+            self:setSlide(item,item.layout.SlideTravel)
+            delay(.07,function()if item.model.Parent and not item.slideHand then self:setSlide(item,item.gun.slideLocked and item.layout.LockedTravel or 0)end end)
+        end
         return true
     end
     function self:swing(item,character,dt)
@@ -382,6 +411,8 @@ function M.new(config)
                 local target
                 if item.gun then
                     item.supportState=item.supportState or{}
+                    local forward=session.handForward or 0
+                    item.supportState.rawLine=support and((support*CFrame.new(0,0,forward)).p-(cf*CFrame.new(0,0,forward)).p)or nil
                     target=Geometry.heldFrame(item.layout,cf,support,item.supportAnchor.Value,item.supportState)
                     item.baseFrame=target
                     self:setRecoil(item,type(recoil)=="table"and recoil[hand]or nil,true)
@@ -396,12 +427,18 @@ function M.new(config)
             local held=ps.held[hand];local cf=worldHands[hand]
             if held and cf and held.kind=="slide"then
                 local item=held.item;local point=item.root.CFrame:pointToObjectSpace(cf.p)
+                local lift=item.layout.ManualBolt and math.max(0,math.min(1,(point.y-held.startY)/item.layout.BoltLift))or 0
+                if lift>.75 then held.unlocked=true end
                 local pull=math.max(0,math.min(item.layout.SlideTravel,(point.z-held.start)*item.layout.RackGain))
+                if item.layout.ManualBolt and not held.unlocked then pull=0 end
                 if pull>=item.layout.RackTravel and not held.opened then
-                    held.opened=true;State.open(item.gun);sound(item.root,Assets.slide_pull,.35)
+                    held.opened=true;local ejected=State.open(item.gun);sound(item.root,Assets[item.layout.RackPullSound or"slide_pull"],.35)
+                    if ejected and item.layout.ManualBolt and self.remote then self.remote:FireAllClients("weaponEject",item.model,{frame=item.root.CFrame,number=item.shotCount.Value})end
                 end
-                self:setSlide(item,pull)
-                if held.opened and pull<.025 then
+                if item.layout.ManualBolt and pull>.025 then lift=1 end
+                self:setSlide(item,pull,lift)
+                if held.opened and pull<.025 and(not item.layout.ManualBolt or lift<.15)then
+                    if item.layout.ManualBolt then State.close(item.gun);self:setSlide(item,0,0);sound(item.root,Assets[item.layout.RackCloseSound],.35);self:sync(item)end
                     self:release(player,hand);ps.requireRelease[hand]=true
                 end
             elseif held and cf and held.kind=="remove"then
@@ -452,7 +489,7 @@ function M.new(config)
                 if item.gun then
                     local mag=State.remove(item.gun)
                     if mag then mag.inserted=nil;mag.mount.Value=nil;if mag.weld then mag.weld:Destroy();mag.weld=nil end;mag.root.Anchored=false;mag.root.CanCollide=true;mag.root.CFrame=mag.spawn end
-                    item.gun=State.new(item.layout.Capacity,item.layout.HoldOpen);self:setSlide(item,0)
+                    item.gun=State.new(item.layout.Capacity,item.layout.HoldOpen,item.layout.ManualBolt);self:setSlide(item,0,0)
                 elseif item.layout.MagazineItem then item.rounds=item.layout.Capacity end
                 self:anchor(item,false);self:move(item,item.spawn);item.root.Velocity=Vector3.new();item.root.RotVelocity=Vector3.new();item.lastUse=tick();self:sync(item)
             end

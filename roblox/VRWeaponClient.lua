@@ -78,11 +78,12 @@ function M.new(player,menu,remote)
     function self:stableHands(input,dt)
         local character=player.Character;local root=character and character:FindFirstChild("HumanoidRootPart")
         local origin=root and root.CFrame or CFrame.new();local output={}
-        self.handOrigin=origin
+        self.handOrigin=origin;self.rawHands={}
+        local forward=menu and menu.armForward or 0
         for _,hand in ipairs({"left","right"})do
             local raw=input[hand]
             if raw then
-                local current=origin:toObjectSpace(raw);local state=self.handFilters[hand]
+                local current=origin:toObjectSpace(raw*CFrame.new(0,0,forward));local state=self.handFilters[hand]
                 if not state or(current.p-state.raw.p).magnitude>2 then state={raw=current,filtered=current};self.handFilters[hand]=state end
                 local positionSpeed=(current.p-state.raw.p).magnitude/math.max(.001,dt)
                 local angle=frameAngle(current,state.raw)
@@ -90,7 +91,7 @@ function M.new(player,menu,remote)
                 local difference=(current.p-state.filtered.p).magnitude
                 local angularDifference=frameAngle(current,state.filtered)
                 if difference>.0025 or angularDifference>math.rad(.08)then state.filtered=state.filtered:lerp(current,1-math.exp(-dt*rate))end
-                state.raw=current;output[hand]=origin*state.filtered
+                state.raw=current;self.rawHands[hand]=origin*state.filtered;output[hand]=self.rawHands[hand]*CFrame.new(0,0,-forward)
             else self.handFilters[hand]=nil end
         end
         return output
@@ -115,6 +116,11 @@ function M.new(player,menu,remote)
         s.ammo=data.ammo+(data.chamber and 1 or 0);s.eventAt=tick()
         if not predicted then self:feedback(model,layout,data.frame,data.position,data.count)end
         self.fx:impact(data.position,data.normal,data.hit)
+    end
+    function self:confirmEject(model,data)
+        if not model or not model.Parent or type(data)~="table"then return end
+        local layout=Geometry.forModel(model)
+        if layout and layout.ManualBolt then self.fx:eject(layout,data.frame,data.number or 0)end
     end
     function self:update(hands,buttons,blocked)
         local now=tick();local dt=math.max(.001,math.min(.05,now-self.lastAt));self.lastAt=now
@@ -192,9 +198,10 @@ function M.new(player,menu,remote)
                             local front=supportHand~=""and supportHand~=heldHand and down(buttons,supportHand=="left"and 32 or 64)and hands[supportHand]or nil
                             if not front then s.supportHand=nil;s.supportAnchor=nil;s.supportState=nil
                             elseif s.supportHand~=supportHand then
-                                s.supportHand=supportHand;s.supportAnchor=hands[heldHand]:pointToObjectSpace(front.p)
+                                s.supportHand=supportHand;s.supportAnchor=layout.Grip:pointToObjectSpace(layout.Foregrip)
                                 s.supportState={}
                             end
+                            if front and s.supportState then s.supportState.rawLine=self.rawHands[supportHand].p-self.rawHands[heldHand].p end
                             local desired=Geometry.heldFrame(layout,hands[heldHand],front,s.supportAnchor or(anchor and anchor.Value or nil),s.supportState)
                             -- Smooth the solved aim in the avatar's space. Smoothing a
                             -- correction in rear-wrist space temporarily adds wrist yaw
@@ -233,12 +240,16 @@ function M.new(player,menu,remote)
                             s.ammo=(rounds and rounds.Value or 0)+(chamber and chamber.Value and 1 or 0)
                         end
                         local trigger=heldHand=="left"and 128 or 1
+                        if layout.ManualBolt and chamber and not chamber.Value then s.manualConsumed=false end
                         if not down(buttons,trigger)and now-s.lastShot>.4 then s.predicted=s.confirmed end
                         if localOwner and down(buttons,trigger)and rackHand==""and(layout.Automatic or not down(previous,trigger))then
                             if now-s.lastShot>=layout.Interval then
                                 local remaining=s.ammo-math.max(0,s.predicted-s.confirmed)
-                                if remaining>0 then
+                                local bolt=model:FindFirstChild("BoltLift")
+                                local ready=chamber and chamber.Value and(not layout.ManualBolt or(not s.manualConsumed and(not bolt or bolt.Value<.05)))
+                                if remaining>0 and ready then
                                     s.predicted=s.predicted+1
+                                    if layout.ManualBolt then s.manualConsumed=true end
                                     local cf=root.CFrame;local origin=cf:pointToWorldSpace(layout.Muzzle)
                                     local _,position=workspace:FindPartOnRayWithIgnoreList(Ray.new(origin,cf.lookVector*300),{folder,workspace.CurrentCamera,player.Character},false,true)
                                     self:feedback(model,layout,cf,position,s.predicted,heldHand)
@@ -250,22 +261,27 @@ function M.new(player,menu,remote)
                             self.aim[heldHand]={s.recoil,s.yaw}
                             self.visualHands[heldHand]=root.CFrame*layout.Grip
                             if s.supportHand and s.supportAnchor and hands[s.supportHand]then
-                                local position=(root.CFrame*layout.Grip):pointToWorldSpace(s.supportAnchor)
-                                local actual=hands[s.supportHand]
-                                self.visualHands[s.supportHand]=CFrame.new(position)*(actual-actual.p)
+                                self.visualHands[s.supportHand]=root.CFrame*Geometry.supportGrip(layout,s.supportHand)
                             end
                         end
                         local slide=renderedModel:FindFirstChild("Slide");local offset=model:FindFirstChild("SlideOffset")
                         local start=model:FindFirstChild("SlideGrabZ");local locked=model:FindFirstChild("SlideLocked")
                         local target=offset and layout.SlideRest:toObjectSpace(offset.Value).p.z or 0
+                        local lift=model:FindFirstChild("BoltLift");lift=lift and lift.Value or 0
                         if localOwner and rackHand~=""and hands[rackHand]then
                             if down(buttons,rackHand=="left"and 32 or 64)then
                                 local point=root.CFrame:pointToObjectSpace(hands[rackHand].p)
                                 target=math.max(0,math.min(layout.SlideTravel,(point.z-start.Value)*layout.RackGain))
-                            else target=locked and locked.Value and(rounds and rounds.Value==0)and layout.LockedTravel or 0 end
-                        elseif now-s.lastShot<.035 then target=layout.SlideTravel end
+                                if layout.ManualBolt then
+                                    local startY=model:FindFirstChild("SlideGrabY");lift=math.max(0,math.min(1,(point.y-startY.Value)/layout.BoltLift))
+                                    if target>.025 then lift=1 end
+                                end
+                            elseif not layout.ManualBolt then target=locked and locked.Value and(rounds and rounds.Value==0)and layout.LockedTravel or 0 end
+                        elseif not layout.ManualBolt and now-s.lastShot<.035 then target=layout.SlideTravel end
                         s.slide=s.slide+(target-s.slide)*(1-math.exp(-dt*65))
-                        if slide then slide.CFrame=root.CFrame*layout.SlideRest*CFrame.new(0,0,s.slide)end
+                        if slide then slide.CFrame=root.CFrame*layout.SlideRest*CFrame.new(0,0,s.slide)*CFrame.Angles(0,0,(layout.BoltAngle or 0)*lift)end
+                        local stem=renderedModel:FindFirstChild("BoltStem");if stem and slide then stem.CFrame=slide.CFrame*layout.BoltStem end
+                        local lens=renderedModel:FindFirstChild("ScopeLens");if lens then lens.CFrame=root.CFrame*layout.ScopeFrame*CFrame.Angles(0,math.pi/2,0)end
                     end
                 end
             end
