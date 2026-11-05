@@ -40,6 +40,26 @@ class MenuHistoryTests(unittest.TestCase):
         self.lua.globals().module = self.lua.execute((ROOT / 'roblox/VRMenu.lua').read_text(encoding='utf8'))
         self.lua.execute('menu=module.new(A,box,remote)')
 
+    def test_turn_speed_buttons_update_display_and_queue_saved_preference(self):
+        self.lua.execute("""
+        menu.opened=true;menu.page='settings';menu:draw()
+        menu.buttons[1].label.Parent.Parent.Parent=gui
+        assert(hasText('65 deg/s'))
+        local function click(label)for _,b in ipairs(menu.buttons)do if b.label.Text==label then b.action();return end end;error('Button missing')end
+        click('+');assert(menu.turnSpeed==75 and hasText('75 deg/s'))
+        assert(menu.queue[1][1]%16==10 and menu.queue[1][2]==75)
+        click('-');assert(menu.turnSpeed==65)
+        menu:setTurnSpeed(500);assert(menu.turnSpeed==180 and box:FindFirstChild('turn_speed').Value==180)
+        menu:setTurnSpeed(0);assert(menu.turnSpeed==15)
+        local nextMenu=module.new(A,box,remote);assert(nextMenu.turnSpeed==15)
+        """)
+
+    def test_helper_preference_updates_display_without_echoing_a_command(self):
+        self.lua.execute("menu:setTurnSpeed(105,true);assert(menu.turnSpeed==105 and #menu.queue==0)")
+
+    def test_only_y_opens_menu_and_b_does_not_open_chat(self):
+        self.lua.execute("menu.setOpen=function(self,open,page)self.opened=open;self.page=page end;menu:update(nil,4,0);assert(not menu.opened);menu:update(nil,0,0);menu:update(nil,2,0);assert(menu.opened and menu.page=='menu');menu:update(nil,0,0);menu:update(nil,2,0);assert(not menu.opened)")
+
     def test_all_received_history_survives_menu_recreation(self):
         self.lua.execute("for i=1,150 do menu:addMessage(A,'message '..i)end;assert(#menu.messages==150);local nextMenu=module.new(A,box,remote);assert(#nextMenu.messages==150);assert(nextMenu.messages[1]=='Alpha: message 1' and nextMenu.messages[150]=='Alpha: message 150')")
 

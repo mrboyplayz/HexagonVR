@@ -21,6 +21,15 @@ def request(ticket='opaque+ticket:part',version='2015',url='https://www.hexagon.
 
 
 class ProtocolTests(unittest.TestCase):
+    def test_regular_launcher_resolution_rejects_nested_vr_redirects(self):
+        original='"C:\\Hexagon\\HexagonPlayerLauncher.exe" "%1"'
+        self.assertTrue(launch.is_vr_command('C:\\Downloads\\HexagonVR(1).exe --protocol "%1"'))
+        self.assertEqual(launch.regular_command('C:\\old\\HexagonVR.exe --protocol "%1"',original),original)
+
+    def test_missing_backup_recovers_normal_routing_and_forwards_without_starting_vr(self):
+        with tempfile.TemporaryDirectory()as temp,patch.object(launch,'state_path',return_value=Path(temp)/'missing'),patch.object(launch,'repair_stale_routing')as repair,patch.object(launch,'regular_command',return_value='normal launcher'),patch.object(launch,'forward_original')as forward:
+            launch.handle_protocol(request())
+            repair.assert_called_once();forward.assert_called_once_with('normal launcher',request())
     def test_launch_fields_preserve_opaque_ticket_and_encoded_url(self):
         self.assertEqual(launch.parse_protocol(request()),('2015','opaque+ticket:part','https://www.hexagon.pw/game/Join.ashx?place=1'))
 
@@ -86,6 +95,13 @@ class WindowsRoutingTests(unittest.TestCase):
         with winreg.CreateKey(winreg.HKEY_CURRENT_USER,self.key) as key:winreg.SetValueEx(key,'',0,winreg.REG_SZ,'other launcher')
         self.redirect.restore(state)
         self.assertEqual(self.redirect.user_value()[0],'other launcher')
+
+    def test_old_vr_redirect_is_never_restored_as_the_regular_launcher(self):
+        state=self.redirect.install('unused',b'key');self.redirect.scheme=launch.SCHEME
+        state['user_original']=['C:\\old\\HexagonVR.exe --protocol "%1"',winreg.REG_SZ]
+        state['original']='C:\\old\\HexagonVR.exe --protocol "%1"'
+        with patch.object(launch,'regular_command',return_value=self.original):self.redirect.restore(state)
+        self.assertEqual(self.redirect.user_value()[0],self.original)
 
     def test_real_authenticated_pipe_delivers_uri_and_restores_registration(self):
         host=launch.ProtocolHost(Path(self.temp.name))

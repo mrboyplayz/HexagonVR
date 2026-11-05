@@ -20,23 +20,41 @@ def service(tree, kind):
     found=next((x for x in tree.findall('Item') if x.get('class')==kind),None)
     return found if found is not None else item(kind,kind,tree)
 
-def install(source, target, url, key, user_id=0, local_fast_poll=False):
+def install(source, target, url, key, user_id=0, local_fast_poll=False, filtering_enabled=None):
     source,target=Path(source),Path(target)
     if source.resolve()==target.resolve(): raise ValueError('Choose a new output path.')
     tree=ET.parse(source).getroot()
     if tree.tag!='roblox': raise ValueError('Input must be an XML .rbxlx place.')
+    if filtering_enabled is not None:prop(service(tree,'Workspace'),'bool','FilteringEnabled','true'if filtering_enabled else'false')
     ss=service(tree,'ServerScriptService'); sg=service(tree,'StarterGui')
-    for parent,names in [(ss,('HexagonVRServer','VRConfig','VRChat')),(sg,('HexagonVRClient',))]:
+    rs=service(tree,'ReplicatedStorage')
+    for child in list(rs.findall('Item')):
+        if child.findtext('./Properties/string[@name="Name"]')=='HexagonVRWeaponGeometry':rs.remove(child)
+    geometry=item('ModuleScript','HexagonVRWeaponGeometry',rs)
+    prop(geometry,'ProtectedString','Source',(ROOT/'roblox/VRWeaponGeometry.lua').read_text())
+    for child in list(rs.findall('Item')):
+        if child.findtext('./Properties/string[@name="Name"]')=='HexagonVRBody':rs.remove(child)
+    body=item('ModuleScript','HexagonVRBody',rs)
+    prop(body,'ProtectedString','Source',(ROOT/'roblox/VRBody.lua').read_text())
+    for parent,names in [(ss,('HexagonVRServer','VRConfig','VRChat','VRWeapons','VRWeaponState','VRWeaponAssets','VRHats')),(sg,('HexagonVRClient',))]:
         for child in list(parent.findall('Item')):
             if child.findtext('./Properties/string[@name="Name"]') in names: parent.remove(child)
     cfg=(ROOT/'roblox/VRConfig.lua').read_text()
     cfg=cfg.replace('http://127.0.0.1:18765',url).replace('CHANGE_ME',key)
     if user_id:cfg=cfg.replace('AllowedUserIds = {},','AllowedUserIds = {'+str(int(user_id))+'},')
     if local_fast_poll:cfg=cfg.replace('PollRate = 6,','PollRate = 30,')
+    for name in ('VRWeapons','VRWeaponState','VRWeaponAssets','VRHats'):
+        node=item('ModuleScript',name,ss);prop(node,'ProtectedString','Source',(ROOT/'roblox'/(name+'.lua')).read_text())
     for parent,kind,name,text in [(ss,'ModuleScript','VRConfig',cfg),(ss,'ModuleScript','VRChat',(ROOT/'roblox/VRChat.lua').read_text()),(ss,'Script','HexagonVRServer',(ROOT/'roblox/VRServer.lua').read_text()),(sg,'LocalScript','HexagonVRClient',(ROOT/'roblox/VRClient.lua').read_text())]:
         node=item(kind,name,parent);prop(node,'ProtectedString','Source',text)
         if kind!='ModuleScript': prop(node,'bool','Disabled','false')
         if kind=='LocalScript':
+            weapons=item('ModuleScript','VRWeaponClient',node)
+            prop(weapons,'ProtectedString','Source',(ROOT/'roblox/VRWeaponClient.lua').read_text())
+            fx=item('ModuleScript','VRWeaponFX',weapons)
+            prop(fx,'ProtectedString','Source',(ROOT/'roblox/VRWeaponFX.lua').read_text())
+            fx_assets=item('ModuleScript','VRWeaponAssets',fx)
+            prop(fx_assets,'ProtectedString','Source',(ROOT/'roblox/VRWeaponAssets.lua').read_text())
             chat_ui=item('ModuleScript','VRChatClient',node)
             prop(chat_ui,'ProtectedString','Source',(ROOT/'roblox/VRChatClient.lua').read_text())
             module=item('ModuleScript','VRMenu',node)
@@ -51,6 +69,7 @@ def make_demo(target):
     tree=ET.Element('roblox',{'version':'4'})
     ET.SubElement(tree,'External').text='null';ET.SubElement(tree,'External').text='nil'
     ws=service(tree,'Workspace')
+    prop(ws,'bool','FilteringEnabled','false')
     def part(name,pos,size,color):
         node=item('Part',name,ws);prop(node,'bool','Anchored','true')
         prop(node,'token','TopSurface','0');prop(node,'token','BottomSurface','0')
@@ -66,7 +85,10 @@ def make_demo(target):
     for i in range(5):part('DepthMarker'+str(i),(-8+i*4,2,-10-i*6),(2,4,2),(.2,.5+i*.08,.9))
     part('LeftWall',(-16,3,-10),(1,6,28),(.9,.35,.22))
     part('RightWall',(16,3,-10),(1,6,28),(.25,.8,.45))
-    service(tree,'Players');service(tree,'ReplicatedStorage');service(tree,'ServerScriptService');service(tree,'StarterGui')
+    service(tree,'Players');rs=service(tree,'ReplicatedStorage');ss=service(tree,'ServerScriptService');service(tree,'StarterGui')
+    offline=item('BoolValue','HexagonVROfflineAssets',rs);prop(offline,'bool','Value','true')
+    targets=item('Script','HexagonVRPracticeTargets',ss)
+    prop(targets,'ProtectedString','Source',(ROOT/'roblox/VRPracticeTargets.lua').read_text());prop(targets,'bool','Disabled','false')
     target=Path(target);target.parent.mkdir(parents=True,exist_ok=True)
     ET.ElementTree(tree).write(target,encoding='utf-8',xml_declaration=True)
 

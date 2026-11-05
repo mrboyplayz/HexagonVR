@@ -43,8 +43,9 @@ def main():
     from game_tools import make_demo,install
     demo=ROOT/'build/VR-Demo.rbxlx';base=ROOT/'build/base.rbxlx';make_demo(base);install(base,demo,'','',0)
     if args.native_only:return
-    run(sys.executable,'-m','PyInstaller','--noconfirm','--onefile','--name','HexagonVR','--distpath',ROOT/'dist','--workpath',ROOT/'build/pyinstaller','--specpath',ROOT/'build',
+    run(sys.executable,'-m','PyInstaller','--noconfirm','--onefile','--hide-console','hide-early','--name','HexagonVR','--distpath',ROOT/'dist','--workpath',ROOT/'build/pyinstaller','--specpath',ROOT/'build',
         '--add-data',str(ROOT/'roblox')+';roblox','--add-data',str(demo)+';.',
+        '--add-data',str(ROOT/'assets')+';assets',
         *sum((['--add-data',str(ROOT/'native'/name)+';native']for name in ('MINHOOK-LICENSE.txt','LLVM-LICENSE.txt','THIRD-PARTY.md')),[]),
         *sum((['--add-data',str(native/name)+';native']for name in ('HexagonVRNative.dll','HexagonVRStudioLoader.exe','HexagonVRTextureHost64.dll')),[]),
         '--collect-all','openvr','--collect-all','glfw','--collect-all','windows_capture',ROOT/'bridge.py')
@@ -53,9 +54,11 @@ def main():
     with zipfile.ZipFile(archive,'w',zipfile.ZIP_DEFLATED,compresslevel=6)as z:
         z.write(dist/'HexagonVR.exe','HexagonVR.exe');z.write(demo,'VR-Demo.rbxlx')
         for name in ('README.md','LICENSE'):z.write(ROOT/name,name)
+        for asset in (ROOT/'assets').iterdir():z.write(asset,'assets/'+asset.name)
         for name in ('MINHOOK-LICENSE.txt','LLVM-LICENSE.txt','THIRD-PARTY.md'):z.write(ROOT/'native'/name,'licenses/'+name)
         z.writestr('Start-VR.cmd','@echo off\r\ncd /d "%~dp0"\r\nHexagonVR.exe\r\n')
         z.writestr('Start-Studio-Test.cmd','@echo off\r\ncd /d "%~dp0"\r\nHexagonVR.exe --studio-test\r\n')
+        z.writestr('Install-Weapon-Assets.cmd','@echo off\r\ncd /d "%~dp0"\r\nHexagonVR.exe --install-assets\r\npause\r\n')
         z.writestr('Add-VR-To-Place.cmd','@echo off\r\ncd /d "%~dp0"\r\nif "%~1"=="" exit /b 1\r\nHexagonVR.exe --install "%~1"\r\npause\r\n')
     manifest={p.name:hashlib.sha256(p.read_bytes()).hexdigest()for p in (dist/'HexagonVR.exe',archive)}
     (dist/'SHA256SUMS.txt').write_text('\n'.join(value+'  '+name for name,value in manifest.items())+'\n')

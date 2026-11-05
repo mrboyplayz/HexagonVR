@@ -7,6 +7,14 @@ from vr_actions import Actions
 
 
 class UIOrderingTests(unittest.TestCase):
+    def test_turn_speed_preference_is_delivered_once(self):
+        transport=self.transport({1:(float(110*16+10),95.,0.)})
+        self.assertEqual(transport.ui_command(),(10,95,0));self.assertIsNone(transport.ui_command())
+
+    def test_haptic_packet_is_delivered_once_with_original_hand_and_strength(self):
+        token=99*16+9;transport=self.transport({1:(float(token),1.,2600.)})
+        self.assertEqual(transport.ui_command(),(9,1,2600));self.assertIsNone(transport.ui_command())
+
     def transport(self,values,last=0):
         t=LocalTransport.__new__(LocalTransport);t.ui_outputs=list(values);t.vec=values.get;t.ui_token=last;return t
 

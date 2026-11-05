@@ -4,11 +4,14 @@ local RS=game:GetService("ReplicatedStorage")
 local Run=game:GetService("RunService")
 local player=Players.LocalPlayer
 local remote=RS:WaitForChild("HexagonVR")
+local Body=require(RS:WaitForChild("HexagonVRBody"))
 local enabled=false
 local wanted,lastWake=true,0
 local savedCamera,hidden,baseline={},{},{}
-local lastInput,lastSequence,lastSent,lastTurn=0,nil,0,nil
+local lastInput,lastSequence,lastSent,lastTurn,lastSentButtons,lastSentBlocked=0,nil,0,nil,nil,nil
 local mailboxDormant=false
+local bodyYaw,lastRenderAt=0,tick()
+local lastHelperTurnSpeed=nil
 local gui=Instance.new("ScreenGui");gui.Name="HexagonVRStatus";gui.Parent=player:WaitForChild("PlayerGui")
 local label=Instance.new("TextLabel");label.Size=UDim2.new(0,600,0,28);label.Position=UDim2.new(.5,-300,1,-40)
 label.BackgroundTransparency=.3;label.BackgroundColor3=Color3.new(0,0,0);label.TextColor3=Color3.new(1,1,1)
@@ -31,10 +34,12 @@ if not box:FindFirstChild("camera_state")then
 end
 local menu=require(script:WaitForChild("VRMenu")).new(player,box,remote)
 local chatUI=require(script:WaitForChild("VRChatClient")).new(player,menu)
+local weapons=require(script:WaitForChild("VRWeaponClient")).new(player,menu,remote)
 local studioMenuShown=false
 local function walk(object,fn)for _,v in ipairs(object:GetChildren())do fn(v);walk(v,fn)end end
 local function restore()
     menu:setOpen(false)
+    weapons:update({},0,true)
     for part,value in pairs(hidden)do if part.Parent then part.LocalTransparencyModifier=value end end
     hidden={};baseline={}
     if savedCamera.camera and savedCamera.camera.Parent then
@@ -45,6 +50,7 @@ local function restore()
     if hum then hum:Move(Vector3.new(),false) end
 end
 remote.OnClientEvent:connect(function(action,who,value,reason)
+    if action=="weaponShot"then weapons:confirmShot(who,value);return end
     if action=="chatDisplay"then chatUI:display(who,value);return end
     if action=="chatResult"then menu:chatResult(who,value,reason);return end
     if action=="message" then label.Text=who;return end
@@ -54,16 +60,26 @@ remote.OnClientEvent:connect(function(action,who,value,reason)
         if value and not enabled then
             local camera=workspace.CurrentCamera
             savedCamera={camera=camera,kind=camera.CameraType,subject=camera.CameraSubject,fov=camera.FieldOfView}
-            baseline={};lastTurn=nil
+            baseline={};lastTurn=nil;bodyYaw=0
         elseif not value then
             restore()
             if RS:FindFirstChild("HexagonVRStudioMenuTest")then studioMenuShown=false end
         end
-        enabled=value;label.Text=enabled and "VR | Y menu | B chat | A jump | X recenter" or "VR off | type /vr to use VR"
+        enabled=value;label.Text=enabled and "VR | Y menu | Grip grab | A jump" or "VR off | type /vr to use VR"
     end
 end)
 remote:FireServer("ready")
 local function render()
+    local now=tick();local dt=math.max(0,math.min(.05,now-lastRenderAt));lastRenderAt=now
+    -- Hats leave the local character when grabbed, including by another player.
+    -- Restore them before weapon prediction applies its own local suppression.
+    local ownCharacter=player.Character
+    for part in pairs(hidden)do
+        if not part.Parent or not ownCharacter or not part:IsDescendantOf(ownCharacter)then
+            if part.Parent then part.LocalTransparencyModifier=0 end
+            hidden[part]=nil
+        end
+    end
     local control=box.control.Value
     box.ack.Value=Vector3.new(control.y,56002.25,66003.5)
     local input=box.move.Value;local settings=box.settings.Value
@@ -93,6 +109,7 @@ local function render()
     box.camera_state.Value=Vector3.new(control.y,enabled and tracked and 1 or 0,82003.5)
     if tracked and not enabled and wanted and tick()-lastWake>1 then lastWake=tick();remote:FireServer("enable")end
     if not enabled or not tracked then
+        weapons:update({},0,true)
         if menu.opened then menu:setOpen(false)end
         if enabled and tick()-lastInput>.35 then
             local hum=player.Character and player.Character:FindFirstChild("Humanoid")
@@ -105,17 +122,30 @@ local function render()
     local torso=char and char:FindFirstChild("Torso")
     local hum=char and char:FindFirstChild("Humanoid")
     if not root or not torso or not hum then return end
-    if lastTurn and control.z~=lastTurn and not menu.opened then
-        local delta=math.max(-1,math.min(1,control.z-lastTurn))
-        root.CFrame=root.CFrame*CFrame.Angles(0,math.rad(-30*delta),0)
-    end
-    lastTurn=control.z
     local head=box.head.Value
+    local turn=control.z>=-1 and control.z<=1 and control.z or 0
+    if control.z>=60 and control.z<=722 then
+        local speed=math.floor(control.z/4);local axis=control.z-speed*4-1
+        if speed>=15 and speed<=180 and axis>=-1.001 and axis<=1.001 then
+            turn=math.max(-1,math.min(1,axis))
+            if lastHelperTurnSpeed~=speed then menu:setTurnSpeed(speed,true);lastHelperTurnSpeed=speed end
+        end
+    end
+    if not menu.opened and turn~=0 then
+        local pivot=Vector3.new(head.p.x,0,head.p.z)
+        root.CFrame=root.CFrame*CFrame.new(pivot)*CFrame.Angles(0,-math.rad(menu.turnSpeed or Body.TurnSpeed)*turn*dt,0)*CFrame.new(-pivot)
+    end
     local left=math.floor(flags/2)%2==1 and box.left.Value or nil
     local right=math.floor(flags/4)%2==1 and box.right.Value or nil
+    local eyeForward=math.max(.2,math.min(.65,settings.y))
+    local avatarHead,localTorso
+    avatarHead,localTorso,bodyYaw=Body.sample(head,bodyYaw,dt,eyeForward)
+    local torsoFrame=root.CFrame*localTorso
+    local bodyWeld=root:FindFirstChild("HexagonVR_body")
+    if bodyWeld then bodyWeld.C0=localTorso*bodyWeld.C1 end
     local camera=workspace.CurrentCamera
     camera.CameraType=Enum.CameraType.Scriptable
-    camera.CoordinateFrame=root.CFrame*head*CFrame.new(0,0,-math.max(0,math.min(1,settings.y)))
+    camera.CoordinateFrame=root.CFrame*Body.eyes(avatarHead,eyeForward)
     camera.Focus=camera.CoordinateFrame*CFrame.new(0,0,-8)
     camera.FieldOfView=math.max(1,math.min(120,settings.x))
     box.viewport.Value=Vector3.new(camera.ViewportSize.x,camera.ViewportSize.y,camera.FieldOfView)
@@ -124,15 +154,18 @@ local function render()
         studioMenuShown=true;menu:setOpen(true,"menu")
         print("HEXAGON_VR_STUDIO_MENU_OPEN")
     end
-    local blocked=menu:update(right and root.CFrame*right or nil,ui.x>=0 and ui.x<=127 and ui.x or 0,ui.z)
-    for _,row in ipairs({{"head",head},{"left",left},{"right",right}})do
+    local buttons=ui.x>=0 and ui.x<=255 and ui.x==math.floor(ui.x)and ui.x or 0
+    local blocked=menu:update(right and root.CFrame*right or nil,buttons,ui.z)
+    weapons:update({left=left and root.CFrame*left or nil,right=right and root.CFrame*right or nil},buttons,blocked)
+    for _,row in ipairs({{"head",avatarHead},{"left",left},{"right",right}})do
         local weld=torso:FindFirstChild("HexagonVR_"..row[1])
         if weld then
             if not baseline[weld]then baseline[weld]=weld.C0 end
             if row[2]then
                 local target=row[2]
+                if row[1]~="head"and weapons.visualHands[row[1]]then target=root.CFrame:toObjectSpace(weapons.visualHands[row[1]])end
                 if row[1]~="head"then target=target*CFrame.Angles(math.rad(90),0,0)*CFrame.new(0,1,0)end
-                weld.C0=torso.CFrame:toObjectSpace(root.CFrame*target)*weld.C1
+                weld.C0=torsoFrame:toObjectSpace(root.CFrame*target)*weld.C1
             else weld.C0=baseline[weld]end
         end
     end
@@ -143,14 +176,19 @@ local function render()
     if direction.magnitude>.01 then hum:Move(CFrame.new(Vector3.new(),direction):vectorToWorldSpace(vector),false)end
     if input.z>.5 and not blocked then hum.Jump=true end
     walk(char,function(part)
-        if part:IsA("BasePart")and(part.Name=="Head"or part.Parent:IsA("Hat")or part.Parent:IsA("Accessory"))then
+        local wearable=false;local parent=part.Parent
+        while parent and parent~=char do
+            if parent:IsA("Hat")or parent:IsA("Accessory")then wearable=true;break end
+            parent=parent.Parent
+        end
+        if part:IsA("BasePart")and(part==char:FindFirstChild("Head")or wearable)then
             if hidden[part]==nil then hidden[part]=part.LocalTransparencyModifier end
             part.LocalTransparencyModifier=1
         end
     end)
-    if tick()-lastSent>=.05 then
-        lastSent=tick()
-        remote:FireServer("pose",{seq=control.y,head={head:components()},left=left and {left:components()}or nil,right=right and {right:components()}or nil,tracked=true})
+    if tick()-lastSent>=.05 or buttons~=lastSentButtons or blocked~=lastSentBlocked then
+        lastSent=tick();lastSentButtons=buttons;lastSentBlocked=blocked
+        remote:FireServer("pose",{seq=control.y,head={head:components()},left=left and {left:components()}or nil,right=right and {right:components()}or nil,trackingRoot={root.CFrame:components()},tracked=true,buttons=buttons,blocked=blocked,weaponRecoil=weapons:aimState(),weaponRelease=weapons:releaseState(),eyeForward=eyeForward})
     end
 end
 Run:BindToRenderStep("HexagonVR",Enum.RenderPriority.Last.Value,render)

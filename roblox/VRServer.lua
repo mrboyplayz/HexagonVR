@@ -3,9 +3,12 @@ local Players=game:GetService("Players")
 local RS=game:GetService("ReplicatedStorage")
 local Run=game:GetService("RunService")
 local C=require(script.Parent.VRConfig)
+local bodyModule=RS:FindFirstChild("HexagonVRBody")
+local Body=bodyModule and require(bodyModule)or nil
 local remote=RS:FindFirstChild("HexagonVR")or Instance.new("RemoteEvent")
 remote.Name="HexagonVR";remote.Parent=RS
 local sessions,requested={},{}
+local weapons=C.Weapons and C.Weapons.Enabled and require(script.Parent.VRWeapons).new(C)or nil
 local function tell(player,text)remote:FireClient(player,"message",text)end
 local function allowed(player)
     local list=C.AllowedUserIds or {}
@@ -17,11 +20,12 @@ local function leave(player,reason)
     local state=sessions[player]
     if not state then return end
     sessions[player]=nil
+    if weapons then weapons:dropPlayer(player)end
     if state.death then state.death:disconnect()end
     for _,row in ipairs(state.joints)do
         if row.weld and row.weld.Parent then row.weld:Destroy()end
         if row.motor then
-            if row.parent.Parent then row.motor.Parent=row.parent else row.motor:Destroy()end
+            if row.parent.Parent then row.motor.Part0=row.part0;row.motor.Part1=row.part1;row.motor.Parent=row.parent else row.motor:Destroy()end
         end
     end
     if state.humanoid.Parent then
@@ -43,11 +47,20 @@ local function enter(player)
     for _,spec in ipairs({{"Neck","Head","head"},{"Left Shoulder","Left Arm","left"},{"Right Shoulder","Right Arm","right"}})do
         local motor=torso:FindFirstChild(spec[1]);local part=char:FindFirstChild(spec[2])
         if not motor or not motor:IsA("Motor6D")or not part then tell(player,"Your R6 neck or shoulder joints are missing.");return end
-        joints[#joints+1]={motor=motor,parent=motor.Parent,part=part,key=spec[3],c0=motor.C0,c1=motor.C1}
+        joints[#joints+1]={motor=motor,parent=motor.Parent,part=part,key=spec[3],c0=motor.C0,c1=motor.C1,part0=motor.Part0,part1=motor.Part1}
+    end
+    if Body then
+        local motor
+        for _,parent in ipairs({root,torso})do for _,candidate in ipairs(parent:GetChildren())do
+            if candidate:IsA("Motor6D")and candidate.Part0==root and candidate.Part1==torso then motor=candidate end
+        end end
+        if not motor then tell(player,"Your R6 body root joint is missing.");return end
+        table.insert(joints,1,{motor=motor,parent=motor.Parent,part=torso,key="body",c0=motor.C0,c1=motor.C1,part0=motor.Part0,part1=motor.Part1})
     end
     for _,row in ipairs(joints)do
-        row.motor.Parent=nil;row.weld=Instance.new("Weld");row.weld.Name="HexagonVR_"..row.key
-        row.weld.Part0=torso;row.weld.Part1=row.part;row.weld.C0=row.c0;row.weld.C1=row.c1;row.weld.Parent=torso
+        row.motor.Parent=nil;row.motor.Part0=nil;row.motor.Part1=nil
+        row.weld=Instance.new(row.key=="body"and"Motor6D"or"Weld");row.weld.Name="HexagonVR_"..row.key
+        row.weld.Part0=row.key=="body"and root or torso;row.weld.Part1=row.part;row.weld.C0=row.c0;row.weld.C1=row.c1;row.weld.Parent=row.parent
     end
     local state={character=char,torso=torso,root=root,humanoid=hum,joints=joints,autoRotate=hum.AutoRotate,walkSpeed=hum.WalkSpeed,lastSequence=-1,lastPoseAt=tick()+25,remotePoseAt=-math.huge}
     sessions[player]=state;hum.AutoRotate=false;hum.WalkSpeed=C.WalkSpeed
@@ -77,10 +90,10 @@ local function setup(player)
     player.CharacterAdded:connect(characterAdded)
     if player.Character and C.AutoEnable then characterAdded(player.Character)end
 end
-local function frame(a)
+local function frame(a,positionLimit)
     if type(a)~="table"or #a~=12 then return nil end
     for i=1,12 do if type(a[i])~="number"or a[i]~=a[i]or math.abs(a[i])>10000 then return nil end end
-    if Vector3.new(a[1],a[2],a[3]).magnitude>C.MaxReach then return nil end
+    if Vector3.new(a[1],a[2],a[3]).magnitude>(positionLimit or C.MaxReach)then return nil end
     for row=0,2 do
         local length=0
         for col=0,2 do local x=a[4+row*3+col];length=length+x*x end
@@ -101,13 +114,43 @@ local function apply(player,pose)
     if not head then return end
     state.lastSequence=pose.seq;state.lastPoseAt=tick()
     local root=state.root.CFrame
+    local torsoFrame=state.torso.CFrame
+    local eyesForward=type(pose.eyeForward)=="number"and pose.eyeForward==pose.eyeForward and math.max(.2,math.min(.65,pose.eyeForward))or .45
+    if Body then
+        local localTorso,yaw
+        head,localTorso,yaw=Body.sample(head,state.bodyYaw or 0,tick()-(state.bodyAt or tick()-.05),eyesForward)
+        state.bodyYaw=yaw;state.bodyAt=tick();torsoFrame=root*localTorso
+    end
+    local hands={left=frame(pose.left),right=frame(pose.right)}
     for _,row in ipairs(state.joints)do
-        local target=row.key=="head"and head or frame(pose[row.key])
-        if target then
+        local target=row.key=="head"and head or hands[row.key]
+        if row.key=="body"then row.weld.C0=root:toObjectSpace(torsoFrame)*row.weld.C1
+        elseif target then
             if row.key~="head"then target=target*CFrame.Angles(math.rad(C.ArmRotationDegrees),0,0)*CFrame.new(0,1,0)end
-            row.weld.C0=state.torso.CFrame:toObjectSpace(root*target)*row.weld.C1
+            row.weld.C0=torsoFrame:toObjectSpace(root*target)*row.weld.C1
         else row.weld.C0=row.c0 end
     end
+    if weapons then
+        local mask=pose.buttons
+        if type(mask)~="number"or mask~=mask or mask<0 or mask>255 or mask~=math.floor(mask)then mask=0 end
+        local trackingRoot=frame(pose.trackingRoot,10000)
+        if not trackingRoot or(trackingRoot.p-root.p).magnitude>6 then trackingRoot=root end
+        local releases={}
+        if type(pose.weaponRelease)=="table"then
+            for _,hand in ipairs({"left","right"})do
+                local row=pose.weaponRelease[hand]
+                if type(row)=="table"then
+                    local cf=frame(row.frame,10000);local velocity=row.velocity
+                    if cf and type(velocity)=="table"and #velocity==3 then
+                        local valid=true;for n=1,3 do if type(velocity[n])~="number"or velocity[n]~=velocity[n]or math.abs(velocity[n])>10000 then valid=false end end
+                        if valid then releases[hand]={model=row.model,frame=cf,velocity=Vector3.new(unpack(velocity))}end
+                    end
+                end
+            end
+        end
+        weapons:update(player,state,{left=hands.left and trackingRoot*hands.left or nil,right=hands.right and trackingRoot*hands.right or nil},mask,pose.blocked==true,pose.weaponRecoil,releases)
+    end
+    return true
 end
 Players.PlayerAdded:connect(setup)
 Players.PlayerRemoving:connect(function(player)requested[player]=nil;leave(player,"disconnect")end)
@@ -119,11 +162,22 @@ end)
 for _,player in ipairs(Players:GetPlayers())do setup(player)end
 remote.OnServerEvent:connect(function(player,action,data)
     local state=sessions[player]
+    if action=="weaponTrigger"and state and weapons and type(data)=="table"then
+        weapons:trigger(player,state,data.hand,data.pressed,data.recoil);return
+    end
     if action=="reset"and state then state.humanoid.Health=0;return end
     if action=="enable"then enter(player)end
     if action=="toggle"then command(player,"/vr")end
     if action=="ready"and state then remote:FireClient(player,"mode",player,true)end
-    if action=="pose"and state and tick()-state.remotePoseAt>=.04 then state.remotePoseAt=tick();apply(player,data)end
+    if action=="pose"and state and type(data)=="table"then
+        local mask=data.buttons
+        local valid=type(mask)=="number"and mask==mask and mask>=0 and mask<=255 and mask==math.floor(mask)
+        local changed=valid and(mask~=state.remoteMask or(data.blocked==true)~=state.remoteBlocked)
+        local elapsed=tick()-state.remotePoseAt
+        if elapsed>=.04 or(changed and elapsed>=.008)then
+            if apply(player,data)then state.remotePoseAt=tick();state.remoteMask=valid and mask or 0;state.remoteBlocked=data.blocked==true end
+        end
+    end
 end)
 -- Server-only integration-test hook; no externally supplied code is accepted.
 local toggle=Instance.new("BindableEvent");toggle.Name="HexagonVRTestToggle";toggle.Parent=script

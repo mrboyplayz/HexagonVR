@@ -1,0 +1,2152 @@
+<?xml version='1.0' encoding='utf-8'?>
+<roblox version="4"><External>null</External><External>nil</External><Item class="Workspace" referent="RBX6478d77cacd248db9646b1455b96147d"><Properties><string name="Name">Workspace</string><bool name="FilteringEnabled">false</bool></Properties><Item class="Part" referent="RBXf1a6947a648e4afaaa028f97a7417e19"><Properties><string name="Name">Baseplate</string><bool name="Anchored">true</bool><token name="TopSurface">0</token><token name="BottomSurface">0</token><Vector3 name="size"><X>120</X><Y>1</Y><Z>120</Z></Vector3><CoordinateFrame name="CFrame"><X>0</X><Y>-0.5</Y><Z>0</Z><R00>1</R00><R01>0</R01><R02>0</R02><R10>0</R10><R11>1</R11><R12>0</R12><R20>0</R20><R21>0</R21><R22>1</R22></CoordinateFrame><Color3 name="Color"><r>0.23</r><g>0.26</g><b>0.3</b></Color3></Properties></Item><Item class="Part" referent="RBX5aaf6c486ffb478bb4e4080fd77c6366"><Properties><string name="Name">DepthMarker0</string><bool name="Anchored">true</bool><token name="TopSurface">0</token><token name="BottomSurface">0</token><Vector3 name="size"><X>2</X><Y>4</Y><Z>2</Z></Vector3><CoordinateFrame name="CFrame"><X>-8</X><Y>2</Y><Z>-10</Z><R00>1</R00><R01>0</R01><R02>0</R02><R10>0</R10><R11>1</R11><R12>0</R12><R20>0</R20><R21>0</R21><R22>1</R22></CoordinateFrame><Color3 name="Color"><r>0.2</r><g>0.5</g><b>0.9</b></Color3></Properties></Item><Item class="Part" referent="RBX8d747e6e7e974edab88464d338d0f5af"><Properties><string name="Name">DepthMarker1</string><bool name="Anchored">true</bool><token name="TopSurface">0</token><token name="BottomSurface">0</token><Vector3 name="size"><X>2</X><Y>4</Y><Z>2</Z></Vector3><CoordinateFrame name="CFrame"><X>-4</X><Y>2</Y><Z>-16</Z><R00>1</R00><R01>0</R01><R02>0</R02><R10>0</R10><R11>1</R11><R12>0</R12><R20>0</R20><R21>0</R21><R22>1</R22></CoordinateFrame><Color3 name="Color"><r>0.2</r><g>0.58</g><b>0.9</b></Color3></Properties></Item><Item class="Part" referent="RBX435df5f86dbe4735a32919bfc7e6fd2f"><Properties><string name="Name">DepthMarker2</string><bool name="Anchored">true</bool><token name="TopSurface">0</token><token name="BottomSurface">0</token><Vector3 name="size"><X>2</X><Y>4</Y><Z>2</Z></Vector3><CoordinateFrame name="CFrame"><X>0</X><Y>2</Y><Z>-22</Z><R00>1</R00><R01>0</R01><R02>0</R02><R10>0</R10><R11>1</R11><R12>0</R12><R20>0</R20><R21>0</R21><R22>1</R22></CoordinateFrame><Color3 name="Color"><r>0.2</r><g>0.66</g><b>0.9</b></Color3></Properties></Item><Item class="Part" referent="RBXb837b83e24c44681a02dcb500cf84d1d"><Properties><string name="Name">DepthMarker3</string><bool name="Anchored">true</bool><token name="TopSurface">0</token><token name="BottomSurface">0</token><Vector3 name="size"><X>2</X><Y>4</Y><Z>2</Z></Vector3><CoordinateFrame name="CFrame"><X>4</X><Y>2</Y><Z>-28</Z><R00>1</R00><R01>0</R01><R02>0</R02><R10>0</R10><R11>1</R11><R12>0</R12><R20>0</R20><R21>0</R21><R22>1</R22></CoordinateFrame><Color3 name="Color"><r>0.2</r><g>0.74</g><b>0.9</b></Color3></Properties></Item><Item class="Part" referent="RBXe3562e4fc2e643b49ed0f33da239c7fc"><Properties><string name="Name">DepthMarker4</string><bool name="Anchored">true</bool><token name="TopSurface">0</token><token name="BottomSurface">0</token><Vector3 name="size"><X>2</X><Y>4</Y><Z>2</Z></Vector3><CoordinateFrame name="CFrame"><X>8</X><Y>2</Y><Z>-34</Z><R00>1</R00><R01>0</R01><R02>0</R02><R10>0</R10><R11>1</R11><R12>0</R12><R20>0</R20><R21>0</R21><R22>1</R22></CoordinateFrame><Color3 name="Color"><r>0.2</r><g>0.8200000000000001</g><b>0.9</b></Color3></Properties></Item><Item class="Part" referent="RBX89589ad28717461b963a5e8c77a35d72"><Properties><string name="Name">LeftWall</string><bool name="Anchored">true</bool><token name="TopSurface">0</token><token name="BottomSurface">0</token><Vector3 name="size"><X>1</X><Y>6</Y><Z>28</Z></Vector3><CoordinateFrame name="CFrame"><X>-16</X><Y>3</Y><Z>-10</Z><R00>1</R00><R01>0</R01><R02>0</R02><R10>0</R10><R11>1</R11><R12>0</R12><R20>0</R20><R21>0</R21><R22>1</R22></CoordinateFrame><Color3 name="Color"><r>0.9</r><g>0.35</g><b>0.22</b></Color3></Properties></Item><Item class="Part" referent="RBX9523775a354d432c9d5c8f8b50744589"><Properties><string name="Name">RightWall</string><bool name="Anchored">true</bool><token name="TopSurface">0</token><token name="BottomSurface">0</token><Vector3 name="size"><X>1</X><Y>6</Y><Z>28</Z></Vector3><CoordinateFrame name="CFrame"><X>16</X><Y>3</Y><Z>-10</Z><R00>1</R00><R01>0</R01><R02>0</R02><R10>0</R10><R11>1</R11><R12>0</R12><R20>0</R20><R21>0</R21><R22>1</R22></CoordinateFrame><Color3 name="Color"><r>0.25</r><g>0.8</g><b>0.45</b></Color3></Properties></Item></Item><Item class="Players" referent="RBXf4005fdf997d4d088416445d4eacd2e6"><Properties><string name="Name">Players</string></Properties></Item><Item class="ReplicatedStorage" referent="RBX54d93a9bd2bc4c9985d6517ca8b0e7fa"><Properties><string name="Name">ReplicatedStorage</string></Properties><Item class="BoolValue" referent="RBXcf61ce5deab04b79b6fd3649942e1a8f"><Properties><string name="Name">HexagonVROfflineAssets</string><bool name="Value">true</bool></Properties></Item><Item class="ModuleScript" referent="RBX4059c687f3274e098845c692c046c1d2"><Properties><string name="Name">HexagonVRWeaponGeometry</string><ProtectedString name="Source">-- Shared render and server transforms; forward is -Z, up is +Y.
+local G={
+    Hat={Wearable=true,Grip=CFrame.new()},
+    Crowbar={
+        Size=Vector3.new(1.6,4.2,.3),Scale=Vector3.new(1,1,1),
+        Grip=CFrame.new(0,-1.25,0)*CFrame.Angles(math.rad(90),0,0),
+        Bottom=Vector3.new(0,-1.25,0),Tip=Vector3.new(-.6,2,0),
+    },
+    Pistol={
+        Gun=true,Mesh="pistol_mesh",Texture="pistol_texture",SlideMesh="slide_mesh",SlideTexture="slide_texture",
+        MagazineKind="Magazine",Capacity=12,Interval=.18,Automatic=false,HoldOpen=true,
+        Recoil=4.8,YawKick=.65,RecoilBack=.03,FireSound="fire",Casing="pistol_casing_mesh",CasingScale=Vector3.new(.045,.085,.045),
+        InsertDepth=.86,RockAngle=0,
+        Eject=CFrame.new(.2,.43,.02),RackGain=1.7,SlideGrabRadius=.65,
+        Size=Vector3.new(.25,1.15,1.7),Scale=Vector3.new(.175831,.175831,.175831),
+        Grip=CFrame.new(0,-.25,.19),SlideRest=CFrame.new(0,.447,-.077),
+        Magazine=CFrame.new(0,-.09,.459),Mouth=Vector3.new(0,-.49,.459),
+        SlidePoint=Vector3.new(0,.45,.2),Muzzle=Vector3.new(0,.48,-.9),
+        SlideSize=Vector3.new(.2,.35,1.52),SlideTravel=.32,RackTravel=.17,LockedTravel=.28,
+        RemovePoint=Vector3.new(0,-.75,.46),
+    },
+    Magazine={MagazineItem=true,Mesh="magazine_mesh",Capacity=12,Size=Vector3.new(.2,.98,.63),Scale=Vector3.new(.175831,.175831,.175831),Grip=CFrame.new(),Top=Vector3.new(0,.49,0)},
+    AK47={
+        Gun=true,Mesh="ak_mesh",Texture="ak_texture",SlideMesh="ak_bolt_mesh",SlideTexture="ak_texture",
+        MagazineKind="AKMagazine",Capacity=30,Interval=.105,Automatic=true,HoldOpen=false,
+        Recoil=4.5,YawKick=.85,RecoilBack=.035,FireSound="ak_fire",Casing="rifle_casing_mesh",CasingScale=Vector3.new(.045,.055,.045),
+        InsertDepth=.4,RockAngle=math.rad(18),
+        Eject=CFrame.new(.23,.34,.2),RackGain=1.8,SlideGrabRadius=.7,
+        Size=Vector3.new(.4,1.1,4.2),Scale=Vector3.new(1,1,1),Grip=CFrame.new(0,-.12683,1.25792),
+        SlideRest=CFrame.new(.0688,.33994,.21174),SlideSize=Vector3.new(.28,.2,1),
+        Magazine=CFrame.new(.00012,-.17384,.41035),Mouth=Vector3.new(0,-.12,.41035),
+        RemovePoint=Vector3.new(0,-.6,.5),SlidePoint=Vector3.new(.24,.34,.3),Muzzle=Vector3.new(0,.3,-1.43),
+        Foregrip=Vector3.new(0,-.08,-.7),
+        SlideTravel=.45,RackTravel=.2,LockedTravel=0,
+    },
+    AKMagazine={MagazineItem=true,Mesh="ak_magazine_mesh",Texture="ak_texture",Capacity=30,
+        Size=Vector3.new(.2,.9,.71),Scale=Vector3.new(1,1,1),Grip=CFrame.new(),Top=Vector3.new(0,.45,.05)},
+}
+function G.forModel(model)
+    local kind=model:FindFirstChild("VRKind")
+    return G[kind and kind.Value or model.Name]
+end
+function G.supportRotation(reference,current)
+    if reference.magnitude&lt;.001 or current.magnitude&lt;.001 then return CFrame.new()end
+    local a,b=reference.unit,current.unit
+    local dot=math.max(-1,math.min(1,a:Dot(b)))
+    local axis=a:Cross(b);local length=axis.magnitude
+    if length&lt;.00001 then return CFrame.new()end
+    axis=axis/length
+    local function smooth(value)value=math.max(0,math.min(1,value));return value*value*(3-2*value)end
+    -- Fade support as hands meet or cross instead of jumping to an identity
+    -- correction at a distance threshold or flipping at an opposite vector.
+    local confidence=smooth((current.magnitude-.08)/.37)*smooth((dot+1)/.5)
+    local angle=math.min(math.rad(65),math.acos(dot))*confidence
+    local x,y,z=axis.x,axis.y,axis.z;local c,s=math.cos(angle),math.sin(angle);local t=1-c
+    return CFrame.new(0,0,0,t*x*x+c,t*x*y-s*z,t*x*z+s*y,t*x*y+s*z,t*y*y+c,t*y*z-s*x,t*x*z-s*y,t*y*z+s*x,t*z*z+c)
+end
+function G.heldFrame(layout,primary,support,anchor)
+    local rotation=CFrame.new()
+    if support and layout.Foregrip then
+        local reference=anchor or layout.Grip:pointToObjectSpace(layout.Foregrip)
+        rotation=G.supportRotation(reference,primary:vectorToObjectSpace(support.p-primary.p))
+    end
+    return primary*rotation*layout.Grip:inverse()
+end
+function G.recoilFrame(layout,pitch,yaw)
+    return CFrame.new(0,0,math.max(0,pitch)*(layout.RecoilBack or .03))*CFrame.Angles(math.rad(pitch),math.rad(yaw or 0),math.rad((yaw or 0)*.2))
+end
+function G.applyRecoil(layout,base,pitch,yaw)
+    return base*layout.Grip*G.recoilFrame(layout,pitch or 0,yaw or 0)*layout.Grip:inverse()
+end
+function G.magazineFrame(layout,progress)
+    local remaining=1-math.max(0,math.min(1,progress))
+    return CFrame.new(0,-layout.InsertDepth*remaining,0)*layout.Magazine*CFrame.Angles(-(layout.RockAngle or 0)*remaining,0,0)
+end
+function G.magazineEntry(layout,magLayout,gunFrame,magFrame)
+    local top=gunFrame:pointToObjectSpace(magFrame:pointToWorldSpace(magLayout.Top))
+    local entry=G.magazineFrame(layout,0):pointToWorldSpace(magLayout.Top)
+    local offset=top-entry
+    local up=magFrame:vectorToWorldSpace(Vector3.new(0,1,0)):Dot(gunFrame:vectorToWorldSpace(Vector3.new(0,1,0)))
+    local facing=magFrame.lookVector:Dot(gunFrame.lookVector)
+    return up&gt;.72 and facing&gt;.35 and math.abs(offset.y)&lt;.15 and Vector3.new(offset.x,0,offset.z).magnitude&lt;.28
+end
+function G.guidedMagazineFrame(layout,progress,freeFrame)
+    local t=math.max(0,math.min(1,progress));local assist=t*t*(3-2*t)
+    return freeFrame:lerp(G.magazineFrame(layout,t),assist)
+end
+return G
+</ProtectedString></Properties></Item><Item class="ModuleScript" referent="RBX323a5b21d8c94899b3687a7b42a61602"><Properties><string name="Name">HexagonVRBody</string><ProtectedString name="Source">-- Tracking describes the eyes. Avatar head and neck are placed behind them.
+local B={EyeForward=.45,EyeHeight=.12,HeadHalfHeight=.5,NeckHeight=1,TurnSpeed=65}
+local function wrap(angle)return(angle+math.pi)%(2*math.pi)-math.pi end
+function B.sample(eyes,previous,dt,forward)
+    local head=eyes*CFrame.new(0,-B.EyeHeight,forward or B.EyeForward)
+    local look=head.lookVector
+    local yaw
+    if look.x*look.x+look.z*look.z&lt;.01 then
+        local right=head:vectorToWorldSpace(Vector3.new(1,0,0));yaw=math.atan2(-right.z,right.x)
+    else yaw=math.atan2(-look.x,-look.z)end
+    local target=yaw*.6
+    local limit=math.rad(55)
+    if math.abs(wrap(yaw-target))&gt;limit then target=yaw-(yaw&gt;=0 and limit or-limit)end
+    local bodyYaw=previous+wrap(target-previous)*(1-math.exp(-math.max(0,math.min(.1,dt))*8))
+    local rotation=CFrame.Angles(0,bodyYaw,0)
+    local neck=head:pointToWorldSpace(Vector3.new(0,-B.HeadHalfHeight,0))
+    local torso=CFrame.new(neck-rotation:vectorToWorldSpace(Vector3.new(0,B.NeckHeight,0)))*rotation
+    return head,torso,bodyYaw
+end
+function B.eyes(head,forward)return head*CFrame.new(0,B.EyeHeight,-(forward or B.EyeForward))end
+return B
+</ProtectedString></Properties></Item></Item><Item class="ServerScriptService" referent="RBXb483c10196d541f491cbcc8ab3cc6d09"><Properties><string name="Name">ServerScriptService</string></Properties><Item class="Script" referent="RBXe94e00adc6c54026a249d9d5057e09b5"><Properties><string name="Name">HexagonVRPracticeTargets</string><ProtectedString name="Source">-- Offline demo targets. Not installed into existing maps by the VR installer.
+local parent=Instance.new("Model");parent.Name="VRPracticeTargets";parent.Parent=workspace
+local function create(position,name)
+    local target=Instance.new("Model");target.Name=name;target.Parent=parent
+    local function block(label,offset,size,color)
+        local p=Instance.new("Part");p.Name=label;p.FormFactor=Enum.FormFactor.Custom;p.Size=size
+        p.Anchored=true;p.BrickColor=BrickColor.new(color);p.TopSurface=Enum.SurfaceType.Smooth;p.BottomSurface=Enum.SurfaceType.Smooth
+        p.CFrame=CFrame.new(position+offset);p.Parent=target;return p
+    end
+    local torso=block("Torso",Vector3.new(0,3,0),Vector3.new(2,2,1),"Bright orange")
+    local head=block("Head",Vector3.new(0,4.5,0),Vector3.new(2,1,1),"Bright yellow")
+    block("Left Arm",Vector3.new(-1.5,3,0),Vector3.new(1,2,1),"Bright yellow")
+    block("Right Arm",Vector3.new(1.5,3,0),Vector3.new(1,2,1),"Bright yellow")
+    block("Left Leg",Vector3.new(-.5,1,0),Vector3.new(1,2,1),"Dark stone grey")
+    block("Right Leg",Vector3.new(.5,1,0),Vector3.new(1,2,1),"Dark stone grey")
+    local neck=Instance.new("Motor6D");neck.Name="Neck";neck.Part0=torso;neck.Part1=head;neck.C0=CFrame.new(0,1.5,0);neck.Parent=torso
+    local hum=Instance.new("Humanoid");hum.Parent=target
+    hum.Died:connect(function()delay(2,function()if parent.Parent then target:Destroy();create(position,name)end end)end)
+end
+create(Vector3.new(-4,0,-11),"Crowbar practice")
+create(Vector3.new(4,0,-17),"Shooting practice")
+</ProtectedString><bool name="Disabled">false</bool></Properties></Item><Item class="ModuleScript" referent="RBX74e1ca027fcb487bb7ac3542659350e0"><Properties><string name="Name">VRWeapons</string><ProtectedString name="Source">-- Physical pickups for the Hexagon 2015 engine. No Marketplace scripts execute.
+local M={}
+local State=require(script.Parent.VRWeaponState)
+local Assets=require(script.Parent.VRWeaponAssets)
+local Geometry=require(game:GetService("ReplicatedStorage"):WaitForChild("HexagonVRWeaponGeometry"))
+local Debris=game:GetService("Debris")
+local Run=game:GetService("RunService")
+local GRIP={left=32,right=64}
+local TRIGGER={left=128,right=1}
+local HANDS={"left","right"}
+local function down(mask,bit)return math.floor(mask/bit)%2==1 end
+local function value(kind,name,v,parent)
+    local o=Instance.new(kind);o.Name=name;o.Value=v;o.Parent=parent;return o
+end
+local function part(name,size,color,parent)
+    local p=Instance.new("Part");p.Name=name;p.FormFactor=Enum.FormFactor.Custom;p.Size=size;p.BrickColor=BrickColor.new(color)
+    p.TopSurface=Enum.SurfaceType.Smooth;p.BottomSurface=Enum.SurfaceType.Smooth
+    p.CanCollide=false;p.Parent=parent;return p
+end
+local function mesh(p,id,texture,scale)
+    local m=Instance.new("SpecialMesh");m.MeshType=Enum.MeshType.FileMesh
+    m.MeshId=id;m.TextureId=texture or"";m.Scale=scale;m.Parent=p
+end
+local function joint(root,p,offset)
+    p.CFrame=root.CFrame*offset
+    local w=Instance.new("Weld");w.Part0=root;w.Part1=p;w.C0=offset;w.Parent=root;return w
+end
+local function sound(p,id,volume,pitch)
+    if not id or id==""then return end
+    local s=Instance.new("Sound");s.SoundId=id;s.Volume=volume or .5;s.Pitch=pitch or 1;s.Parent=p
+    s:Play();Debris:AddItem(s,4)
+end
+local function humanoid(partHit)
+    local node=partHit
+    while node and node~=workspace do
+        local h=node:FindFirstChild("Humanoid")
+        if h then return h,node end
+        node=node.Parent
+    end
+end
+function M.new(config)
+    local C=config.Weapons or{}
+    local self={items={},players={},enabled=C.Enabled~=false,remote=game:GetService("ReplicatedStorage"):FindFirstChild("HexagonVR")}
+    if not self.enabled then return self end
+    local old=workspace:FindFirstChild("HexagonVRWeapons")
+    if old then old:Destroy()end
+    local folder=Instance.new("Model");folder.Name="HexagonVRWeapons";folder.Parent=workspace;self.folder=folder
+    local origin=C.SpawnPosition or Vector3.new(0,0,-5)
+    local function create(kind,position)
+        local model=Instance.new("Model");model.Name=kind;model.Parent=folder
+        local p=part("Handle",Vector3.new(.3,.6,.3),"Dark stone grey",model)
+        p.CFrame=CFrame.new(position);p.CanCollide=true;p.Anchored=false
+        local layout=Geometry[kind]
+        local item={kind=kind,model=model,root=p,spawn=p.CFrame,lastUse=tick(),hitAt={},layout=layout,grip=layout.Grip}
+        item.owner=value("ObjectValue","Owner",nil,model);item.hand=value("StringValue","Hand","",model)
+        item.roundValue=value("IntValue","Rounds",0,model)
+        item.mount=value("ObjectValue","MountedTo",nil,model)
+        item.heldGrip=value("CFrameValue","HeldGrip",item.grip,model)
+        value("StringValue","VRKind",kind,model)
+        if layout.MagazineItem then
+            item.loadingInto=value("ObjectValue","LoadingInto",nil,model)
+            item.loadingStart=value("NumberValue","LoadingStartY",0,model)
+            item.loadingProgress=value("NumberValue","LoadingProgress",0,model)
+        end
+        if kind=="Crowbar"then
+            p.Size=layout.Size
+            p.BrickColor=BrickColor.new("Institutional white")
+            mesh(p,Assets.crowbar_mesh,Assets.crowbar_texture,layout.Scale)
+        elseif layout.Gun then
+            p.Size=layout.Size
+            p.BrickColor=BrickColor.new("Institutional white")
+            mesh(p,Assets[layout.Mesh],Assets[layout.Texture],layout.Scale)
+            local slide=part("Slide",layout.SlideSize,"Institutional white",model)
+            mesh(slide,Assets[layout.SlideMesh],Assets[layout.SlideTexture],layout.Scale)
+            item.slideRest=layout.SlideRest
+            item.slide=joint(p,slide,item.slideRest)
+            item.slidePart=slide
+            item.slideOffset=value("CFrameValue","SlideOffset",item.slideRest,model)
+            item.slideGrab=value("StringValue","SlideHand","",model)
+            item.slideGrabZ=value("NumberValue","SlideGrabZ",0,model)
+            item.supportGrab=value("StringValue","SupportHand","",model)
+            item.supportAnchor=value("Vector3Value","SupportAnchor",Vector3.new(0,0,-1),model)
+            item.removingHand=value("StringValue","RemovingHand","",model)
+            item.removalStart=value("NumberValue","RemovalStartY",0,model)
+            item.shotCount=value("IntValue","ShotCount",0,model)
+            item.insertedModel=value("ObjectValue","InsertedMagazine",nil,model)
+            item.gun=State.new(kind=="Pistol"and(C.MagazineCapacity or layout.Capacity)or layout.Capacity,layout.HoldOpen)
+            item.chamberValue=value("BoolValue","Chambered",false,model)
+            item.lockValue=value("BoolValue","SlideLocked",false,model)
+            item.magOffset=layout.Magazine
+            item.mouth=layout.Mouth
+            item.slidePoint=layout.SlidePoint
+            item.muzzle=layout.Muzzle
+            item.magBlock=0
+        else
+            p.Size=layout.Size
+            p.BrickColor=BrickColor.new(layout.Texture and"Institutional white"or"Dark stone grey")
+            mesh(p,Assets[layout.Mesh],Assets[layout.Texture]or"",layout.Scale)
+            item.rounds=kind=="Magazine"and(C.MagazineCapacity or layout.Capacity)or layout.Capacity;item.roundValue.Value=item.rounds
+        end
+        model.PrimaryPart=p;self.items[#self.items+1]=item
+        return item
+    end
+    self.create=create
+    create("Crowbar",origin+Vector3.new(-2,1.9,0))
+    create("Pistol",origin+Vector3.new(0,1.5,0))
+    for n=1,C.SpareMagazines or 4 do create("Magazine",origin+Vector3.new(1.4+n*.65,1.2,0))end
+    create("AK47",origin+Vector3.new(-5,1.8,-1.2))
+    for n=1,3 do create("AKMagazine",origin+Vector3.new(-8+n*.8,1.2,1.2))end
+
+    function self:setSlide(item,travel)
+        local offset=item.slideRest*CFrame.new(0,0,travel)
+        item.slide.C0=offset;item.slideOffset.Value=offset
+        item.slidePart.CFrame=item.root.CFrame*offset
+    end
+    function self:move(item,cf)
+        item.root.CFrame=cf
+        if item.layout.Wearable then
+            item.lastWorldFrame=cf;item.freeFrame=nil
+            for _,part in ipairs(item.hatParts)do if part~=item.root then part.CFrame=cf*item.hatOffsets[part]end end
+        end
+        if item.gun then
+            item.slidePart.CFrame=cf*item.slideOffset.Value
+            if item.gun.magazine then item.gun.magazine.root.CFrame=cf*item.magOffset end
+        end
+    end
+    function self:anchor(item,anchored)
+        item.root.Anchored=anchored
+        if item.layout.Wearable then for _,part in ipairs(item.hatParts)do part.Anchored=anchored end end
+        if item.slidePart then item.slidePart.Anchored=anchored end
+        if item.gun and item.gun.magazine then item.gun.magazine.root.Anchored=anchored end
+    end
+
+    function self:sync(item)
+        if item.gun then
+            item.insertedModel.Value=item.gun.magazine and item.gun.magazine.model or nil
+            item.chamberValue.Value=item.gun.chamber;item.lockValue.Value=item.gun.slideLocked
+            item.roundValue.Value=item.gun.magazine and item.gun.magazine.rounds or 0
+            if item.gun.magazine then item.gun.magazine.roundValue.Value=item.gun.magazine.rounds end
+        else item.roundValue.Value=item.rounds or 0 end
+    end
+    function self:take(item,player,hand,cf,grip)
+        if item.owner.Value or item.inserted then return false end
+        if item.layout.Wearable then
+            grip=item.root.CFrame:toObjectSpace(cf);self.hats:detach(item)
+        end
+        item.owner.Value=player;item.hand.Value=hand;self:anchor(item,true);item.root.CanCollide=false
+        item.root.Velocity=Vector3.new();item.root.RotVelocity=Vector3.new()
+        item.heldGrip.Value=grip or item.grip
+        if item.gun then item.baseFrame=cf*item.grip:inverse();item.recoilPitch=0;item.recoilYaw=0 end
+        self:move(item,cf*item.heldGrip.Value:inverse());item.previous=nil;item.lastUse=tick()
+        self.players[player].held[hand]={kind="item",item=item,grip=item.heldGrip.Value};return true
+    end
+    function self:release(player,hand,allowEquip)
+        local ps=self.players[player];local held=ps and ps.held[hand]
+        if not held then return end
+        ps.held[hand]=nil
+        if held.kind=="slide"then
+            local gun=held.item
+            if held.opened and gun.gun.slideOpen then State.close(gun.gun);sound(gun.root,Assets.slide_release,.35)end
+            gun.slideHand=nil;gun.slideGrab.Value="";self:setSlide(gun,gun.gun.slideLocked and gun.layout.LockedTravel or 0)
+            self:sync(gun);return
+        elseif held.kind=="remove"then held.item.removingHand.Value="";return
+        elseif held.kind=="support"then held.item.supportGrab.Value="";return end
+        local item=held.item
+        if item.guide then item.guide=nil;item.loadingInto.Value=nil;item.loadingProgress.Value=0 end
+        -- A gun's secondary slide hand must detach before the gun drops.
+        for _,other in ipairs(HANDS)do
+            local h=ps.held[other]
+            if h and h.item==item and h.kind~="item"then self:release(player,other)end
+        end
+        if item.layout.Wearable and allowEquip and self.hats:tryEquip(item,player)then return end
+        if item.layout.Wearable then item.freeFrame=item.root.CFrame end
+        item.owner.Value=nil;item.hand.Value="";self:anchor(item,false);item.root.CanCollide=true
+        local velocity=item.velocity or Vector3.new()
+        item.root.Velocity=velocity.magnitude&gt;35 and velocity.unit*35 or velocity
+        item.root.RotVelocity=Vector3.new();item.previous=nil;item.lastUse=tick()
+        pcall(function()item.root:SetNetworkOwner(nil)end)
+        if item.gun and item.gun.magazine then
+            local mag=item.gun.magazine
+            mag.root.Anchored=false;mag.root.CanCollide=false
+        end
+    end
+    function self:dropPlayer(player)
+        if not self.players[player]then return end
+        for _,hand in ipairs(HANDS)do self:release(player,hand)end
+        self.players[player]=nil
+    end
+    function self:grab(player,hand,cf,worldHands)
+        local ps=self.players[player]
+        -- Prefer the other hand's slide or magazine over a nearby loose pickup.
+        local other=hand=="left"and"right"or"left"
+        local held=ps.held[other]
+        if held and held.kind=="item"and held.item.gun then
+            local gun=held.item;local point=gun.root.CFrame:pointToObjectSpace(cf.p)
+            local slidePoint=gun.slidePart.CFrame:pointToObjectSpace(cf.p)
+            local half=gun.layout.SlideSize/2
+            local gap=Vector3.new(math.max(0,math.abs(slidePoint.x)-half.x),math.max(0,math.abs(slidePoint.y)-half.y),math.max(0,math.abs(slidePoint.z)-half.z)).magnitude
+            local function support()
+                local primary=worldHands[other]
+                if not primary or(cf.p-primary.p).magnitude&lt;.45 then return false end
+                ps.held[hand]={kind="support",item=gun};gun.supportAnchor.Value=primary:pointToObjectSpace(cf.p)
+                gun.supportGrab.Value=hand;return true
+            end
+            if gun.layout.Foregrip and math.abs(point.x)&lt;.65 and point.y&gt;-.65 and point.y&lt;.3 and point.z&gt; -1.5 and point.z&lt;-.2 then
+                if support()then return end
+            elseif gap&lt;gun.layout.SlideGrabRadius and point.y&gt;gun.layout.RemovePoint.y+.5 then
+                ps.held[hand]={kind="slide",item=gun,start=point.z,opened=false}
+                gun.slideHand=hand;gun.slideGrab.Value=hand;gun.slideGrabZ.Value=point.z;return
+            elseif gun.gun.magazine and(point-gun.layout.RemovePoint).magnitude&lt;.7 then
+                ps.held[hand]={kind="remove",item=gun,start=point.y}
+                gun.removingHand.Value=hand;gun.removalStart.Value=point.y;return
+            elseif gun.layout.Foregrip and(point-gun.layout.Foregrip).magnitude&lt;.8 then
+                if support()then return end
+            end
+        end
+        local nearest,score=nil,math.huge
+        for _,item in ipairs(self.items)do
+            if item.model.Parent and not item.owner.Value and not item.inserted then
+                local localPoint=item.root.CFrame:pointToObjectSpace(cf.p)
+                local half=item.root.Size/2
+                local closest=Vector3.new(math.max(-half.x,math.min(half.x,localPoint.x)),math.max(-half.y,math.min(half.y,localPoint.y)),math.max(-half.z,math.min(half.z,localPoint.z)))
+                local surface=item.root.CFrame:pointToWorldSpace(closest)
+                local nearby=(surface-cf.p).magnitude
+                local target=(item.root.CFrame*item.grip).p
+                local offset=target-cf.p;local distance=offset.magnitude
+                local radius=item.layout.Wearable and(C.HatGrabRadius or .65)or(C.GrabRadius or 2.5)
+                local pointed=not item.layout.Wearable and distance&gt;.01 and distance&lt;=(C.DistanceGrabRange or 6)and cf.lookVector:Dot(offset.unit)&gt;.94
+                if nearby&lt;=radius or pointed then
+                    local blocked=self:trace(cf.p,target-cf.p,ps.character)
+                    if blocked and item.layout.Wearable and item.wearerCharacter and blocked:IsDescendantOf(item.wearerCharacter)then blocked=nil end
+                    local rank=nearby&lt;=radius and nearby or distance+3
+                    if not blocked and rank&lt;score then nearest=item;score=rank end
+                end
+            end
+        end
+        if nearest then self:take(nearest,player,hand,cf)end
+    end
+    function self:trace(origin,delta,character)
+        if delta.magnitude&lt;.001 then return nil,origin end
+        return workspace:FindPartOnRayWithIgnoreList(Ray.new(origin,delta),{folder,character,workspace.CurrentCamera},false,true)
+    end
+    function self:setRecoil(item,recoil,defer)
+        if not item.gun then return end
+        local pitch,yaw=0,0
+        if type(recoil)=="table"then
+            if type(recoil[1])=="number"and recoil[1]==recoil[1]then pitch=math.max(0,math.min(12,recoil[1]))end
+            if type(recoil[2])=="number"and recoil[2]==recoil[2]then yaw=math.max(-4,math.min(4,recoil[2]))end
+        end
+        item.recoilPitch=pitch;item.recoilYaw=yaw
+        if item.baseFrame and not defer then self:move(item,Geometry.applyRecoil(item.layout,item.baseFrame,pitch,yaw))end
+    end
+    function self:trigger(player,session,hand,pressed,recoil)
+        local ps=self.players[player]
+        if not ps or(hand~="left"and hand~="right")or type(pressed)~="boolean"then return end
+        ps.triggers=ps.triggers or{}
+        local previous=ps.triggers[hand];ps.triggers[hand]=pressed
+        if not pressed or previous or ps.blocked or tick()-ps.lastAt&gt;.2 then return end
+        local held=ps.held[hand]
+        if held and held.kind=="item"and held.item.gun and recoil then self:setRecoil(held.item,recoil)end
+        if held and held.kind=="item"and held.item.gun and session.humanoid and session.humanoid.Health&lt;=0 then return end
+        if held and held.kind=="item"and held.item.gun then self:shot(held.item,player,session.character)end
+    end
+    function self:shot(item,player,character)
+        if item.slideHand then return end
+        local fired,reason=State.fire(item.gun,tick(),item.kind=="Pistol"and(C.FireInterval or item.layout.Interval)or item.layout.Interval)
+        self:sync(item)
+        if not fired then return false,reason end
+        local cf=item.root.CFrame
+        local muzzle=cf:pointToWorldSpace(item.muzzle)
+        -- Old-engine rays skip a part containing their start point. Trace from
+        -- the avatar's head so a grip/barrel inside a wall cannot shoot past it.
+        local head=character:FindFirstChild("Head")
+        local origin=head and head.Position or cf:pointToWorldSpace(item.grip.p)
+        local obstruction,obstructedAt,obstructedNormal=self:trace(origin,muzzle-origin,character)
+        local hit,position,normal=obstruction,obstructedAt,obstructedNormal
+        if not obstruction then hit,position,normal=self:trace(muzzle,cf.lookVector*(C.Range or 300),character)end
+        if hit then local h,target=humanoid(hit);if h and target~=character then h:TakeDamage(C.GunDamage or 25)end end
+        item.shotCount.Value=item.shotCount.Value+1
+        if self.remote then self.remote:FireAllClients("weaponShot",item.model,{count=item.shotCount.Value,frame=cf,position=position,normal=normal,hit=hit,ammo=item.roundValue.Value,chamber=item.gun.chamber})end
+        self:setSlide(item,item.layout.SlideTravel)
+        delay(.07,function()if item.model.Parent and not item.slideHand then self:setSlide(item,item.gun.slideLocked and item.layout.LockedTravel or 0)end end)
+        return true
+    end
+    function self:swing(item,character,dt)
+        local cf=item.root.CFrame
+        local bottom=cf:pointToWorldSpace(item.layout.Bottom)
+        local tip=cf:pointToWorldSpace(item.layout.Tip)
+        local previous=item.previous;item.previous={bottom=bottom,tip=tip,cf=cf}
+        if not previous or dt&lt;=0 or dt&gt;.18 then return end
+        local travel=(tip-previous.tip).magnitude
+        local speed=travel/dt
+        if speed&lt;(C.SwingSpeed or 5)or speed&gt;(C.MaxHandSpeed or 65)then return end
+        if tick()-(item.swingAt or 0)&gt;.4 then item.swingAt=tick();sound(item.root,Assets.crowbar_swing,.3)end
+        -- Sweep the shaft at several points, with wall checks before damage.
+        local steps=math.min(12,math.max(1,math.ceil(travel/.3)))
+        for n=0,steps do
+            local t=n/steps;local a=previous.bottom+(bottom-previous.bottom)*t;local b=previous.tip+(tip-previous.tip)*t
+            local head=character:FindFirstChild("Head")
+            local wall=head and self:trace(head.Position,a-head.Position,character)
+            local hit
+            if not wall or humanoid(wall)then hit=self:trace(a,b-a,character)end
+            if hit then
+                local h,target=humanoid(hit)
+                if h and target~=character and tick()-(item.hitAt[h]or-math.huge)&gt;(C.HitCooldown or .5)then
+                    item.hitAt[h]=tick();h:TakeDamage(C.CrowbarDamage or 20);sound(item.root,Assets.crowbar_hit,.45)
+                end
+            end
+        end
+    end
+    function self:loadMagazine(player,hand,held,other,cf,dt)
+        local mag=held.item;local ps=self.players[player]
+        local gun=other and other.kind=="item"and other.item.gun and other.item or nil
+        local compatible=gun and gun.layout.MagazineKind==mag.kind and not gun.gun.magazine and tick()&gt;gun.magBlock
+        if mag.guide and(not compatible or mag.guide.gun~=gun)then
+            mag.guide=nil;mag.loadingInto.Value=nil;mag.loadingProgress.Value=0
+        end
+        if not compatible or not cf then return end
+        local point=gun.root.CFrame:pointToObjectSpace(cf.p)
+        local up=mag.root.CFrame:vectorToWorldSpace(Vector3.new(0,1,0)):Dot(gun.root.CFrame:vectorToWorldSpace(Vector3.new(0,1,0)))
+        if not mag.guide then
+            if Geometry.magazineEntry(gun.layout,mag.layout,gun.root.CFrame,mag.root.CFrame)then
+                mag.guide={gun=gun,start=point,smooth=gun.root.CFrame:toObjectSpace(mag.root.CFrame),began=tick()}
+                mag.loadingStart.Value=point.y;mag.loadingProgress.Value=0;mag.loadingInto.Value=gun.model
+            end
+        end
+        local guide=mag.guide
+        if not guide then return end
+        local travel=point.y-guide.start.y
+        if travel&lt;-.22 or up&lt;.3 or Vector3.new(point.x-guide.start.x,0,point.z-guide.start.z).magnitude&gt;.75 then
+            mag.guide=nil;mag.loadingInto.Value=nil;mag.loadingProgress.Value=0;return
+        end
+        local progress=math.max(0,math.min(1,travel/gun.layout.InsertDepth))
+        local freeFrame=gun.root.CFrame:toObjectSpace(cf*held.grip:inverse())
+        local target=Geometry.guidedMagazineFrame(gun.layout,progress,freeFrame)
+        guide.smooth=guide.smooth:lerp(target,1-math.exp(-math.max(.001,dt)*35))
+        mag.root.CFrame=gun.root.CFrame*guide.smooth;mag.loadingProgress.Value=progress
+        local gap=(mag.root.Position-(gun.root.CFrame*gun.magOffset).p).magnitude
+        if progress&gt;=.98 and gap&lt;.09 and tick()-guide.began&gt;.06 then
+            ps.held[hand]=nil;ps.requireRelease[hand]=true
+            mag.guide=nil;mag.loadingInto.Value=nil;mag.loadingProgress.Value=1
+            mag.owner.Value=nil;mag.hand.Value="";mag.inserted=gun;mag.mount.Value=gun.model
+            mag.root.Anchored=true;mag.root.CanCollide=false;mag.root.CFrame=gun.root.CFrame*gun.magOffset
+            mag.weld=joint(gun.root,mag.root,gun.magOffset)
+            State.insert(gun.gun,mag);self:sync(gun);sound(gun.root,Assets.magazine_in,.35)
+        end
+    end
+    function self:update(player,session,worldHands,mask,blocked,recoil,releases)
+        if not self.enabled then return end
+        local ps=self.players[player]
+        if not ps then ps={held={},requireRelease={},lastMask=mask,lastAt=tick(),lastRoot=session.root.Position};self.players[player]=ps end
+        ps.character=session.character
+        ps.session=session;ps.blocked=blocked
+        local now=tick();local dt=now-ps.lastAt;ps.lastAt=now
+        if(session.root.Position-ps.lastRoot).magnitude&gt;8 then self:dropPlayer(player);return end
+        ps.lastRoot=session.root.Position
+        if blocked then
+            for _,hand in ipairs(HANDS)do self:release(player,hand)end
+            ps.lastMask=mask;return
+        end
+        for _,hand in ipairs(HANDS)do
+            local cf=worldHands[hand];local held=ps.held[hand]
+            if not cf or not down(mask,GRIP[hand])then
+                if cf and held and held.kind=="item"then
+                    local item=held.item;local target=cf*held.grip:inverse();local release=type(releases)=="table"and releases[hand]or nil
+                    if release and release.model==item.model and(release.frame.p-target.p).magnitude&lt;2.5 then
+                        target=release.frame;item.velocity=release.velocity
+                    else item.velocity=dt&gt;0 and(target.p-item.root.Position)/dt or Vector3.new()end
+                    self:move(item,target)
+                end
+                self:release(player,hand,cf~=nil and not down(mask,GRIP[hand]));ps.requireRelease[hand]=nil
+            elseif not held and not ps.requireRelease[hand]then self:grab(player,hand,cf,worldHands)end
+        end
+        -- First move primary objects. Secondary-hand interactions use their new frames.
+        for _,hand in ipairs(HANDS)do
+            local held=ps.held[hand];local cf=worldHands[hand]
+            if held and held.kind=="item"and cf then
+                local item=held.item;local other=ps.held[hand=="left"and"right"or"left"]
+                local support=other and other.kind=="support"and worldHands[hand=="left"and"right"or"left"]or nil
+                local target
+                if item.gun then
+                    target=Geometry.heldFrame(item.layout,cf,support,item.supportAnchor.Value)
+                    item.baseFrame=target
+                    self:setRecoil(item,type(recoil)=="table"and recoil[hand]or nil,true)
+                    target=Geometry.applyRecoil(item.layout,target,item.recoilPitch or 0,item.recoilYaw or 0)
+                else target=cf*held.grip:inverse()end
+                item.velocity=dt&gt;0 and(target.p-item.root.Position)/dt or Vector3.new()
+                self:move(item,target);item.lastUse=now
+                if item.kind=="Crowbar"then self:swing(item,session.character,dt)end
+            end
+        end
+        for _,hand in ipairs(HANDS)do
+            local held=ps.held[hand];local cf=worldHands[hand]
+            if held and cf and held.kind=="slide"then
+                local item=held.item;local point=item.root.CFrame:pointToObjectSpace(cf.p)
+                local pull=math.max(0,math.min(item.layout.SlideTravel,(point.z-held.start)*item.layout.RackGain))
+                if pull&gt;=item.layout.RackTravel and not held.opened then
+                    held.opened=true;State.open(item.gun);sound(item.root,Assets.slide_pull,.35)
+                end
+                self:setSlide(item,pull)
+                if held.opened and pull&lt;.025 then
+                    self:release(player,hand);ps.requireRelease[hand]=true
+                end
+            elseif held and cf and held.kind=="remove"then
+                local gun=held.item;local point=gun.root.CFrame:pointToObjectSpace(cf.p)
+                local travel=math.max(0,held.start-point.y)
+                if gun.gun.magazine then gun.gun.magazine.root.CFrame=gun.root.CFrame*Geometry.magazineFrame(gun.layout,1-travel/gun.layout.InsertDepth)end
+                if travel&gt;=gun.layout.InsertDepth*.95 then
+                    local mag=State.remove(gun.gun)
+                    ps.held[hand]=nil;gun.removingHand.Value=""
+                    if mag then
+                        mag.inserted=nil;mag.mount.Value=nil;if mag.weld then mag.weld:Destroy();mag.weld=nil end
+                        mag.root.Anchored=true;gun.magBlock=now+.6
+                        local grip=mag.root.CFrame:toObjectSpace(cf)
+                        self:take(mag,player,hand,cf,grip);self:sync(gun);sound(gun.root,Assets.magazine_out,.3)
+                    end
+                end
+            end
+        end
+        for _,hand in ipairs(HANDS)do
+            local held=ps.held[hand];local other=ps.held[hand=="left"and"right"or"left"]
+            if held and held.kind=="item"and held.item.layout.MagazineItem then
+                self:loadMagazine(player,hand,held,other,worldHands[hand],dt)
+            end
+            held=ps.held[hand]
+            self:trigger(player,session,hand,down(mask,TRIGGER[hand]))
+        end
+        ps.lastMask=mask
+    end
+    self.hats=require(script.Parent.VRHats).new(self,C)
+    function self:registerHat(hat,wearer)return self.hats:register(hat,wearer)end
+    Run.Stepped:connect(function()
+        for player,ps in pairs(self.players)do
+            if not ps.blocked and tick()-ps.lastAt&lt;.18 and ps.session then
+                for _,hand in ipairs(HANDS)do
+                    local held=ps.held[hand]
+                    if held and held.kind=="item"and held.item.gun and held.item.layout.Automatic and ps.triggers and ps.triggers[hand]then self:shot(held.item,player,ps.session.character)end
+                end
+            end
+        end
+        for index=#self.items,1,-1 do
+            local item=self.items[index]
+            if item.layout.Wearable and not item.model.Parent then
+                self.hats.byHat[item.model]=nil
+                for _,ps in pairs(self.players)do for _,hand in ipairs(HANDS)do if ps.held[hand]and ps.held[hand].item==item then ps.held[hand]=nil end end end
+                table.remove(self.items,index)
+            elseif item.layout.Wearable then self.hats:step(item)
+            elseif not item.owner.Value and not item.inserted and(item.root.Position.y&lt;-100 or tick()-item.lastUse&gt;(C.RespawnSeconds or 90))then
+                if item.gun then
+                    local mag=State.remove(item.gun)
+                    if mag then mag.inserted=nil;mag.mount.Value=nil;if mag.weld then mag.weld:Destroy();mag.weld=nil end;mag.root.Anchored=false;mag.root.CanCollide=true;mag.root.CFrame=mag.spawn end
+                    item.gun=State.new(item.layout.Capacity,item.layout.HoldOpen);self:setSlide(item,0)
+                elseif item.layout.MagazineItem then item.rounds=item.layout.Capacity end
+                self:anchor(item,false);self:move(item,item.spawn);item.root.Velocity=Vector3.new();item.root.RotVelocity=Vector3.new();item.lastUse=tick();self:sync(item)
+            end
+        end
+    end)
+    return self
+end
+return M
+</ProtectedString></Properties></Item><Item class="ModuleScript" referent="RBXcb066ceeb75f46f0b58943980c0e14f1"><Properties><string name="Name">VRWeaponState</string><ProtectedString name="Source">-- Engine-independent firearm state. Lua 5.1; all transitions run on the server.
+local M={}
+function M.new(capacity,holdOpen)
+    return {capacity=capacity or 12,holdOpen=holdOpen~=false,magazine=nil,chamber=false,slideOpen=false,slideLocked=false,lastShot=-math.huge}
+end
+function M.insert(gun,magazine)
+    if gun.magazine or not magazine or type(magazine.rounds)~="number"then return false end
+    gun.magazine=magazine
+    return true
+end
+function M.remove(gun)
+    local magazine=gun.magazine;gun.magazine=nil;return magazine
+end
+function M.open(gun)
+    if gun.slideOpen then return false end
+    local ejected=gun.chamber;gun.chamber=false;gun.slideOpen=true
+    return ejected
+end
+function M.close(gun)
+    if not gun.slideOpen then return false end
+    gun.slideOpen=false
+    if gun.magazine and gun.magazine.rounds&gt;0 then
+        gun.magazine.rounds=gun.magazine.rounds-1;gun.chamber=true;gun.slideLocked=false
+    else gun.slideLocked=gun.magazine~=nil and gun.holdOpen end
+    return gun.chamber
+end
+function M.fire(gun,now,interval)
+    if now-gun.lastShot&lt;(interval or .18)then return false,"cooldown"end
+    if gun.slideOpen or gun.slideLocked then return false,"slide"end
+    gun.lastShot=now
+    if not gun.chamber then return false,"empty"end
+    gun.chamber=false
+    if gun.magazine and gun.magazine.rounds&gt;0 then
+        gun.magazine.rounds=gun.magazine.rounds-1;gun.chamber=true
+    elseif gun.magazine then gun.slideLocked=gun.holdOpen end
+    return true
+end
+return M
+</ProtectedString></Properties></Item><Item class="ModuleScript" referent="RBX87249f4c4ad1410c9fe01f0c4a2f855a"><Properties><string name="Name">VRWeaponAssets</string><ProtectedString name="Source">-- Public Roblox assets, verified through anonymous Hexagon delivery.
+local assets={
+    ak_bolt_mesh="https://www.hexagon.pw/asset/?id=117894152668366",
+    ak_fire="https://www.hexagon.pw/asset/?id=3742927611",
+    ak_magazine_mesh="https://www.hexagon.pw/asset/?id=79624202898032",
+    ak_mesh="https://www.hexagon.pw/asset/?id=114208852722175",
+    ak_texture="https://www.hexagon.pw/asset/?id=78005805871988",
+    casing_bounce="https://www.hexagon.pw/asset/?id=325025387",
+    casing_texture="https://www.hexagon.pw/asset/?id=2794275376",
+    crowbar_hit="https://www.hexagon.pw/asset/?id=21433696",
+    crowbar_mesh="https://www.hexagon.pw/asset/?id=106907737955498",
+    crowbar_swing="https://www.hexagon.pw/asset/?id=21433711",
+    crowbar_texture="https://www.hexagon.pw/asset/?id=21426286",
+    dry_fire="https://www.hexagon.pw/asset/?id=537744814",
+    fire="https://www.hexagon.pw/asset/?id=3806566911",
+    magazine_in="https://www.hexagon.pw/asset/?id=1197340682",
+    magazine_mesh="https://www.hexagon.pw/asset/?id=80958271393580",
+    magazine_out="https://www.hexagon.pw/asset/?id=888773635",
+    pistol_casing_mesh="https://www.hexagon.pw/asset/?id=109894682585548",
+    pistol_mesh="https://www.hexagon.pw/asset/?id=89107029148183",
+    pistol_texture="https://www.hexagon.pw/asset/?id=2492931263",
+    reload="https://www.hexagon.pw/asset/?id=3821789416",
+    rifle_casing_mesh="https://www.hexagon.pw/asset/?id=97009576578556",
+    slide_mesh="https://www.hexagon.pw/asset/?id=72960610154574",
+    slide_pull="https://www.hexagon.pw/asset/?id=3719415248",
+    slide_release="https://www.hexagon.pw/asset/?id=265294983",
+    slide_texture="https://www.hexagon.pw/asset/?id=2492931686",
+}
+local offline=game:GetService("ReplicatedStorage"):FindFirstChild("HexagonVROfflineAssets")
+if offline and offline.Value then
+    local files={
+        ak_bolt_mesh="ak_bolt_mesh.mesh",
+        ak_fire="ak_fire.mp3",
+        ak_magazine_mesh="ak_magazine_mesh.mesh",
+        ak_mesh="ak_mesh.mesh",
+        ak_texture="ak_texture.png",
+        casing_bounce="casing_bounce.mp3",
+        casing_texture="casing_texture.png",
+        crowbar_hit="crowbar_hit.mp3",
+        crowbar_mesh="crowbar_mesh.mesh",
+        crowbar_swing="crowbar_swing.mp3",
+        crowbar_texture="crowbar_texture.png",
+        dry_fire="dry_fire.mp3",
+        fire="fire.mp3",
+        magazine_in="magazine_in.mp3",
+        magazine_mesh="magazine_mesh.mesh",
+        magazine_out="magazine_out.mp3",
+        pistol_casing_mesh="pistol_casing_mesh.mesh",
+        pistol_mesh="pistol_mesh.mesh",
+        pistol_texture="pistol_texture.png",
+        reload="reload.mp3",
+        rifle_casing_mesh="rifle_casing_mesh.mesh",
+        slide_mesh="slide_mesh.mesh",
+        slide_pull="slide_pull.mp3",
+        slide_release="slide_release.mp3",
+        slide_texture="slide_texture.png",
+    }
+    for key,file in pairs(files)do assets[key]="rbxasset://HexagonVRWeapons/"..file end
+end
+return assets
+</ProtectedString></Properties></Item><Item class="ModuleScript" referent="RBX010cd36d9f914613992324510a45e4b7"><Properties><string name="Name">VRHats</string><ProtectedString name="Source">-- Shared wearable instances: detach, hold at the touched point, and re-equip.
+local M={}
+local Players=game:GetService("Players")
+local Geometry=require(game:GetService("ReplicatedStorage"):WaitForChild("HexagonVRWeaponGeometry"))
+local function value(kind,name,initial,parent)
+    local node=Instance.new(kind);node.Name=name;node.Value=initial;node.Parent=parent;return node
+end
+local function walk(node,fn)
+    for _,child in ipairs(node:GetChildren())do fn(child);walk(child,fn)end
+end
+local function isHat(node)return node:IsA("Hat")or node:IsA("Accessory")end
+local function inside(part,hat)return part and(part==hat or part:IsDescendantOf(hat))end
+local function removeTouchPickup(item)
+    walk(item.model,function(node)if node:IsA("TouchTransmitter")then node:Destroy()end end)
+end
+local function detachJoints(item)
+    local function check(joint)
+        if joint:IsA("JointInstance")then
+            local a,b=inside(joint.Part0,item.model),inside(joint.Part1,item.model)
+            if a~=b and(a or b)then joint.Part0=nil;joint.Part1=nil;joint:Destroy()end
+        end
+    end
+    walk(item.model,check)
+    -- Native hats can leave an attachment in a previous wearer's character.
+    for _,player in ipairs(Players:GetPlayers())do if player.Character then walk(player.Character,check)end end
+end
+function M.new(weapons,config)
+    local self={byHat={}}
+    function self:register(hat,wearer)
+        if self.byHat[hat]then return self.byHat[hat]end
+        if not isHat(hat)then return end
+        local root=hat:FindFirstChild("Handle");if not root or not root:IsA("BasePart")then return end
+        local character=wearer and wearer.Character or hat.Parent
+        local head=character and character:FindFirstChild("Head")
+        local offset=head and head.CFrame:toObjectSpace(root.CFrame)or CFrame.new(0,.5,0)
+        local item={kind="Hat",model=hat,root=root,layout=Geometry.Hat,grip=CFrame.new(),spawn=root.CFrame,lastUse=tick(),hitAt={},hatParts={},hatOffsets={},wearerCharacter=head and character or nil,headOffset=offset}
+        item.owner=value("ObjectValue","Owner",nil,hat);item.hand=value("StringValue","Hand","",hat)
+        item.heldGrip=value("CFrameValue","HeldGrip",CFrame.new(),hat)
+        item.roundValue=value("IntValue","Rounds",0,hat);item.mount=value("ObjectValue","MountedTo",nil,hat)
+        item.wearer=value("ObjectValue","Wearer",wearer,hat)
+        value("StringValue","VRKind","Hat",hat);value("CFrameValue","HeadOffset",offset,hat)
+        walk(hat,function(part)
+            if part:IsA("BasePart")then
+                item.hatParts[#item.hatParts+1]=part;item.hatOffsets[part]=root.CFrame:toObjectSpace(part.CFrame)
+                value("CFrameValue","VRHatOffset",item.hatOffsets[part],part)
+            end
+        end)
+        self.byHat[hat]=item;weapons.items[#weapons.items+1]=item
+        if not head then hat.Parent=weapons.folder;root.CanCollide=true end
+        return item
+    end
+    function self:detach(item)
+        detachJoints(item);item.wearer.Value=nil;item.wearerCharacter=nil;item.model.Parent=weapons.folder
+        removeTouchPickup(item)
+        for _,part in ipairs(item.hatParts)do part.CanCollide=false end
+    end
+    function self:attach(item,player)
+        local character=player.Character;local head=character and character:FindFirstChild("Head")
+        local humanoid=character and character:FindFirstChild("Humanoid")
+        if not head or not humanoid or humanoid.Health&lt;=0 then return false end
+        detachJoints(item)
+        local frame=head.CFrame*item.headOffset
+        weapons:move(item,frame)
+        if item.model:IsA("Hat")then item.model.AttachmentPoint=item.headOffset:inverse()*CFrame.new(0,head.Size.y/2,0)end
+        item.owner.Value=nil;item.hand.Value="";item.wearer.Value=player;item.wearerCharacter=character
+        item.model.Parent=character
+        detachJoints(item)
+        weapons:move(item,frame)
+        local joint=Instance.new("Weld");joint.Name="HexagonVRHatWeld";joint.Part0=head;joint.Part1=item.root;joint.C0=item.headOffset;joint.C1=CFrame.new();joint.Parent=item.root
+        weapons:anchor(item,false)
+        for _,part in ipairs(item.hatParts)do part.CanCollide=false;part.Velocity=Vector3.new();part.RotVelocity=Vector3.new()end
+        item.lastUse=tick();item.previous=nil;return true
+    end
+    function self:tryEquip(item,actor)
+        local anchor=(item.root.CFrame*item.headOffset:inverse()).p
+        local best,distance=nil,config.HatEquipRadius or 1.1
+        for _,player in ipairs(Players:GetPlayers())do
+            local character=player.Character;local head=character and character:FindFirstChild("Head");local humanoid=character and character:FindFirstChild("Humanoid")
+            if head and humanoid and humanoid.Health&gt;0 then
+                local gap=(head.Position-anchor).magnitude
+                if gap&lt;distance then
+                    local hit=weapons:trace(anchor,head.Position-anchor,actor.Character)
+                    if not hit or hit:IsDescendantOf(character)then best=player;distance=gap end
+                end
+            end
+        end
+        return best and self:attach(item,best)or false
+    end
+    function self:step(item)
+        if item.wearerCharacter and item.model.Parent==item.wearerCharacter then return end
+        if item.model.Parent~=weapons.folder then
+            -- The 2015 engine also auto-equips loose Hats on body contact.
+            -- Only an explicit grip release near a head may equip a VR hat.
+            local frame=item.freeFrame or item.lastWorldFrame or item.root.CFrame
+            self:detach(item);weapons:anchor(item,item.owner.Value~=nil);weapons:move(item,frame)
+            item.root.CanCollide=item.owner.Value==nil
+            item.root.Velocity=item.velocity or Vector3.new()
+        end
+        removeTouchPickup(item)
+        if not item.owner.Value then item.freeFrame=item.root.CFrame end
+        if not item.owner.Value and item.root.Position.y&lt;-100 then
+            self:detach(item);weapons:anchor(item,false);weapons:move(item,CFrame.new((config.SpawnPosition or Vector3.new(0,0,-5))+Vector3.new(0,3,0)))
+            item.root.CanCollide=true;item.root.Velocity=Vector3.new();item.root.RotVelocity=Vector3.new()
+        end
+    end
+    local function character(player,char)
+        local function added(node)
+            if isHat(node)then spawn(function()wait(.1);if node.Parent==char then self:register(node,player)end end)end
+        end
+        for _,node in ipairs(char:GetChildren())do added(node)end
+        char.ChildAdded:connect(added)
+        spawn(function()
+            local humanoid=char:FindFirstChild("Humanoid")or char:WaitForChild("Humanoid")
+            humanoid.Died:connect(function()
+                for _,item in pairs(self.byHat)do
+                    if item.wearerCharacter==char and item.model.Parent==char then
+                        self:detach(item);weapons:anchor(item,false);item.root.CanCollide=true
+                    end
+                end
+            end)
+        end)
+    end
+    local function playerAdded(player)
+        player.CharacterAdded:connect(function(char)character(player,char)end)
+        if player.Character then character(player,player.Character)end
+    end
+    Players.PlayerAdded:connect(playerAdded)
+    for _,player in ipairs(Players:GetPlayers())do playerAdded(player)end
+    workspace.ChildAdded:connect(function(node)if isHat(node)then self:register(node,nil)end end)
+    for _,node in ipairs(workspace:GetChildren())do if isHat(node)then self:register(node,nil)end end
+    return self
+end
+return M
+</ProtectedString></Properties></Item><Item class="ModuleScript" referent="RBXaef4277affa248d4995255231307312d"><Properties><string name="Name">VRConfig</string><ProtectedString name="Source">return {
+    AllowedUserIds = {}, -- Empty allows every player with a local VR helper.
+    AutoEnable = false,
+    TrackingTimeout = 2,
+    WalkSpeed = 12,
+    MaxReach = 12,
+    ArmRotationDegrees = 90,
+    Weapons = {
+        Enabled = true,
+        SpawnPosition = Vector3.new(0,0,-5),
+        GrabRadius = 2.5,
+        DistanceGrabRange = 6,
+        HatGrabRadius = .65,
+        HatEquipRadius = 1.1,
+        MagazineCapacity = 12,
+        SpareMagazines = 4,
+        CrowbarDamage = 20,
+        SwingSpeed = 5,
+        MaxHandSpeed = 65,
+        HitCooldown = .5,
+        GunDamage = 25,
+        FireInterval = .18,
+        Range = 300,
+        RespawnSeconds = 90,
+    },
+}
+</ProtectedString></Properties></Item><Item class="ModuleScript" referent="RBXe0257882da114dacbdb72216ebc91858"><Properties><string name="Name">VRChat</string><ProtectedString name="Source">-- Public chat submitted by the game itself. No desktop keyboard input.
+local Chat={}
+function Chat.start(remote,config,isActive,command)
+    local Players=game:GetService("Players")
+    local Run=game:GetService("RunService")
+    local Service=game:GetService("Chat")
+    local jobs,last,completed={},{},{}
+    local function reply(player,id,ok,text)
+        completed[player]={id=id,ok=ok,text=text}
+        if player.Parent then remote:FireClient(player,"chatResult",id,ok,text)end
+    end
+    local function alive(player,job)
+        return player.Parent and jobs[player]==job and not job.expired
+    end
+    local function filtered(text,recipient)
+        local ok,value=pcall(function()return Service:FilterStringForPlayerAsync(text,recipient)end)
+        return ok and type(value)=="string"and #value&gt;0 and #value&lt;=2048 and value or nil
+    end
+    remote.OnServerEvent:connect(function(player,action,data)
+        if action~="chat"then return end
+        if type(data)~="table"or type(data.id)~="number"or data.id~=math.floor(data.id)or data.id&lt;1 or data.id&gt;999999 then return end
+        local id=data.id
+        if completed[player]and completed[player].id==id then
+            local row=completed[player];remote:FireClient(player,"chatResult",id,row.ok,row.text);return
+        end
+        if jobs[player]then
+            if jobs[player].id~=id then reply(player,id,false,"A message is still being sent.")end
+            return
+        end
+        if type(data.text)~="string"or #data.text&gt;140 or data.text:find("%c")then reply(player,id,false,"Enter a message of up to 140 characters.");return end
+        local text=data.text:match("^%s*(.-)%s*$")
+        if text==""then reply(player,id,false,"Enter a message first.");return end
+        if last[player]and tick()-last[player]&lt;(config.ChatInterval or 1.5)then reply(player,id,false,"Please wait a moment before sending again.");return end
+        local lower=string.lower(text)
+        if lower=="/vr"or lower=="/unvr"then
+            last[player]=tick();command(player,lower);reply(player,id,true,"Done.");return
+        end
+        if text:sub(1,1)=="/"then reply(player,id,false,"This keyboard uses public chat. Use normal chat for other commands.");return end
+        if not isActive(player)then reply(player,id,false,"Turn VR on before using this keyboard.");return end
+        last[player]=tick()
+        local job={id=id,deadline=tick()+(config.ChatTimeout or 12),expired=false,replied=false}
+        jobs[player]=job
+        spawn(function()
+            -- Confirm the sender's own filtered copy before delivering anywhere.
+            local own=filtered(text,player)
+            if not alive(player,job)then if jobs[player]==job then jobs[player]=nil end;return end
+            if not own then jobs[player]=nil;reply(player,id,false,"Chat is unavailable right now. Your text is kept.");return end
+            remote:FireClient(player,"chatDisplay",player,own)
+            job.replied=true;reply(player,id,true,"Sent.")
+            local recipients={}
+            for _,recipient in ipairs(Players:GetPlayers())do if recipient~=player then recipients[#recipients+1]=recipient end end
+            job.remaining=#recipients
+            if job.remaining==0 then jobs[player]=nil;return end
+            for _,recipient in ipairs(recipients)do spawn(function()
+                local value=filtered(text,recipient)
+                if alive(player,job)and recipient.Parent and value then remote:FireClient(recipient,"chatDisplay",player,value)end
+                job.remaining=job.remaining-1
+                if job.remaining==0 and jobs[player]==job then jobs[player]=nil end
+            end)end
+        end)
+    end)
+    Run.Stepped:connect(function()
+        for player,job in pairs(jobs)do
+            if not job.expired and tick()&gt;job.deadline then
+                job.expired=true;jobs[player]=nil
+                if not job.replied then reply(player,job.id,false,"Chat took too long. Your text is kept.")end
+            end
+        end
+    end)
+    Players.PlayerRemoving:connect(function(player)jobs[player]=nil;last[player]=nil;completed[player]=nil end)
+end
+return Chat
+</ProtectedString></Properties></Item><Item class="Script" referent="RBXcee21ef1a3924ae59d36a1f39f2eeaff"><Properties><string name="Name">HexagonVRServer</string><ProtectedString name="Source">-- Lua 5.1 / Hexagon 0.217. Each player owns an independent R6 VR session.
+local Players=game:GetService("Players")
+local RS=game:GetService("ReplicatedStorage")
+local Run=game:GetService("RunService")
+local C=require(script.Parent.VRConfig)
+local bodyModule=RS:FindFirstChild("HexagonVRBody")
+local Body=bodyModule and require(bodyModule)or nil
+local remote=RS:FindFirstChild("HexagonVR")or Instance.new("RemoteEvent")
+remote.Name="HexagonVR";remote.Parent=RS
+local sessions,requested={},{}
+local weapons=C.Weapons and C.Weapons.Enabled and require(script.Parent.VRWeapons).new(C)or nil
+local function tell(player,text)remote:FireClient(player,"message",text)end
+local function allowed(player)
+    local list=C.AllowedUserIds or {}
+    if #list==0 then return true end
+    for _,id in ipairs(list)do if tonumber(id)==player.userId then return true end end
+    return false
+end
+local function leave(player,reason)
+    local state=sessions[player]
+    if not state then return end
+    sessions[player]=nil
+    if weapons then weapons:dropPlayer(player)end
+    if state.death then state.death:disconnect()end
+    for _,row in ipairs(state.joints)do
+        if row.weld and row.weld.Parent then row.weld:Destroy()end
+        if row.motor then
+            if row.parent.Parent then row.motor.Part0=row.part0;row.motor.Part1=row.part1;row.motor.Parent=row.parent else row.motor:Destroy()end
+        end
+    end
+    if state.humanoid.Parent then
+        state.humanoid.AutoRotate=state.autoRotate;state.humanoid.WalkSpeed=state.walkSpeed
+        state.humanoid:Move(Vector3.new(),false)
+    end
+    remote:FireAllClients("mode",player,false,reason)
+    print("HEXAGON_VR_OFF",player.Name,reason or"toggle")
+end
+local function enter(player)
+    if sessions[player]then return end
+    if not allowed(player)then tell(player,"VR is not enabled for this account in this game's VRConfig.");return end
+    local char=player.Character
+    local torso=char and char:FindFirstChild("Torso")
+    local root=char and char:FindFirstChild("HumanoidRootPart")
+    local hum=char and char:FindFirstChild("Humanoid")
+    if not torso or not root or not hum or hum.Health&lt;=0 then tell(player,"VR needs a living R6 character.");return end
+    local joints={}
+    for _,spec in ipairs({{"Neck","Head","head"},{"Left Shoulder","Left Arm","left"},{"Right Shoulder","Right Arm","right"}})do
+        local motor=torso:FindFirstChild(spec[1]);local part=char:FindFirstChild(spec[2])
+        if not motor or not motor:IsA("Motor6D")or not part then tell(player,"Your R6 neck or shoulder joints are missing.");return end
+        joints[#joints+1]={motor=motor,parent=motor.Parent,part=part,key=spec[3],c0=motor.C0,c1=motor.C1,part0=motor.Part0,part1=motor.Part1}
+    end
+    if Body then
+        local motor
+        for _,parent in ipairs({root,torso})do for _,candidate in ipairs(parent:GetChildren())do
+            if candidate:IsA("Motor6D")and candidate.Part0==root and candidate.Part1==torso then motor=candidate end
+        end end
+        if not motor then tell(player,"Your R6 body root joint is missing.");return end
+        table.insert(joints,1,{motor=motor,parent=motor.Parent,part=torso,key="body",c0=motor.C0,c1=motor.C1,part0=motor.Part0,part1=motor.Part1})
+    end
+    for _,row in ipairs(joints)do
+        row.motor.Parent=nil;row.motor.Part0=nil;row.motor.Part1=nil
+        row.weld=Instance.new(row.key=="body"and"Motor6D"or"Weld");row.weld.Name="HexagonVR_"..row.key
+        row.weld.Part0=row.key=="body"and root or torso;row.weld.Part1=row.part;row.weld.C0=row.c0;row.weld.C1=row.c1;row.weld.Parent=row.parent
+    end
+    local state={character=char,torso=torso,root=root,humanoid=hum,joints=joints,autoRotate=hum.AutoRotate,walkSpeed=hum.WalkSpeed,lastSequence=-1,lastPoseAt=tick()+25,remotePoseAt=-math.huge}
+    sessions[player]=state;hum.AutoRotate=false;hum.WalkSpeed=C.WalkSpeed
+    state.death=hum.Died:connect(function()if sessions[player]==state then leave(player,"death")end end)
+    remote:FireAllClients("mode",player,true)
+    print("HEXAGON_VR_ON",player.Name)
+end
+local function command(player,text)
+    text=string.lower(string.match(text or"","^%s*(.-)%s*$"))
+    if text~="/vr"and text~="/unvr"then return end
+    if requested[player]and tick()-requested[player]&lt;.5 then return end
+    requested[player]=tick()
+    if sessions[player]then leave(player,"toggle")elseif text=="/vr"then enter(player)end
+end
+require(script.Parent.VRChat).start(remote,C,function(player)return sessions[player]~=nil end,command)
+local function setup(player)
+    player.Chatted:connect(function(text)command(player,text)end)
+    local function characterAdded(character)
+        leave(player,"respawn")
+        if C.AutoEnable and allowed(player)then spawn(function()
+            local deadline=tick()+20
+            repeat wait(.1)until(character and character:FindFirstChild("Torso"))or tick()&gt;deadline
+            wait(2)
+            if player.Character==character and player.Parent and not sessions[player]then enter(player)end
+        end)end
+    end
+    player.CharacterAdded:connect(characterAdded)
+    if player.Character and C.AutoEnable then characterAdded(player.Character)end
+end
+local function frame(a,positionLimit)
+    if type(a)~="table"or #a~=12 then return nil end
+    for i=1,12 do if type(a[i])~="number"or a[i]~=a[i]or math.abs(a[i])&gt;10000 then return nil end end
+    if Vector3.new(a[1],a[2],a[3]).magnitude&gt;(positionLimit or C.MaxReach)then return nil end
+    for row=0,2 do
+        local length=0
+        for col=0,2 do local x=a[4+row*3+col];length=length+x*x end
+        if math.abs(length-1)&gt;.05 then return nil end
+        for other=row+1,2 do
+            local dot=0;for col=0,2 do dot=dot+a[4+row*3+col]*a[4+other*3+col]end
+            if math.abs(dot)&gt;.05 then return nil end
+        end
+    end
+    return CFrame.new(unpack(a))
+end
+local function apply(player,pose)
+    local state=sessions[player]
+    if not state then return end
+    if not state.character.Parent or state.humanoid.Health&lt;=0 then leave(player,"death");return end
+    if type(pose)~="table"or not pose.tracked or type(pose.seq)~="number"or pose.seq~=pose.seq or pose.seq&lt;0 or pose.seq&gt;=1000000 or pose.seq~=math.floor(pose.seq)or pose.seq==state.lastSequence then return end
+    local head=frame(pose.head)
+    if not head then return end
+    state.lastSequence=pose.seq;state.lastPoseAt=tick()
+    local root=state.root.CFrame
+    local torsoFrame=state.torso.CFrame
+    local eyesForward=type(pose.eyeForward)=="number"and pose.eyeForward==pose.eyeForward and math.max(.2,math.min(.65,pose.eyeForward))or .45
+    if Body then
+        local localTorso,yaw
+        head,localTorso,yaw=Body.sample(head,state.bodyYaw or 0,tick()-(state.bodyAt or tick()-.05),eyesForward)
+        state.bodyYaw=yaw;state.bodyAt=tick();torsoFrame=root*localTorso
+    end
+    local hands={left=frame(pose.left),right=frame(pose.right)}
+    for _,row in ipairs(state.joints)do
+        local target=row.key=="head"and head or hands[row.key]
+        if row.key=="body"then row.weld.C0=root:toObjectSpace(torsoFrame)*row.weld.C1
+        elseif target then
+            if row.key~="head"then target=target*CFrame.Angles(math.rad(C.ArmRotationDegrees),0,0)*CFrame.new(0,1,0)end
+            row.weld.C0=torsoFrame:toObjectSpace(root*target)*row.weld.C1
+        else row.weld.C0=row.c0 end
+    end
+    if weapons then
+        local mask=pose.buttons
+        if type(mask)~="number"or mask~=mask or mask&lt;0 or mask&gt;255 or mask~=math.floor(mask)then mask=0 end
+        local trackingRoot=frame(pose.trackingRoot,10000)
+        if not trackingRoot or(trackingRoot.p-root.p).magnitude&gt;6 then trackingRoot=root end
+        local releases={}
+        if type(pose.weaponRelease)=="table"then
+            for _,hand in ipairs({"left","right"})do
+                local row=pose.weaponRelease[hand]
+                if type(row)=="table"then
+                    local cf=frame(row.frame,10000);local velocity=row.velocity
+                    if cf and type(velocity)=="table"and #velocity==3 then
+                        local valid=true;for n=1,3 do if type(velocity[n])~="number"or velocity[n]~=velocity[n]or math.abs(velocity[n])&gt;10000 then valid=false end end
+                        if valid then releases[hand]={model=row.model,frame=cf,velocity=Vector3.new(unpack(velocity))}end
+                    end
+                end
+            end
+        end
+        weapons:update(player,state,{left=hands.left and trackingRoot*hands.left or nil,right=hands.right and trackingRoot*hands.right or nil},mask,pose.blocked==true,pose.weaponRecoil,releases)
+    end
+    return true
+end
+Players.PlayerAdded:connect(setup)
+Players.PlayerRemoving:connect(function(player)requested[player]=nil;leave(player,"disconnect")end)
+Run.Stepped:connect(function()
+    local expired={}
+    for player,state in pairs(sessions)do if tick()-state.lastPoseAt&gt;C.TrackingTimeout then expired[#expired+1]=player end end
+    for _,player in ipairs(expired)do leave(player,"tracking lost")end
+end)
+for _,player in ipairs(Players:GetPlayers())do setup(player)end
+remote.OnServerEvent:connect(function(player,action,data)
+    local state=sessions[player]
+    if action=="weaponTrigger"and state and weapons and type(data)=="table"then
+        weapons:trigger(player,state,data.hand,data.pressed,data.recoil);return
+    end
+    if action=="reset"and state then state.humanoid.Health=0;return end
+    if action=="enable"then enter(player)end
+    if action=="toggle"then command(player,"/vr")end
+    if action=="ready"and state then remote:FireClient(player,"mode",player,true)end
+    if action=="pose"and state and type(data)=="table"then
+        local mask=data.buttons
+        local valid=type(mask)=="number"and mask==mask and mask&gt;=0 and mask&lt;=255 and mask==math.floor(mask)
+        local changed=valid and(mask~=state.remoteMask or(data.blocked==true)~=state.remoteBlocked)
+        local elapsed=tick()-state.remotePoseAt
+        if elapsed&gt;=.04 or(changed and elapsed&gt;=.008)then
+            if apply(player,data)then state.remotePoseAt=tick();state.remoteMask=valid and mask or 0;state.remoteBlocked=data.blocked==true end
+        end
+    end
+end)
+-- Server-only integration-test hook; no externally supplied code is accepted.
+local toggle=Instance.new("BindableEvent");toggle.Name="HexagonVRTestToggle";toggle.Parent=script
+toggle.Event:connect(function(player)command(player,"/vr")end)
+print("HEXAGON_VR_SERVER_READY_MULTIPLAYER")
+</ProtectedString><bool name="Disabled">false</bool></Properties></Item></Item><Item class="StarterGui" referent="RBX34844ff6039b43f19e5b73fb08b804a8"><Properties><string name="Name">StarterGui</string></Properties><Item class="LocalScript" referent="RBX762f7ab18dc64d969ddc7513235a8964"><Properties><string name="Name">HexagonVRClient</string><ProtectedString name="Source">-- First-person tracking and locomotion execute locally every frame.
+local Players=game:GetService("Players")
+local RS=game:GetService("ReplicatedStorage")
+local Run=game:GetService("RunService")
+local player=Players.LocalPlayer
+local remote=RS:WaitForChild("HexagonVR")
+local Body=require(RS:WaitForChild("HexagonVRBody"))
+local enabled=false
+local wanted,lastWake=true,0
+local savedCamera,hidden,baseline={},{},{}
+local lastInput,lastSequence,lastSent,lastTurn,lastSentButtons,lastSentBlocked=0,nil,0,nil,nil,nil
+local mailboxDormant=false
+local bodyYaw,lastRenderAt=0,tick()
+local lastHelperTurnSpeed=nil
+local gui=Instance.new("ScreenGui");gui.Name="HexagonVRStatus";gui.Parent=player:WaitForChild("PlayerGui")
+local label=Instance.new("TextLabel");label.Size=UDim2.new(0,600,0,28);label.Position=UDim2.new(.5,-300,1,-40)
+label.BackgroundTransparency=.3;label.BackgroundColor3=Color3.new(0,0,0);label.TextColor3=Color3.new(1,1,1)
+label.FontSize=Enum.FontSize.Size18;label.Text="Type /vr to use VR";label.Parent=gui
+local privateStorage=player:WaitForChild("PlayerScripts")
+local box=privateStorage:FindFirstChild("HexagonVRLocalMailbox")
+local initial={head={12001.125,23002.25,34003.5},left={13001.125,24002.25,35003.5},right={14001.125,25002.25,36003.5},control={16001.125,26002.25,36003.5},move={15001.125,25002.25,35003.5},settings={17001.125,27002.25,37003.5},ack={26002.25,56002.25,66003.5},move_ack={15001.125,25002.25,77003.5},settings_ack={17001.125,27002.25,78003.5},viewport={18001.125,28002.25,38003.5},position={19001.125,29002.25,39003.5}}
+initial.ui={20001.125,30002.25,40003.5};initial.ui_ack={20001.125,30002.25,81003.5};initial.ui_out={21001.125,31002.25,41003.5}
+initial.camera_state={26002.25,0,82003.5}
+if not box then
+    box=Instance.new("Folder");box.Name="HexagonVRLocalMailbox";box.Parent=privateStorage
+    for name,values in pairs(initial) do
+        local isFrame=name=="head" or name=="left" or name=="right"
+        local value=Instance.new(isFrame and "CFrameValue" or "Vector3Value")
+        value.Name=name;value.Value=isFrame and CFrame.new(unpack(values)) or Vector3.new(unpack(values));value.Parent=box
+    end
+end
+if not box:FindFirstChild("camera_state")then
+    local value=Instance.new("Vector3Value");value.Name="camera_state";value.Value=Vector3.new(unpack(initial.camera_state));value.Parent=box
+end
+local menu=require(script:WaitForChild("VRMenu")).new(player,box,remote)
+local chatUI=require(script:WaitForChild("VRChatClient")).new(player,menu)
+local weapons=require(script:WaitForChild("VRWeaponClient")).new(player,menu,remote)
+local studioMenuShown=false
+local function walk(object,fn)for _,v in ipairs(object:GetChildren())do fn(v);walk(v,fn)end end
+local function restore()
+    menu:setOpen(false)
+    weapons:update({},0,true)
+    for part,value in pairs(hidden)do if part.Parent then part.LocalTransparencyModifier=value end end
+    hidden={};baseline={}
+    if savedCamera.camera and savedCamera.camera.Parent then
+        savedCamera.camera.CameraType=savedCamera.kind;savedCamera.camera.CameraSubject=savedCamera.subject;savedCamera.camera.FieldOfView=savedCamera.fov
+    end
+    savedCamera={}
+    local hum=player.Character and player.Character:FindFirstChild("Humanoid")
+    if hum then hum:Move(Vector3.new(),false) end
+end
+remote.OnClientEvent:connect(function(action,who,value,reason)
+    if action=="weaponShot"then weapons:confirmShot(who,value);return end
+    if action=="chatDisplay"then chatUI:display(who,value);return end
+    if action=="chatResult"then menu:chatResult(who,value,reason);return end
+    if action=="message" then label.Text=who;return end
+    if who~=player then return end
+    if action=="mode" then
+        wanted=value or(wanted and(reason=="tracking lost"or reason=="respawn"or reason=="death"))
+        if value and not enabled then
+            local camera=workspace.CurrentCamera
+            savedCamera={camera=camera,kind=camera.CameraType,subject=camera.CameraSubject,fov=camera.FieldOfView}
+            baseline={};lastTurn=nil;bodyYaw=0
+        elseif not value then
+            restore()
+            if RS:FindFirstChild("HexagonVRStudioMenuTest")then studioMenuShown=false end
+        end
+        enabled=value;label.Text=enabled and "VR | Y menu | Grip grab | A jump" or "VR off | type /vr to use VR"
+    end
+end)
+remote:FireServer("ready")
+local function render()
+    local now=tick();local dt=math.max(0,math.min(.05,now-lastRenderAt));lastRenderAt=now
+    -- Hats leave the local character when grabbed, including by another player.
+    -- Restore them before weapon prediction applies its own local suppression.
+    local ownCharacter=player.Character
+    for part in pairs(hidden)do
+        if not part.Parent or not ownCharacter or not part:IsDescendantOf(ownCharacter)then
+            if part.Parent then part.LocalTransparencyModifier=0 end
+            hidden[part]=nil
+        end
+    end
+    local control=box.control.Value
+    box.ack.Value=Vector3.new(control.y,56002.25,66003.5)
+    local input=box.move.Value;local settings=box.settings.Value
+    box.move_ack.Value=Vector3.new(input.x,input.y,77003.5)
+    box.settings_ack.Value=Vector3.new(settings.x,settings.y,78003.5)
+    local ui=box.ui.Value
+    menu.nativeRendering=math.floor(settings.z)==4
+    local forward=(settings.z-math.floor(settings.z))*10
+    if math.abs((menu.armForward or 0)-forward)&gt;.01 then
+        menu.armForward=forward
+        if menu.opened and menu.page=="settings"then menu:draw()end
+    end
+    box.ui_ack.Value=Vector3.new(ui.x,ui.y,81003.5)
+    menu:mailbox()
+    if control.y~=lastSequence then lastSequence=control.y;lastInput=tick() end
+    if control.y~=initial.control[2] then mailboxDormant=false end
+    if tick()-lastInput&gt;1 and not mailboxDormant then
+        for name,values in pairs(initial)do
+            local isFrame=name=="head"or name=="left"or name=="right"
+            box[name].Value=isFrame and CFrame.new(unpack(values))or Vector3.new(unpack(values))
+        end
+        lastSequence=initial.control[2];mailboxDormant=true
+        return
+    end
+    local flags=control.x
+    local tracked=flags&gt;=1 and flags&lt;=7 and flags==math.floor(flags) and tick()-lastInput&lt;.35
+    box.camera_state.Value=Vector3.new(control.y,enabled and tracked and 1 or 0,82003.5)
+    if tracked and not enabled and wanted and tick()-lastWake&gt;1 then lastWake=tick();remote:FireServer("enable")end
+    if not enabled or not tracked then
+        weapons:update({},0,true)
+        if menu.opened then menu:setOpen(false)end
+        if enabled and tick()-lastInput&gt;.35 then
+            local hum=player.Character and player.Character:FindFirstChild("Humanoid")
+            if hum then hum:Move(Vector3.new(),false)end
+        end
+        return
+    end
+    local char=player.Character
+    local root=char and char:FindFirstChild("HumanoidRootPart")
+    local torso=char and char:FindFirstChild("Torso")
+    local hum=char and char:FindFirstChild("Humanoid")
+    if not root or not torso or not hum then return end
+    local head=box.head.Value
+    local turn=control.z&gt;=-1 and control.z&lt;=1 and control.z or 0
+    if control.z&gt;=60 and control.z&lt;=722 then
+        local speed=math.floor(control.z/4);local axis=control.z-speed*4-1
+        if speed&gt;=15 and speed&lt;=180 and axis&gt;=-1.001 and axis&lt;=1.001 then
+            turn=math.max(-1,math.min(1,axis))
+            if lastHelperTurnSpeed~=speed then menu:setTurnSpeed(speed,true);lastHelperTurnSpeed=speed end
+        end
+    end
+    if not menu.opened and turn~=0 then
+        local pivot=Vector3.new(head.p.x,0,head.p.z)
+        root.CFrame=root.CFrame*CFrame.new(pivot)*CFrame.Angles(0,-math.rad(menu.turnSpeed or Body.TurnSpeed)*turn*dt,0)*CFrame.new(-pivot)
+    end
+    local left=math.floor(flags/2)%2==1 and box.left.Value or nil
+    local right=math.floor(flags/4)%2==1 and box.right.Value or nil
+    local eyeForward=math.max(.2,math.min(.65,settings.y))
+    local avatarHead,localTorso
+    avatarHead,localTorso,bodyYaw=Body.sample(head,bodyYaw,dt,eyeForward)
+    local torsoFrame=root.CFrame*localTorso
+    local bodyWeld=root:FindFirstChild("HexagonVR_body")
+    if bodyWeld then bodyWeld.C0=localTorso*bodyWeld.C1 end
+    local camera=workspace.CurrentCamera
+    camera.CameraType=Enum.CameraType.Scriptable
+    camera.CoordinateFrame=root.CFrame*Body.eyes(avatarHead,eyeForward)
+    camera.Focus=camera.CoordinateFrame*CFrame.new(0,0,-8)
+    camera.FieldOfView=math.max(1,math.min(120,settings.x))
+    box.viewport.Value=Vector3.new(camera.ViewportSize.x,camera.ViewportSize.y,camera.FieldOfView)
+    box.position.Value=Vector3.new(root.Position.x,root.Position.z,control.y)
+    if not studioMenuShown and RS:FindFirstChild("HexagonVRStudioMenuTest")then
+        studioMenuShown=true;menu:setOpen(true,"menu")
+        print("HEXAGON_VR_STUDIO_MENU_OPEN")
+    end
+    local buttons=ui.x&gt;=0 and ui.x&lt;=255 and ui.x==math.floor(ui.x)and ui.x or 0
+    local blocked=menu:update(right and root.CFrame*right or nil,buttons,ui.z)
+    weapons:update({left=left and root.CFrame*left or nil,right=right and root.CFrame*right or nil},buttons,blocked)
+    for _,row in ipairs({{"head",avatarHead},{"left",left},{"right",right}})do
+        local weld=torso:FindFirstChild("HexagonVR_"..row[1])
+        if weld then
+            if not baseline[weld]then baseline[weld]=weld.C0 end
+            if row[2]then
+                local target=row[2]
+                if row[1]~="head"and weapons.visualHands[row[1]]then target=root.CFrame:toObjectSpace(weapons.visualHands[row[1]])end
+                if row[1]~="head"then target=target*CFrame.Angles(math.rad(90),0,0)*CFrame.new(0,1,0)end
+                weld.C0=torsoFrame:toObjectSpace(root.CFrame*target)*weld.C1
+            else weld.C0=baseline[weld]end
+        end
+    end
+    local vector=Vector3.new(input.x,0,input.y)
+    if blocked then vector=Vector3.new()end
+    if vector.magnitude&gt;1 then vector=vector.unit end
+    local direction=camera.CoordinateFrame.lookVector;direction=Vector3.new(direction.x,0,direction.z)
+    if direction.magnitude&gt;.01 then hum:Move(CFrame.new(Vector3.new(),direction):vectorToWorldSpace(vector),false)end
+    if input.z&gt;.5 and not blocked then hum.Jump=true end
+    walk(char,function(part)
+        local wearable=false;local parent=part.Parent
+        while parent and parent~=char do
+            if parent:IsA("Hat")or parent:IsA("Accessory")then wearable=true;break end
+            parent=parent.Parent
+        end
+        if part:IsA("BasePart")and(part==char:FindFirstChild("Head")or wearable)then
+            if hidden[part]==nil then hidden[part]=part.LocalTransparencyModifier end
+            part.LocalTransparencyModifier=1
+        end
+    end)
+    if tick()-lastSent&gt;=.05 or buttons~=lastSentButtons or blocked~=lastSentBlocked then
+        lastSent=tick();lastSentButtons=buttons;lastSentBlocked=blocked
+        remote:FireServer("pose",{seq=control.y,head={head:components()},left=left and {left:components()}or nil,right=right and {right:components()}or nil,trackingRoot={root.CFrame:components()},tracked=true,buttons=buttons,blocked=blocked,weaponRecoil=weapons:aimState(),weaponRelease=weapons:releaseState(),eyeForward=eyeForward})
+    end
+end
+Run:BindToRenderStep("HexagonVR",Enum.RenderPriority.Last.Value,render)
+print("HEXAGON_VR_LOCAL_MAILBOX_READY")
+</ProtectedString><bool name="Disabled">false</bool></Properties><Item class="ModuleScript" referent="RBX605e04217cff469eb0ec416387e7a711"><Properties><string name="Name">VRWeaponClient</string><ProtectedString name="Source">-- Rear-hand anchored two-hand poses, guided magazines, and visible weapon recoil.
+local M={}
+local Geometry=require(game:GetService("ReplicatedStorage"):WaitForChild("HexagonVRWeaponGeometry"))
+local FX=require(script:WaitForChild("VRWeaponFX"))
+local function down(mask,bit)return math.floor(mask/bit)%2==1 end
+local function parts(node,out)
+    out=out or{}
+    for _,child in ipairs(node:GetChildren())do
+        if child:IsA("BasePart")then out[#out+1]=child end
+        parts(child,out)
+    end
+    return out
+end
+local function stripClone(node)
+    for _,child in ipairs(node:GetChildren())do
+        if child:IsA("BasePart")or child:IsA("JointInstance")or child:IsA("Sound")or child:IsA("ValueBase")or child:IsA("LuaSourceContainer")then child:Destroy()
+        else stripClone(child)end
+    end
+end
+local function frameAngle(a,b)
+    local dot=math.min(a.lookVector:Dot(b.lookVector),a:vectorToWorldSpace(Vector3.new(0,1,0)):Dot(b:vectorToWorldSpace(Vector3.new(0,1,0))))
+    return math.acos(math.max(-1,math.min(1,dot)))
+end
+local function spring(x,v,omega,dt)
+    local c=v+omega*x;local decay=math.exp(-omega*dt)
+    return (x+c*dt)*decay,(v-omega*c*dt)*decay
+end
+function M.new(player,menu,remote)
+    -- Instance wrappers can leave a weak-key table while the engine still owns
+    -- their parts. Keep suppression state until it is explicitly restored.
+    local self={fx=FX.new(),cache={},lastButtons=0,lastAt=tick(),sentTriggers={},visualHands={},aim={},handFilters={},heldFrames={},releaseFrames={},releaseAt={}}
+    local visuals=Instance.new("Model");visuals.Name="HexagonVRPredictedWeapons";visuals.Parent=workspace.CurrentCamera;self.visuals=visuals
+    function self:state(model)
+        local s=self.cache[model]
+        if not s then
+            local count=model:FindFirstChild("ShotCount")
+            s={confirmed=count and count.Value or 0,predicted=count and count.Value or 0,ammo=0,
+                recoil=0,velocity=0,yaw=0,yawVelocity=0,slide=0,lastShot=-math.huge,eventAt=-math.huge}
+            self.cache[model]=s
+        end
+        return s
+    end
+    function self:aimState()return self.aim end
+    function self:releaseState()return self.releaseFrames end
+    function self:visualRoot(model)
+        local s=self.cache[model]
+        return s and s.visual and s.visual.Parent and s.visual:FindFirstChild("Handle")or model:FindFirstChild("Handle")
+    end
+    function self:visual(model)
+        local s=self:state(model)
+        if not s.visual then
+            s.visual=Instance.new("Model");s.visual.Name=model.Name;s.hidden={};s.copies={}
+            for _,original in ipairs(parts(model))do
+                    local copy=original:Clone()
+                    stripClone(copy)
+                    copy.Anchored=true;copy.CanCollide=false;copy.LocalTransparencyModifier=0;copy.Parent=s.visual
+                    s.copies[original]=copy
+            end
+        end
+        s.rendered=true;s.visual.Parent=visuals
+        for _,original in ipairs(parts(model))do
+                if s.hidden[original]==nil then s.hidden[original]=true end
+                original.LocalTransparencyModifier=1
+        end
+        return s.visual:FindFirstChild("Handle"),s.visual
+    end
+    function self:finishVisuals()
+        for model,s in pairs(self.cache)do
+            if s.visual and not s.rendered then
+                s.visual.Parent=nil
+                for original in pairs(s.hidden)do if original.Parent then original.LocalTransparencyModifier=0 end end
+                s.hidden={}
+                if not model.Parent then s.visual:Destroy();s.visual=nil end
+            end
+            if not model.Parent then self.cache[model]=nil end
+        end
+    end
+    function self:stableHands(input,dt)
+        local character=player.Character;local root=character and character:FindFirstChild("HumanoidRootPart")
+        local origin=root and root.CFrame or CFrame.new();local output={}
+        self.handOrigin=origin
+        for _,hand in ipairs({"left","right"})do
+            local raw=input[hand]
+            if raw then
+                local current=origin:toObjectSpace(raw);local state=self.handFilters[hand]
+                if not state or(current.p-state.raw.p).magnitude&gt;2 then state={raw=current,filtered=current};self.handFilters[hand]=state end
+                local positionSpeed=(current.p-state.raw.p).magnitude/math.max(.001,dt)
+                local angle=frameAngle(current,state.raw)
+                local rate=24+math.min(140,positionSpeed*16+angle/math.max(.001,dt)*65)
+                local difference=(current.p-state.filtered.p).magnitude
+                local angularDifference=frameAngle(current,state.filtered)
+                if difference&gt;.0025 or angularDifference&gt;math.rad(.08)then state.filtered=state.filtered:lerp(current,1-math.exp(-dt*rate))end
+                state.raw=current;output[hand]=origin*state.filtered
+            else self.handFilters[hand]=nil end
+        end
+        return output
+    end
+    function self:feedback(model,layout,cf,position,number,hand)
+        local root=self:visualRoot(model);if not root then return end
+        local s=self:state(model);s.lastShot=tick()
+        local support=model:FindFirstChild("SupportHand")
+        local stability=support and support.Value~=""and .65 or 1
+        s.recoil=math.min(12,s.recoil+layout.Recoil*.4*stability)
+        s.velocity=s.velocity+layout.Recoil*38*stability
+        s.yawVelocity=s.yawVelocity+(number%2==0 and 1 or -1)*(layout.YawKick or .6)*30*stability
+        self.fx:shot(root,layout,cf,position,number)
+        if menu and hand then menu:command(9,hand=="left"and 0 or 1,layout.Automatic and 2400 or 3000)end
+    end
+    function self:confirmShot(model,data)
+        if not model or not model.Parent or type(data)~="table"then return end
+        local layout=Geometry.forModel(model);if not layout or not layout.Gun then return end
+        local owner=model:FindFirstChild("Owner");local s=self:state(model)
+        local predicted=owner and owner.Value==player and s.predicted&gt;=data.count
+        s.confirmed=data.count;s.predicted=math.max(s.predicted,data.count)
+        s.ammo=data.ammo+(data.chamber and 1 or 0);s.eventAt=tick()
+        if not predicted then self:feedback(model,layout,data.frame,data.position,data.count)end
+        self.fx:impact(data.position,data.normal,data.hit)
+    end
+    function self:update(hands,buttons,blocked)
+        local now=tick();local dt=math.max(.001,math.min(.05,now-self.lastAt));self.lastAt=now
+        local previous=self.lastButtons;self.lastButtons=buttons;self.visualHands={}
+        for _,hand in ipairs({"left","right"})do
+            local bit=hand=="left"and 32 or 64
+            if down(previous,bit)and not down(buttons,bit)then
+                local held=self.heldFrames[hand]
+                if held then self.releaseFrames[hand]={model=held.model,frame={held.frame:components()},velocity={held.velocity.x,held.velocity.y,held.velocity.z}};self.releaseAt[hand]=now end
+            elseif down(buttons,bit)or(self.releaseAt[hand]and now-self.releaseAt[hand]&gt;.3)then self.releaseFrames[hand]=nil;self.releaseAt[hand]=nil end
+        end
+        for _,s in pairs(self.cache)do s.rendered=false end
+        visuals.Parent=workspace.CurrentCamera
+        self.fx.folder.Parent=workspace.CurrentCamera
+        if remote then
+            for _,hand in ipairs({"left","right"})do
+                local pressed=not blocked and down(buttons,hand=="left"and 128 or 1)
+                if self.sentTriggers[hand]~=pressed then
+                    self.sentTriggers[hand]=pressed;remote:FireServer("weaponTrigger",{hand=hand,pressed=pressed,recoil=self.aim[hand]})
+                end
+            end
+        end
+        local folder=workspace:FindFirstChild("HexagonVRWeapons");self.aim={}
+        if not folder or blocked then
+            self.handFilters={};self.heldFrames={};self.releaseFrames={};self.releaseAt={}
+            for _,s in pairs(self.cache)do
+                s.localHeld=false;s.localGrip=nil;s.wasMounted=nil;s.removeSnapshot=nil;s.mountFrame=nil;s.loadingFor=nil;s.loadingSmooth=nil
+                s.supportHand=nil;s.supportAnchor=nil;s.supportBlend=nil;s.aimRotation=nil
+                s.seatBlend=nil;s.guidePendingAt=nil;s.guideConfirmed=nil;s.rejectedGuide=nil
+            end
+            self:finishVisuals();return
+        end
+        hands=self:stableHands(hands,dt)
+        for _,model in ipairs(folder:GetChildren())do
+            local owner=model:FindFirstChild("Owner");local hand=model:FindFirstChild("Hand");local root=model:FindFirstChild("Handle")
+            local layout=Geometry.forModel(model)
+            if owner and root and layout and not layout.MagazineItem then
+                local s=self:state(model);local localOwner=owner.Value==player;local heldHand=hand and hand.Value
+                if localOwner and(not s.localHeld or heldHand~=s.lastHeldHand)then
+                    if now-s.lastShot&gt;.15 then s.recoil=0;s.velocity=0;s.yaw=0;s.yawVelocity=0 end
+                    s.aimRotation=nil;s.supportBlend=nil;s.supportHand=nil;s.supportAnchor=nil;s.wearGrip=nil
+                end
+                s.localHeld=localOwner
+                if localOwner then s.lastHeldHand=heldHand end
+                if localOwner then
+                    local originalRoot=root
+                    local renderedModel=model
+                    if localOwner then root,renderedModel=self:visual(model)end
+                    local support=model:FindFirstChild("SupportHand");local anchor=model:FindFirstChild("SupportAnchor")
+                    if layout.Gun then
+                        s.recoil,s.velocity=spring(s.recoil,s.velocity,16,dt)
+                        s.yaw,s.yawVelocity=spring(s.yaw,s.yawVelocity,18,dt)
+                        s.recoil=math.max(0,math.min(12,s.recoil));s.yaw=math.max(-4,math.min(4,s.yaw))
+                    end
+                    local mount=model:FindFirstChild("MountedTo")
+                    if localOwner and hands[heldHand]and down(buttons,heldHand=="left"and 32 or 64)and not(mount and mount.Value)then
+                        if layout.Gun then
+                            local supportHand=support and support.Value or""
+                            local front=supportHand~=""and supportHand~=heldHand and down(buttons,supportHand=="left"and 32 or 64)and hands[supportHand]or nil
+                            if not front then s.supportHand=nil;s.supportAnchor=nil
+                            elseif s.supportHand~=supportHand then
+                                s.supportHand=supportHand;s.supportAnchor=hands[heldHand]:pointToObjectSpace(front.p)
+                            end
+                            local desired=Geometry.heldFrame(layout,hands[heldHand],front,s.supportAnchor or(anchor and anchor.Value or nil))
+                            -- Smooth the solved aim in the avatar's space. Smoothing a
+                            -- correction in rear-wrist space temporarily adds wrist yaw
+                            -- back into a two-hand gun, producing a large sideways kick.
+                            local aimedGrip=self.handOrigin:toObjectSpace(desired*layout.Grip)
+                            local rotation=aimedGrip-aimedGrip.p
+                            if front then s.supportBlend=1
+                            elseif s.supportBlend then s.supportBlend=s.supportBlend*math.exp(-dt*28);if s.supportBlend&lt;.01 then s.supportBlend=nil end end
+                            if s.supportBlend then s.aimRotation=(s.aimRotation or rotation):lerp(rotation,1-math.exp(-dt*24))
+                            else s.aimRotation=rotation end
+                            local originRotation=self.handOrigin-self.handOrigin.p
+                            s.baseFrame=CFrame.new(hands[heldHand].p)*originRotation*s.aimRotation*layout.Grip:inverse()
+                            root.CFrame=Geometry.applyRecoil(layout,s.baseFrame,s.recoil,s.yaw)
+                        else
+                            local grip=model:FindFirstChild("HeldGrip")
+                            local heldGrip=grip and grip.Value or layout.Grip
+                            if layout.Wearable then
+                                if not s.wearGrip then s.wearGrip=originalRoot.CFrame:toObjectSpace(hands[heldHand])end
+                                heldGrip=s.wearGrip
+                            end
+                            root.CFrame=hands[heldHand]*heldGrip:inverse()
+                            if layout.Wearable then
+                                for original,copy in pairs(s.copies)do
+                                    local offset=original:FindFirstChild("VRHatOffset")
+                                    if original~=originalRoot and offset then copy.CFrame=root.CFrame*offset.Value end
+                                end
+                            end
+                            self.visualHands[heldHand]=root.CFrame*heldGrip
+                        end
+                    end
+                    if layout.Gun then
+                        local chamber=model:FindFirstChild("Chambered");local rounds=model:FindFirstChild("Rounds");local shots=model:FindFirstChild("ShotCount")
+                        local rack=model:FindFirstChild("SlideHand");local rackHand=rack and rack.Value or""
+                        if localOwner and now-s.eventAt&gt;.12 and shots and shots.Value&gt;=s.confirmed then
+                            s.confirmed=shots.Value;s.predicted=math.max(s.predicted,s.confirmed)
+                            s.ammo=(rounds and rounds.Value or 0)+(chamber and chamber.Value and 1 or 0)
+                        end
+                        local trigger=heldHand=="left"and 128 or 1
+                        if not down(buttons,trigger)and now-s.lastShot&gt;.4 then s.predicted=s.confirmed end
+                        if localOwner and down(buttons,trigger)and rackHand==""and(layout.Automatic or not down(previous,trigger))then
+                            if now-s.lastShot&gt;=layout.Interval then
+                                local remaining=s.ammo-math.max(0,s.predicted-s.confirmed)
+                                if remaining&gt;0 then
+                                    s.predicted=s.predicted+1
+                                    local cf=root.CFrame;local origin=cf:pointToWorldSpace(layout.Muzzle)
+                                    local _,position=workspace:FindPartOnRayWithIgnoreList(Ray.new(origin,cf.lookVector*300),{folder,self.fx.folder,visuals,player.Character},false,true)
+                                    self:feedback(model,layout,cf,position,s.predicted,heldHand)
+                                    if s.baseFrame then root.CFrame=Geometry.applyRecoil(layout,s.baseFrame,s.recoil,s.yaw)end
+                                elseif not down(previous,trigger)then self.fx:dry(root)end
+                            end
+                        end
+                        if localOwner then
+                            self.aim[heldHand]={s.recoil,s.yaw}
+                            self.visualHands[heldHand]=root.CFrame*layout.Grip
+                            if s.supportHand and s.supportAnchor and hands[s.supportHand]then
+                                local position=(root.CFrame*layout.Grip):pointToWorldSpace(s.supportAnchor)
+                                local actual=hands[s.supportHand]
+                                self.visualHands[s.supportHand]=CFrame.new(position)*(actual-actual.p)
+                            end
+                        end
+                        local slide=renderedModel:FindFirstChild("Slide");local offset=model:FindFirstChild("SlideOffset")
+                        local start=model:FindFirstChild("SlideGrabZ");local locked=model:FindFirstChild("SlideLocked")
+                        local target=offset and layout.SlideRest:toObjectSpace(offset.Value).p.z or 0
+                        if localOwner and rackHand~=""and hands[rackHand]then
+                            if down(buttons,rackHand=="left"and 32 or 64)then
+                                local point=root.CFrame:pointToObjectSpace(hands[rackHand].p)
+                                target=math.max(0,math.min(layout.SlideTravel,(point.z-start.Value)*layout.RackGain))
+                            else target=locked and locked.Value and(rounds and rounds.Value==0)and layout.LockedTravel or 0 end
+                        elseif now-s.lastShot&lt;.035 then target=layout.SlideTravel end
+                        s.slide=s.slide+(target-s.slide)*(1-math.exp(-dt*65))
+                        if slide then slide.CFrame=root.CFrame*layout.SlideRest*CFrame.new(0,0,s.slide)end
+                    end
+                end
+            end
+        end
+        -- Resolve each magazine once, after every gun pose. Mounted state wins
+        -- over a stale free-hand ownership field during replication handoffs.
+        for _,model in ipairs(folder:GetChildren())do
+            local layout=Geometry.forModel(model)
+            if layout and layout.MagazineItem then
+                local s=self:state(model);local owner=model:FindFirstChild("Owner");local hand=model:FindFirstChild("Hand")
+                local root=self:visualRoot(model);local loading=model:FindFirstChild("LoadingInto");local mount=model:FindFirstChild("MountedTo")
+                if mount and mount.Value and not s.lastMount and s.lastHeldHand and menu then menu:command(9,s.lastHeldHand=="left"and 0 or 1,1600)end
+                s.lastMount=mount and mount.Value or nil
+                local mountedTo=mount and mount.Value
+                if not mountedTo then
+                    for _,candidate in ipairs(folder:GetChildren())do
+                        local inserted=candidate:FindFirstChild("InsertedMagazine")
+                        if inserted and inserted.Value==model and(not owner or owner.Value~=player or s.loadingFor==candidate or(s.wasMounted==candidate and not s.wasRemoving))then mountedTo=candidate;break end
+                    end
+                end
+                local mountedOwner=mountedTo and mountedTo:FindFirstChild("Owner")
+                local gun=loading and loading.Value
+                if gun then s.lastGuideAt=now;s.guidePendingAt=nil;s.guideConfirmed=true
+                elseif s.loadingFor and s.guidePendingAt and now-s.guidePendingAt&lt;.35 then gun=s.loadingFor
+                elseif s.loadingFor and s.lastGuideAt and now-s.lastGuideAt&lt;.12 and hand and hands[hand.Value]then
+                    local previousGun=self:visualRoot(s.loadingFor);local previousLayout=Geometry[s.loadingFor.Name]
+                    if previousGun and previousLayout and s.loadingStartY then
+                        local point=previousGun.CFrame:pointToObjectSpace(hands[hand.Value].p)
+                        local progress=(point.y-s.loadingStartY)/previousLayout.InsertDepth
+                        if progress&gt;.85 and s.loadingStartPoint and Vector3.new(point.x-s.loadingStartPoint.x,0,point.z-s.loadingStartPoint.z).magnitude&lt;.3 then gun=s.loadingFor end
+                    end
+                end
+                if mountedTo and mountedOwner and mountedOwner.Value==player then
+                    local gunRoot=self:visualRoot(mountedTo);local gunLayout=Geometry[mountedTo.Name]
+                    if gunRoot and gunLayout then
+                        root=self:visual(model)
+                        if hand and hand.Value~=""then self.visualHands[hand.Value]=nil end
+                        local removal=mountedTo:FindFirstChild("RemovingHand");local start=mountedTo:FindFirstChild("RemovalStartY")
+                        local primary=mountedTo:FindFirstChild("Hand");local other=primary and primary.Value=="left"and"right"or"left"
+                        if hands[other]and down(buttons,other=="left"and 32 or 64)and not down(previous,other=="left"and 32 or 64)then
+                            local point=gunRoot.CFrame:pointToObjectSpace(hands[other].p)
+                            if(point-gunLayout.RemovePoint).magnitude&lt;.7 then
+                                local previousFrame=gunRoot.CFrame*(s.mountFrame or gunLayout.Magazine)
+                                s.removeSnapshot={hand=other,y=point.y,grip=previousFrame:toObjectSpace(hands[other]),at=now}
+                            end
+                        end
+                        local removeHand=removal and removal.Value or""
+                        local snapshot=s.removeSnapshot
+                        if snapshot and not down(buttons,snapshot.hand=="left"and 32 or 64)then s.removeSnapshot=nil;snapshot=nil end
+                        if removeHand==""and snapshot and now-snapshot.at&lt;.15 then removeHand=snapshot.hand end
+                        local frame=gunLayout.Magazine
+                        if s.loadingFor==mountedTo and s.loadingSmooth then s.seatBlend=s.loadingSmooth;s.mountFrame=nil end
+                        if removeHand~=""and start and hands[removeHand]and down(buttons,removeHand=="left"and 32 or 64)then
+                            s.wasRemoving=true
+                            local point=gunRoot.CFrame:pointToObjectSpace(hands[removeHand].p)
+                            local startY=snapshot and snapshot.hand==removeHand and snapshot.y or start.Value
+                            frame=Geometry.magazineFrame(gunLayout,1-math.max(0,startY-point.y)/gunLayout.InsertDepth)
+                            s.mountFrame=(s.mountFrame or gunLayout.Magazine):lerp(frame,1-math.exp(-dt*45));frame=s.mountFrame
+                            local grip=snapshot and snapshot.grip or model.HeldGrip.Value
+                            local position=(gunRoot.CFrame*frame*grip).p
+                            self.visualHands[removeHand]=CFrame.new(position)*(hands[removeHand]-hands[removeHand].p)
+                        else
+                            s.mountFrame=nil;s.wasRemoving=nil
+                            if s.seatBlend then
+                                s.seatBlend=s.seatBlend:lerp(gunLayout.Magazine,1-math.exp(-dt*45));frame=s.seatBlend
+                                if(s.seatBlend.p-gunLayout.Magazine.p).magnitude&lt;.001 then s.seatBlend=nil;frame=gunLayout.Magazine end
+                            end
+                        end
+                        root.CFrame=gunRoot.CFrame*frame
+                        s.wasMounted=mountedTo;s.lastMountFrame=frame
+                    end
+                    s.loadingFor=nil;s.loadingSmooth=nil
+                elseif owner and owner.Value==player and hand and hands[hand.Value]and down(buttons,hand.Value=="left"and 32 or 64)then
+                    root=self:visual(model)
+                    local grip=model:FindFirstChild("HeldGrip")
+                    if s.wasMounted then
+                        local oldGun=self:visualRoot(s.wasMounted)
+                        local lastFrame=oldGun and oldGun.CFrame*(s.lastMountFrame or Geometry[s.wasMounted.Name].Magazine)or root.CFrame
+                        s.localGrip=lastFrame:toObjectSpace(hands[hand.Value]);s.wasMounted=nil;s.removeSnapshot=nil;s.mountFrame=nil;s.wasRemoving=nil
+                    elseif not s.localHeld or s.lastHeldHand~=hand.Value then s.localGrip=layout.Grip end
+                    s.localGrip=s.localGrip or layout.Grip
+                    root.CFrame=hands[hand.Value]*s.localGrip:inverse()
+                    self.visualHands[hand.Value]=root.CFrame*s.localGrip
+                    s.lastHeldHand=hand.Value
+                    if not gun and s.loadingFor and s.guidePendingAt then
+                        s.rejectedGuide=s.loadingFor;s.loadingFor=nil;s.loadingSmooth=nil;s.guidePendingAt=nil
+                    end
+                    if not gun and not mountedTo then
+                        for _,candidate in ipairs(folder:GetChildren())do
+                            local candidateLayout=Geometry[candidate.Name];local candidateOwner=candidate:FindFirstChild("Owner");local candidateHand=candidate:FindFirstChild("Hand")
+                            local inserted=candidate:FindFirstChild("InsertedMagazine")
+                            if candidateLayout and candidateLayout.Gun and candidateLayout.MagazineKind==model.Name and candidateOwner and candidateOwner.Value==player and candidateHand and candidateHand.Value~=hand.Value and inserted and not inserted.Value then
+                                local candidateRoot=self:visualRoot(candidate)
+                                if candidateRoot and Geometry.magazineEntry(candidateLayout,layout,candidateRoot.CFrame,root.CFrame)and s.rejectedGuide~=candidate then
+                                    gun=candidate;s.guidePendingAt=now;s.guideConfirmed=false;break
+                                elseif s.rejectedGuide==candidate and candidateRoot and not Geometry.magazineEntry(candidateLayout,layout,candidateRoot.CFrame,root.CFrame)then s.rejectedGuide=nil end
+                            end
+                        end
+                    end
+                    if gun then
+                        local gunRoot=self:visualRoot(gun);local gunLayout=Geometry[gun.Name]
+                        if gunRoot and gunLayout then
+                            local point=gunRoot.CFrame:pointToObjectSpace(hands[hand.Value].p)
+                            if s.loadingFor~=gun then
+                                local progress=loading and loading.Value==gun and model:FindFirstChild("LoadingProgress")or nil
+                                s.loadingFor=gun;s.loadingSmooth=gunRoot.CFrame:toObjectSpace(root.CFrame)
+                                s.loadingStartY=point.y-math.max(0,math.min(1,progress and progress.Value or 0))*gunLayout.InsertDepth
+                                s.loadingStartPoint=point
+                            end
+                            local progress=math.max(0,math.min(1,(point.y-s.loadingStartY)/gunLayout.InsertDepth))
+                            local up=root.CFrame:vectorToWorldSpace(Vector3.new(0,1,0)):Dot(gunRoot.CFrame:vectorToWorldSpace(Vector3.new(0,1,0)))
+                            local lateral=Vector3.new(point.x-s.loadingStartPoint.x,0,point.z-s.loadingStartPoint.z).magnitude
+                            if point.y-s.loadingStartY&lt;-.22 or lateral&gt;.75 or up&lt;.3 then
+                                s.rejectedGuide=gun;s.loadingFor=nil;s.loadingSmooth=nil;s.guidePendingAt=nil
+                            else
+                                local target=Geometry.guidedMagazineFrame(gunLayout,progress,gunRoot.CFrame:toObjectSpace(root.CFrame))
+                                s.loadingSmooth=s.loadingSmooth:lerp(target,1-math.exp(-dt*35));root.CFrame=gunRoot.CFrame*s.loadingSmooth
+                                self.visualHands[hand.Value]=root.CFrame*s.localGrip
+                            end
+                        end
+                    else s.loadingFor=nil;s.loadingSmooth=nil end
+                else
+                    s.loadingFor=nil;s.loadingSmooth=nil;s.localGrip=nil;s.wasMounted=nil;s.removeSnapshot=nil;s.mountFrame=nil;s.seatBlend=nil;s.guidePendingAt=nil;s.rejectedGuide=nil;s.wasRemoving=nil
+                end
+                s.localHeld=owner and owner.Value==player
+            end
+        end
+        local heldFrames={}
+        for model,s in pairs(self.cache)do
+            local owner=model:FindFirstChild("Owner");local hand=model:FindFirstChild("Hand");local mount=model:FindFirstChild("MountedTo")
+            if s.rendered and owner and owner.Value==player and hand and hands[hand.Value]and down(buttons,hand.Value=="left"and 32 or 64)and not(mount and mount.Value)then
+                local frame=self:visualRoot(model).CFrame;local old=self.heldFrames[hand.Value]
+                local velocity=old and old.model==model and(frame.p-old.frame.p)/dt or Vector3.new()
+                if velocity.magnitude&gt;35 then velocity=velocity.unit*35 end
+                heldFrames[hand.Value]={model=model,frame=frame,velocity=velocity}
+            end
+        end
+        self.heldFrames=heldFrames;self:finishVisuals()
+    end
+    return self
+end
+return M
+</ProtectedString></Properties><Item class="ModuleScript" referent="RBX0c3ad4fe0e2f4e9aa464ef9b9890fc95"><Properties><string name="Name">VRWeaponFX</string><ProtectedString name="Source">-- Local, immediate gun feedback. Damage and ammunition remain server controlled.
+local M={}
+local Assets=require(script:WaitForChild("VRWeaponAssets"))
+local Debris=game:GetService("Debris")
+local function part(name,parent)
+    local p=Instance.new("Part");p.Name=name;p.FormFactor=Enum.FormFactor.Custom;p.Size=Vector3.new(.2,.2,.2)
+    p.TopSurface=Enum.SurfaceType.Smooth;p.BottomSurface=Enum.SurfaceType.Smooth;p.CanCollide=false;p.Parent=parent;return p
+end
+local function play(parent,id,volume,pitch)
+    if not id then return end
+    local s=Instance.new("Sound");s.SoundId=id;s.Volume=volume;s.Pitch=pitch or 1;s.Parent=parent;s:Play();Debris:AddItem(s,4)
+end
+function M.new()
+    local self={}
+    local folder=Instance.new("Model");folder.Name="HexagonVRLocalFX";folder.Parent=workspace.CurrentCamera;self.folder=folder
+    function self:dry(root)play(root,Assets.dry_fire,.25,1)end
+    function self:impact(position,normal,hit)
+        if not hit or not position then return end
+        local dot=part("Impact",folder);dot.Anchored=true
+        dot.CFrame=CFrame.new(position+(normal or Vector3.new())*.012)
+        local shape=Instance.new("SpecialMesh");shape.MeshType=Enum.MeshType.Sphere;shape.Scale=Vector3.new(.18,.18,.18);shape.Parent=dot
+        if hit.Anchored then dot.BrickColor=BrickColor.new("Really black");Debris:AddItem(dot,5)
+        else dot.BrickColor=BrickColor.new("Institutional white");dot.Material=Enum.Material.Neon;Debris:AddItem(dot,.08)end
+    end
+    function self:shot(root,layout,cf,hitPosition,number)
+        local muzzle=cf:pointToWorldSpace(layout.Muzzle)
+        local audio=part("ShotAudio",folder);audio.Anchored=true;audio.Transparency=1;audio.CFrame=cf
+        play(audio,Assets[layout.FireSound],.6,.97+math.random()*.06);Debris:AddItem(audio,4)
+        local flash=part("MuzzleFlash",folder);flash.Anchored=true;flash.BrickColor=BrickColor.new("New Yeller");flash.Material=Enum.Material.Neon
+        flash.CFrame=cf*CFrame.new(layout.Muzzle)*CFrame.new(0,0,-.12)
+        local glow=Instance.new("SpecialMesh");glow.MeshType=Enum.MeshType.Sphere;glow.Scale=Vector3.new(.65,.65,2.2);glow.Parent=flash
+        local light=Instance.new("PointLight");light.Color=Color3.new(1,.72,.3);light.Range=7;light.Brightness=1.6;light.Parent=flash;Debris:AddItem(flash,.035)
+        local casing=part("Casing",folder);casing.CFrame=cf*layout.Eject*CFrame.Angles(math.random(),math.random(),math.random())
+        casing.BrickColor=BrickColor.new("Bright yellow");casing.Material=Enum.Material.Metal;casing.CanCollide=true
+        local mesh=Instance.new("SpecialMesh");mesh.MeshType=Enum.MeshType.FileMesh;mesh.MeshId=Assets[layout.Casing];mesh.TextureId=Assets.casing_texture
+        mesh.Scale=layout.CasingScale;mesh.Parent=casing
+        casing.Velocity=cf:vectorToWorldSpace(Vector3.new(5+math.random()*3,2.5+math.random()*2,-.5+math.random()))
+        casing.RotVelocity=Vector3.new(10+math.random()*14,math.random()*20,math.random()*24)
+        local bounced=false;casing.Touched:connect(function(other)
+            if not bounced and other.Parent~=folder and other.CanCollide then bounced=true;play(casing,Assets.casing_bounce,.12,.9+math.random()*.2)end
+        end);Debris:AddItem(casing,3)
+        if hitPosition and(not layout.Automatic or number%3==0)then
+            local delta=hitPosition-muzzle
+            if delta.magnitude&gt;.1 then
+                local beam=part("Tracer",folder);beam.Anchored=true;beam.BrickColor=BrickColor.new("New Yeller");beam.Material=Enum.Material.Neon
+                beam.CFrame=CFrame.new(muzzle,hitPosition)*CFrame.new(0,0,-delta.magnitude/2)
+                local shape=Instance.new("BlockMesh");shape.Scale=Vector3.new(.045,.045,delta.magnitude/.2);shape.Parent=beam;Debris:AddItem(beam,.03)
+            end
+        end
+    end
+    return self
+end
+return M
+</ProtectedString></Properties><Item class="ModuleScript" referent="RBXaba9b70384eb4a01b901f5469f957aa6"><Properties><string name="Name">VRWeaponAssets</string><ProtectedString name="Source">-- Public Roblox assets, verified through anonymous Hexagon delivery.
+local assets={
+    ak_bolt_mesh="https://www.hexagon.pw/asset/?id=117894152668366",
+    ak_fire="https://www.hexagon.pw/asset/?id=3742927611",
+    ak_magazine_mesh="https://www.hexagon.pw/asset/?id=79624202898032",
+    ak_mesh="https://www.hexagon.pw/asset/?id=114208852722175",
+    ak_texture="https://www.hexagon.pw/asset/?id=78005805871988",
+    casing_bounce="https://www.hexagon.pw/asset/?id=325025387",
+    casing_texture="https://www.hexagon.pw/asset/?id=2794275376",
+    crowbar_hit="https://www.hexagon.pw/asset/?id=21433696",
+    crowbar_mesh="https://www.hexagon.pw/asset/?id=106907737955498",
+    crowbar_swing="https://www.hexagon.pw/asset/?id=21433711",
+    crowbar_texture="https://www.hexagon.pw/asset/?id=21426286",
+    dry_fire="https://www.hexagon.pw/asset/?id=537744814",
+    fire="https://www.hexagon.pw/asset/?id=3806566911",
+    magazine_in="https://www.hexagon.pw/asset/?id=1197340682",
+    magazine_mesh="https://www.hexagon.pw/asset/?id=80958271393580",
+    magazine_out="https://www.hexagon.pw/asset/?id=888773635",
+    pistol_casing_mesh="https://www.hexagon.pw/asset/?id=109894682585548",
+    pistol_mesh="https://www.hexagon.pw/asset/?id=89107029148183",
+    pistol_texture="https://www.hexagon.pw/asset/?id=2492931263",
+    reload="https://www.hexagon.pw/asset/?id=3821789416",
+    rifle_casing_mesh="https://www.hexagon.pw/asset/?id=97009576578556",
+    slide_mesh="https://www.hexagon.pw/asset/?id=72960610154574",
+    slide_pull="https://www.hexagon.pw/asset/?id=3719415248",
+    slide_release="https://www.hexagon.pw/asset/?id=265294983",
+    slide_texture="https://www.hexagon.pw/asset/?id=2492931686",
+}
+local offline=game:GetService("ReplicatedStorage"):FindFirstChild("HexagonVROfflineAssets")
+if offline and offline.Value then
+    local files={
+        ak_bolt_mesh="ak_bolt_mesh.mesh",
+        ak_fire="ak_fire.mp3",
+        ak_magazine_mesh="ak_magazine_mesh.mesh",
+        ak_mesh="ak_mesh.mesh",
+        ak_texture="ak_texture.png",
+        casing_bounce="casing_bounce.mp3",
+        casing_texture="casing_texture.png",
+        crowbar_hit="crowbar_hit.mp3",
+        crowbar_mesh="crowbar_mesh.mesh",
+        crowbar_swing="crowbar_swing.mp3",
+        crowbar_texture="crowbar_texture.png",
+        dry_fire="dry_fire.mp3",
+        fire="fire.mp3",
+        magazine_in="magazine_in.mp3",
+        magazine_mesh="magazine_mesh.mesh",
+        magazine_out="magazine_out.mp3",
+        pistol_casing_mesh="pistol_casing_mesh.mesh",
+        pistol_mesh="pistol_mesh.mesh",
+        pistol_texture="pistol_texture.png",
+        reload="reload.mp3",
+        rifle_casing_mesh="rifle_casing_mesh.mesh",
+        slide_mesh="slide_mesh.mesh",
+        slide_pull="slide_pull.mp3",
+        slide_release="slide_release.mp3",
+        slide_texture="slide_texture.png",
+    }
+    for key,file in pairs(files)do assets[key]="rbxasset://HexagonVRWeapons/"..file end
+end
+return assets
+</ProtectedString></Properties></Item></Item></Item><Item class="ModuleScript" referent="RBXe677a1e09912401483617a3f50ed7c2f"><Properties><string name="Name">VRChatClient</string><ProtectedString name="Source">-- Display only the server-filtered text delivered to this player.
+local ChatUI={}
+function ChatUI.new(player,menu)
+    local Starter=game:GetService("StarterGui")
+    local fallback,lines=nil,{}
+    local function panel(text)
+        lines[#lines+1]=text;if #lines&gt;6 then table.remove(lines,1)end
+        if not fallback or not fallback.Parent then
+            local gui=Instance.new("ScreenGui");gui.Name="HexagonVRChatDisplay";gui.Parent=player:WaitForChild("PlayerGui")
+            fallback=Instance.new("TextLabel");fallback.Name="PublicChat";fallback.Position=UDim2.new(0,8,0,235);fallback.Size=UDim2.new(0,320,0,155)
+            fallback.BackgroundColor3=Color3.new(0,0,0);fallback.BackgroundTransparency=.45;fallback.BorderSizePixel=0
+            fallback.Font=Enum.Font.SourceSans;fallback.FontSize=Enum.FontSize.Size18;fallback.TextColor3=Color3.new(1,1,1)
+            fallback.TextXAlignment=Enum.TextXAlignment.Left;fallback.TextYAlignment=Enum.TextYAlignment.Top;fallback.TextWrapped=true;fallback.Parent=gui
+        end
+        fallback.Text=table.concat(lines,"\n")
+    end
+    local self={}
+    function self:display(sender,text)
+        if not sender or type(text)~="string"then return end
+        local ok,blocked=pcall(function()return Starter:GetCore("GetBlockedUserIds")end)
+        if ok and type(blocked)=="table"then for _,id in ipairs(blocked)do if id==sender.userId then return end end end
+        menu:addMessage(sender,text)
+        local line=sender.Name..": "..text
+        local shown=pcall(function()Starter:SetCore("ChatMakeSystemMessage",{Text=line,Color=Color3.new(1,1,1),Font=Enum.Font.SourceSans,FontSize=Enum.FontSize.Size18})end)
+        if not shown then panel(line)end
+        local head=sender.Character and sender.Character:FindFirstChild("Head")
+        if head then pcall(function()game:GetService("Chat"):Chat(head,text,Enum.ChatColor.White)end)end
+    end
+    return self
+end
+return ChatUI
+</ProtectedString></Properties></Item><Item class="ModuleScript" referent="RBXa6b68fed55944db5a07929c6a3565abc"><Properties><string name="Name">VRMenu</string><ProtectedString name="Source">-- Private world-space menu with locally received chat history.
+local Menu={}
+function Menu.new(player,box,remote)
+    local self={opened=false,page="menu",draft="",shift=false,buttons={},messages={},queue={},serial=math.random(1,500000),pending=nil,lastButtons=0,scroll=0,notice="",hover=nil}
+    local serialValue=box:FindFirstChild("ui_serial")
+    if not serialValue then serialValue=Instance.new("NumberValue");serialValue.Name="ui_serial";serialValue.Value=self.serial;serialValue.Parent=box end
+    local history=box:FindFirstChild("chat_history")
+    if not history then history=Instance.new("Folder");history.Name="chat_history";history.Parent=box end
+    local stored=history:GetChildren();table.sort(stored,function(a,b)return tonumber(a.Name)&lt;tonumber(b.Name)end)
+    self.historySerial=0
+    for _,line in ipairs(stored)do
+        self.messages[#self.messages+1]=line.Value;self.historySerial=math.max(self.historySerial,tonumber(line.Name))
+    end
+    local panel=Instance.new("Part");panel.Name="HexagonVRMenu";panel.FormFactor=Enum.FormFactor.Custom
+    panel.Size=Vector3.new(4.8,3.8,.05);panel.Anchored=true;panel.CanCollide=false;panel.Transparency=1
+    self.panel=panel
+    local gui=Instance.new("SurfaceGui");gui.Name="HexagonVRMenuSurface";gui.Face=Enum.NormalId.Front
+    gui.CanvasSize=Vector2.new(1100,870);gui.Adornee=panel
+    local playerGui=player:WaitForChild("PlayerGui")
+    local assets="rbxasset://textures/ui/Settings/"
+    local hosted=require(script:WaitForChild("VRMenuAssets"))
+    local function texture(path)return hosted[path]or assets..path end
+    local background=Instance.new("Frame");background.Size=UDim2.new(1,0,1,0);background.BackgroundColor3=Color3.new(41/255,41/255,41/255);background.BackgroundTransparency=.2;background.BorderSizePixel=0;background.Parent=gui
+    local cursor=Instance.new("Frame");cursor.Size=UDim2.new(0,12,0,12);cursor.BackgroundColor3=Color3.new(1,1,1);cursor.BorderSizePixel=0;cursor.ZIndex=10;cursor.Visible=false;cursor.Parent=background
+    local function text(value,x,y,w,h,size)
+        local l=Instance.new("TextLabel");l.Position=UDim2.new(0,x,0,y);l.Size=UDim2.new(0,w,0,h)
+        l.BackgroundTransparency=1;l.TextColor3=Color3.new(1,1,1);l.Font=Enum.Font.SourceSans;l.FontSize=size or Enum.FontSize.Size32
+        l.BorderSizePixel=0;l.Text=value;l.TextWrapped=true;l.ZIndex=3;l.Parent=background;return l
+    end
+    local function image(path,x,y,w,h,sliced)
+        local i=Instance.new("ImageLabel");i.BackgroundTransparency=1;i.BorderSizePixel=0;i.Image=texture(path)
+        i.Position=UDim2.new(0,x,0,y);i.Size=UDim2.new(0,w,0,h);i.ZIndex=2;i.Parent=background
+        if sliced then i.ScaleType=Enum.ScaleType.Slice;i.SliceCenter=Rect.new(unpack(sliced))end
+        return i
+    end
+    local function button(value,x,y,w,h,action)
+        local plate=image("MenuBarAssets/MenuButton.png",x,y,w,h,{8,6,46,44})
+        local l=text(value,x,y-2,w,h);l.Font=Enum.Font.SourceSansBold
+        self.buttons[#self.buttons+1]={x=x,y=y,w=w,h=h,label=l,plate=plate,action=action};return l
+    end
+    function self:command(kind,a,b)
+        if #self.queue&gt;180 then self.notice="Please wait for the bridge.";return false end
+        serialValue.Value=serialValue.Value%999999+1;self.serial=serialValue.Value
+        local token=self.serial*16+kind
+        self.queue[#self.queue+1]={token,a or 0,b or 0};return token
+    end
+    function self:mailbox()
+        local v=box.ui.Value
+        if v.x&lt;0 or v.x&gt;255 or v.x~=math.floor(v.x) then return end
+        if self.pending and v.y==self.pending[1] then self.pending=nil end
+        if not self.pending and #self.queue&gt;0 then self.pending=table.remove(self.queue,1)end
+        local p=self.pending or {0,0,0};box.ui_out.Value=Vector3.new(p[1],p[2],p[3])
+        if self.sending and tick()-self.sending.started&gt;30 then
+            self.sending=nil;self.notice="Send was not confirmed. Your text is kept."
+            if self.opened and self.page=="chat"then self:draw()end
+        end
+    end
+    local turnSetting=box:FindFirstChild("turn_speed")
+    if not turnSetting then turnSetting=Instance.new("NumberValue");turnSetting.Name="turn_speed";turnSetting.Value=65;turnSetting.Parent=box end
+    self.turnSpeed=turnSetting.Value
+    function self:setTurnSpeed(value,fromHelper)
+        value=math.max(15,math.min(180,math.floor(value+.5)))
+        local changed=self.turnSpeed~=value;self.turnSpeed=value;turnSetting.Value=value
+        if not fromHelper then self:command(10,value,0)end
+        if changed and self.opened and self.page=="settings"then self:draw()end
+    end
+    function self:send()
+        if self.sending then self.notice="A message is still being sent.";self:draw();return end
+        local message=self.draft:match("^%s*(.-)%s*$")
+        if message=="" then return end
+        if #self.queue&gt;140 then self.notice="A message is still being sent.";self:draw();return end
+        serialValue.Value=serialValue.Value%999999+1
+        local id=serialValue.Value
+        self.sending={id=id,text=message,started=tick()};self.notice="Sending...";self:draw()
+        remote:FireServer("chat",{id=id,text=message})
+    end
+    function self:chatResult(id,ok,notice)
+        if not self.sending or self.sending.id~=id then return end
+        if ok and self.draft:match("^%s*(.-)%s*$")==self.sending.text then self.draft=""end
+        self.sending=nil;self.notice=notice or(ok and"Sent."or"Message was not sent. Your text is kept.")
+        if self.opened and self.page=="chat"then self:draw()end
+    end
+    function self:addMessage(sender,message)
+        local line=(sender and sender.Name or"Player")..": "..tostring(message)
+        self.messages[#self.messages+1]=line;self.historySerial=self.historySerial+1
+        local value=Instance.new("StringValue");value.Name=tostring(self.historySerial);value.Value=line;value.Parent=history
+        -- Keep the same messages visible while reading older conversation.
+        if self.scroll&gt;0 then self.scroll=self.scroll+1 end
+        if self.opened and self.page=="chat"then self:draw(self.scroll==0 and math.huge or nil)end
+    end
+    function self:scrollChat(direction)
+        local view=self.chatView
+        if view then
+            local y=view.CanvasPosition.y;local maximum=self.chatMaximum or 0
+            if direction&gt;0 and y&gt;0 then view.CanvasPosition=Vector2.new(0,math.max(0,y-60));return end
+            if direction&lt;0 and y&lt;maximum then view.CanvasPosition=Vector2.new(0,math.min(maximum,y+60));return end
+        end
+        local offset=math.max(0,math.min(math.max(0,#self.messages-6),self.scroll+direction))
+        if offset~=self.scroll then self.scroll=offset;self:draw(direction&gt;0 and 0 or math.huge)end
+    end
+    function self:scrollPlayers(direction)
+        self.playerScroll=math.max(0,math.min(math.max(0,#game.Players:GetPlayers()-4),(self.playerScroll or 0)+direction))
+        if self.opened and self.page=="menu"then self:draw()end
+    end
+    function self:draw(chatPosition)
+        if self.chatView then self.chatPosition=self.chatView.CanvasPosition.y end
+        if chatPosition~=nil then self.chatPosition=chatPosition end
+        self.chatView=nil
+        for _,child in ipairs(background:GetChildren())do if child~=cursor then child:Destroy()end end
+        self.buttons={}
+        local confirm=self.page=="confirmLeave"or self.page=="confirmReset"
+        if not confirm then
+            image("MenuBarAssets/MenuBackground.png",40,48,1020,82,{4,4,6,6})
+            local tabs={{"menu","Players","Radial/PlayerList.png"},{"settings","Settings","MenuBarIcons/GameSettingsTab.png"},{"chat","Chat","Radial/Chat.png"},{"help","Help","MenuBarIcons/HelpTab.png"}}
+            for index,tab in ipairs(tabs)do
+                local x=40+(index-1)*255;local selected=self.page==tab[1]
+                local icon=image(tab[3],x+20,68,42,38);icon.ImageTransparency=selected and 0 or .5
+                local title=text(tab[2],x+80,60,165,58);title.Font=Enum.Font.SourceSansBold;title.TextXAlignment=Enum.TextXAlignment.Left;title.TextTransparency=selected and 0 or .5
+                local underline=nil
+                if selected then underline=image("MenuBarAssets/MenuSelection.png",x,124,255,6,{3,1,4,5})end
+                self.buttons[#self.buttons+1]={x=x,y=48,w=255,h=82,label=title,icon=icon,tab=true,selected=selected,action=function()self.page=tab[1];self:draw()end}
+            end
+        end
+        if self.page=="confirmLeave" or self.page=="confirmReset" then
+            local leave=self.page=="confirmLeave"
+            text(leave and "Are you sure you want to leave the game?"or"Are you sure you want to reset your character?",90,245,920,120,Enum.FontSize.Size48).Font=Enum.Font.SourceSansBold
+            button(leave and "Don't Leave"or"Don't Reset",180,430,350,80,function()self.page="menu";self:draw()end)
+            button(leave and "Leave"or"Reset",570,430,350,80,function()
+                if leave then self:command(4)else remote:FireServer("reset")end
+                self:setOpen(false)
+            end)
+        elseif self.page=="chat" then
+            self.scroll=math.max(0,math.min(math.max(0,#self.messages-6),self.scroll))
+            local rows={};local last=math.max(0,#self.messages-self.scroll);local first=math.max(1,last-5)
+            for i=first,last do rows[#rows+1]=self.messages[i]end
+            text(last==0 and "No messages received yet"or("Messages "..first.."-"..last.." of "..#self.messages),60,132,865,22,Enum.FontSize.Size18)
+            local view=Instance.new("ScrollingFrame");view.Name="ChatHistory";view.Position=UDim2.new(0,60,0,155);view.Size=UDim2.new(0,865,0,155)
+            view.BackgroundTransparency=1;view.BorderSizePixel=0;view.ClipsDescendants=true;view.ScrollBarThickness=6;view.ZIndex=3;view.Parent=background
+            local chat=text(table.concat(rows,"\n"),0,0,850,10000,Enum.FontSize.Size28);chat.Parent=view;chat.TextYAlignment=Enum.TextYAlignment.Top;chat.TextXAlignment=Enum.TextXAlignment.Left
+            self.chatView=view
+            local firstFit,placing,maximum,lastHeight=true,false,0,nil
+            local function fit()
+                if self.chatView~=view or placing then return end
+                placing=true
+                local position=firstFit and(self.chatPosition or math.huge)or view.CanvasPosition.y
+                local follow=not firstFit and self.scroll==0 and position&gt;=maximum and maximum&gt;0
+                -- TextBounds may be zero until this world-space GUI renders.
+                local estimate=8
+                for _,line in ipairs(rows)do estimate=estimate+math.max(1,math.ceil(#line/28))*34 end
+                local height=math.max(155,chat.TextBounds.y&gt;0 and chat.TextBounds.y+8 or estimate)
+                if height~=lastHeight then chat.Size=UDim2.new(0,850,0,height);view.CanvasSize=UDim2.new(0,0,0,height);lastHeight=height end
+                maximum=height-155;self.chatMaximum=maximum
+                view.CanvasPosition=Vector2.new(0,follow and maximum or math.max(0,math.min(maximum,position)))
+                firstFit=false;placing=false
+            end
+            fit();chat.Changed:connect(function(property)if property=="TextBounds"then fit()end end)
+            button("Older",945,155,115,44,function()self:scrollChat(1)end).FontSize=Enum.FontSize.Size24
+            button("Newer",945,207,115,44,function()self:scrollChat(-1)end).FontSize=Enum.FontSize.Size24
+            button("Latest",945,259,115,44,function()self.scroll=0;self:draw(math.huge)end).FontSize=Enum.FontSize.Size24
+            local draft=text(self.draft==""and"Public chat: select the keys below"or self.draft.."|",70,320,960,58,Enum.FontSize.Size32)
+            draft.BackgroundTransparency=.6;draft.BackgroundColor3=Color3.new(0,0,0);draft.TextXAlignment=Enum.TextXAlignment.Left
+            local lines={"1234567890","qwertyuiop","asdfghjkl","zxcvbnm,./"}
+            local symbols={['1']='!',['2']='@',['3']='#',['4']='$',['5']='%',['6']='^',['7']='&amp;',['8']='*',['9']='(',['0']=')',[',']='&lt;',['.']='&gt;',['/']='?'}
+            for row,line in ipairs(lines)do
+                local width=91;local start=(1100-#line*(width+9))/2
+                for col=1,#line do
+                    local char=line:sub(col,col);local shown=self.shift and(symbols[char]or char:upper())or char
+                    button(shown,start+(col-1)*(width+9),385+(row-1)*72,width,62,function()
+                        if #self.draft&lt;140 then self.draft=self.draft..shown end;self:draw()
+                    end)
+                end
+            end
+            button(self.shift and "SHIFT"or"Shift",40,680,150,64,function()self.shift=not self.shift;self:draw()end)
+            button("Space",205,680,360,64,function()if #self.draft&lt;140 then self.draft=self.draft.." "end;self:draw()end)
+            button("Backspace",580,680,230,64,function()self.draft=self.draft:sub(1,-2);self:draw()end)
+            button("Enter",825,680,235,64,function()self:send()end)
+        elseif self.page=="settings"then
+            local function row(name,value,y,action)
+                local label=text(name,70,y,440,64);label.TextXAlignment=Enum.TextXAlignment.Left
+                if action then button(value,560,y,460,64,action)else text(value,560,y,460,64)end
+            end
+            row("Camera Mode","First Person",190)
+            row("Movement Mode","Head Relative",278)
+            local speedLabel=text("Turn Speed",70,366,440,64);speedLabel.TextXAlignment=Enum.TextXAlignment.Left
+            button("-",560,366,110,64,function()self:setTurnSpeed(self.turnSpeed-10)end)
+            text(tostring(self.turnSpeed).." deg/s",680,366,240,64)
+            button("+",930,366,110,64,function()self:setTurnSpeed(self.turnSpeed+10)end)
+            if self.nativeRendering then row("View Scale","Native Headset Projection",454)
+            else row("View Scale",self.wide and "&lt;  Wide  &gt;"or"&lt;  Headset  &gt;",454,function()self.wide=not self.wide;self:command(self.wide and 3 or 2);self:draw()end)end
+            row("Arm Forward",tostring(math.floor((self.armForward or .3)*100/3+.5)).." cm  &gt;",542,function()self:command(8)end)
+            row("Headset Position","Recenter",630,function()self:command(1);self:setOpen(false)end)
+        elseif self.page=="help"then
+            local rows={{"Move / Turn","Left / Right thumbstick"},{"Jump","A button"},{"Open / Close Menu","Y button only"},{"Grab / Drop","Hold / release either grip"},{"Fire / Select","Trigger on holding hand"},{"Reload","Other hand: magazine / slide"}}
+            for index,row in ipairs(rows)do
+                local y=170+(index-1)*75;local name=text(row[1],80,y,430,60);name.Font=Enum.Font.SourceSansBold;name.TextXAlignment=Enum.TextXAlignment.Left
+                text(row[2],550,y,460,60)
+            end
+        else
+            local title=text("Players",65,160,970,65,Enum.FontSize.Size36);title.Font=Enum.Font.SourceSansBold;title.TextXAlignment=Enum.TextXAlignment.Left
+            local members=game.Players:GetPlayers();table.sort(members,function(a,b)return a.Name&lt;b.Name end)
+            self.playerScroll=math.max(0,math.min(math.max(0,#members-4),self.playerScroll or 0))
+            local first=self.playerScroll+1
+            for index=first,math.min(#members,first+3)do
+                local member=members[index];local y=245+(index-first)*94
+                local row=image("MenuBarAssets/MenuButton.png",55,y,990,80,{8,6,46,44});row.ImageTransparency=.25
+                image("Radial/PlayerList.png",75,y+17,44,44)
+                local name=text(member.Name,145,y,650,80,Enum.FontSize.Size36);name.Font=Enum.Font.SourceSansBold;name.TextXAlignment=Enum.TextXAlignment.Left
+                if member==player then text("You",850,y,160,80)end
+            end
+            button("Previous",60,642,260,54,function()self:scrollPlayers(-4)end)
+            text(#members==0 and "No players"or(first.."-"..math.min(#members,first+3).." of "..#members),345,642,410,54,Enum.FontSize.Size28)
+            button("Next",780,642,260,54,function()self:scrollPlayers(4)end)
+        end
+        if not confirm then
+            button("Reset Character",40,766,325,72,function()self.page="confirmReset";self:draw()end)
+            button("Leave Game",387,766,325,72,function()self.page="confirmLeave";self:draw()end)
+            button("Resume Game",734,766,325,72,function()self:setOpen(false)end)
+            text(self.page=="chat"and(self.notice~=""and self.notice or"Right thumbstick scrolls chat")or"Point and select with the right trigger",60,self.page=="chat"and 744 or 704,980,self.page=="chat"and 22 or 38,self.page=="chat"and Enum.FontSize.Size18 or Enum.FontSize.Size24)
+        end
+    end
+    function self:setOpen(open,page)
+        self.opened=open
+        if page then self.page=page end
+        if open then
+            local camera=workspace.CurrentCamera;local head=camera.CoordinateFrame
+            local look=head.lookVector;look=Vector3.new(look.x,0,look.z)
+            if look.magnitude&lt;.01 then look=Vector3.new(0,0,-1)else look=look.unit end
+            local position=head.p+look*5.5+Vector3.new(0,-.35,0)
+            panel.CFrame=CFrame.new(position,position-look);panel.Parent=camera;self:draw()
+        else panel.Parent=nil end
+        gui.Parent=open and playerGui or nil;cursor.Visible=false
+    end
+    function self:update(worldRight,mask,axis)
+        local function down(bit)return math.floor(mask/bit)%2==1 end
+        local function pressed(bit)return down(bit)and math.floor(self.lastButtons/bit)%2==0 end
+        if not down(1)then self.consumeTrigger=false end
+        if pressed(2)then self:setOpen(not self.opened,"menu")end
+        if self.opened and self.page=="chat"and math.abs(axis)&gt;.65 and tick()-(self.lastScroll or 0)&gt;.25 then
+            self.lastScroll=tick();self:scrollChat(axis&lt;0 and 1 or -1)
+        end
+        if self.opened and self.page=="menu"and math.abs(axis)&gt;.65 and tick()-(self.lastScroll or 0)&gt;.25 then
+            self.lastScroll=tick();self:scrollPlayers(axis&gt;0 and 1 or -1)
+        end
+        cursor.Visible=false;self.hover=nil
+        if self.opened and down(1)then self.consumeTrigger=true end
+        if self.opened and worldRight then
+            local origin=panel.CFrame:pointToObjectSpace(worldRight.p)
+            local direction=panel.CFrame:vectorToObjectSpace(worldRight.lookVector)
+            if math.abs(direction.z)&gt;.001 then
+                local distance=(-panel.Size.z/2-origin.z)/direction.z
+                if distance&gt;0 then
+                    local hit=origin+direction*distance
+                    local x=(.5-hit.x/panel.Size.x)*1100;local y=(.5-hit.y/panel.Size.y)*870
+                    if x&gt;=0 and x&lt;=1100 and y&gt;=0 and y&lt;=870 then
+                        cursor.Visible=true;cursor.Position=UDim2.new(0,x-8,0,y-8)
+                        for _,b in ipairs(self.buttons)do if x&gt;=b.x and x&lt;=b.x+b.w and y&gt;=b.y and y&lt;=b.y+b.h then self.hover=b;break end end
+                    end
+                end
+            end
+            for _,b in ipairs(self.buttons)do
+                if b.plate then b.plate.Image=texture(b==self.hover and "MenuBarAssets/MenuButtonSelected.png"or"MenuBarAssets/MenuButton.png")end
+                if b.tab then b.label.TextTransparency=(b.selected or b==self.hover)and 0 or .5;b.icon.ImageTransparency=b.label.TextTransparency end
+            end
+            if pressed(1)and self.hover then self.hover.action()end
+        end
+        local tool=nil
+        if player.Character then for _,child in ipairs(player.Character:GetChildren())do if child:IsA("Tool")then tool=child;break end end end
+        local activate=not self.opened and down(1)and not self.consumeTrigger
+        if tool~=self.tool and self.tool then pcall(function()self.tool:Deactivate()end)end
+        if tool and (tool~=self.tool or activate~=self.activated)then pcall(function()if activate then tool:Activate()else tool:Deactivate()end end)end
+        self.tool=tool;self.activated=activate;self.lastButtons=mask
+        return self.opened
+    end
+    local function incoming(kind,sender,message,recipient)
+        if kind==Enum.PlayerChatType.Whisper and sender~=player and recipient~=player then return end
+        if kind==Enum.PlayerChatType.Team and sender and sender.TeamColor~=player.TeamColor then return end
+        self:addMessage(sender,message)
+    end
+    -- Some 2015 builds reserve PlayerChatted for CoreScripts.
+    local connected=pcall(function()game.Players.PlayerChatted:connect(incoming)end)
+    local watchers={}
+    local function watch(sender)
+        if connected or watchers[sender]or not sender:IsA("Player")then return end
+        watchers[sender]=sender.Chatted:connect(function(message,recipient)
+            if recipient and sender~=player and recipient~=player then return end
+            incoming(recipient and Enum.PlayerChatType.Whisper or Enum.PlayerChatType.All,sender,message,recipient)
+        end)
+    end
+    if not connected then
+        for _,sender in ipairs(game.Players:GetPlayers())do watch(sender)end
+    end
+    -- PlayerAdded is server-only in this client generation.
+    game.Players.ChildAdded:connect(function(sender)
+        watch(sender)
+        if sender:IsA("Player")and self.opened and self.page=="menu"then self:draw()end
+    end)
+    game.Players.ChildRemoved:connect(function(sender)
+        if watchers[sender]then watchers[sender]:disconnect();watchers[sender]=nil end
+        if sender:IsA("Player")then self:scrollPlayers(0)end
+    end)
+    self:draw();return self
+end
+return Menu
+</ProtectedString></Properties><Item class="ModuleScript" referent="RBX9bc0f16eade04eca881c17011132d081"><Properties><string name="Name">VRMenuAssets</string><ProtectedString name="Source">-- Verified Hexagon image assets. Pending uploads use built-in textures.
+return {
+    ["MenuBarAssets/MenuBackground.png"] = "https://www.hexagon.pw/asset/?id=105304",
+    ["MenuBarAssets/MenuButton.png"] = "https://www.hexagon.pw/asset/?id=105306",
+    ["MenuBarAssets/MenuButtonSelected.png"] = "https://www.hexagon.pw/asset/?id=105308",
+    ["MenuBarAssets/MenuSelection.png"] = "https://www.hexagon.pw/asset/?id=105310",
+    ["MenuBarIcons/GameSettingsTab.png"] = "https://www.hexagon.pw/asset/?id=105312",
+    ["MenuBarIcons/HelpTab.png"] = "https://www.hexagon.pw/asset/?id=105314",
+    ["Radial/Chat.png"] = "https://www.hexagon.pw/asset/?id=105316",
+    ["Radial/PlayerList.png"] = "https://www.hexagon.pw/asset/?id=105318",
+}
+</ProtectedString></Properties></Item></Item></Item></Item></roblox>

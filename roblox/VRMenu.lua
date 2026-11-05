@@ -46,7 +46,7 @@ function Menu.new(player,box,remote)
     end
     function self:mailbox()
         local v=box.ui.Value
-        if v.x<0 or v.x>127 or v.x~=math.floor(v.x) then return end
+        if v.x<0 or v.x>255 or v.x~=math.floor(v.x) then return end
         if self.pending and v.y==self.pending[1] then self.pending=nil end
         if not self.pending and #self.queue>0 then self.pending=table.remove(self.queue,1)end
         local p=self.pending or {0,0,0};box.ui_out.Value=Vector3.new(p[1],p[2],p[3])
@@ -54,6 +54,15 @@ function Menu.new(player,box,remote)
             self.sending=nil;self.notice="Send was not confirmed. Your text is kept."
             if self.opened and self.page=="chat"then self:draw()end
         end
+    end
+    local turnSetting=box:FindFirstChild("turn_speed")
+    if not turnSetting then turnSetting=Instance.new("NumberValue");turnSetting.Name="turn_speed";turnSetting.Value=65;turnSetting.Parent=box end
+    self.turnSpeed=turnSetting.Value
+    function self:setTurnSpeed(value,fromHelper)
+        value=math.max(15,math.min(180,math.floor(value+.5)))
+        local changed=self.turnSpeed~=value;self.turnSpeed=value;turnSetting.Value=value
+        if not fromHelper then self:command(10,value,0)end
+        if changed and self.opened and self.page=="settings"then self:draw()end
     end
     function self:send()
         if self.sending then self.notice="A message is still being sent.";self:draw();return end
@@ -172,13 +181,16 @@ function Menu.new(player,box,remote)
             end
             row("Camera Mode","First Person",190)
             row("Movement Mode","Head Relative",278)
-            row("Turn Mode","Snap Turn (30 degrees)",366)
+            local speedLabel=text("Turn Speed",70,366,440,64);speedLabel.TextXAlignment=Enum.TextXAlignment.Left
+            button("-",560,366,110,64,function()self:setTurnSpeed(self.turnSpeed-10)end)
+            text(tostring(self.turnSpeed).." deg/s",680,366,240,64)
+            button("+",930,366,110,64,function()self:setTurnSpeed(self.turnSpeed+10)end)
             if self.nativeRendering then row("View Scale","Native Headset Projection",454)
             else row("View Scale",self.wide and "<  Wide  >"or"<  Headset  >",454,function()self.wide=not self.wide;self:command(self.wide and 3 or 2);self:draw()end)end
             row("Arm Forward",tostring(math.floor((self.armForward or .3)*100/3+.5)).." cm  >",542,function()self:command(8)end)
             row("Headset Position","Recenter",630,function()self:command(1);self:setOpen(false)end)
         elseif self.page=="help"then
-            local rows={{"Move","Left thumbstick"},{"Turn","Right thumbstick"},{"Jump","A button"},{"Menu / Chat","Y button / B button"},{"Select / Use Tool","Right trigger"},{"Recenter","X button"}}
+            local rows={{"Move / Turn","Left / Right thumbstick"},{"Jump","A button"},{"Open / Close Menu","Y button only"},{"Grab / Drop","Hold / release either grip"},{"Fire / Select","Trigger on holding hand"},{"Reload","Other hand: magazine / slide"}}
             for index,row in ipairs(rows)do
                 local y=170+(index-1)*75;local name=text(row[1],80,y,430,60);name.Font=Enum.Font.SourceSansBold;name.TextXAlignment=Enum.TextXAlignment.Left
                 text(row[2],550,y,460,60)
@@ -223,7 +235,6 @@ function Menu.new(player,box,remote)
         local function pressed(bit)return down(bit)and math.floor(self.lastButtons/bit)%2==0 end
         if not down(1)then self.consumeTrigger=false end
         if pressed(2)then self:setOpen(not self.opened,"menu")end
-        if pressed(4)then self:setOpen(not(self.opened and self.page=="chat"),"chat")end
         if self.opened and self.page=="chat"and math.abs(axis)>.65 and tick()-(self.lastScroll or 0)>.25 then
             self.lastScroll=tick();self:scrollChat(axis<0 and 1 or -1)
         end

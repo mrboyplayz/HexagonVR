@@ -22,3 +22,6 @@ native-report-*.jsonl
 *_token*
 
 *.pid
+
+# Private published map; the public kit includes the offline demo instead.
+Hexagon-VR-Weapons.rbxlx

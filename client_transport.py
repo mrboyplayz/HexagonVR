@@ -178,7 +178,8 @@ class LocalTransport:
         encoded=(4 if pose.get('nativeRendering')else 3)+max(0,min(1,pose.get('armForward',0)))/10
         self.write(self.cells['settings'],struct.pack('<3f',pose.get('fov',110),pose.get('cameraForward',.35),encoded))
         if 'ui' in self.cells:self.write(self.cells['ui'],struct.pack('<3f',pose.get('buttons',0),self.ui_token,pose.get('uiAxis',0)))
-        self.heartbeat(flags,pose.get('turn',0))
+        from vr_settings import encode_turn
+        self.heartbeat(flags,encode_turn(pose.get('turn',0),pose.get('turnSpeed',65)))
         self.sent_times[self.sequence]=time.monotonic()
     def ui_command(self):
         candidates=[]
@@ -186,7 +187,7 @@ class LocalTransport:
             v=self.vec(address)
             if not v or not all(x.is_integer() and 0<=x<16777216 for x in v):continue
             token=int(v[0]);kind=token%16
-            if token<=16 or kind not in range(1,9):continue
+            if token<=16 or kind not in range(1,11):continue
             serial=token//16
             if not 1<=serial<=999999:continue
             delta=(serial-self.ui_token//16)%999999 if self.ui_token else serial

@@ -1,0 +1,86 @@
+{
+  "provider": "Roblox",
+  "meshes": {
+    "ak_bolt_mesh": {
+      "file": "ak_bolt_mesh.mesh",
+      "sha256": "ccd4f2effed7c00d05296c52a73cf4a72ea9823fe025a77bbeec5825b316f759",
+      "asset_id": "117894152668366",
+      "verified": true,
+      "public_delivery_verified": true,
+      "url": "https://www.hexagon.pw/asset/?id=117894152668366",
+      "bytes": 70793
+    },
+    "ak_magazine_mesh": {
+      "file": "ak_magazine_mesh.mesh",
+      "sha256": "e0f3ed91a8977e1741ba889102a60bde57798d9bcd90ae18bfffaa1caa90cf35",
+      "asset_id": "79624202898032",
+      "verified": true,
+      "public_delivery_verified": true,
+      "url": "https://www.hexagon.pw/asset/?id=79624202898032",
+      "bytes": 365453
+    },
+    "crowbar_mesh": {
+      "file": "crowbar_mesh.mesh",
+      "sha256": "c14e5d936091e0a261673036f164a304a698415cb02a614430043274fe72b1e2",
+      "asset_id": "106907737955498",
+      "verified": true,
+      "public_delivery_verified": true,
+      "url": "https://www.hexagon.pw/asset/?id=106907737955498",
+      "bytes": 35929
+    },
+    "ak_mesh": {
+      "file": "ak_mesh.mesh",
+      "sha256": "1838ad2993a709c02258e5cba88c182950bbeaa65ea809052377078ba8debaf9",
+      "asset_id": "114208852722175",
+      "verified": true,
+      "public_delivery_verified": true,
+      "url": "https://www.hexagon.pw/asset/?id=114208852722175",
+      "bytes": 1159177
+    },
+    "magazine_mesh": {
+      "file": "magazine_mesh.mesh",
+      "sha256": "e146906bc7c260b6f6f8bf1fd18e443151d007ba37ed9c59dadf6aa8a9dd0f77",
+      "asset_id": "80958271393580",
+      "verified": true,
+      "public_delivery_verified": true,
+      "url": "https://www.hexagon.pw/asset/?id=80958271393580",
+      "bytes": 1129
+    },
+    "pistol_casing_mesh": {
+      "file": "pistol_casing_mesh.mesh",
+      "sha256": "f04f732b3c35b91ba8c5bdf7020ddfc7ab817b5ec4e89899dd15dcc2782b85eb",
+      "asset_id": "109894682585548",
+      "verified": true,
+      "public_delivery_verified": true,
+      "url": "https://www.hexagon.pw/asset/?id=109894682585548",
+      "bytes": 7865
+    },
+    "pistol_mesh": {
+      "file": "pistol_mesh.mesh",
+      "sha256": "1552ffd7236f36bcda51bcc8ebae9f9a37522720fcaf996ce1fe58422e4fe970",
+      "asset_id": "89107029148183",
+      "verified": true,
+      "public_delivery_verified": true,
+      "url": "https://www.hexagon.pw/asset/?id=89107029148183",
+      "bytes": 58297
+    },
+    "rifle_casing_mesh": {
+      "file": "rifle_casing_mesh.mesh",
+      "sha256": "fa02228055c0632c9eca4032e1bc9d27cb352867edd81c0dadad23349d567374",
+      "asset_id": "97009576578556",
+      "verified": true,
+      "public_delivery_verified": true,
+      "url": "https://www.hexagon.pw/asset/?id=97009576578556",
+      "bytes": 9481
+    },
+    "slide_mesh": {
+      "file": "slide_mesh.mesh",
+      "sha256": "81b7d5c7d748456c94729deab9ad1b6c2eb86582be12144130ca59c0e1a4257d",
+      "asset_id": "72960610154574",
+      "verified": true,
+      "public_delivery_verified": true,
+      "url": "https://www.hexagon.pw/asset/?id=72960610154574",
+      "bytes": 19369
+    }
+  }
+}

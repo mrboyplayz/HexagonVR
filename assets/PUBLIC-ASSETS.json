@@ -1,0 +1,177 @@
+{
+  "crowbar_mesh": {
+    "file": "crowbar_mesh.mesh",
+    "asset_id": "106907737955498",
+    "url": "https://www.hexagon.pw/asset/?id=106907737955498",
+    "public_delivery_verified": true,
+    "provider": "Roblox"
+  },
+  "crowbar_texture": {
+    "file": "crowbar_texture.png",
+    "asset_id": "21426286",
+    "url": "https://www.hexagon.pw/asset/?id=21426286",
+    "public_delivery_verified": true,
+    "provider": "Roblox"
+  },
+  "pistol_mesh": {
+    "file": "pistol_mesh.mesh",
+    "asset_id": "89107029148183",
+    "url": "https://www.hexagon.pw/asset/?id=89107029148183",
+    "public_delivery_verified": true,
+    "provider": "Roblox"
+  },
+  "pistol_texture": {
+    "file": "pistol_texture.png",
+    "asset_id": "2492931263",
+    "url": "https://www.hexagon.pw/asset/?id=2492931263",
+    "public_delivery_verified": true,
+    "provider": "Roblox"
+  },
+  "slide_mesh": {
+    "file": "slide_mesh.mesh",
+    "asset_id": "72960610154574",
+    "url": "https://www.hexagon.pw/asset/?id=72960610154574",
+    "public_delivery_verified": true,
+    "provider": "Roblox"
+  },
+  "slide_texture": {
+    "file": "slide_texture.png",
+    "asset_id": "2492931686",
+    "url": "https://www.hexagon.pw/asset/?id=2492931686",
+    "public_delivery_verified": true,
+    "provider": "Roblox"
+  },
+  "magazine_mesh": {
+    "file": "magazine_mesh.mesh",
+    "asset_id": "80958271393580",
+    "url": "https://www.hexagon.pw/asset/?id=80958271393580",
+    "public_delivery_verified": true,
+    "provider": "Roblox"
+  },
+  "fire": {
+    "file": "fire.mp3",
+    "asset_id": "3806566911",
+    "url": "https://www.hexagon.pw/asset/?id=3806566911",
+    "public_delivery_verified": true,
+    "provider": "Roblox"
+  },
+  "reload": {
+    "file": "reload.mp3",
+    "asset_id": "3821789416",
+    "url": "https://www.hexagon.pw/asset/?id=3821789416",
+    "public_delivery_verified": true,
+    "provider": "Roblox"
+  },
+  "crowbar_hit": {
+    "file": "crowbar_hit.mp3",
+    "asset_id": "21433696",
+    "url": "https://www.hexagon.pw/asset/?id=21433696",
+    "public_delivery_verified": true,
+    "provider": "Roblox"
+  },
+  "crowbar_swing": {
+    "file": "crowbar_swing.mp3",
+    "asset_id": "21433711",
+    "url": "https://www.hexagon.pw/asset/?id=21433711",
+    "public_delivery_verified": true,
+    "provider": "Roblox"
+  },
+  "ak_fire": {
+    "file": "ak_fire.mp3",
+    "asset_id": "3742927611",
+    "url": "https://www.hexagon.pw/asset/?id=3742927611",
+    "public_delivery_verified": true,
+    "provider": "Roblox"
+  },
+  "dry_fire": {
+    "file": "dry_fire.mp3",
+    "asset_id": "537744814",
+    "url": "https://www.hexagon.pw/asset/?id=537744814",
+    "public_delivery_verified": true,
+    "provider": "Roblox"
+  },
+  "magazine_out": {
+    "file": "magazine_out.mp3",
+    "asset_id": "888773635",
+    "url": "https://www.hexagon.pw/asset/?id=888773635",
+    "public_delivery_verified": true,
+    "provider": "Roblox"
+  },
+  "magazine_in": {
+    "file": "magazine_in.mp3",
+    "asset_id": "1197340682",
+    "url": "https://www.hexagon.pw/asset/?id=1197340682",
+    "public_delivery_verified": true,
+    "provider": "Roblox"
+  },
+  "slide_release": {
+    "file": "slide_release.mp3",
+    "asset_id": "265294983",
+    "url": "https://www.hexagon.pw/asset/?id=265294983",
+    "public_delivery_verified": true,
+    "provider": "Roblox"
+  },
+  "slide_pull": {
+    "file": "slide_pull.mp3",
+    "asset_id": "3719415248",
+    "url": "https://www.hexagon.pw/asset/?id=3719415248",
+    "public_delivery_verified": true,
+    "provider": "Roblox"
+  },
+  "casing_bounce": {
+    "file": "casing_bounce.mp3",
+    "asset_id": "325025387",
+    "url": "https://www.hexagon.pw/asset/?id=325025387",
+    "public_delivery_verified": true,
+    "provider": "Roblox"
+  },
+  "pistol_casing_mesh": {
+    "file": "pistol_casing_mesh.mesh",
+    "asset_id": "109894682585548",
+    "url": "https://www.hexagon.pw/asset/?id=109894682585548",
+    "public_delivery_verified": true,
+    "provider": "Roblox"
+  },
+  "rifle_casing_mesh": {
+    "file": "rifle_casing_mesh.mesh",
+    "asset_id": "97009576578556",
+    "url": "https://www.hexagon.pw/asset/?id=97009576578556",
+    "public_delivery_verified": true,
+    "provider": "Roblox"
+  },
+  "casing_texture": {
+    "file": "casing_texture.png",
+    "asset_id": "2794275376",
+    "url": "https://www.hexagon.pw/asset/?id=2794275376",
+    "public_delivery_verified": true,
+    "provider": "Roblox"
+  },
+  "ak_texture": {
+    "file": "ak_texture.png",
+    "asset_id": "78005805871988",
+    "url": "https://www.hexagon.pw/asset/?id=78005805871988",
+    "public_delivery_verified": true,
+    "provider": "Roblox"
+  },
+  "ak_mesh": {
+    "file": "ak_mesh.mesh",
+    "asset_id": "114208852722175",
+    "url": "https://www.hexagon.pw/asset/?id=114208852722175",
+    "public_delivery_verified": true,
+    "provider": "Roblox"
+  },
+  "ak_bolt_mesh": {
+    "file": "ak_bolt_mesh.mesh",
+    "asset_id": "117894152668366",
+    "url": "https://www.hexagon.pw/asset/?id=117894152668366",
+    "public_delivery_verified": true,
+    "provider": "Roblox"
+  },
+  "ak_magazine_mesh": {
+    "file": "ak_magazine_mesh.mesh",
+    "asset_id": "79624202898032",
+    "url": "https://www.hexagon.pw/asset/?id=79624202898032",
+    "public_delivery_verified": true,
+    "provider": "Roblox"
+  }
+}

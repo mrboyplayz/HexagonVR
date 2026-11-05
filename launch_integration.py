@@ -28,6 +28,48 @@ def state_path():
     return Path(os.environ['LOCALAPPDATA']) / 'HexagonVR' / 'launch-state.json'
 
 
+def is_vr_command(command):
+    return isinstance(command,str) and ('--protocol' in command.lower() or 'hexagonvr.exe' in command.lower())
+
+
+def regular_command(*preferred):
+    """Never save or restore a previous VR redirect as the normal launcher."""
+    for command in preferred:
+        if isinstance(command,str)and command and not is_vr_command(command):return command
+    key='Software\\Classes\\'+SCHEME+'\\shell\\open\\command'
+    for root in (winreg.HKEY_CURRENT_USER,winreg.HKEY_LOCAL_MACHINE):
+        try:
+            with winreg.OpenKey(root,key)as handle:command,kind=winreg.QueryValueEx(handle,'')
+            if kind in(winreg.REG_SZ,winreg.REG_EXPAND_SZ)and not is_vr_command(command):return command
+        except FileNotFoundError:pass
+    launchers=list((Path(os.environ['LOCALAPPDATA'])/'Hexagon/Versions').glob('*/HexagonPlayerLauncher.exe'))
+    if launchers:return subprocess.list2cmdline([str(max(launchers,key=lambda p:p.stat().st_mtime))])+' "%1"'
+    raise RuntimeError('The regular Hexagon launcher was not found; repair Hexagon with its installer')
+
+
+def process_running(pid):
+    kernel=C.WinDLL('kernel32',use_last_error=True)
+    kernel.OpenProcess.restype=C.c_void_p
+    handle=kernel.OpenProcess(0x100000,False,int(pid))
+    if not handle:return False
+    try:return kernel.WaitForSingleObject(C.c_void_p(handle),0)==0x102
+    finally:kernel.CloseHandle(C.c_void_p(handle))
+
+
+def repair_stale_routing():
+    path=state_path();redirect=RegistryRedirect('',path)
+    if path.exists():
+        state=json.loads(path.read_text())
+        if process_running(state.get('pid',0)):return False
+        redirect.restore(state)
+    current=redirect.user_value()
+    if current and is_vr_command(current[0]):
+        command=regular_command()
+        with winreg.CreateKey(winreg.HKEY_CURRENT_USER,redirect.key)as handle:winreg.SetValueEx(handle,'',0,winreg.REG_SZ,command)
+        redirect.notify_shell()
+    return True
+
+
 def parse_protocol(uri):
     if len(uri) > 65536 or any(c in uri for c in '\r\n\x00"') or not uri.startswith(SCHEME + ':1+'):
         raise ValueError('Invalid Hexagon launch request')
@@ -55,6 +97,7 @@ class RegistryRedirect:
     def __init__(self, replacement, path=None, scheme=SCHEME):
         self.replacement = replacement
         self.path = path or state_path()
+        self.scheme = scheme
         self.key = 'Software\\Classes\\' + scheme + '\\shell\\open\\command'
 
     def user_value(self):
@@ -67,6 +110,8 @@ class RegistryRedirect:
     def restore(self, state):
         if self.user_value() == (state['replacement'], winreg.REG_SZ):
             old = state['user_original']
+            if self.scheme==SCHEME and old and is_vr_command(old[0]):
+                old=(regular_command(state.get('original')),winreg.REG_SZ)
             if old is not None:
                 with winreg.CreateKey(winreg.HKEY_CURRENT_USER, self.key) as key:
                     winreg.SetValueEx(key, '', 0, old[1], old[0])
@@ -103,6 +148,9 @@ class RegistryRedirect:
             original, kind = winreg.QueryValueEx(handle, '')
         if not isinstance(original, str) or kind not in (winreg.REG_SZ, winreg.REG_EXPAND_SZ):
             raise RuntimeError('Unsupported Hexagon launch registration')
+        if self.scheme==SCHEME and is_vr_command(original):
+            original=regular_command()
+            old=(original,winreg.REG_SZ)
         state = dict(replacement=self.replacement, user_original=old, original=original,
                      endpoint=endpoint, key=key.hex(), pid=os.getpid())
         self.path.parent.mkdir(parents=True, exist_ok=True)
@@ -142,7 +190,7 @@ def handle_protocol(uri):
     parse_protocol(uri)
     path = state_path()
     if not path.exists():
-        raise RuntimeError('HexagonVR launch state is missing; reopen the regular Hexagon launcher')
+        repair_stale_routing();return forward_original(regular_command(),uri)
     state = json.loads(path.read_text())
     try:
         C.WinDLL('user32').AllowSetForegroundWindow(C.c_uint32(state['pid']))
@@ -151,9 +199,9 @@ def handle_protocol(uri):
             if not connection.poll(5) or connection.recv_bytes(16) != b'ok':
                 raise RuntimeError('The running HexagonVR helper could not accept the launch')
         return
-    except (FileNotFoundError, ConnectionError, OSError):
+    except (FileNotFoundError, ConnectionError, OSError, EOFError):
         RegistryRedirect(state['replacement'], path).restore(state)
-        forward_original(state['original'], uri)
+        forward_original(regular_command(state['original']), uri)
 
 
 def launch_player(uri, directory):

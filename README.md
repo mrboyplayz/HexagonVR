@@ -1,5 +1,34 @@
 # HexagonVR
 
+## Physical weapon build
+
+This build adds physical hats, a crowbar, pistol, and AK-47 to the existing 2015 VR support. Use the **new EXE and updated place together** for the current controls and controller vibration. Close the older helper and rejoin a fresh server after installing an updated place. **Every VR player must upgrade: v0.2.1-beta.1 and earlier do not send grip-button input.**
+
+- Hold either controller's grip near a ground pickup to grab it. Nearby surfaces have a 2.5-stud grab radius. Point at a pickup within 6 studs for distance grab, so you can pick it up without bending to the floor. Holding grip keeps trying as you approach. Release it to drop or throw.
+- Touch your hat or another player's hat and hold grip to remove it. Your hand keeps the point where you grabbed it, so wrist rotation pivots the hat around that point. Release it near your head or another player's head to equip it there. Release it elsewhere for a physical ground pickup. The same original hat moves between players; everyone sees the transfer. Hats require a nearby touch rather than distance grab.
+- The crowbar is 4.2 studs long and points forward from its shaft grip. Its original Marketplace texture coordinates are preserved. Swing it into a player or NPC. Slow contact does no damage; repeated contact is limited by a cooldown.
+- Hold the pistol in either hand. Keep grip held on the magazine, guide its top into the bottom opening, then push it up the well until it clicks. It remains in your hand during insertion and only locks when fully seated. Releasing halfway drops it. AK magazines follow an assisted rock-in path.
+- Grasp the slide on top, pull it back a few centimeters, then release it or move your hand forward. The enlarged grab area and assisted slide travel make this easier. The AK charging handle works the same way on the receiver's right side.
+- Pull the trigger on the hand holding the pistol to fire one shot. Release and pull again for the next shot. Hold the AK trigger for automatic fire. Shots have immediate local sound, muzzle flash, spring recoil, controller vibration, and textured spinning cartridge cases. Damage and ammo remain server controlled.
+- Grasp the bottom of the inserted magazine and draw it down the well to remove it. The magazine follows your hand during extraction. A chambered round remains until fired or ejected by racking the slide.
+- The slide stays back after the final round. Insert another magazine, then pull and release the slide.
+- The AK uses its own 30-round magazines and rejects pistol magazines. Its bolt returns forward when empty. Grip the fore-end with your other hand to stabilize aiming and reduce recoil. The rear grip remains anchored; the support grip captures your actual hand placement, preserves wrist roll, and blends in and out without flipping the rifle.
+- Recoil now has visible rise, rearward kick, and a small sideways impulse. Both virtual hands stay on the weapon. Two hands reduce the kick; the server's firing direction follows the recoiling muzzle.
+- Held weapons, slides, and magazines use a private local view so replicated position corrections cannot pull them away from your hands. Small tracking movements are filtered, while deliberate movements and wrist roll remain responsive. The seated magazine follows the same gun pose every frame. Grip changes send immediately; short controller tracking and squeeze-button dropouts no longer repeatedly detach the grip. The second hand captures its current local placement when support ownership arrives.
+- Two-hand aim now filters the solved direction in avatar space. Rotating the rear wrist cannot briefly steer the rifle away from stationary grip positions. Bringing the hands together or crossing them fades support smoothly. The displayed front hand uses the same local anchor as the gun.
+- Each magazine has one final render pose. Mounted state takes priority during ownership updates; removal captures the local grip, preserves that grip when detached, and ignores delayed server grip changes during the same hold. Loading measures travel in the rendered gun's frame and bridges short guide-to-mount update gaps.
+- Reload alignment starts locally as the magazine enters the well, then the server confirms it. At the mouth it keeps your hand's angle; assistance ramps up as you physically push the magazine in. Seating eases through the last gap. A previous magazine's progress or grip value cannot snap a fresh reload into place.
+- Dropping sends the displayed weapon pose and bounded throw velocity to the server. Shared parts become visible again, and their physics stay server owned. Remote clients do not write another player's weapon transforms. This test place explicitly uses Filtering Disabled.
+- Y is the only menu shortcut; B and X are unassigned. Chat and recentering are available inside the menu. The Studio test starts with the menu closed.
+
+The kit spawns a crowbar, an unloaded pistol with four 12-round magazines, and an unloaded AK-47 with three 30-round magazines near `(0, 0, -5)`. Change `VRConfig.Weapons.SpawnPosition` for your map. The offline demo includes two respawning practice targets. Damage, capacity, range, cooldowns, and respawn time are configurable. Pickups are shared; ownership, ammunition, hit checks, and cleanup run on the server. Opening the VR menu drops held pickups and suppresses weapon actions.
+
+Models and audio come from the [classic Crowbar](https://create.roblox.com/store/asset/61044725/Crowbar), [Roblox Pistol](https://create.roblox.com/store/asset/4842197274/Pistol), [AK-47 by Regole_CKC](https://create.roblox.com/store/asset/8974619704/AK47), and [AK47 sound pack](https://create.roblox.com/store/asset/7953557310). Original IDs, files, and hashes are recorded in `assets/MARKETPLACE-SOURCES.json`. Imported scripts are excluded. Mesh axes and scale are adapted to VR. The offline audio is converted to MP3 with a peak limiter; online delivery uses the original public recordings.
+
+The live place uses public Roblox assets through Hexagon's delivery endpoint. The nine converted legacy meshes were uploaded to Roblox as Open Use and verified byte-for-byte with anonymous downloads. Public textures and sounds were verified as well; all 25 URLs are recorded in `assets/PUBLIC-ASSETS.json`. **PC players can see and hear weapons without an asset installer. Each VR player still needs the helper for tracking.** The separate offline demo uses bundled local files installed by the helper.
+
+The scripts were published to [Hexagon VR Test](https://www.hexagon.pw/games/105279), with Filtering Disabled. The downloaded published version was verified against the local file by SHA-256; see `PUBLISH-RECEIPT.json` for its version. Join a fresh server to load the updated scripts. The public kit includes `VR-Demo.rbxlx` for a separate offline test; the online map remains private. The real 2015 engine passed weapon, moving-grip, and hat interaction checks. Two separate network clients passed independent weapon pickup, visibility, dropped physics, and hat transfers in FD. Physical headset/controller feel and a simultaneous live two-headset session still need user verification.
+
 Native stereo VR for supported games in Hexagon's Windows 2015 client.
 
 **Launch SteamVR and connect your headset before using HexagonVR.** Tested with a Meta Quest 3S and a Meta Quest 3 connected wirelessly to SteamVR.
@@ -10,16 +39,18 @@ This project was created by AI, if you do not like it then you shouldn't use it.
 
 ## Download and run
 
-1. Download **HexagonVR.exe** from [Releases](https://github.com/mrboyplayz/HexagonVR/releases/tag/v0.2.1-beta.1). Install the regular Hexagon 2015 client first. This is a beta; live filtering for the new VR chat keyboard and simultaneous physical headsets still need user verification.
+1. Download **HexagonVR.exe** from [Releases](https://github.com/mrboyplayz/HexagonVR/releases/tag/v0.3.0-beta.1). Install the regular Hexagon 2015 client first. This is a beta; live filtering for the new VR chat keyboard and simultaneous physical headsets still need user verification.
 2. Launch SteamVR and connect your headset/controllers.
 3. Open HexagonVR **before joining the game**. The console will tell you `enter a game with support for hexagonVR`.
 4. Use the normal Hexagon website Play button for a game with the support scripts installed. HexagonVR starts the verified 2015 client with the renderer initialized before its shaders. Tracking and headset presentation begin after the game reports that its VR camera is active.
 
 If the game was already open without HexagonVR, keep the helper open and rejoin through Hexagon. The helper does not close your game automatically. It can reconnect to a game whose native renderer is already running.
 
-When upgrading from v0.2.0-beta.1, close the existing Hexagon game and the old helper completely, then open the new helper before joining again. Restarting just the helper leaves the old graphics module loaded in the existing game.
+When upgrading from v0.2.1-beta.1 or earlier, close the existing Hexagon game and the old helper completely, then open the new helper before joining again. Restarting just the helper leaves the old graphics module loaded in the existing game. An old helper cannot grab weapons or hats because it does not transmit grips; the updated place alone cannot add that input.
 
 While the helper is running it temporarily routes the Windows `hexagon-player:` launch command through HexagonVR for early initialization. The previous per-user association is backed up and restored when the helper exits. If the helper was interrupted, the next launch restores the previous association and uses the original launcher. Other client versions and launch modes are forwarded to the original launcher. No administrator access is required. Launch tickets pass through an authenticated local pipe and stdin; the helper does not save them or read browser cookies.
+
+Launcher recovery rejects backups that point to another HexagonVR executable, which previously could leave VR registered as the normal launcher. A stale redirect forwards to the real Hexagon launcher and repairs itself. The protocol dispatch process stays hidden; explicitly starting HexagonVR still shows its status console. Close old helpers from Downloads before using this build. Physical pickups need both the current helper and an updated place in a fresh server; the helper cannot update an already running game's server scripts.
 
 Several players can use VR in the same server. **Each VR player runs their own helper and SteamVR on their own PC.** PC players can join normally without a helper. VR rigs, pose limits, tracking timeouts, and cleanup are independent for each player.
 
@@ -28,14 +59,19 @@ Several players can use VR in the same server. **Each VR player runs their own h
 | Control | Action |
 | --- | --- |
 | Left stick | Walk |
-| Right stick | Snap turn |
+| Right stick | Hold left/right for smooth turn; speed adjustable in Settings |
 | A | Jump |
-| X | Recenter |
 | Y | Open/close menu |
-| B | Chat and keyboard |
+| B / X | Unassigned |
+| Menu tabs | Chat keyboard and Settings → Recenter |
 | Right trigger | Select a menu button or use an equipped tool |
+| Either grip | Hold to grab a weapon, magazine, or hat; release to drop |
+| Release a hat near a head | Equip it on that player |
+| Holding hand's trigger | Fire pistol once / hold for AK automatic fire |
 
-Point at the 3D menu with the right controller and pull its trigger. Settings includes a live **Arm Forward** adjustment. The default moves the arm anchor 10 cm along controller aim.
+Point at the 3D menu with the right controller and pull its trigger. Open **Y → Settings → Turn Speed** and use **− / +** to change smooth turning from 15 to 180 degrees/s (default 65). It takes effect immediately and is saved locally for the next launch. Partial stick tilt turns more slowly. Settings also includes a live **Arm Forward** adjustment. The default moves the arm anchor 10 cm along controller aim.
+
+The torso partially follows head yaw and follows the tracked neck position when leaning. The avatar head sits behind the tracked eyes, with the camera 0.45 studs forward and 0.12 studs above the head center. The headset view retains direct tracking. Smooth turns pivot around the eyes, so room-scale head offsets do not orbit around the character root. The original R6 body joint is restored when VR ends.
 
 The keyboard sends public chat through the game's server, without desktop keyboard input or window focus. The server filters a separate copy for each recipient; filtering failures keep your draft and show an error. Enter clears the draft only after the server confirms it. Both PC and VR players with the support scripts receive these messages. Other chat commands, including whispers, use the ordinary game chat box; `/vr` and `/unvr` also work on the VR keyboard.
 
@@ -59,7 +95,7 @@ R6 characters are required. The helper supports the exact Player and Studio exec
 
 ## Studio test
 
-Run `HexagonVR.exe --studio-test` or `Start-Studio-Test.cmd` from the full ZIP. It opens the bundled offline test in an installed supported Hexagon Studio and shows the menu automatically. SteamVR and the headset must be connected.
+Run `HexagonVR.exe --studio-test` or `Start-Studio-Test.cmd` from the full ZIP. It opens the bundled offline test in an installed supported Hexagon Studio with the menu closed. Press Y to open it. Studio can open before the headset is ready; tracking starts when SteamVR detects it.
 
 ## Rendering and client access
 
@@ -90,6 +126,12 @@ The build downloads a pinned LLVM-MinGW compiler archive, verifies its SHA-256, 
 ```
 
 The build runs the native stereo-matrix test as well. GitHub Actions performs a Windows build and unit tests. Private account credentials, runtime settings, game-client executables, and logs are excluded from this repository.
+
+With the supported Hexagon 2015 Studio installed, run `python tests/run_weapon_motion.py` for moving-grip engine checks. It opens an isolated hidden test, uses synthetic hand poses, and closes only its own process. The suite covers rear-wrist yaw, close/crossed hands, combined gun motion, stale magazine ownership/grip updates, extraction, loading, and interrupted reload cleanup. Headset feel still needs physical testing.
+
+`python tests/run_weapon_network.py` starts an isolated local server and two hidden Studio clients. It checks FD, public mesh URLs, remote held-weapon visibility, private visual isolation, and dropped weapon visibility/physics. It closes only its own test processes.
+
+`python tests/run_hat_interactions.py` checks off-center pivots, multipart hats, drops, re-equipping, and legacy touch-pickup suppression. `python tests/run_hat_network.py` checks taking another player's hat, swapping wearers, placing it on somebody else, ground drops, and returning its original fit with two separate clients.
 
 ## Files and licenses
 

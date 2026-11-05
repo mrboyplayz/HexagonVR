@@ -2,6 +2,7 @@
 import argparse, ctypes, http.server, json, math, os, secrets, sys, threading, time, urllib.parse, urllib.request
 from pathlib import Path
 import numpy as np
+from vr_settings import turn_speed,load_settings,save_setting
 
 ROOT=Path(getattr(sys,'_MEIPASS',Path(__file__).resolve().parent))
 USER_ROOT=Path(sys.executable).parent if getattr(sys,'frozen',False) else Path(__file__).resolve().parent
@@ -21,6 +22,9 @@ def configure_console():
     if k.GetConsoleMode(handle,ctypes.byref(mode)):
         k.SetConsoleMode(handle,(mode.value|0x80)&~(0x40|0x4|0x2))
     k.SetConsoleTitleW('HexagonVR')
+    k.GetConsoleWindow.restype=W.HWND
+    window=k.GetConsoleWindow()
+    if window:ctypes.WinDLL('user32').ShowWindow(window,5)
 
 def matrix34(values):
     a=np.array(values,dtype=float).reshape(3,4)
@@ -65,13 +69,17 @@ class Tracker:
             origin=np.eye(4);origin[:3,:3]=((co,0,si),(0,1,0),(-si,0,co))
             origin[:3,3]=(head[0,3],head[1,3]-.5,head[2,3])
             self.origin=np.linalg.inv(origin)
-        if abs(turn_axis)>.7 and not self.turn_held:self.turn+=1 if turn_axis>0 else -1;self.turn_held=True
-        if abs(turn_axis)<.3:self.turn_held=False
+        self.turn=turn_command(turn_axis)
         def local(m):
             if m is None:return None
             result=self.origin@m;result[:3,3]*=self.scale
             return cframe(result)
         return {'tracked':True,'head':local(head),'left':local(left),'right':local(right),'move':list(move),'jump':bool(jump),'turn':self.turn,'fov':100}
+
+def turn_command(axis):
+    if not isinstance(axis,(int,float))or not math.isfinite(axis):return 0.
+    value=max(-1.,min(1.,float(axis)))
+    return math.copysign((abs(value)-.2)/.8,value)if abs(value)>.2 else 0.
 
 class State:
     def __init__(self,key):self.key=key;self.lock=threading.Lock();self.pose={'tracked':False,'seq':0};self.updated=0;self.seq=0;self.requests=0;self.viewport=None
@@ -116,7 +124,7 @@ def serve(state,host,port):
                     if a is not None and (not isinstance(a,list) or len(a)!=12 or not all(isinstance(x,(float,int)) and math.isfinite(x) and abs(x)<10000 for x in a)):raise ValueError('Invalid pose')
                 if not isinstance(pose.get('head'),list):raise ValueError('Missing head pose')
                 if not isinstance(pose.get('move'),list) or len(pose['move'])!=2 or not all(isinstance(x,(float,int)) and math.isfinite(x) and abs(x)<=1 for x in pose['move']):raise ValueError('Invalid movement')
-                if not isinstance(pose.get('turn'),int):raise ValueError('Invalid turn counter')
+                if not isinstance(pose.get('turn'),(int,float))or not math.isfinite(pose['turn'])or abs(pose['turn'])>1:raise ValueError('Invalid turn axis')
                 pose={k:pose.get(k) for k in ('tracked','head','left','right','move','jump','turn','fov','cameraForward')}
                 state.publish(pose);self.response(200,{'ok':True})
             except (ValueError,TypeError,KeyError):self.response(400,{'error':'Invalid tracking packet'})
@@ -143,13 +151,39 @@ def controller_aim_pose(vr,system,index,role,device_pose):
         return aimed
     except vr.OpenVRError:return device_pose
 
+_GRIP_STATES={}
+_HAND_POSES={}
+def tracked_hand(role,pose,now=None):
+    now=time.monotonic()if now is None else now
+    if pose is not None:
+        _HAND_POSES[role]=(now,pose.copy());return pose
+    previous=_HAND_POSES.get(role)
+    if previous and now-previous[0]<=.075:return previous[1].copy()
+    _HAND_POSES.pop(role,None);return None
+
+def stable_grip(role,pressed,now=None):
+    now=time.monotonic()if now is None else now
+    held,released=_GRIP_STATES.get(role,(False,None))
+    if pressed:held,released=True,None
+    elif held:
+        if released is None:released=now
+        elif now-released>=.05:held=False
+    _GRIP_STATES[role]=(held,released)
+    return held
+
 def openvr_inputs(vr,system,poses,role):
     index=system.getTrackedDeviceIndexForControllerRole(role)
-    if index==vr.k_unTrackedDeviceIndexInvalid or not poses[index].bPoseIsValid:return None,(0,0),False,0
+    if index==vr.k_unTrackedDeviceIndexInvalid or not poses[index].bPoseIsValid:
+        previous=tracked_hand(role,None)
+        if previous is not None:
+            held=_GRIP_STATES.get(role,(False,None))[0]
+            return previous,(0,0),False,(1<<vr.k_EButton_Grip)if held else 0
+        _GRIP_STATES.pop(role,None);return None,(0,0),False,0
     matrix=matrix34(poses[index].mDeviceToAbsoluteTracking.m)
     matrix=controller_aim_pose(vr,system,index,role,matrix)
+    tracked_hand(role,matrix)
     ok,state=system.getControllerState(index)
-    if not ok:return matrix,(0,0),False,0
+    if not ok:return matrix,(0,0),False,(1<<vr.k_EButton_Grip)if stable_grip(role,False)else 0
     axis=(0,0)
     for i in range(5):
         try:
@@ -158,7 +192,22 @@ def openvr_inputs(vr,system,poses,role):
         except vr.OpenVRError:pass
     axis=tuple(0 if abs(x)<.15 else max(-1,min(1,x)) for x in axis)
     trigger=bool(state.ulButtonPressed & (1<<vr.k_EButton_SteamVR_Trigger)) or state.rAxis[1].x>.7
-    return matrix,axis,trigger,int(state.ulButtonPressed)
+    buttons=int(state.ulButtonPressed);grip=1<<vr.k_EButton_Grip
+    buttons=(buttons|grip)if stable_grip(role,bool(buttons&grip))else(buttons&~grip)
+    return matrix,axis,trigger,buttons
+
+
+def controller_buttons(vr,left_trigger,right_trigger,left_buttons,right_buttons):
+    """Y is the only menu shortcut. A jumps; B and X are unassigned."""
+    a=1<<vr.k_EButton_A;menu=1<<vr.k_EButton_ApplicationMenu;grip=1<<vr.k_EButton_Grip
+    return (int(right_trigger)+(2 if left_buttons&menu else 0)
+            +(8 if right_buttons&a else 0)
+            +(32 if left_buttons&grip else 0)+(64 if right_buttons&grip else 0)+(128 if left_trigger else 0))
+
+def pulse_controller(vr,system,hand,strength):
+    role=vr.TrackedControllerRole_LeftHand if hand==0 else vr.TrackedControllerRole_RightHand
+    index=system.getTrackedDeviceIndexForControllerRole(role)
+    if index!=vr.k_unTrackedDeviceIndexInvalid:system.triggerHapticPulse(index,0,max(100,min(3999,int(strength))))
 
 def find_window(pid):
     from ctypes import wintypes
@@ -324,9 +373,14 @@ def launch_place(path,key,port,hidden=False,user_id=0,auto_vr=False,local_client
     if local_client and native_directory:
         import openvr
         from native_renderer import write_config
-        vr_system=openvr.init(openvr.VRApplication_Background)
-        try:write_config(vr_system,openvr,native_directory,native_scale,native_eye_scale)
-        finally:openvr.shutdown()
+        try:vr_system=openvr.init(openvr.VRApplication_Background)
+        except openvr.OpenVRError:
+            # The native renderer supports deferred configuration. Open Studio
+            # now; the tracking loop configures the eyes when the headset wakes.
+            debug('Studio will wait for the headset before enabling stereo.',flush=True)
+        else:
+            try:write_config(vr_system,openvr,native_directory,native_scale,native_eye_scale)
+            finally:openvr.shutdown()
     session=uuid.uuid4().hex[:12];folder=exe.parent/'content/HexagonVR'/session;folder.mkdir(parents=True)
     install(path,folder/'VRPlace.rbxlx','http://127.0.0.1:'+str(port),key,user_id,local_fast_poll=True)
     if menu_test:
@@ -381,7 +435,8 @@ def main():
     p.add_argument('--hidden',action='store_true');p.add_argument('--seconds',type=float,default=0)
     p.add_argument('--auto-vr',action='store_true',help='Enable /vr automatically in the local demo')
     p.add_argument('--wait-for-headset',action='store_true',help='Wait for the wireless headset before opening the game')
-    p.add_argument('--fov',type=float,default=120);p.add_argument('--camera-forward',type=float,default=.35)
+    p.add_argument('--fov',type=float,default=120);p.add_argument('--camera-forward',type=float,default=.45)
+    p.add_argument('--turn-speed',type=float,default=None,help='Smooth turn speed, 15 to 180 degrees per second')
     p.add_argument('--view-mode',choices=['native','wide'],default='native',help='Headset angular scale or intentional wider/zoomed-out view')
     p.add_argument('--arm-outset',type=float,default=.4,help='Extra outward offset per arm in studs')
     p.add_argument('--arm-forward',type=float,default=.3,help='Forward hand-anchor offset along each controller aim, in studs')
@@ -395,15 +450,24 @@ def main():
     p.add_argument('--protocol',help=argparse.SUPPRESS)
     p.add_argument('--no-launch-integration',action='store_true',help='Do not temporarily route Hexagon launches through the early graphics loader')
     p.add_argument('--native-directory',type=Path,help=argparse.SUPPRESS)
+    p.add_argument('--install-assets',action='store_true',help='Install bundled weapon models and sounds in existing Hexagon clients, then exit')
     args=p.parse_args()
+    from weapon_assets import install_assets
+    install_assets()
+    if args.install_assets:
+        print('HexagonVR Marketplace weapon assets installed.');return
     if args.protocol:
         from launch_integration import handle_protocol
         handle_protocol(args.protocol)
         return
+    from launch_integration import repair_stale_routing
+    repair_stale_routing()
     for name in ('arm_forward','arm_outset'):
         if not math.isfinite(getattr(args,name))or not 0<=getattr(args,name)<=1:p.error(name.replace('_','-')+' must be between 0 and 1 studs')
     eye_resolution((64,64),args.eye_scale)
     VERBOSE=args.diagnostics
+    saved_preferences=load_settings(USER_ROOT/'vr-settings.json')
+    args.turn_speed=turn_speed(args.turn_speed if args.turn_speed is not None else saved_preferences.get('turn_speed',65))
     if args.studio_test:
         args.launch=USER_ROOT/'VR-Demo.rbxlx' if (USER_ROOT/'VR-Demo.rbxlx').exists()else ROOT/'VR-Demo.rbxlx';args.auto_vr=True;args.preview=True;args.wait_for_headset=True
     if not any((args.launch,args.install,args.probe,args.relay,args.relay_only,args.http_compat,args.mock)):
@@ -447,7 +511,7 @@ def main():
         if args.launch:
             while True:
                 try:
-                    process,folder=launch_place(args.launch,key,args.port,args.hidden,args.user_id,args.auto_vr,args.local_client,menu_test=args.studio_test,native_directory=native_directory if args.native_renderer else None,native_scale=args.scale,native_eye_scale=args.eye_scale)
+                    process,folder=launch_place(args.launch,key,args.port,args.hidden,args.user_id,args.auto_vr,args.local_client,menu_test=False,native_directory=native_directory if args.native_renderer else None,native_scale=args.scale,native_eye_scale=args.eye_scale)
                     break
                 except Exception as error:
                     import openvr as vr
@@ -455,7 +519,7 @@ def main():
                     status('Launch SteamVR and connect your headset to continue.');time.sleep(1)
         from vr_actions import Actions
         actions=Actions(legacy_chat=False);tracker=Tracker(args.scale);start=time.monotonic();last_status=start;last_window_check=0
-        left_held=0;last_tuning=None;last_vr_settings=None;last_vr_check=0
+        left_held=0;last_tuning=None;last_vr_settings=None;last_vr_check=0;haptics={}
         def disconnect():
             nonlocal transport,preview,system,compositor,native
             if native:native.close();native=None
@@ -479,6 +543,7 @@ def main():
                             settings=json.loads(content)
                             for key in ('arm_forward','arm_outset'):
                                 if key in settings and isinstance(settings[key],(int,float))and math.isfinite(settings[key]):setattr(args,key,max(0,min(1,float(settings[key]))))
+                            if 'turn_speed'in settings:args.turn_speed=turn_speed(settings['turn_speed'])
                             last_vr_settings=content
                     except (OSError,ValueError):pass
             if args.local_client:
@@ -507,7 +572,7 @@ def main():
                 try:
                     system=vr.init(vr.VRApplication_Scene if args.preview or args.native_renderer else vr.VRApplication_Background)
                     compositor=vr.VRCompositor() if args.preview or args.native_renderer else None
-                    status('hexagonVR is running | Y: menu | B: chat')
+                    status('hexagonVR is running | Y: menu | grip: grab')
                 except vr.OpenVRError as error:
                     if system is not None:vr.shutdown();system=None;compositor=None
                     if not args.wait_for_headset:raise
@@ -531,17 +596,18 @@ def main():
                         except (RuntimeError,OSError):disconnect()
                     time.sleep(.02);continue
                 head=matrix34(poses[0].mDeviceToAbsoluteTracking.m)
-                left,move,_,lb=openvr_inputs(vr,system,poses,vr.TrackedControllerRole_LeftHand)
+                left,move,left_trigger,lb=openvr_inputs(vr,system,poses,vr.TrackedControllerRole_LeftHand)
                 right,turn,trigger,rb=openvr_inputs(vr,system,poses,vr.TrackedControllerRole_RightHand)
                 a=1<<vr.k_EButton_A;menu_button=1<<vr.k_EButton_ApplicationMenu
-                pose=tracker.convert(head,left,right,move,bool(rb&a),turn[0],bool(lb&a and not left_held&a));left_held=lb
-                pose['buttons']=int(trigger)+(2 if lb&menu_button else 0)+(4 if rb&menu_button else 0)+(8 if rb&a else 0)+(16 if lb&a else 0)
+                pose=tracker.convert(head,left,right,move,bool(rb&a),turn[0],False);left_held=lb
+                pose['buttons']=controller_buttons(vr,left_trigger,trigger,lb,rb)
                 pose['uiAxis']=turn[1]
                 if not compositor:time.sleep(1/90)
             pose['fov']=120 if args.native_renderer else preview.fov if preview else args.fov
             pose['nativeRendering']=args.native_renderer
             pose['armForward']=args.arm_forward
-            pose['cameraForward']=0 if args.view_mode=='native' else args.camera_forward
+            pose['cameraForward']=args.camera_forward
+            pose['turnSpeed']=args.turn_speed
             offset_hands(pose,args.arm_outset,args.arm_forward)
             state.publish(pose)
             camera_ready=not args.native_renderer
@@ -565,6 +631,12 @@ def main():
                                     current=json.loads(settings_path.read_text())if settings_path.exists()else{}
                                     current['arm_forward']=args.arm_forward;settings_path.write_text(json.dumps(current,indent=2)+'\n')
                                 except (OSError,ValueError):pass
+                            elif kind==9 and a in(0,1)and 100<=b<=3999:
+                                haptics[a]=(time.monotonic()+.035,b)
+                            elif kind==10 and 15<=a<=180:
+                                args.turn_speed=turn_speed(a)
+                                try:save_setting(USER_ROOT/'vr-settings.json','turn_speed',args.turn_speed)
+                                except OSError:debug('Turn speed changed, but the preference file could not be saved.',flush=True)
                             elif actions.receive(kind,a,b,hwnd,transport.pid,token=transport.ui_token)=='leave':break
                         chat_result=actions.poll_result(transport.pid)
                         if chat_result:transport.report_chat(*chat_result)
@@ -581,11 +653,15 @@ def main():
                                 write_config(system,vr,native_directory,args.scale,args.eye_scale);attach(transport.pid,native_directory)
                                 native=NativePresenter(transport.pid,native_directory)
                             native.set_pose(transport.sequence,head,transport.active_ack_address())
-                            status('hexagonVR native stereo | Y: menu | B: chat')
+                            status('hexagonVR native stereo | Y: menu | grip: grab')
                         elif args.native_renderer:status('Waiting for the game VR camera; type /vr if VR was turned off.')
                     except (RuntimeError,OSError) as error:
                         debug('Local client disconnected:',error,flush=True);disconnect();continue
             if process and state.viewport is not None and hasattr(process,'_vr_restore_flags'):process._vr_restore_flags()
+            if system is not None:
+                for hand,(until,strength)in tuple(haptics.items()):
+                    if time.monotonic()<until:pulse_controller(vr,system,hand,strength)
+                    else:del haptics[hand]
             if native:
                 if camera_ready:native.submit(vr,compositor)
                 elif native.suspend():compositor.clearLastSubmittedFrame()

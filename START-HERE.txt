@@ -1,0 +1,66 @@
+HEXAGON VR: PHYSICAL HATS, CROWBAR, PISTOL, AND AK-47
+
+1. Close the old HexagonVR helper and leave any old test server.
+   Every VR player must upgrade. v0.2.1-beta.1 and earlier cannot send grips.
+2. Start SteamVR and connect the headset and controllers.
+3. Run Start-Studio-Test.cmd to try the included offline place, or start
+   HexagonVR.exe before joining a game containing the updated support scripts.
+4. The test starts with the menu closed. Y is the only menu shortcut.
+   B and X are unassigned. Chat and recentering are inside the menu.
+
+Hold either GRIP to pick up; release to drop.
+You can point at a ground pickup within 6 studs and hold grip to bring it
+to your hand. You do not need to bend to the floor. Grip keeps trying
+when held as you move closer. Nearby pickup surfaces are easier to grab.
+Crowbar: full size, pointing forward from the shaft grip; swing to hit.
+Hats: touch your hat or somebody else's hat and hold GRIP to remove it.
+It pivots around the point where you grabbed it. Release near your head or
+another player's head to equip it there. Release elsewhere to drop it on
+the ground; you can pick it up again. Everyone sees the same original hat.
+Hats require a nearby touch, without distance grab.
+Pistol: pick up with one hand, then use the other hand to pick up a magazine.
+Keep holding grip. Guide the magazine's top into the bottom opening,
+then push it up the well until it clicks. It only locks when fully seated.
+Releasing it halfway drops it instead of completing the reload.
+Grab the slide, pull back a few centimeters, and release or move it forward.
+Use the holding hand's TRIGGER to fire. Release it between shots.
+To remove the magazine, grip its bottom and pull down.
+After the last shot, insert a magazine and pull/release the slide again.
+
+AK-47: use a curved AK magazine (30 rounds), then grab the charging handle
+on the receiver's right side, pull back, and release or return it forward.
+Hold trigger for automatic fire. Grip the fore-end with your other hand
+to stabilize aiming and reduce recoil. The rear grip stays fixed and the
+front grip captures your actual hand placement. The AK bolt does not lock
+when empty. AK magazines follow a guided rock-in path as you push them in.
+
+Both guns have immediate firing sound, spring recoil, muzzle flash,
+controller vibration, textured cartridge cases, and confirmed impact effects.
+The offline demo includes two practice targets that respawn after being shot.
+
+RIGHT STICK: hold left/right for smooth turning.
+Y -> Settings -> Turn Speed: use minus/plus to adjust from 15 to 180 degrees/s.
+Default is 65. Changes apply immediately and are saved for the next launch.
+Partial stick tilt turns more slowly.
+Held magazines and two-hand guns use stable local visuals, with small tracking
+movements filtered so server position updates cannot tug them between frames.
+The torso follows your head turn partially and stays connected at the neck.
+The camera sits at your eyes in front of the avatar head. Look down to see
+your body. Turns pivot around the eyes rather than orbiting around the root.
+
+The magazine holds 12 rounds. Inserting a magazine alone does not chamber one.
+Removing it does not remove a round already in the chamber.
+Opening a VR menu drops held items and blocks weapon actions.
+
+The support scripts are published to Hexagon VR Test (place 105279),
+version 14, with Filtering Disabled. Join a fresh server for the new scripts.
+The published file's SHA-256 was verified. See PUBLISH-RECEIPT.json.
+The public download includes the separate offline VR-Demo.rbxlx.
+Each VR player needs this EXE.
+PC players can see and hear weapons without installing the helper or assets.
+The live place uses verified public Roblox meshes, textures, and recordings.
+The offline demo still uses the bundled files installed by the helper.
+
+Marketplace asset sources and adaptation details: assets/MARKETPLACE-SOURCES.json
+Verification results: WEAPON-VALIDATION.json
+Physical headset/controller feel has not been verified in this build.

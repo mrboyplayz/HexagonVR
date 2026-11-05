@@ -1,0 +1,198 @@
+{
+  "models": [
+    {
+      "name": "Crowbar",
+      "id": 61044725,
+      "url": "https://create.roblox.com/store/asset/61044725/Crowbar"
+    },
+    {
+      "name": "Roblox Pistol",
+      "id": 4842197274,
+      "url": "https://create.roblox.com/store/asset/4842197274/Pistol"
+    },
+    {
+      "name": "AK-47",
+      "id": 8974619704,
+      "url": "https://create.roblox.com/store/asset/8974619704/AK47"
+    },
+    {
+      "name": "AK47 sound sources",
+      "id": 7953557310,
+      "url": "https://create.roblox.com/store/asset/7953557310"
+    }
+  ],
+  "assets": {
+    "crowbar_mesh": {
+      "original_id": 21426303,
+      "source_url": "https://www.roblox.com/library/21426303",
+      "file": "crowbar_mesh.mesh",
+      "sha256": "c14e5d936091e0a261673036f164a304a698415cb02a614430043274fe72b1e2"
+    },
+    "crowbar_texture": {
+      "original_id": 21426286,
+      "source_url": "https://www.roblox.com/library/21426286",
+      "file": "crowbar_texture.png",
+      "sha256": "24b64d66741c1c146d9596505882242c3146e339a1d51de14d046d01114073fd"
+    },
+    "pistol_mesh": {
+      "original_id": 2492922600,
+      "source_url": "https://www.roblox.com/library/2492922600",
+      "file": "pistol_mesh.mesh",
+      "sha256": "1552ffd7236f36bcda51bcc8ebae9f9a37522720fcaf996ce1fe58422e4fe970"
+    },
+    "pistol_texture": {
+      "original_id": 2492931263,
+      "source_url": "https://www.roblox.com/library/2492931263",
+      "file": "pistol_texture.png",
+      "sha256": "3545cf0ac4ce4c852c05390a5d0d00933e3fb6173ac8d6d8c1186f0f2b12fcc1"
+    },
+    "slide_mesh": {
+      "original_id": 2492923497,
+      "source_url": "https://www.roblox.com/library/2492923497",
+      "file": "slide_mesh.mesh",
+      "sha256": "81b7d5c7d748456c94729deab9ad1b6c2eb86582be12144130ca59c0e1a4257d"
+    },
+    "slide_texture": {
+      "original_id": 2492931686,
+      "source_url": "https://www.roblox.com/library/2492931686",
+      "file": "slide_texture.png",
+      "sha256": "883ebfea035dca03574950af882f49f790f8c7cdb090a0fb0358c64d77f2d6b0"
+    },
+    "magazine_mesh": {
+      "original_id": 2492925447,
+      "source_url": "https://www.roblox.com/library/2492925447",
+      "file": "magazine_mesh.mesh",
+      "sha256": "e146906bc7c260b6f6f8bf1fd18e443151d007ba37ed9c59dadf6aa8a9dd0f77"
+    },
+    "fire": {
+      "original_id": 3806566911,
+      "source_url": "https://www.roblox.com/library/3806566911",
+      "file": "fire.mp3",
+      "sha256": "ba057b2b205410549bf390c0ba7dd4b589c6be6444d8699cbeb81966b38c35fb"
+    },
+    "reload": {
+      "original_id": 3821789416,
+      "source_url": "https://www.roblox.com/library/3821789416",
+      "file": "reload.mp3",
+      "sha256": "8e245532527853178c759932a366f1fe30d487c15befb6472fe5c6ccdf017ddd"
+    },
+    "crowbar_hit": {
+      "original_id": 21433696,
+      "source_url": "https://www.roblox.com/library/21433696",
+      "file": "crowbar_hit.mp3",
+      "sha256": "6e17d670687ff6079396b288d0803966368fe6878d442468ad1d786790c6f1f8"
+    },
+    "crowbar_swing": {
+      "original_id": 21433711,
+      "source_url": "https://www.roblox.com/library/21433711",
+      "file": "crowbar_swing.mp3",
+      "sha256": "673994ab554d881b6922da34abfbfd635073ebe1f5d37a449d619d5a3cbcd1b8"
+    },
+    "ak_fire": {
+      "original_ids": [
+        3742927611
+      ],
+      "file": "ak_fire.mp3",
+      "sha256": "5962b33d63614c023b57e4905f1b8a80747927fdf75b311867c322a1376c23d1"
+    },
+    "dry_fire": {
+      "original_ids": [
+        537744814
+      ],
+      "file": "dry_fire.mp3",
+      "sha256": "447fd72c29afcf571b10afecda426cab0dffae22c9fda6f0a7fe178716e76907"
+    },
+    "magazine_out": {
+      "original_ids": [
+        888773635
+      ],
+      "file": "magazine_out.mp3",
+      "sha256": "903313d8446cc7724cd8454acc67a5d9853aaeffd04cbd5a7d1d85d9b9e7ea3d"
+    },
+    "magazine_in": {
+      "original_ids": [
+        1197340682
+      ],
+      "file": "magazine_in.mp3",
+      "sha256": "2bdc09c3bfaed152d11666daf549cb52cbdb6f4f804aa8f84db2432c2e82c4cd"
+    },
+    "slide_release": {
+      "original_ids": [
+        265294983
+      ],
+      "file": "slide_release.mp3",
+      "sha256": "774bbbca397ff934f33682ca1e7a7c5b415366ed9e10e7d8c3165ce7709715ad"
+    },
+    "slide_pull": {
+      "original_ids": [
+        3719415248
+      ],
+      "file": "slide_pull.mp3",
+      "sha256": "23ddf8804fa337dcc74f3442d12fbeeee9fc746fd867bd848d3f4dd304a021d8"
+    },
+    "casing_bounce": {
+      "original_ids": [
+        325025387
+      ],
+      "file": "casing_bounce.mp3",
+      "sha256": "474920e811edf51c6e55f20bedddbd2c5fcc801b41f3110962869823c1986c31"
+    },
+    "pistol_casing_mesh": {
+      "original_ids": [
+        2794279992
+      ],
+      "file": "pistol_casing_mesh.mesh",
+      "sha256": "f04f732b3c35b91ba8c5bdf7020ddfc7ab817b5ec4e89899dd15dcc2782b85eb"
+    },
+    "rifle_casing_mesh": {
+      "original_ids": [
+        2794280533
+      ],
+      "file": "rifle_casing_mesh.mesh",
+      "sha256": "fa02228055c0632c9eca4032e1bc9d27cb352867edd81c0dadad23349d567374"
+    },
+    "casing_texture": {
+      "original_ids": [
+        2794275376
+      ],
+      "file": "casing_texture.png",
+      "sha256": "3ee928544941fda53ecefa427ce1c178acc0ed164388b2ae4be95cedbdc3bae7"
+    },
+    "ak_texture": {
+      "original_ids": [
+        78005805871988
+      ],
+      "file": "ak_texture.png",
+      "sha256": "bcf8b421ac5f06b1ec90e652da2a92b017a44768193e3970986721a1e5e17ca8"
+    },
+    "ak_mesh": {
+      "original_ids": [
+        18824501149,
+        18824505875,
+        18824508204,
+        18824515585,
+        18824517781,
+        18824519786,
+        18824533493,
+        18824539657
+      ],
+      "file": "ak_mesh.mesh",
+      "sha256": "1838ad2993a709c02258e5cba88c182950bbeaa65ea809052377078ba8debaf9"
+    },
+    "ak_bolt_mesh": {
+      "original_ids": [
+        18824511060
+      ],
+      "file": "ak_bolt_mesh.mesh",
+      "sha256": "ccd4f2effed7c00d05296c52a73cf4a72ea9823fe025a77bbeec5825b316f759"
+    },
+    "ak_magazine_mesh": {
+      "original_ids": [
+        18824522024
+      ],
+      "file": "ak_magazine_mesh.mesh",
+      "sha256": "e0f3ed91a8977e1741ba889102a60bde57798d9bcd90ae18bfffaa1caa90cf35"
+    }
+  },
+  "note": "Geometry, albedo textures and audio only; no Marketplace scripts. Mesh vertices preserve position, normal, all three texture coordinates and color. AK components are normalized to the 2015 engine; sounds peak limited and converted to MP3."
+}

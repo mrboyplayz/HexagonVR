@@ -72,6 +72,17 @@ class MultiplayerTests(unittest.TestCase):
   time=1.02;remote.OnServerEvent:Fire(A,'pose',pose(2,2));assert(vr(A).C0.x==1,'Own rate limit not enforced')
   time=1.05;remote.OnServerEvent:Fire(B,'pose',pose(2,4));assert(vr(B).C0.x==4)
   ''')
+ def test_grip_edges_are_not_dropped_by_the_pose_rate_limit(self):
+  self.lua.execute('''
+  toggle.Event:Fire(A);local initial=pose(1,1);initial.buttons=0
+  remote.OnServerEvent:Fire(A,'pose',initial)
+  time=1.015;local press=pose(2,2);press.buttons=64
+  remote.OnServerEvent:Fire(A,'pose',press);assert(vr(A).C0.x==2,'Grip press was delayed by pose throttling')
+  time=1.030;local release=pose(3,3);release.buttons=0
+  remote.OnServerEvent:Fire(A,'pose',release);assert(vr(A).C0.x==3,'Grip release was delayed by pose throttling')
+  time=1.031;local spam=pose(4,4);spam.buttons=64
+  remote.OnServerEvent:Fire(A,'pose',spam);assert(vr(A).C0.x==3,'Grip edges bypassed the minimum safety interval')
+  ''')
  def test_repeated_enable_requests_do_not_toggle_either_player_off(self):
   self.lua.execute("remote.OnServerEvent:Fire(A,'enable');remote.OnServerEvent:Fire(A,'enable');remote.OnServerEvent:Fire(B,'enable');time=3;remote.OnServerEvent:Fire(A,'enable');assert(vr(A)and vr(B));remote.OnServerEvent:Fire(A,'toggle');assert(not vr(A)and vr(B))")
  def test_timeout_does_not_stop_other_player(self):

@@ -21,12 +21,12 @@ class Tests(unittest.TestCase):
         np.testing.assert_allclose(p['head'][:3],(0,1.5,0),atol=1e-10)
         np.testing.assert_allclose(p['left'][:3],(-1.2,.6,-.6),atol=1e-10)
         h[0,3]+=.1;p=t.convert(h);self.assertAlmostEqual(p['head'][0],.3)
-    def test_snap_turn_requires_release(self):
+    def test_turn_axis_remains_active_while_held_and_reverses_directly(self):
         t=Tracker();h=np.eye(4)
         self.assertEqual(t.convert(h,turn_axis=1)['turn'],1)
         self.assertEqual(t.convert(h,turn_axis=1)['turn'],1)
         t.convert(h,turn_axis=0)
-        self.assertEqual(t.convert(h,turn_axis=-1)['turn'],0)
+        self.assertEqual(t.convert(h,turn_axis=-1)['turn'],-1)
     def test_relay_auth_and_freshness(self):
         s=State('test-key');http=serve(s,'127.0.0.1',0)
         url='http://127.0.0.1:'+str(http.server_port)+'/pose'
