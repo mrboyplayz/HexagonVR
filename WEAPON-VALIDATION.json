@@ -67,7 +67,7 @@
     "01:12:09.3624 (7.6080137)          WEAPON_CHECK AK-47 and dedicated magazines spawn"
   ],
   "unit_tests_passed": 98,
-  "revision": "Authored support-hand position/orientation with two-controller aiming and shoulder-following arms; M16 and manual-bolt AWP; native 4x lens-only scope; verified public Roblox assets.",
+  "revision": "Remove collidable invisible head/torso copies from the private first-person arm rig; keep its appearance Humanoid passive; validate idle, overlapping arms, locomotion, stopping, and jumping on an unanchored R6 character.",
   "body_engine_pass": true,
   "body_checks": [
     "01:32:50.64976 (7.8644261)          BODY_CHECK VR replaces the body root motor with an independent body weld",
@@ -235,5 +235,20 @@
   ],
   "scope_eye_relief_test_studs": 0.8,
   "scope_visible_eye_red_pixels": 7092,
-  "scope_lens_centre_red_pixels": 398
+  "scope_lens_centre_red_pixels": 398,
+  "idle_motion_pass": true,
+  "idle_motion_checks": [
+    "IDLE_MOTION_CHECK Holding the private arms inside the body cannot create a collision impulse",
+    "IDLE_MOTION_CHECK Intentional stick locomotion still moves the character",
+    "IDLE_MOTION_CHECK Releasing the stick stops the body without drift resuming",
+    "IDLE_MOTION_CHECK Physical head turns and small tracking movements cannot push the walking body",
+    "IDLE_MOTION_CHECK Stationary headset/controllers with zero stick input cannot propel the character",
+    "IDLE_MOTION_CHECK The drift regression uses a freely simulated character",
+    "IDLE_MOTION_CHECK Jump input still lifts the freely simulated character",
+    "IDLE_MOTION_CHECK Leaving VR removes the first-person appearance rig"
+  ],
+  "idle_motion_metrics": [
+    "IDLE_MOTION_METRIC moving_head_max_xz 0",
+    "IDLE_MOTION_METRIC neutral_max_xz 0"
+  ]
 }
