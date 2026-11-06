@@ -16,15 +16,19 @@ local ok,err=pcall(function()
     expect(math.abs(model['Right Arm'].Transparency-.45)<.001 and char['Right Arm'].Transparency==0 and char['Right Arm'].LocalTransparencyModifier==1,'Only the local arm copies are semi-transparent; shared arm transparency stays unchanged')
     local beforeRight=right;local beforeLeft=left
     local maximum=0
+    local maximumFrameChange=0;local expectedRight=root.CFrame*right*CFrame.Angles(math.rad(90),0,0)*CFrame.new(0,1,0)
     local Run=game:GetService('RunService')
     Run:BindToRenderStep('ArmEndpointRegression',Enum.RenderPriority.Last.Value+10,function()
         maximum=math.max(maximum,(root.CFrame:pointToObjectSpace(model['Right Arm'].CFrame:pointToWorldSpace(Vector3.new(0,-model['Right Arm'].Size.y/2,0)))-beforeRight.p).magnitude,(root.CFrame:pointToObjectSpace(model['Left Arm'].CFrame:pointToWorldSpace(Vector3.new(0,-model['Left Arm'].Size.y/2,0)))-beforeLeft.p).magnitude)
+        local a,b={model['Right Arm'].CFrame:components()},{expectedRight:components()}
+        for n=1,12 do maximumFrameChange=math.max(maximumFrameChange,math.abs(a[n]-b[n]))end
     end)
     for n=1,80 do
         box.head.Value=CFrame.new(.2*math.sin(n*.05),1.5,0)*CFrame.Angles(.5*math.sin(n*.09),math.rad(-120+n*3),.15*math.cos(n*.08));frame()
     end
     Run:UnbindFromRenderStep('ArmEndpointRegression')
     expect(maximum<.002,'Physical head turns and moving shoulders cannot move stationary tracked wrists')
+    expect(maximumFrameChange<.002 and math.abs(model['Right Arm'].Size.y-char['Right Arm'].Size.y)<.001,'Empty hands retain the full controller-following arm pose while the torso turns')
     local Body=require(game.ReplicatedStorage.HexagonVRBody);local yaw=0
     for n=1,60 do local h,t;h,t,yaw=Body.sample(CFrame.Angles(0,math.rad(170),0),yaw,1/90)end
     local stable=true

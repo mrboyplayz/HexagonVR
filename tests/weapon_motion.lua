@@ -7,6 +7,8 @@ local ok,err=pcall(function()
     local gun,mag
     for _,item in ipairs(W.items)do item.root.Anchored=true;if item.kind=='AK47'then gun=item elseif item.kind=='AKMagazine'and not mag then mag=item end end
     local client=require(game.StarterGui.HexagonVRClient.VRWeaponClient).new(player)
+    local arms=require(game.StarterGui.HexagonVRClient.VRArms).new()
+    local torso=CFrame.new(0,5,1)*CFrame.Angles(0,.4,0)
     local function expect(value,text)assert(value,text);print('MOTION_CHECK',text)end
     local primary=CFrame.new(0,5,0);local base=primary*gun.grip:inverse()
     local front=CFrame.new(base:pointToWorldSpace(gun.layout.Foregrip))
@@ -15,10 +17,16 @@ local ok,err=pcall(function()
     gun.root.CFrame=base
     local function render(left,right,buttons)
         client.lastAt=tick()-1/90;client:update({left=left,right=right},buttons or 96,false)
+        arms:update(player.Character,{left=left,right=right},client.visualHands,torso,client.gunHands)
         return client:visualRoot(gun.model).CFrame
     end
     local steady=render(front,primary)
     expect(client.visualHands.left~=nil and client:state(gun.model).supportPendingAt~=nil,'The foregrip engages locally on squeeze before a server acknowledgement')
+    local function shoulderError(hand)
+        local arm=arms.copies[hand];local shoulder=torso:pointToWorldSpace(Vector3.new(hand=='left'and-1.15 or 1.15,.55,0))
+        return(arm.CFrame:pointToWorldSpace(Vector3.new(0,arm.Size.y/2,0))-shoulder).magnitude
+    end
+    expect(shoulderError('left')<.002 and shoulderError('right')<.002,'Both hands on a gun use shoulder-to-grip arm poses')
     gun.supportGrab.Value='left'
     local acknowledged=render(front,primary)
     expect(steady.lookVector:Dot(acknowledged.lookVector)>.9999,'Server foregrip confirmation preserves the locally captured contact')
@@ -45,6 +53,11 @@ local ok,err=pcall(function()
     expect((attached.p-(aimed*G.supportGrip(gun.layout,'left')).p).magnitude<.001,'The preset front hand stays on the moving gun')
     client.handFilters={};render(front,primary,64)
     expect(client.visualHands.left==nil,'Releasing the support grip immediately frees the hand')
+    local offset=CFrame.Angles(math.rad(90),0,0)*CFrame.new(0,1,0)
+    local function sameFrame(a,b)
+        local x,y={a:components()},{b:components()};for n=1,12 do if math.abs(x[n]-y[n])>.002 then return false end end;return true
+    end
+    expect(sameFrame(arms.copies.left.CFrame,front*offset)and math.abs(arms.copies.left.Size.y-player.Character['Left Arm'].Size.y)<.001 and shoulderError('right')<.002,'Releasing the foregrip restores the free arm while the gun arm keeps its shoulder pose')
     local calibrated=require(game.StarterGui.HexagonVRClient.VRWeaponClient).new(player,{armForward=.3,command=function()end})
     local rawPrimary=CFrame.new(0,5,0);local rawFront=CFrame.new(rawPrimary.p+gun.layout.Grip:pointToObjectSpace(gun.layout.Foregrip))
     local rear=rawPrimary*CFrame.new(0,0,-.3);gun.root.CFrame=rear*gun.grip:inverse()
@@ -54,10 +67,18 @@ local ok,err=pcall(function()
     for n=1,30 do calibrated.lastAt=tick()-1/90;calibrated:update({right=rear,left=rawFront*CFrame.Angles(.5,.8,.4)*CFrame.new(0,0,-.3)},96,false)end
     expect(calibrated:visualRoot(gun.model).CFrame.lookVector:Dot(beforeOffset.lookVector)>.9999,'Forward hand calibration cannot turn support-wrist rotation into an aiming wobble')
     calibrated:update({},0,true);gun.root.CFrame=base;client.handFilters={}
+    local crowbar;for _,item in ipairs(W.items)do if item.kind=='Crowbar'then crowbar=item end end
+    gun.supportGrab.Value='';crowbar.owner.Value=player;crowbar.hand.Value='left'
+    render(front,primary)
+    expect(sameFrame(arms.copies.left.CFrame,client.visualHands.left*offset)and not client.gunHands.left and client.gunHands.right,'A crowbar hand keeps normal controller-following arms beside a gun hand')
+    crowbar.owner.Value=nil;crowbar.hand.Value=''
     gun.insertedModel.Value=mag.model;mag.mount.Value=gun.model
     mag.owner.Value=player;mag.hand.Value='left';mag.root.CFrame=base*gun.magOffset
     gun.supportGrab.Value='';client.handFilters={}
     local distant=CFrame.new(-3,5,0)
+    gun.supportGrab.Value='left';render(distant,primary)
+    expect(not client.gunHands.left,'A magazine hand cannot inherit the gun shoulder pose from delayed foregrip metadata')
+    gun.supportGrab.Value=''
     render(distant,primary)
     local visible=client:visualRoot(gun.model);local visibleMag=client:visualRoot(mag.model)
     expect((visibleMag.Position-(visible.CFrame*gun.magOffset).p).magnitude<.001,'A mounted magazine cannot be overwritten by a stale free-hand ownership update')

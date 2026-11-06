@@ -1,4 +1,4 @@
-HEXAGON VR v0.4.1-beta.1: TWO-HAND AIM, TRACKED ARMS, AND HATS
+HEXAGON VR v0.4.2-beta.1: TWO-HAND AIM, TRACKED ARMS, AND HATS
 
 1. Close the old HexagonVR helper and the Hexagon game completely.
    Every VR player must upgrade. v0.2.1-beta.1 and earlier cannot send grips.
@@ -36,8 +36,8 @@ front hand uses its preset grip position and wrist angle. The AK bolt does not l
 when empty. AK magazines follow a guided rock-in path as you push them in.
 The foregrip responds locally on squeeze. Both hand positions drive aim,
 with rear-wrist roll, no old angle limit, and no extra aiming filter.
-Your own arms are 45% transparent; shoulders follow your torso while wrists
-stay on tracked controllers or the weapon's fixed grips.
+Your own arms are 45% transparent. Only gun/foregrip hands use shoulder poses.
+Other hands follow the controllers normally, with their usual arm length.
 
 The guns have immediate firing sound, spring recoil, muzzle flash,
 controller vibration, textured cartridge cases, and confirmed impact effects.
@@ -58,7 +58,7 @@ Removing it does not remove a round already in the chamber.
 Opening a VR menu drops held items and blocks weapon actions.
 
 The support scripts are published to Hexagon VR Test (place 105279),
-version 17, with Filtering Disabled. Join a fresh server for the new scripts.
+version 18, with Filtering Disabled. Join a fresh server for the new scripts.
 The published file's SHA-256 was verified. See PUBLISH-RECEIPT.json.
 The public download includes the separate offline VR-Demo.rbxlx.
 Each VR player needs this EXE.
@@ -77,7 +77,7 @@ AWP: use a 10-round AWP magazine. Grip its bolt handle, lift, pull back,
 push forward, and lower to lock. Cycle it again after every shot.
 Look through the AWP scope for its native 4x lens view; no extra button.
 Both controller positions aim rifles. The support hand stays at a fixed
-fore-end position/angle, while the shoulders can follow your torso.
+fore-end position/angle, while those gun arms follow your torso at the shoulder.
 
 Idle pullback fix: the private arms no longer contain invisible head/torso
 colliders. Rejoin a fresh server for the corrected place scripts.

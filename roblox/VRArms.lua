@@ -8,11 +8,11 @@ local function strip(node)
     end
 end
 function M.new()
-    local self={originals={},copies={},transparency=.45}
+    local self={originals={},copies={},lengths={},transparency=.45}
     function self:clear()
         for part,previous in pairs(self.originals)do if part.Parent then part.LocalTransparencyModifier=previous end end
         if self.model then self.model:Destroy()end
-        self.originals={};self.copies={};self.model=nil;self.character=nil;self.humanoid=nil
+        self.originals={};self.copies={};self.lengths={};self.model=nil;self.character=nil;self.humanoid=nil
     end
     function self:prepare(character)
         if self.character==character and self.model then return end
@@ -23,7 +23,8 @@ function M.new()
                 if original:IsA('BasePart')then
                     local copy=original:Clone();strip(copy);copy.FormFactor=Enum.FormFactor.Custom;copy.Anchored=true;copy.CanCollide=false;copy.LocalTransparencyModifier=0;copy.Parent=model
                     copy.Size=Vector3.new(original.Size.x*.55,original.Size.y,original.Size.z*.55)
-                    self.copies[original.Name=='Left Arm'and'left'or'right']=copy
+                    local hand=original.Name=='Left Arm'and'left'or'right'
+                    self.copies[hand]=copy;self.lengths[hand]=original.Size.y
                     self.originals[original]=original.LocalTransparencyModifier
                 end
             elseif original:IsA('Shirt')or original:IsA('Pants')or original:IsA('BodyColors')or original:IsA('CharacterMesh')then
@@ -33,7 +34,7 @@ function M.new()
         local humanoid=Instance.new('Humanoid');humanoid.Name='Humanoid';humanoid.Parent=model;self.humanoid=humanoid
         pcall(function()humanoid.NameDisplayDistance=0;humanoid.HealthDisplayDistance=0 end)
     end
-    function self:update(character,hands,grips,torsoFrame)
+    function self:update(character,hands,grips,torsoFrame,gunHands)
         if not character then self:clear();return end
         self:prepare(character);self.model.Parent=workspace.CurrentCamera
         -- Appearance only: omit dummy Head/Torso parts, which the legacy
@@ -50,7 +51,7 @@ function M.new()
             copy.Transparency=frame and self.transparency or 1
             if frame then
                 local torso=torsoFrame or(character:FindFirstChild('Torso')and character.Torso.CFrame)
-                if torso then
+                if torso and gunHands and gunHands[hand]then
                     local shoulder=torso:pointToWorldSpace(Vector3.new(hand=='left'and -1.15 or 1.15,.55,0))
                     local delta=shoulder-frame.p;local length=delta.magnitude
                     if length>.0001 then
@@ -61,7 +62,7 @@ function M.new()
                         local p=frame.p+y*(copy.Size.y/2)
                         copy.CFrame=CFrame.new(p.x,p.y,p.z,x.x,y.x,z.x,x.y,y.y,z.y,x.z,y.z,z.z)
                     else copy.Size=Vector3.new(copy.Size.x,.2,copy.Size.z);copy.CFrame=frame*CFrame.Angles(math.rad(90),0,0)*CFrame.new(0,copy.Size.y/2,0)end
-                else copy.CFrame=frame*offset end
+                else copy.Size=Vector3.new(copy.Size.x,self.lengths[hand],copy.Size.z);copy.CFrame=frame*offset end
             end
         end
     end

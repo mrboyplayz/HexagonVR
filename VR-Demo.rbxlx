@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<roblox version="4"><External>null</External><External>nil</External><Item class="Workspace" referent="RBXa53d0ab3aee147b79bbbe72a9d25b802"><Properties><string name="Name">Workspace</string><bool name="FilteringEnabled">false</bool></Properties><Item class="Part" referent="RBX19ef224143144ef0af3508434f29cfdf"><Properties><string name="Name">Baseplate</string><bool name="Anchored">true</bool><token name="TopSurface">0</token><token name="BottomSurface">0</token><Vector3 name="size"><X>120</X><Y>1</Y><Z>120</Z></Vector3><CoordinateFrame name="CFrame"><X>0</X><Y>-0.5</Y><Z>0</Z><R00>1</R00><R01>0</R01><R02>0</R02><R10>0</R10><R11>1</R11><R12>0</R12><R20>0</R20><R21>0</R21><R22>1</R22></CoordinateFrame><Color3 name="Color"><r>0.23</r><g>0.26</g><b>0.3</b></Color3></Properties></Item><Item class="Part" referent="RBX4ebe09421a5b47838fc26dfafab21446"><Properties><string name="Name">DepthMarker0</string><bool name="Anchored">true</bool><token name="TopSurface">0</token><token name="BottomSurface">0</token><Vector3 name="size"><X>2</X><Y>4</Y><Z>2</Z></Vector3><CoordinateFrame name="CFrame"><X>-8</X><Y>2</Y><Z>-10</Z><R00>1</R00><R01>0</R01><R02>0</R02><R10>0</R10><R11>1</R11><R12>0</R12><R20>0</R20><R21>0</R21><R22>1</R22></CoordinateFrame><Color3 name="Color"><r>0.2</r><g>0.5</g><b>0.9</b></Color3></Properties></Item><Item class="Part" referent="RBX8d135e64d45e4dbc84594eff02a86873"><Properties><string name="Name">DepthMarker1</string><bool name="Anchored">true</bool><token name="TopSurface">0</token><token name="BottomSurface">0</token><Vector3 name="size"><X>2</X><Y>4</Y><Z>2</Z></Vector3><CoordinateFrame name="CFrame"><X>-4</X><Y>2</Y><Z>-16</Z><R00>1</R00><R01>0</R01><R02>0</R02><R10>0</R10><R11>1</R11><R12>0</R12><R20>0</R20><R21>0</R21><R22>1</R22></CoordinateFrame><Color3 name="Color"><r>0.2</r><g>0.58</g><b>0.9</b></Color3></Properties></Item><Item class="Part" referent="RBXb3a22f8bfe304df5ae1b094466434eef"><Properties><string name="Name">DepthMarker2</string><bool name="Anchored">true</bool><token name="TopSurface">0</token><token name="BottomSurface">0</token><Vector3 name="size"><X>2</X><Y>4</Y><Z>2</Z></Vector3><CoordinateFrame name="CFrame"><X>0</X><Y>2</Y><Z>-22</Z><R00>1</R00><R01>0</R01><R02>0</R02><R10>0</R10><R11>1</R11><R12>0</R12><R20>0</R20><R21>0</R21><R22>1</R22></CoordinateFrame><Color3 name="Color"><r>0.2</r><g>0.66</g><b>0.9</b></Color3></Properties></Item><Item class="Part" referent="RBX676b9451a122473d8c6ea46c0339f6e3"><Properties><string name="Name">DepthMarker3</string><bool name="Anchored">true</bool><token name="TopSurface">0</token><token name="BottomSurface">0</token><Vector3 name="size"><X>2</X><Y>4</Y><Z>2</Z></Vector3><CoordinateFrame name="CFrame"><X>4</X><Y>2</Y><Z>-28</Z><R00>1</R00><R01>0</R01><R02>0</R02><R10>0</R10><R11>1</R11><R12>0</R12><R20>0</R20><R21>0</R21><R22>1</R22></CoordinateFrame><Color3 name="Color"><r>0.2</r><g>0.74</g><b>0.9</b></Color3></Properties></Item><Item class="Part" referent="RBX81f1ae78bcb547a49dd19d88f319b35e"><Properties><string name="Name">DepthMarker4</string><bool name="Anchored">true</bool><token name="TopSurface">0</token><token name="BottomSurface">0</token><Vector3 name="size"><X>2</X><Y>4</Y><Z>2</Z></Vector3><CoordinateFrame name="CFrame"><X>8</X><Y>2</Y><Z>-34</Z><R00>1</R00><R01>0</R01><R02>0</R02><R10>0</R10><R11>1</R11><R12>0</R12><R20>0</R20><R21>0</R21><R22>1</R22></CoordinateFrame><Color3 name="Color"><r>0.2</r><g>0.8200000000000001</g><b>0.9</b></Color3></Properties></Item><Item class="Part" referent="RBX89ee1687f83647989e34274b077c2c09"><Properties><string name="Name">LeftWall</string><bool name="Anchored">true</bool><token name="TopSurface">0</token><token name="BottomSurface">0</token><Vector3 name="size"><X>1</X><Y>6</Y><Z>28</Z></Vector3><CoordinateFrame name="CFrame"><X>-16</X><Y>3</Y><Z>-10</Z><R00>1</R00><R01>0</R01><R02>0</R02><R10>0</R10><R11>1</R11><R12>0</R12><R20>0</R20><R21>0</R21><R22>1</R22></CoordinateFrame><Color3 name="Color"><r>0.9</r><g>0.35</g><b>0.22</b></Color3></Properties></Item><Item class="Part" referent="RBX387691e071474677a3c7687771580c60"><Properties><string name="Name">RightWall</string><bool name="Anchored">true</bool><token name="TopSurface">0</token><token name="BottomSurface">0</token><Vector3 name="size"><X>1</X><Y>6</Y><Z>28</Z></Vector3><CoordinateFrame name="CFrame"><X>16</X><Y>3</Y><Z>-10</Z><R00>1</R00><R01>0</R01><R02>0</R02><R10>0</R10><R11>1</R11><R12>0</R12><R20>0</R20><R21>0</R21><R22>1</R22></CoordinateFrame><Color3 name="Color"><r>0.25</r><g>0.8</g><b>0.45</b></Color3></Properties></Item></Item><Item class="Players" referent="RBX73f71b6018c444f0a4ae2ac6f7acdc6a"><Properties><string name="Name">Players</string></Properties></Item><Item class="ReplicatedStorage" referent="RBXa6b0cb9f569f4ed5871a0c7be4776beb"><Properties><string name="Name">ReplicatedStorage</string></Properties><Item class="BoolValue" referent="RBX40f315c05e8b4bebae85b82e11eb9946"><Properties><string name="Name">HexagonVROfflineAssets</string><bool name="Value">true</bool></Properties></Item><Item class="ModuleScript" referent="RBXff1983853ad0490581ce188b9131087a"><Properties><string name="Name">HexagonVRWeaponGeometry</string><ProtectedString name="Source">-- Shared render and server transforms; forward is -Z, up is +Y.
+<roblox version="4"><External>null</External><External>nil</External><Item class="Workspace" referent="RBX63a00f46c9284843bca2c078deca7818"><Properties><string name="Name">Workspace</string><bool name="FilteringEnabled">false</bool></Properties><Item class="Part" referent="RBX422152e9db7d4f828a9b15cf0bc01bcb"><Properties><string name="Name">Baseplate</string><bool name="Anchored">true</bool><token name="TopSurface">0</token><token name="BottomSurface">0</token><Vector3 name="size"><X>120</X><Y>1</Y><Z>120</Z></Vector3><CoordinateFrame name="CFrame"><X>0</X><Y>-0.5</Y><Z>0</Z><R00>1</R00><R01>0</R01><R02>0</R02><R10>0</R10><R11>1</R11><R12>0</R12><R20>0</R20><R21>0</R21><R22>1</R22></CoordinateFrame><Color3 name="Color"><r>0.23</r><g>0.26</g><b>0.3</b></Color3></Properties></Item><Item class="Part" referent="RBX351da5ef31804f218aa5a56eb13285b0"><Properties><string name="Name">DepthMarker0</string><bool name="Anchored">true</bool><token name="TopSurface">0</token><token name="BottomSurface">0</token><Vector3 name="size"><X>2</X><Y>4</Y><Z>2</Z></Vector3><CoordinateFrame name="CFrame"><X>-8</X><Y>2</Y><Z>-10</Z><R00>1</R00><R01>0</R01><R02>0</R02><R10>0</R10><R11>1</R11><R12>0</R12><R20>0</R20><R21>0</R21><R22>1</R22></CoordinateFrame><Color3 name="Color"><r>0.2</r><g>0.5</g><b>0.9</b></Color3></Properties></Item><Item class="Part" referent="RBX205493eb812a43a39c12a6c831d79c56"><Properties><string name="Name">DepthMarker1</string><bool name="Anchored">true</bool><token name="TopSurface">0</token><token name="BottomSurface">0</token><Vector3 name="size"><X>2</X><Y>4</Y><Z>2</Z></Vector3><CoordinateFrame name="CFrame"><X>-4</X><Y>2</Y><Z>-16</Z><R00>1</R00><R01>0</R01><R02>0</R02><R10>0</R10><R11>1</R11><R12>0</R12><R20>0</R20><R21>0</R21><R22>1</R22></CoordinateFrame><Color3 name="Color"><r>0.2</r><g>0.58</g><b>0.9</b></Color3></Properties></Item><Item class="Part" referent="RBX229a3d055a084d55b0ee791cb2629f4c"><Properties><string name="Name">DepthMarker2</string><bool name="Anchored">true</bool><token name="TopSurface">0</token><token name="BottomSurface">0</token><Vector3 name="size"><X>2</X><Y>4</Y><Z>2</Z></Vector3><CoordinateFrame name="CFrame"><X>0</X><Y>2</Y><Z>-22</Z><R00>1</R00><R01>0</R01><R02>0</R02><R10>0</R10><R11>1</R11><R12>0</R12><R20>0</R20><R21>0</R21><R22>1</R22></CoordinateFrame><Color3 name="Color"><r>0.2</r><g>0.66</g><b>0.9</b></Color3></Properties></Item><Item class="Part" referent="RBXfcf150ec036b4b86a167360c80ee4289"><Properties><string name="Name">DepthMarker3</string><bool name="Anchored">true</bool><token name="TopSurface">0</token><token name="BottomSurface">0</token><Vector3 name="size"><X>2</X><Y>4</Y><Z>2</Z></Vector3><CoordinateFrame name="CFrame"><X>4</X><Y>2</Y><Z>-28</Z><R00>1</R00><R01>0</R01><R02>0</R02><R10>0</R10><R11>1</R11><R12>0</R12><R20>0</R20><R21>0</R21><R22>1</R22></CoordinateFrame><Color3 name="Color"><r>0.2</r><g>0.74</g><b>0.9</b></Color3></Properties></Item><Item class="Part" referent="RBX5560654d54ea42ee8fc844bd04a1843f"><Properties><string name="Name">DepthMarker4</string><bool name="Anchored">true</bool><token name="TopSurface">0</token><token name="BottomSurface">0</token><Vector3 name="size"><X>2</X><Y>4</Y><Z>2</Z></Vector3><CoordinateFrame name="CFrame"><X>8</X><Y>2</Y><Z>-34</Z><R00>1</R00><R01>0</R01><R02>0</R02><R10>0</R10><R11>1</R11><R12>0</R12><R20>0</R20><R21>0</R21><R22>1</R22></CoordinateFrame><Color3 name="Color"><r>0.2</r><g>0.8200000000000001</g><b>0.9</b></Color3></Properties></Item><Item class="Part" referent="RBX46a2840062e84ef3bb6eaa4dabe3f43c"><Properties><string name="Name">LeftWall</string><bool name="Anchored">true</bool><token name="TopSurface">0</token><token name="BottomSurface">0</token><Vector3 name="size"><X>1</X><Y>6</Y><Z>28</Z></Vector3><CoordinateFrame name="CFrame"><X>-16</X><Y>3</Y><Z>-10</Z><R00>1</R00><R01>0</R01><R02>0</R02><R10>0</R10><R11>1</R11><R12>0</R12><R20>0</R20><R21>0</R21><R22>1</R22></CoordinateFrame><Color3 name="Color"><r>0.9</r><g>0.35</g><b>0.22</b></Color3></Properties></Item><Item class="Part" referent="RBX576535c8e2934033b92ab6cf07b4b5b2"><Properties><string name="Name">RightWall</string><bool name="Anchored">true</bool><token name="TopSurface">0</token><token name="BottomSurface">0</token><Vector3 name="size"><X>1</X><Y>6</Y><Z>28</Z></Vector3><CoordinateFrame name="CFrame"><X>16</X><Y>3</Y><Z>-10</Z><R00>1</R00><R01>0</R01><R02>0</R02><R10>0</R10><R11>1</R11><R12>0</R12><R20>0</R20><R21>0</R21><R22>1</R22></CoordinateFrame><Color3 name="Color"><r>0.25</r><g>0.8</g><b>0.45</b></Color3></Properties></Item></Item><Item class="Players" referent="RBXa0a91f60196845b6aed7189416b941f2"><Properties><string name="Name">Players</string></Properties></Item><Item class="ReplicatedStorage" referent="RBXfd540f4376784302a67f8d199432167f"><Properties><string name="Name">ReplicatedStorage</string></Properties><Item class="BoolValue" referent="RBXd3cb96dd84ee4350bdc9aa402821b1da"><Properties><string name="Name">HexagonVROfflineAssets</string><bool name="Value">true</bool></Properties></Item><Item class="ModuleScript" referent="RBX0319918c2b094c68af2da526d274d863"><Properties><string name="Name">HexagonVRWeaponGeometry</string><ProtectedString name="Source">-- Shared render and server transforms; forward is -Z, up is +Y.
 local G={
     Hat={Wearable=true,Grip=CFrame.new()},
     Crowbar={
@@ -146,7 +146,7 @@ function G.guidedMagazineFrame(layout,progress,freeFrame)
     return freeFrame:lerp(G.magazineFrame(layout,t),assist)
 end
 return G
-</ProtectedString></Properties></Item><Item class="ModuleScript" referent="RBX5336c3cb65b145718195a5e68c68dc3f"><Properties><string name="Name">HexagonVRBody</string><ProtectedString name="Source">-- Tracking describes the eyes. Avatar head and neck are placed behind them.
+</ProtectedString></Properties></Item><Item class="ModuleScript" referent="RBX7ea3a20aedba458f89fcd640413972b1"><Properties><string name="Name">HexagonVRBody</string><ProtectedString name="Source">-- Tracking describes the eyes. Avatar head and neck are placed behind them.
 local B={EyeForward=.45,EyeHeight=.12,HeadHalfHeight=.5,NeckHeight=1,TurnSpeed=65}
 local function wrap(angle)return(angle+math.pi)%(2*math.pi)-math.pi end
 function B.sample(eyes,previous,dt,forward)
@@ -168,7 +168,7 @@ function B.sample(eyes,previous,dt,forward)
 end
 function B.eyes(head,forward)return head*CFrame.new(0,B.EyeHeight,-(forward or B.EyeForward))end
 return B
-</ProtectedString></Properties></Item></Item><Item class="ServerScriptService" referent="RBX7ad3f726e7c245d0a31e430742749be6"><Properties><string name="Name">ServerScriptService</string></Properties><Item class="Script" referent="RBX279768d2751143d5a81bd810cd1a83e3"><Properties><string name="Name">HexagonVRPracticeTargets</string><ProtectedString name="Source">-- Offline demo targets. Not installed into existing maps by the VR installer.
+</ProtectedString></Properties></Item></Item><Item class="ServerScriptService" referent="RBX7523f686e69b4c63bc5af72d34a60433"><Properties><string name="Name">ServerScriptService</string></Properties><Item class="Script" referent="RBXb7ce0c41da624604b8a8bb214086e5fa"><Properties><string name="Name">HexagonVRPracticeTargets</string><ProtectedString name="Source">-- Offline demo targets. Not installed into existing maps by the VR installer.
 local parent=Instance.new("Model");parent.Name="VRPracticeTargets";parent.Parent=workspace
 local function create(position,name)
     local target=Instance.new("Model");target.Name=name;target.Parent=parent
@@ -189,7 +189,7 @@ local function create(position,name)
 end
 create(Vector3.new(-4,0,-11),"Crowbar practice")
 create(Vector3.new(4,0,-17),"Shooting practice")
-</ProtectedString><bool name="Disabled">false</bool></Properties></Item><Item class="ModuleScript" referent="RBXefffb0d157d247359a2821b46fa16d4d"><Properties><string name="Name">VRWeapons</string><ProtectedString name="Source">-- Physical pickups for the Hexagon 2015 engine. No Marketplace scripts execute.
+</ProtectedString><bool name="Disabled">false</bool></Properties></Item><Item class="ModuleScript" referent="RBX8a91970d5995494abe5997fcd410336a"><Properties><string name="Name">VRWeapons</string><ProtectedString name="Source">-- Physical pickups for the Hexagon 2015 engine. No Marketplace scripts execute.
 local M={}
 local State=require(script.Parent.VRWeaponState)
 local Assets=require(script.Parent.VRWeaponAssets)
@@ -689,7 +689,7 @@ function M.new(config)
     return self
 end
 return M
-</ProtectedString></Properties></Item><Item class="ModuleScript" referent="RBX96762e3fcf094789b94173ff04cd261b"><Properties><string name="Name">VRWeaponState</string><ProtectedString name="Source">-- Engine-independent firearm state. Lua 5.1; all transitions run on the server.
+</ProtectedString></Properties></Item><Item class="ModuleScript" referent="RBX560d7911a9494d1fa4dae0e7e4dc7385"><Properties><string name="Name">VRWeaponState</string><ProtectedString name="Source">-- Engine-independent firearm state. Lua 5.1; all transitions run on the server.
 local M={}
 function M.new(capacity,holdOpen,manual)
     return {capacity=capacity or 12,holdOpen=holdOpen~=false,manual=manual,magazine=nil,chamber=false,spent=false,slideOpen=false,slideLocked=false,lastShot=-math.huge}
@@ -728,7 +728,7 @@ function M.fire(gun,now,interval)
     return true
 end
 return M
-</ProtectedString></Properties></Item><Item class="ModuleScript" referent="RBXd64e89dc96c6408a9395b49cb873fe5e"><Properties><string name="Name">VRWeaponAssets</string><ProtectedString name="Source">-- Public Roblox assets, verified through anonymous Hexagon delivery.
+</ProtectedString></Properties></Item><Item class="ModuleScript" referent="RBX12e4770fd8774975abd95ce34a322fd8"><Properties><string name="Name">VRWeaponAssets</string><ProtectedString name="Source">-- Public Roblox assets, verified through anonymous Hexagon delivery.
 local assets={
     ak_bolt_mesh="https://www.hexagon.pw/asset/?id=117894152668366",
     ak_fire="https://www.hexagon.pw/asset/?id=3742927611",
@@ -812,7 +812,7 @@ if offline and offline.Value then
     for key,file in pairs(files)do assets[key]="rbxasset://HexagonVRWeapons/"..file end
 end
 return assets
-</ProtectedString></Properties></Item><Item class="ModuleScript" referent="RBXe20275ff74cc48f29d856d6d05977ef9"><Properties><string name="Name">VRHats</string><ProtectedString name="Source">-- Shared wearable instances: detach, hold at the touched point, and re-equip.
+</ProtectedString></Properties></Item><Item class="ModuleScript" referent="RBX9f3f111fca804581a529d7212cf07dbf"><Properties><string name="Name">VRHats</string><ProtectedString name="Source">-- Shared wearable instances: detach, hold at the touched point, and re-equip.
 local M={}
 local Players=game:GetService("Players")
 local Geometry=require(game:GetService("ReplicatedStorage"):WaitForChild("HexagonVRWeaponGeometry"))
@@ -963,7 +963,7 @@ function M.new(weapons,config)
     return self
 end
 return M
-</ProtectedString></Properties></Item><Item class="ModuleScript" referent="RBX6e345263d9114f28aa5bc77f26929772"><Properties><string name="Name">VRConfig</string><ProtectedString name="Source">return {
+</ProtectedString></Properties></Item><Item class="ModuleScript" referent="RBXea66e95b545c42578e5a049ccb6723b9"><Properties><string name="Name">VRConfig</string><ProtectedString name="Source">return {
     AllowedUserIds = {}, -- Empty allows every player with a local VR helper.
     AutoEnable = false,
     TrackingTimeout = 2,
@@ -989,7 +989,7 @@ return M
         RespawnSeconds = 90,
     },
 }
-</ProtectedString></Properties></Item><Item class="ModuleScript" referent="RBXee5bd556198f47188b333419873a66de"><Properties><string name="Name">VRChat</string><ProtectedString name="Source">-- Public chat submitted by the game itself. No desktop keyboard input.
+</ProtectedString></Properties></Item><Item class="ModuleScript" referent="RBX30dbab1d22e74346923cadb473dfe6b3"><Properties><string name="Name">VRChat</string><ProtectedString name="Source">-- Public chat submitted by the game itself. No desktop keyboard input.
 local Chat={}
 function Chat.start(remote,config,isActive,command)
     local Players=game:GetService("Players")
@@ -1061,7 +1061,7 @@ function Chat.start(remote,config,isActive,command)
     Players.PlayerRemoving:connect(function(player)jobs[player]=nil;last[player]=nil;completed[player]=nil end)
 end
 return Chat
-</ProtectedString></Properties></Item><Item class="Script" referent="RBX425538d2f56841a68e8d1adfe1d99671"><Properties><string name="Name">HexagonVRServer</string><ProtectedString name="Source">-- Lua 5.1 / Hexagon 0.217. Each player owns an independent R6 VR session.
+</ProtectedString></Properties></Item><Item class="Script" referent="RBX623ab253c2fd43fb869cc0ae0303547c"><Properties><string name="Name">HexagonVRServer</string><ProtectedString name="Source">-- Lua 5.1 / Hexagon 0.217. Each player owns an independent R6 VR session.
 local Players=game:GetService("Players")
 local RS=game:GetService("ReplicatedStorage")
 local Run=game:GetService("RunService")
@@ -1254,7 +1254,7 @@ end)
 local toggle=Instance.new("BindableEvent");toggle.Name="HexagonVRTestToggle";toggle.Parent=script
 toggle.Event:connect(function(player)command(player,"/vr")end)
 print("HEXAGON_VR_SERVER_READY_MULTIPLAYER")
-</ProtectedString><bool name="Disabled">false</bool></Properties></Item></Item><Item class="StarterGui" referent="RBX0f7faf32a023450ca8c79bca124d87ee"><Properties><string name="Name">StarterGui</string></Properties><Item class="LocalScript" referent="RBX09c563b7f4f24f8d997b2fcee9b8dde0"><Properties><string name="Name">HexagonVRClient</string><ProtectedString name="Source">-- First-person tracking and locomotion execute locally every frame.
+</ProtectedString><bool name="Disabled">false</bool></Properties></Item></Item><Item class="StarterGui" referent="RBXb35d4349a22947c6ba1fc71abed1b87a"><Properties><string name="Name">StarterGui</string></Properties><Item class="LocalScript" referent="RBXb538af04601243929183e533e05c5b81"><Properties><string name="Name">HexagonVRClient</string><ProtectedString name="Source">-- First-person tracking and locomotion execute locally every frame.
 local Players=game:GetService("Players")
 local RS=game:GetService("ReplicatedStorage")
 local Run=game:GetService("RunService")
@@ -1427,7 +1427,7 @@ local function render()
     local buttons=ui.x&gt;=0 and ui.x&lt;=255 and ui.x==math.floor(ui.x)and ui.x or 0
     local blocked=menu:update(right and root.CFrame*right or nil,buttons,ui.z)
     weapons:update({left=left and root.CFrame*left or nil,right=right and root.CFrame*right or nil},buttons,blocked)
-    arms:update(char,{left=left and root.CFrame*left or nil,right=right and root.CFrame*right or nil},weapons.visualHands,torsoFrame)
+    arms:update(char,{left=left and root.CFrame*left or nil,right=right and root.CFrame*right or nil},weapons.visualHands,torsoFrame,weapons.gunHands)
     scope:update(control.y,blocked,menu.nativeRendering)
     for _,row in ipairs({{"head",avatarHead},{"left",left},{"right",right}})do
         local weld=torso:FindFirstChild("HexagonVR_"..row[1])
@@ -1465,7 +1465,7 @@ local function render()
 end
 Run:BindToRenderStep("HexagonVR",Enum.RenderPriority.Last.Value,render)
 print("HEXAGON_VR_LOCAL_MAILBOX_READY")
-</ProtectedString><bool name="Disabled">false</bool></Properties><Item class="ModuleScript" referent="RBXf491799a721f40fd97788fa5f8cf4b0f"><Properties><string name="Name">VRArms</string><ProtectedString name="Source">-- Private first-person limbs follow tracked grips, independent of body physics.
+</ProtectedString><bool name="Disabled">false</bool></Properties><Item class="ModuleScript" referent="RBXcb5fedfbed824c60a6de150c43b6c69c"><Properties><string name="Name">VRArms</string><ProtectedString name="Source">-- Private first-person limbs follow tracked grips, independent of body physics.
 local M={}
 local offset=CFrame.Angles(math.rad(90),0,0)*CFrame.new(0,1,0)
 local function strip(node)
@@ -1475,11 +1475,11 @@ local function strip(node)
     end
 end
 function M.new()
-    local self={originals={},copies={},transparency=.45}
+    local self={originals={},copies={},lengths={},transparency=.45}
     function self:clear()
         for part,previous in pairs(self.originals)do if part.Parent then part.LocalTransparencyModifier=previous end end
         if self.model then self.model:Destroy()end
-        self.originals={};self.copies={};self.model=nil;self.character=nil;self.humanoid=nil
+        self.originals={};self.copies={};self.lengths={};self.model=nil;self.character=nil;self.humanoid=nil
     end
     function self:prepare(character)
         if self.character==character and self.model then return end
@@ -1490,7 +1490,8 @@ function M.new()
                 if original:IsA('BasePart')then
                     local copy=original:Clone();strip(copy);copy.FormFactor=Enum.FormFactor.Custom;copy.Anchored=true;copy.CanCollide=false;copy.LocalTransparencyModifier=0;copy.Parent=model
                     copy.Size=Vector3.new(original.Size.x*.55,original.Size.y,original.Size.z*.55)
-                    self.copies[original.Name=='Left Arm'and'left'or'right']=copy
+                    local hand=original.Name=='Left Arm'and'left'or'right'
+                    self.copies[hand]=copy;self.lengths[hand]=original.Size.y
                     self.originals[original]=original.LocalTransparencyModifier
                 end
             elseif original:IsA('Shirt')or original:IsA('Pants')or original:IsA('BodyColors')or original:IsA('CharacterMesh')then
@@ -1500,7 +1501,7 @@ function M.new()
         local humanoid=Instance.new('Humanoid');humanoid.Name='Humanoid';humanoid.Parent=model;self.humanoid=humanoid
         pcall(function()humanoid.NameDisplayDistance=0;humanoid.HealthDisplayDistance=0 end)
     end
-    function self:update(character,hands,grips,torsoFrame)
+    function self:update(character,hands,grips,torsoFrame,gunHands)
         if not character then self:clear();return end
         self:prepare(character);self.model.Parent=workspace.CurrentCamera
         -- Appearance only: omit dummy Head/Torso parts, which the legacy
@@ -1517,7 +1518,7 @@ function M.new()
             copy.Transparency=frame and self.transparency or 1
             if frame then
                 local torso=torsoFrame or(character:FindFirstChild('Torso')and character.Torso.CFrame)
-                if torso then
+                if torso and gunHands and gunHands[hand]then
                     local shoulder=torso:pointToWorldSpace(Vector3.new(hand=='left'and -1.15 or 1.15,.55,0))
                     local delta=shoulder-frame.p;local length=delta.magnitude
                     if length&gt;.0001 then
@@ -1528,14 +1529,14 @@ function M.new()
                         local p=frame.p+y*(copy.Size.y/2)
                         copy.CFrame=CFrame.new(p.x,p.y,p.z,x.x,y.x,z.x,x.y,y.y,z.y,x.z,y.z,z.z)
                     else copy.Size=Vector3.new(copy.Size.x,.2,copy.Size.z);copy.CFrame=frame*CFrame.Angles(math.rad(90),0,0)*CFrame.new(0,copy.Size.y/2,0)end
-                else copy.CFrame=frame*offset end
+                else copy.Size=Vector3.new(copy.Size.x,self.lengths[hand],copy.Size.z);copy.CFrame=frame*offset end
             end
         end
     end
     return self
 end
 return M
-</ProtectedString></Properties></Item><Item class="ModuleScript" referent="RBX72d07f20977e4a04ac053cdbe6edd2a1"><Properties><string name="Name">VRScope</string><ProtectedString name="Source">-- Optical pose only: the native renderer supplies the magnified lens image.
+</ProtectedString></Properties></Item><Item class="ModuleScript" referent="RBXee7e2bd7736b450495c3f0e2345a9a32"><Properties><string name="Name">VRScope</string><ProtectedString name="Source">-- Optical pose only: the native renderer supplies the magnified lens image.
 local M={}
 local G=require(game.ReplicatedStorage:WaitForChild('HexagonVRWeaponGeometry'))
 function M.new(player,box,weapons)
@@ -1569,7 +1570,7 @@ function M.new(player,box,weapons)
     return self
 end
 return M
-</ProtectedString></Properties></Item><Item class="ModuleScript" referent="RBX09a3b51b3f2f444b9b574e2ea0fba123"><Properties><string name="Name">VRWeaponClient</string><ProtectedString name="Source">-- Rear-hand anchored two-hand poses, guided magazines, and visible weapon recoil.
+</ProtectedString></Properties></Item><Item class="ModuleScript" referent="RBXfa65ebf5bb664d4c81f79c4605f161dd"><Properties><string name="Name">VRWeaponClient</string><ProtectedString name="Source">-- Rear-hand anchored two-hand poses, guided magazines, and visible weapon recoil.
 local M={}
 local Geometry=require(game:GetService("ReplicatedStorage"):WaitForChild("HexagonVRWeaponGeometry"))
 local FX=require(script:WaitForChild("VRWeaponFX"))
@@ -1599,7 +1600,7 @@ end
 function M.new(player,menu,remote)
     -- Instance wrappers can leave a weak-key table while the engine still owns
     -- their parts. Keep suppression state until it is explicitly restored.
-    local self={fx=FX.new(),cache={},lastButtons=0,lastAt=tick(),sentTriggers={},visualHands={},aim={},handFilters={},heldFrames={},releaseFrames={},releaseAt={}}
+    local self={fx=FX.new(),cache={},lastButtons=0,lastAt=tick(),sentTriggers={},visualHands={},gunHands={},aim={},handFilters={},heldFrames={},releaseFrames={},releaseAt={}}
     local visuals=Instance.new("Model");visuals.Name="HexagonVRPredictedWeapons";visuals.Parent=workspace.CurrentCamera;self.visuals=visuals
     function self:state(model)
         local s=self.cache[model]
@@ -1695,7 +1696,7 @@ function M.new(player,menu,remote)
     end
     function self:update(hands,buttons,blocked)
         local now=tick();local dt=math.max(.001,math.min(.05,now-self.lastAt));self.lastAt=now
-        local previous=self.lastButtons;self.lastButtons=buttons;self.visualHands={}
+        local previous=self.lastButtons;self.lastButtons=buttons;self.visualHands={};self.gunHands={}
         for _,hand in ipairs({"left","right"})do
             local bit=hand=="left"and 32 or 64
             if down(previous,bit)and not down(buttons,bit)then
@@ -1754,6 +1755,7 @@ function M.new(player,menu,remote)
                     local mount=model:FindFirstChild("MountedTo")
                     if localOwner and hands[heldHand]and down(buttons,heldHand=="left"and 32 or 64)and not(mount and mount.Value)then
                         if layout.Gun then
+                            self.gunHands[heldHand]=true
                             local supportHand=support and support.Value or""
                             local other=heldHand=="left"and"right"or"left"
                             local squeezed=hands[other]and down(buttons,other=="left"and 32 or 64)
@@ -1767,6 +1769,7 @@ function M.new(player,menu,remote)
                                 s.supportPendingAt=now;supportHand=other
                             end
                             local front=supportHand~=""and supportHand~=heldHand and down(buttons,supportHand=="left"and 32 or 64)and hands[supportHand]or nil
+                            if front and not occupied[supportHand]then self.gunHands[supportHand]=true end
                             if not front then s.supportHand=nil;s.supportAnchor=nil;s.supportState=nil
                             elseif s.supportHand~=supportHand then
                                 s.supportHand=supportHand;s.supportAnchor=layout.Grip:pointToObjectSpace(layout.Foregrip)
@@ -1995,7 +1998,7 @@ function M.new(player,menu,remote)
     return self
 end
 return M
-</ProtectedString></Properties><Item class="ModuleScript" referent="RBXd2e73f87c1bd4f3d95d4fdcf6874e55d"><Properties><string name="Name">VRWeaponFX</string><ProtectedString name="Source">-- Local, immediate gun feedback. Damage and ammunition remain server controlled.
+</ProtectedString></Properties><Item class="ModuleScript" referent="RBXf05c712d1fa94983abe41e21e1ade76c"><Properties><string name="Name">VRWeaponFX</string><ProtectedString name="Source">-- Local, immediate gun feedback. Damage and ammunition remain server controlled.
 local M={}
 local Assets=require(script:WaitForChild("VRWeaponAssets"))
 local Debris=game:GetService("Debris")
@@ -2051,7 +2054,7 @@ function M.new()
     return self
 end
 return M
-</ProtectedString></Properties><Item class="ModuleScript" referent="RBXf02b56d6ff904809ba4b0dd25a54a374"><Properties><string name="Name">VRWeaponAssets</string><ProtectedString name="Source">-- Public Roblox assets, verified through anonymous Hexagon delivery.
+</ProtectedString></Properties><Item class="ModuleScript" referent="RBXcbeaf3427e5848b18180c6440fff8e8d"><Properties><string name="Name">VRWeaponAssets</string><ProtectedString name="Source">-- Public Roblox assets, verified through anonymous Hexagon delivery.
 local assets={
     ak_bolt_mesh="https://www.hexagon.pw/asset/?id=117894152668366",
     ak_fire="https://www.hexagon.pw/asset/?id=3742927611",
@@ -2135,7 +2138,7 @@ if offline and offline.Value then
     for key,file in pairs(files)do assets[key]="rbxasset://HexagonVRWeapons/"..file end
 end
 return assets
-</ProtectedString></Properties></Item></Item></Item><Item class="ModuleScript" referent="RBXadf10f6ed0594ad5b8958e6762433e58"><Properties><string name="Name">VRChatClient</string><ProtectedString name="Source">-- Display only the server-filtered text delivered to this player.
+</ProtectedString></Properties></Item></Item></Item><Item class="ModuleScript" referent="RBX280767bff10545ebb3b0bcf68ecd5540"><Properties><string name="Name">VRChatClient</string><ProtectedString name="Source">-- Display only the server-filtered text delivered to this player.
 local ChatUI={}
 function ChatUI.new(player,menu)
     local Starter=game:GetService("StarterGui")
@@ -2166,7 +2169,7 @@ function ChatUI.new(player,menu)
     return self
 end
 return ChatUI
-</ProtectedString></Properties></Item><Item class="ModuleScript" referent="RBX031db5c9c4bc4c4db9e3fe23133d12be"><Properties><string name="Name">VRMenu</string><ProtectedString name="Source">-- Private world-space menu with locally received chat history.
+</ProtectedString></Properties></Item><Item class="ModuleScript" referent="RBXb057e3c920dd492ba5950dd9d732cd77"><Properties><string name="Name">VRMenu</string><ProtectedString name="Source">-- Private world-space menu with locally received chat history.
 local Menu={}
 function Menu.new(player,box,remote)
     local self={opened=false,page="menu",draft="",shift=false,buttons={},messages={},queue={},serial=math.random(1,500000),pending=nil,lastButtons=0,scroll=0,notice="",hover=nil}
@@ -2469,7 +2472,7 @@ function Menu.new(player,box,remote)
     self:draw();return self
 end
 return Menu
-</ProtectedString></Properties><Item class="ModuleScript" referent="RBXdec01f374d174cc083a2df4358ce525a"><Properties><string name="Name">VRMenuAssets</string><ProtectedString name="Source">-- Verified Hexagon image assets. Pending uploads use built-in textures.
+</ProtectedString></Properties><Item class="ModuleScript" referent="RBX66267137c5ab43b496d168b289949e2d"><Properties><string name="Name">VRMenuAssets</string><ProtectedString name="Source">-- Verified Hexagon image assets. Pending uploads use built-in textures.
 return {
     ["MenuBarAssets/MenuBackground.png"] = "https://www.hexagon.pw/asset/?id=105304",
     ["MenuBarAssets/MenuButton.png"] = "https://www.hexagon.pw/asset/?id=105306",

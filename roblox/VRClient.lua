@@ -171,7 +171,7 @@ local function render()
     local buttons=ui.x>=0 and ui.x<=255 and ui.x==math.floor(ui.x)and ui.x or 0
     local blocked=menu:update(right and root.CFrame*right or nil,buttons,ui.z)
     weapons:update({left=left and root.CFrame*left or nil,right=right and root.CFrame*right or nil},buttons,blocked)
-    arms:update(char,{left=left and root.CFrame*left or nil,right=right and root.CFrame*right or nil},weapons.visualHands,torsoFrame)
+    arms:update(char,{left=left and root.CFrame*left or nil,right=right and root.CFrame*right or nil},weapons.visualHands,torsoFrame,weapons.gunHands)
     scope:update(control.y,blocked,menu.nativeRendering)
     for _,row in ipairs({{"head",avatarHead},{"left",left},{"right",right}})do
         local weld=torso:FindFirstChild("HexagonVR_"..row[1])

@@ -1,7 +1,7 @@
-# v0.4.1-beta.1 - Fix idle pullback
+# v0.4.2-beta.1 - Gun-only shoulder poses
 
-Fixes the character being pushed while the headset/controllers are still and no movement input is pressed. The invisible head and torso copies inside the first-person arm model became collidable in the legacy engine. Those copies are removed, and the appearance Humanoid uses a passive physics state. Shoulder-following arms and the actual avatar body remain.
+Shoulder-to-grip arm poses now apply only to hands holding a gun or its foregrip. Empty hands and hands holding hats, crowbars, or magazines keep their normal controller-following rotation and arm length. Releasing a foregrip restores that arm immediately. Both hand positions still aim the gun using its fixed support grip.
 
-The fix is published to [Hexagon VR Test](https://www.hexagon.pw/games/105279), version 17. Leave the old server and join a fresh server. The current v0.4.0 helper also works with the corrected online place; this download additionally updates the bundled offline demo and installer.
+The idle pullback fix remains. The updated scripts are published to [Hexagon VR Test](https://www.hexagon.pw/games/105279), version 18. Join a fresh server; current v0.4 helpers also work online. This download updates the bundled offline demo and installer.
 
-Validation: 98 unit tests; first-person arm tracking checks; a freely simulated R6 character stays still with neutral input, head turns, and overlapping arms. Walking, stopping, jumping, and VR cleanup also pass. Physical headset feel still needs user testing.
+Validation: 98 unit tests; native gun/free-hand/crowbar pose checks, arm tracking, magazine motion, and unanchored idle/walking/stopping/jumping checks. Physical headset feel still needs user testing.

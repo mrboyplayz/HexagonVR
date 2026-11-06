@@ -28,7 +28,7 @@ end
 function M.new(player,menu,remote)
     -- Instance wrappers can leave a weak-key table while the engine still owns
     -- their parts. Keep suppression state until it is explicitly restored.
-    local self={fx=FX.new(),cache={},lastButtons=0,lastAt=tick(),sentTriggers={},visualHands={},aim={},handFilters={},heldFrames={},releaseFrames={},releaseAt={}}
+    local self={fx=FX.new(),cache={},lastButtons=0,lastAt=tick(),sentTriggers={},visualHands={},gunHands={},aim={},handFilters={},heldFrames={},releaseFrames={},releaseAt={}}
     local visuals=Instance.new("Model");visuals.Name="HexagonVRPredictedWeapons";visuals.Parent=workspace.CurrentCamera;self.visuals=visuals
     function self:state(model)
         local s=self.cache[model]
@@ -124,7 +124,7 @@ function M.new(player,menu,remote)
     end
     function self:update(hands,buttons,blocked)
         local now=tick();local dt=math.max(.001,math.min(.05,now-self.lastAt));self.lastAt=now
-        local previous=self.lastButtons;self.lastButtons=buttons;self.visualHands={}
+        local previous=self.lastButtons;self.lastButtons=buttons;self.visualHands={};self.gunHands={}
         for _,hand in ipairs({"left","right"})do
             local bit=hand=="left"and 32 or 64
             if down(previous,bit)and not down(buttons,bit)then
@@ -183,6 +183,7 @@ function M.new(player,menu,remote)
                     local mount=model:FindFirstChild("MountedTo")
                     if localOwner and hands[heldHand]and down(buttons,heldHand=="left"and 32 or 64)and not(mount and mount.Value)then
                         if layout.Gun then
+                            self.gunHands[heldHand]=true
                             local supportHand=support and support.Value or""
                             local other=heldHand=="left"and"right"or"left"
                             local squeezed=hands[other]and down(buttons,other=="left"and 32 or 64)
@@ -196,6 +197,7 @@ function M.new(player,menu,remote)
                                 s.supportPendingAt=now;supportHand=other
                             end
                             local front=supportHand~=""and supportHand~=heldHand and down(buttons,supportHand=="left"and 32 or 64)and hands[supportHand]or nil
+                            if front and not occupied[supportHand]then self.gunHands[supportHand]=true end
                             if not front then s.supportHand=nil;s.supportAnchor=nil;s.supportState=nil
                             elseif s.supportHand~=supportHand then
                                 s.supportHand=supportHand;s.supportAnchor=layout.Grip:pointToObjectSpace(layout.Foregrip)
